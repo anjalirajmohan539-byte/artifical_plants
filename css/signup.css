@@ -54,6 +54,59 @@ a {
       justify-content:center;
       
 }
+/* From Uiverse.io by Yaya12085 */ 
+.input-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  padding: 18px 16px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+  margin-left: 143px;
+}
+
+.input::placeholder {
+  color: transparent;
+}
+
+.input:focus::placeholder {
+  color: rgb(131, 128, 128);
+}
+
+.input:focus,.input:not(:placeholder-shown) {
+  background-color: #fff;
+  border: 1px solid rgb(91, 107, 255);
+  width: 290px;
+  cursor: none;
+  padding: 18px 16px 18px 45px;
+}
+
+.icon {
+  position: absolute;
+  left: 0;
+  height: 45px;
+  width: 45px;
+  background-color: #fff;
+  border-radius: 99px;
+  z-index: -1;
+  fill: rgb(91, 107, 255);
+  border: 1px solid rgb(91, 107, 255);
+}
+
+.input:focus + .icon,.input:not(:placeholder-shown) + .icon {
+  z-index: 0;
+  background-color: transparent;
+  border: none;
+}
 
 .header img
 {
@@ -96,7 +149,7 @@ a
     .login-box h2 {
       margin: 0 0 10px;
       font-weight: 500;
-      font-size:28px;
+      font-size:47px;
     }
 
     .login-box p {
@@ -159,17 +212,16 @@ a
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 20px;
       font-size: 14px;
+      padding-left:100px;
     }
 
     footer h4 {
       font-size: 14px;
-      margin-bottom: 12px;
       font-weight: 600;
     }
 
     footer a {
       display: block;
-      margin-bottom: 6px;
       text-decoration: none;
       color: #7d6656;
     }
