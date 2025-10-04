@@ -139,41 +139,32 @@ a
       color: #3f2f25;
     }
 
-    .login-wrapper {
+    .reg-wrapper {
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 60vh;
     }
 
-    .login-box h2 {
-      margin: 0 0 10px;
+    .reg-box h2 {
+      margin: 0 0 15px;
       font-weight: 500;
-      font-size:47px;
+      font-size:40px;
     }
 
-    .login-box p {
+    .reg-box p {
       font-size: 14px;
       color: #777;
       margin-bottom: 20px;
     }
 
-    .login-box p a {
+    .reg-box p a {
       color: #3f2f25;
       font-weight: bold;
       text-decoration: none;
     }
 
-    .login-box input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .login-box .forgot {
+    .reg-box .forgot {
       display: block;
       font-size: 13px;
       color: #666;
@@ -181,8 +172,8 @@ a
       margin-top:-30px;
     }
 
-    .login-box button {
-      width: 100%;
+    .reg-box button {
+      width: 50%;
       padding: 12px;
       background: #7d6656;
       color: #fff;
@@ -190,9 +181,10 @@ a
       font-size: 14px;
       text-transform: uppercase;
       cursor: pointer;
+      margin-left:160px;
     }
 
-    .login-box button:hover {
+    .reg-box button:hover {
       background: #5e4f42;
     }
 
@@ -203,120 +195,34 @@ a
       font-size: 13px;
       color: #7d6656;
       text-decoration: none;
-    }
+    } 
 
-    footer {
-      background: #f4f2f0;
-      padding: 40px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      font-size: 14px;
-      padding-left:100px;
-    }
-
-    footer h4 {
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    footer a {
-      display: block;
-      text-decoration: none;
-      color: #7d6656;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    .ab a{
-      margin-right: 50px;
-    }
-  
-    .wrapper {
-  display: inline-flex;
-  list-style: none;
-  height: 120px;
-  width: 100%;
-  padding-top: 40px;
-  font-family: "Poppins", sans-serif;
-}
-
-.wrapper .icon {
-  position: relative;
-  background: #7d6656;
-  border-radius: 50%;
-  margin: 10px;
-  width: 37px;
-  height: 35px;
-  font-size:13px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  color: white;
-}
-
-.wrapper .tooltip {
-  position: absolute;
-  top: 0;
+    label {
+  display: block;
+  margin: 14px 0 6px;
   font-size: 14px;
-  background: #fff;
-  color: #fff;
-  padding: 5px 8px;
-  border-radius: 5px;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  color: #374151;
 }
 
-.wrapper .tooltip::before {
-  position: absolute;
-  content: "";
-  height: 8px;
-  width: 8px;
-  background: #fff;
-  bottom: -3px;
-  left: 50%;
-  transform: translate(-50%) rotate(45deg);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-size: 10px;
+  transition: all 0.2s ease;
 }
 
-.wrapper .icon:hover .tooltip {
-  top: -45px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
+textarea {
+    height: 100px;
 }
 
-.wrapper .icon:hover span,
-.wrapper .icon:hover .tooltip {
-  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+input:focus, select:focus, textarea:focus {
+  border-color: #2563eb;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+.centre{
+    margin-left:300px;
 }
 
-.wrapper .facebook:hover,
-.wrapper .facebook:hover .tooltip,
-.wrapper .facebook:hover .tooltip::before {
-  background: #1877f2;
-  color: #fff;
-}
-    
-.wrapper .instagram:hover,
-.wrapper .instagram:hover .tooltip,
-.wrapper .instagram:hover .tooltip::before {
-  background: #ff3385;
-  color: #fff;
-}
-
-.wrapper .pinterest:hover,
-.wrapper .pinterest:hover .tooltip,
-.wrapper .pinterest:hover .tooltip::before {
-  background: #ff3333;
-  color: #fff;
-}
-  
