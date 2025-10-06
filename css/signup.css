@@ -48,7 +48,7 @@ a {
 {
       text-align: center;
       background-color:#a38f84;
-      color:black;
+      color:white;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -91,15 +91,8 @@ a {
 }
 
 .icon {
-  position: absolute;
   left: 0;
-  height: 45px;
-  width: 45px;
-  background-color: #fff;
-  border-radius: 99px;
-  z-index: -1;
   fill: rgb(91, 107, 255);
-  border: 1px solid rgb(91, 107, 255);
 }
 
 .input:focus + .icon,.input:not(:placeholder-shown) + .icon {
@@ -205,60 +198,92 @@ a
       text-decoration: none;
     }
 
-    footer {
-      background: #f4f2f0;
-      padding: 40px 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-      font-size: 14px;
-      padding-left:100px;
-    }
+    footer{
+  background-color: #f4f2f0;
+  padding: 0px 65px;
+  margin-top:50px;
+  color:var(--muted);
+  text-align:center;
+}
 
-    footer h4 {
-      font-size: 14px;
-      font-weight: 600;
-    }
+footer h4{
 
-    footer a {
-      display: block;
-      text-decoration: none;
-      color: #7d6656;
-    }
+  margin-bottom:40px;
+  margin-top:20px;
+  font-size:30px;
+  font-weight: bold;
+}
 
-    footer a:hover {
-      text-decoration: underline;
-    }
+footer a{
+  margin-top:30px;
+  color:black;
+  text-decoration: none;
+}
+.newsletter-form {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f7f7f7;
+  font-family: Arial, sans-serif;
+  margin-right:-50px;
+}
+.newsletter-form h2 {
+  margin-top: 0;
+  color: #333;
+  font-size: 24px;
+}
 
-    .ab a{
-      margin-right: 50px;
-    }
-  
-    .wrapper {
+
+.newsletter-form input[type="email"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.newsletter-form input[type="submit"] {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-radius: 4px;
+  background: #7d6656;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.newsletter-form input[type="submit"]:hover {
+  background-color: #ff8533;
+}
+
+
+.wrapper {
   display: inline-flex;
   list-style: none;
-  height: 120px;
+  height: 55px;
   width: 100%;
-  padding-top: 40px;
   font-family: "Poppins", sans-serif;
+  justify-content: center;
+  padding-left:83%;
+  margin-top:-100px;
 }
 
 .wrapper .icon {
   position: relative;
-  background: #7d6656;
+  background:#a38f84 ;
+  color:#fff ;
   border-radius: 50%;
   margin: 10px;
-  width: 37px;
-  height: 35px;
-  font-size:13px;
+  width: 41px;
+  height: 41px;
+  font-size: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-  color: white;
 }
 
 .wrapper .tooltip {
@@ -303,20 +328,28 @@ a
 .wrapper .facebook:hover .tooltip,
 .wrapper .facebook:hover .tooltip::before {
   background: #1877f2;
-  color: #fff;
+  color: black;
 }
-    
-.wrapper .instagram:hover,
-.wrapper .instagram:hover .tooltip,
-.wrapper .instagram:hover .tooltip::before {
-  background: #ff3385;
+
+.wrapper .twitter:hover,
+.wrapper .twitter:hover .tooltip,
+.wrapper .twitter:hover .tooltip::before {
+  background: #1da1f2;
   color: #fff;
 }
 
-.wrapper .pinterest:hover,
-.wrapper .pinterest:hover .tooltip,
-.wrapper .pinterest:hover .tooltip::before {
-  background: #ff3333;
+.wrapper .instagram:hover,
+.wrapper .instagram:hover .tooltip,
+.wrapper .instagram:hover .tooltip::before {
+  background: #e4405f;
   color: #fff;
+}
+
+.copyright
+{
+  color: white;
+  background-color:black;
+  text-align: center;
+  padding:10px;
 }
   
