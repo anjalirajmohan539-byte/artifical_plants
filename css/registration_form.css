@@ -145,8 +145,8 @@ a {
       font-weight:300;
       font-size:40px;
       margin-left:-50px;
-      font-family:Georgia, serif;
-      color:#a38f84 ;
+       color:#a38f84;
+      font-family:Footlight MT Light;
     }
 
     .reg-box p {
@@ -256,6 +256,8 @@ footer a{
   color:black;
   text-decoration: none;
 }
+
+
 .newsletter-form {
   max-width: 400px;
   margin: 0 auto;
@@ -309,6 +311,7 @@ footer a{
   font-family: "Poppins", sans-serif;
   justify-content: center;
   padding-left:83%;
+  margin-top: -80px;
 }
 
 .wrapper .icon {
