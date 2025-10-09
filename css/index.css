@@ -135,14 +135,14 @@ a {
 .image_slider
 {
   width: 100%;
-  height: 700px;
+  height: 800px;
   overflow: hidden;
 }
 
 .my_slider img
 {
   width: 100%;
-  height: 700px;
+  height: 800px;
 
 }
 
@@ -193,7 +193,7 @@ figure
 }
 
 
-/* .second_banner h2
+.second_banner h2
 {  
   font-size:40px;
   margin-top:50px;
@@ -209,6 +209,26 @@ figure
    justify-items: center;
    flex-wrap: wrap;
    padding: 40px 0;
+}
+
+.new_arrival .btn
+{
+    padding: 10px 20px;
+  background-color:#7d6656;
+  text-align: center;
+  align-items: center;
+  justify-items: center;
+  display: flex;
+  margin-left:50%;
+  color: white;
+
+}
+
+.new_arrival .btn:hover
+{
+  background:#bdafa8;
+  color:white;
+  padding:20px 40px;
 }
 
 *
@@ -254,7 +274,7 @@ body {
 
 .card .info .price
 {
-  color: #f00333;
+  color:#7d6656 ;
   font-size:20px;
   letter-spacing:1px;
 }
@@ -262,6 +282,7 @@ body {
 .card .info h3{
   color: #333;
   padding: 5px;
+  margin-top:20px;
 }
 
 .card .disconnect
@@ -284,9 +305,8 @@ body {
 {
   position:absolute;
   top: 50px;
-  right:-50px;
+  right:-80px;
   width:45px;
-  background: rgba(255,255,255,.8);
   display: flex;
   align-items: center;
   flex-flow: column;
@@ -316,7 +336,7 @@ body {
   left:50%;
   bottom:0%;
   transform: translateX(-50%);
-  padding:10px 10px;
+  padding:10px 20px;
   border: none;
   outline: none;
   background: rgba(0,0,0,.6);
@@ -326,6 +346,7 @@ body {
   cursor: pointer;
   opacity: 0;
   transition-delay: .2s;
+  border-radius:15px;
 }
 
 .card:hover button
@@ -342,51 +363,13 @@ body {
 .card img:hover
 {
     translate: -8px;
-} */
-
-.popular .box-container{
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
 }
 
-.popular .box-container .box{
-  padding: 2rem;
-  background: #fff;
-  box-shadow:0.5rem 1rem rgba(0,0,0,.1);
-  border: 1rem solid rgba(0,0,0,.3);
-  border-radius: .5rem;
-  text-align: center;
-  flex: 1 1 30rem;
-  position: relative;
-}
-
-.popular .box-container .box img{
-  height: 25rem;
-  object-fit: cover;
-  width: 100%;
-  border-radius: .5rem;
-}
-
-.popular .box-container .box .price{
-  position: absolute;
-  top: 3rem;
-  left: 3rem;
-  background: var(--red);
-  color: #fff;
-  font-size: 2rem;
-  padding: 5rem 1rem;
-  border-radius: .5rem;
-}
-
-.popular .box-container .box h3{
-  color: #333;
-  font-size: 2.5rem;
-  padding-top: 1rem;
-}
-
-.popular .box-container .box .stars i{
-  color: gold;
-  font-size: 1.7rem;
-  padding: 1rem .1rem;
+.banner_heading h1{
+  font-size: 50px;
+  margin-top:40px;
+  font-weight:normal;
+  color:#a38f84;
+  font-family:Footlight MT Light;
+  margin-left:160px;
 }
