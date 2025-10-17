@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Customer Reviews Slider</title>
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+  }
+
+  .video-container {
+    width: 80%;
+    max-width: 800px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    display: block;
+    animation: slideInLeft 2.5s ease-out forwards;
+    transform: translateX(100%);
+  }
+
+  @keyframes slideInLeft {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="video-container">
+  <video src="videos/Bouquet_Flowers.mp4" autoplay muted loop></video>
+</div>
+</body>
+</html>
+
