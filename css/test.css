@@ -1,0 +1,240 @@
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; 
+	transition: 0.3s all;
+	font-family: 'Open Sans', sans-serif;
+}
+	   .col-1 {width: 8.333333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-2 {width: 16.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-3 {width: 25%; height: auto; float: left; padding: 15px;}
+	   .col-4 {width: 33.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-5 {width: 41.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-6 {width: 50%; height: auto; float: left; padding: 15px;}
+	   .col-7 {width: 58.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-8 {width: 66.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-9 {width: 75%; height: auto; float: left; padding: 15px;}
+	   .col-10 {width: 83.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-11 {width: 91.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-12 {width: 100%; height: auto; float: left; padding: 15px;}
+	   
+	   .container-fluid{ width: 100%; }
+	   
+	   .container{max-width:1100px;margin: auto;}
+	   
+	   .img-fluid{width: 100%; height:auto;}
+ 
+		.cl{clear:both;}
+a {
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  text-decoration: none;
+}
+
+
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #f7f7f7;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #3b5bdb;
+  padding: 15px 40px;
+  color: white;
+}
+
+.search .input-container {
+  position: relative;
+}
+
+.search input {
+  padding: 10px 35px 10px 15px;
+  border: none;
+  border-radius: 20px;
+  outline: none;
+  width: 220px;
+}
+
+.search svg {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: gray;
+}
+
+.logo {
+  text-align: center;
+}
+
+.logo h1 {
+  font-size: 2em;
+  letter-spacing: 2px;
+}
+
+.logo p {
+  font-size: 0.9em;
+  color: #cfd8ff;
+}
+
+.icons img {
+  width: 28px;
+  margin-left: 15px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.icons img:hover {
+  transform: scale(1.1);
+}
+
+/* Menu */
+.menu {
+  background: #364fc7;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.menu a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.menu a:hover {
+  text-decoration: underline;
+  color: #ffd43b;
+}
+
+/* Main Content */
+.main_content {
+  display: flex;
+  padding: 30px;
+  gap: 30px;
+}
+
+
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #4c6ef5;
+  color: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  height: fit-content;
+}
+
+.sidebar h2 {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+}
+
+.sidebar ul li {
+  margin: 12px 0;
+}
+
+.sidebar ul li a {
+  color: #fff;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+  color: #ffd43b;
+  margin-left: 5px;
+}
+
+/* Product Grid */
+.products {
+  flex: 3;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.product-card {
+  background: #fff;
+  border-radius: 10px;
+  text-align: center;
+  padding: 15px;
+  transition: 0.3s;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-card h3 {
+  margin: 10px 0 5px;
+  color: #333;
+}
+
+.product-card p {
+  color: #555;
+  font-size: 0.95em;
+}
+
+.product-card span {
+  color: #2b8a3e;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.product-card s {
+  color: #999;
+}
+
+.discount {
+  color: #f03e3e;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+  .main_content {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .banner {
+    margin-bottom: 20px;
+  }
+}
