@@ -106,8 +106,13 @@ a {
 
 .header img
 {
-    width:4%;
+    width:5%;
 }
+
+.header a{
+  padding:30px;
+}
+
 .header h1
 {
 	padding-top:10px;
@@ -1322,8 +1327,8 @@ footer a{
   font-weight:normal;
   margin-top:135px;
 }
-/* 
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nanum+Gothic&display=swap');
+
+/* @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nanum+Gothic&display=swap');
 
 
 *,
@@ -1461,5 +1466,44 @@ section {
   bottom: 10px;
   left: 50%;
   transform: translateX(-50%) scale(1);
-  box-shadow: ;
+  box-shadow:0 7px 30px 0 rgba(100, 100, 111, 0.2);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: #fff;
+  font-family: "lexend",sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  padding: 8px 0;
+  text-align: center;
+  width: 60%;
+  outline: 0;
+  border:1px solid rgba(255, 255, 255, 0.4);
+  border-radius: 30px;
+  user-select: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.swiper-slide-active button
+{
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.swiper-slide button:hover
+{
+  transform: translateX(-50%) scale(0.98);
+}
+
+.swiper-pagination-bullet{
+  width: 18px;
+  height: 18px;
+  background-color: #7e7e7e;
+  border-radius: 50%;
+  transition: all 0.6s ease-in-out;
 } */
