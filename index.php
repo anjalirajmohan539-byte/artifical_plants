@@ -25,7 +25,7 @@
             <p class="text-body-secondary">Artifical Flowers and Home Decors</p>
         </div>
         <div class="col-3">
-            <a href="signup.html"><img src="images/contact.png"></a>
+            <a href="signup.php"><img src="images/contact.png"></a>
             <a href="#"><img src="images/shopping-cart.png"></a>
         </div>
     </div>
@@ -34,7 +34,7 @@
         <a href="#" class="text-light">NEW ARRIVALS</a>
         <a href="#" class="text-light">DECOR</a>
         <a href="#" class="text-light">ARTIFICAL FLOWERS</a>
-        <a href="vase.html" class="text-light">VASE</a>
+        <a href="vase.php" class="text-light">VASE</a>
         <a href="#" class="text-light">PEBBLES & MOSS</a>
         <a href="#" class="text-light">BLOG</a>
     </div>

@@ -2,15 +2,12 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Artifical_plant_registration</title>
-<link href="css/registration_form.css" rel="stylesheet">
+<title>Artifical_plant_signup</title>
+<link href="css/signup.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="usecode">
-        <p>Use code PREPAID5 – Get 5% OFF on prepaid orders above ₹2000!</p>
-    </div>
     <div class="header">
 
         <div class="col-3 search">     
@@ -27,7 +24,7 @@
             <p class="text-body-secondary">Artifical Flowers and Home Decors</p>
         </div>
         <div class="col-3">
-            <a href="signup.html"><img src="images/contact.png"></a>
+            <a href="signup.php"><img src="images/contact.png"></a>
             <a href="#"><img src="images/shopping-cart.png"></a>
         </div>
     </div>
@@ -40,68 +37,23 @@
         <a href="#" class="text-light">PEBBLES & MOSS</a>
         <a href="#" class="text-light">BLOG</a>
     </div>
-
-    <div class="cl"></div>
-     <div class="reg-wrapper">
-    <div class="container reg-box">
-        <div class="col-6 centre">
-      <form action="#" method="post">
-
-  <h2>Account Details</h2>
-  <label for="fullname">Full Name</label>
-  <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
-
-  <label for="phone">Phone Number</label>
-  <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
-
-  <label for="email">Email</label>
-  <input type="email" id="email" name="email" placeholder="Enter your email" required>
-
-   <label for="password">Password</label>
-  <input type="password" id="password" name="password" placeholder="Enter your password" required>
-
-  <label for="confirm_password">Confirm Password</label>
-  <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
-  <br>
-  <br>
-  <br>
-
-  <h2>Shipping Address</h2>
-  <label for="address">Street Address</label>
-  <textarea id="address" placeholder="Enter your address"></textarea>
-
-  <label for="city">City</label>
-  <input type="text" id="city" name="city" placeholder="Enter your city" required>
-
-  <label for="state">State</label>
-  <input type="text" id="state" name="state" placeholder="Enter your state" required>
-
-  <label for="zip">Postal Code</label>
-  <input type="text" id="zip" name="zip" placeholder="Enter your pincode" required>
-
-  <label for="country">Country</label>
-  <select id="country" name="country" required>
-    <option value="">Select Country</option>
-    <option value="in">India</option>
-    <option value="us">United States</option>
-    <option value="uk">United Kingdom</option>
-    
-  </select>
-
- <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-  <label class="form-check-label" for="checkDefault">
-   I agree to the Terms & Conditions
-  </label>
-</div>
-  <button type="submit">Register</button>
-</form>
+    <div class="login-wrapper">
+    <div class="login-box">
+      <h2>Login</h2>
+      <p>Don't have an account yet? <a href="registratin_form.php">Create account</a></p>
+      <form>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <a href="forgot_password.html" class="forgot">Forgot your password?</a>
+        <button type="submit">Sign In</button>
+      </form>
+      <a href="index.html" class="return">Return to Store</a>
     </div>
   </div>
-  </div>
 
-    <footer>
-    <div class="col-2">
+  <div class="container-fluid">
+  <footer>
+        <div class="col-2">
       <h4>About Us</h4>
       <a href="#">Our Story</a>
     </div>
@@ -126,6 +78,7 @@
     </div>
     
     <div class="col-4">
+    
       <div class="newsletter-form">
     <p class="heading"> Subscribe to Our Newsletter</p>
     <form class="form">
@@ -178,10 +131,9 @@
     </svg>
   </li>
 </ul>
-
-    </footer>
-    <div class="cl"></div>
-    <div class="copyright">© 2025, Milon, you accept the Terms & Conditions -
-                           Privacy Policies.</div>
+  </footer>
+  </div>
+      <div class="copyright">© 2025, Milon.By signing up for Milon.com you accept the Terms & Conditions -
+Privacy Policies</div>
 </body>
 </html>
