@@ -46,7 +46,7 @@
                 <h1>MILON</h1>
                 <h3 class="one">Artifical Flowers</h3>
                 <p class="onep">"Love is the flower you've got to let grow."</p>
-                <img src="images/2-10.jpg">
+                <img src="images/1555.png">
             </div>
             <div class="my_slider">
                 <h3 class="two">Inspired By Nature - Crafted By Hand</h3>
