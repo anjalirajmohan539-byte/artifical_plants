@@ -25,16 +25,16 @@
             <p class="text-body-secondary">Artifical Flowers and Home Decors</p>
         </div>
         <div class="col-3">
-            <a href="signup.html"><img src="images/contact.png"></a>
+            <a href="signup.php"><img src="images/contact.png"></a>
             <a href="#"><img src="images/shopping-cart.png"></a>
         </div>
     </div>
     <div class="menu">
-        <a href="#" class="text-light">HOME</a>
+        <a href="index.php" class="text-light">HOME</a>
         <a href="#" class="text-light">NEW ARRIVALS</a>
         <a href="#" class="text-light">DECOR</a>
         <a href="#" class="text-light">ARTIFICAL FLOWERS</a>
-        <a href="#" class="text-light">VASE</a>
+        <a href="vase.php" class="text-light">VASE</a>
         <a href="#" class="text-light">PEBBLES & MOSS</a>
         <a href="#" class="text-light">BLOG</a>
     </div>
@@ -45,7 +45,7 @@
 
   <div class="product-head">
       <h1>VASES</h1>
-      <p>When it comes to displaying your Mason vases at home, some vases are better suited for one type of flower over another.</p>
+      <p>When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>
     </div>
 
   <!-- Main Section -->
@@ -68,9 +68,9 @@
 
         <li><img src="images/pitcher_vase.jpg"><a href="#">Pitcher Vase</a></li>
 
-        <li><img src="images/pitcher_vase.jpg"><a href="#">Settings</a></li>
+        <li><img src="images/setting_icon.jpg"><a href="#">Settings</a></li>
 
-        <li><img src="images/pitcher_vase.jpg"><a href="#">Logout</a></li>
+        <li><img src="images/exit.jpg"><a href="#">Logout</a></li>
       </ul>
     </div>
 
@@ -167,8 +167,34 @@
 
   </div>
 
+  <div class="cl"></div>
+
   <div class="recently_views">
 
+  <h2>Recently Viewed</h2>
+
+  <div class="container decor">
+          <div class="col-3 ">
+            <img src="images/decor_1.jpg" alt="">
+            <p1>Artifical plant</p1><br>
+            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+        </div>
+        <div class="col-3">
+            <img src="images/decor_2.jpg" alt="">
+            <p1>Artifical plant</p1><br>
+            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+        </div>
+        <div class="col-3">
+            <img src="images/decor_3.jpg" alt="">
+            <p1>Artifical plant</p1><br>
+            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+        </div>
+        <div class="col-3">
+            <img src="images/decor_4.jpg" alt="">
+            <p1>Artifical plant</p1><br>
+            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+        </div>
+        <div class="cl"></div>
   </div>
 
   <!--   footer   -->

@@ -46,7 +46,7 @@ body {
       top: 0;
       width: 220px;
       height: 100%;
-      background:linear-gradient(180deg, rgba(17,24,39,1) 0%, rgba(8,10,15,1) 100%);
+      background: #897869;
       color: #fff;
       padding: 20px 0;
     }
@@ -54,13 +54,13 @@ body {
 
     .sidebar a {
       color: white;
+      text-decoration: none;
     }
     .sidebar h2 {
       text-align: center;
       margin-bottom:80px;
       font-size: 18px;
     }
-
     .sidebar ul {
       list-style: none;
       padding: 0;
@@ -73,5 +73,5 @@ body {
     }
 
     .sidebar ul li:hover {
-      background: #002db3;
+      background: #9A8C7A;
     }

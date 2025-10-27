@@ -33,21 +33,11 @@ a {
   text-decoration: none;
 }
 
-.usecode
-{
-    background-color:maroon;
-    text-align: center;
-    color: white;
-    height:40px;
-}
-.usecode p
-{
-    padding-top:10px;
-}
 .header
 {
-      text-align: center;
-      background-color:#a38f84;
+    margin: 0;
+    text-align: center;
+      background:#897869;
       color:white;
       display:flex;
       align-items:center;
@@ -55,6 +45,13 @@ a {
       
 }
 
+.header p{
+  color: black;
+  font-size:12px;
+  margin-top:-15px;
+  font-weight:600;
+  text-align: center;
+}
 .input-container {
   position: relative;
   display: flex;
@@ -91,8 +88,12 @@ a {
 }
 
 .icon {
+  position: absolute;
   left: 0;
-  fill: rgb(91, 107, 255);
+  height: 45px;
+  width: 45px;
+  background-color: #fff;
+  border-radius: 99px;
 }
 
 .input:focus + .icon,.input:not(:placeholder-shown) + .icon {
@@ -110,18 +111,18 @@ a {
 	padding-top:10px;
     font-size:80px;
     color:white;
+    font-family: Baskerville Old Face;
 }
 
 .header a
 {
   padding:30px;
 }
-
 .menu
 {
 	padding-top:5px;
 	text-align: center;
-	background-color:#bdafa8;
+	background:#9A8C7A;
 	margin:0;
 	align-items:center;
 	justify-content: center;
