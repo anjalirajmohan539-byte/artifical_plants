@@ -44,10 +44,10 @@
       <form>
         <input type="email" placeholder="Email" required>
         <input type="password" placeholder="Password" required>
-        <a href="forgot_password.html" class="forgot">Forgot your password?</a>
+        <a href="forgot_password.php" class="forgot">Forgot your password?</a>
         <button type="submit">Sign In</button>
       </form>
-      <a href="index.html" class="return">Return to Store</a>
+      <a href="index.php" class="return">Return to Store</a>
     </div>
   </div>
 

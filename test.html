@@ -1,134 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MILON - Vase Collection</title>
-  <link rel="stylesheet" href="css/test.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="css/test.css" />
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
-  <!-- Header Section -->
-  <div class="header">
-    <div class="search">
-      <div class="input-container">
-        <input type="text" name="text" class="input" placeholder="Search something...">
-        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 
-          1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 
-          6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
-        </svg>
-      </div>
-    </div>
-
-    <div class="logo">
-      <h1>MILON</h1>
-      <p>Artificial Flowers & Home Decors</p>
-    </div>
-
-    <div class="icons">
-      <a href="signup.html"><img src="images/contact.png" alt="Contact"></a>
-      <a href="#"><img src="images/shopping-cart.png" alt="Cart"></a>
-    </div>
-  </div>
-
-  <!-- Navigation Menu -->
-  <div class="menu">
-    <a href="#">HOME</a>
-    <a href="#">NEW ARRIVALS</a>
-    <a href="#">DECOR</a>
-    <a href="#">ARTIFICIAL FLOWERS</a>
-    <a href="#">VASE</a>
-    <a href="#">PEBBLES & MOSS</a>
-    <a href="#">BLOG</a>
-  </div>
-
-
-
-<div class="product-head">
-      <h1>VASES</h1>
-      <p>When it comes to displaying your Mason vases at home, some vases are better suited for one type of flower over another.</p>
-    </div>
-
-  <!-- Main Section -->
-  <div class="main_content">
+  <div class="container-fluid">
 
 
     <!-- Sidebar -->
-    <div class="sidebar">
-      <h2>Vase Types</h2>
+    <aside class="sidebar">
+      <h2>Milon<br><span>Artificial Plants</span></h2>
       <ul>
-        <li><img src="images/bowl_vase.jpg"><a href="#">Bowl Vase</a></li>
-        <li><img src="images/bud_vase.jpg"><a href="#">Bud Vase</a></li>
-        <li><img src="images/cylinder_vase.jpg"><a href="#">Cylinder Vase</a></li>
-        <li><img src="images/Ceramic_vase.jpg"><a href="#">Ceramic Vase</a></li>
-        <li><img src="images/cube_vase.jpg"><a href="#">Cube Vase</a></li>
-        <li><img src="images/pitcher_vase.jpg"><a href="#">Pitcher Vase</a></li>
+        <li><a href="#">User List</a></li>
+        <li><a href="#">Product List</a></li>
+        <li><a href="#">Create Date</a></li>
+        <li><a href="#">Last Update</a></li>
       </ul>
-    </div>
+    </aside>
 
-    <!-- Product Grid -->
+    <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <h1><span>Admin</span> Dashboard</h1>
+        <div class="profile">
+          <img src="https://i.pravatar.cc/60" alt="Admin Profile" />
+          <p>Admin Profile</p>
+        </div>
+      </header>
 
-    <div class="products">
-      
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
+      <!-- Dashboard Cards -->
+      <section class="cards">
+        <div class="card"><h3>Sales</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
+        <div class="card"><h3>Earnings</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
+        <div class="card"><h3>Total Customer</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
+        <div class="card"><h3>Inactive users</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
+        <div class="card"><h3>Visitors</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
+        <div class="card"><h3>Orders</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
+        <div class="card"><h3>Active users</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
+        <div class="card"><h3>Orders</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
+      </section>
 
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
+      <!-- Graph Section -->
+      <section class="charts">
+        <div class="chart-card">
+          <h3>Recent Movement</h3>
+          <canvas id="recentMovementChart"></canvas>
+        </div>
+        <div class="chart-card">
+          <h3>Monthly Sales</h3>
+          <canvas id="monthlySalesChart"></canvas>
+        </div>
+      </section>
 
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-    </div>
-
+      <!-- Products Section -->
+      <section class="products">
+        <h2>Most Selling</h2>
+        <div class="product-list">
+          <div class="product-card">
+            <img src="https://i.ibb.co/8bLccXL/plant1.jpg" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+          <div class="product-card">
+            <img src="https://i.ibb.co/z82d6S0/plant2.jpg" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+          <div class="product-card">
+            <img src="https://i.ibb.co/tPV3p4m/plant3.jpg" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+          <div class="product-card">
+            <img src="https://i.ibb.co/xzpg1sK/plant4.jpg" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+        </div>
+      </section>
+    </main>
   </div>
 
+
+
+
+
+
+
+
+  <!-- JavaScript for Charts -->
+  <script>
+    // Recent Movement Line Chart
+    const ctx1 = document.getElementById('recentMovementChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Visitors',
+          data: [1200, 1900, 3000, 2500, 2800, 3200, 4100],
+          borderColor: '#7a614b',
+          backgroundColor: 'rgba(122, 97, 75, 0.2)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#7a614b'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#eee' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Monthly Sales Bar Chart
+    const ctx2 = document.getElementById('monthlySalesChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        datasets: [{
+          label: 'Sales (in ₹000)',
+          data: [15, 22, 18, 25, 28, 35, 40, 38, 45],
+          backgroundColor: '#8b7a6f',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#eee' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
 </body>
 </html>
+

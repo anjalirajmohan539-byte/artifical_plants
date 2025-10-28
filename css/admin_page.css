@@ -75,3 +75,94 @@ body {
     .sidebar ul li:hover {
       background: #9A8C7A;
     }
+
+        .header {
+    align-items: center;
+    margin-top: 30px;
+    margin-right: 100px;
+    float: right;
+    }
+
+    .header img
+    {
+      width: 55px;
+      border-radius: 34px;
+    }
+
+    .header p
+    {
+      margin-left: -19px;
+    }
+
+    .content
+    {
+      padding-left: 298px !important;
+      padding-inline-end: 15px;
+    }
+
+    /* .stat
+    {
+      align-items: center;
+      background: #d3e2f7;
+      border-radius: 50%;
+      display: flex;
+      height: 40px;
+      justify-content: center;
+      width: 40px;
+    }
+
+    .stat svg
+    {
+      width: 18px;
+      height: 18px;
+      color: #3b7ddd !important;
+      stroke-width: 1.5;
+    } */
+
+
+    .content strong
+    {
+      color: #897869;
+      font-size:40px;
+    }
+
+
+
+.decor img
+{
+  width: 91%;
+  border-radius:20px;
+}
+
+.most_sellings
+{
+  margin-top:100px;
+}
+
+.most_sellings h3
+{
+  font-size:30px;
+  font-weight:500;
+}
+
+.decor p1
+{
+  color: #897869;
+ padding-top:10px;
+}
+
+.decor p2
+{
+  color: lightgreen;
+}
+
+.decor span
+{
+  color: red;
+  
+}
+
+main .row
+{
+  flex-wrap: inherit;
+}
