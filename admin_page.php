@@ -5,6 +5,7 @@
 <title>Artifical_plant_registration</title>
 <link href="css/admin_page.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
@@ -12,280 +13,141 @@
 <div class="sidebar">
     <h2>Milon <br> Artifical Plants</h2>
     <ul>
-      <a href="#"><li>User List</li></a>
-      <a href="#"><li>Product List</li></a>
-      <a href="#"><li>Create Date</li></a>
-      <a href="#"><li>Last Update</li></a>
+	  <a href="#"><li><img src="images/dashboard_icon.jpg">Dashboard</li></a>
+	  <a href="#"><li><img src="images/product_icon.jpg">Orders</li></a>
+      <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
+      <a href="#"><li><img src="images/product_icon.jpg">Product List</li></a>
+      <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
+      <a href="#"><li><img src="images/logout_icon.jpg">Logout</li></a>
     </ul>
   </div>
 
-     <div class="header">
-            <img src="images/admin_profile.jpg"><p>Admin Profile</p>
-    </div>
-
-    <div class="cl"></div>
-  
-  			<main class="content">
-
-				<div class=" p-0">
-
-					<h1 class="h3 mb-3"><strong>Admin</strong> Dashboard</h1>
-
-					<div class="row">
-						<div class="col-xl-6 col-xxl-5 d-flex">
-							<div class="w-100">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Sales</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Visitors</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="users"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Earnings</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">21.300</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Orders</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="shopping-cart"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">64</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-
-            
-
-            <div class="row">
-						<div class="col-xl-6 col-xxl-5 d-flex">
-							<div class="w-100">
-								<div class="row">
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Total Customer</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="truck"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">2.382</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -3.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Active users</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="users"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">14.212</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 5.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-6">
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Inactive users</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="dollar-sign"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">21.300</h1>
-												<div class="mb-0">
-													<span class="text-success"> <i class="mdi mdi-arrow-bottom-right"></i> 6.65% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-										<div class="card">
-											<div class="card-body">
-												<div class="row">
-													<div class="col mt-0">
-														<h5 class="card-title">Orders</h5>
-													</div>
-
-													<div class="col-auto">
-														<div class="stat text-primary">
-															<i class="align-middle" data-feather="shopping-cart"></i>
-														</div>
-													</div>
-												</div>
-												<h1 class="mt-1 mb-3">64</h1>
-												<div class="mb-0">
-													<span class="text-danger"> <i class="mdi mdi-arrow-bottom-right"></i> -2.25% </span>
-													<span class="text-muted">Since last week</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-
-            
-            
-					</div>
-
-						<div class="col-12 col-lg-4 col-xxl-3 d-flex">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-
-									<h5 class="card-title mb-0">Monthly Sales</h5>
-								</div>
-								<div class="card-body d-flex w-100">
-									<div class="align-self-center chart chart-lg">
-										<canvas id="chartjs-dashboard-bar"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
-
-        <div class="container most_sellings">
-
-        <div class="h3">
-          <h3>Most Selling</h3>
+     <!-- Main Content -->
+    <main class="main-content">
+      <header class="topbar">
+        <h1><span>Admin</span> Dashboard</h1>
+        <div class="profile">
+          <img src="images/men_image.jpg" alt="Admin Profile" />
+          <p>Admin Profile</p>
         </div>
+      </header>
 
-         <div class="container decor">
-          <div class="col-3 ">
-            <img src="images/decor_1.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+      <!-- Dashboard Cards -->
+      <section class="cards">
+        <div class="card"><h3>Sales</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
+        <div class="card"><h3>Earnings</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
+        <div class="card"><h3>Order</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
+        <div class="card"><h3>Delivered</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
+        <div class="card"><h3>Total Customer</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
+        <div class="card"><h3>Active Users</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
+        <div class="card"><h3>InActive Users</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
+        <div class="card"><h3>Banned Users</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
+      </section>
+
+      <!-- Graph Section -->
+      <section class="charts">
+        <div class="chart-card">
+          <h3>Recent Movement</h3>
+          <canvas id="recentMovementChart"></canvas>
         </div>
-        <div class="col-3">
-            <img src="images/decor_2.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+        <div class="chart-card">
+          <h3>Monthly Sales</h3>
+          <canvas id="monthlySalesChart"></canvas>
         </div>
-        <div class="col-3">
-            <img src="images/decor_3.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+      </section>
+
+      <!-- Products Section -->
+      <section class="products">
+        <h2>Most Selling Product</h2>
+        <div class="product-list">
+          <div class="product-card">
+            <img src="images/plant_3" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+          <div class="product-card">
+            <img src="images/plant_3" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+          <div class="product-card">
+            <img src="images/plant_3" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+          <div class="product-card">
+            <img src="images/plant_3" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
+		  <div class="product-card">
+            <img src="images/plant_3" alt="">
+            <p>Artificial plant</p>
+            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
+          </div>
         </div>
-        <div class="col-3">
-            <img src="images/decor_4.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
-        </div>
+      </section>
+    </main>
+  </div>
 
 
-        </div>
 
 
-        	<div class="col-xl-6 col-xxl-7">
-							<div class="card flex-fill w-100">
-								<div class="card-header">
-
-									<h5 class="card-title mb-0">Recent Movement</h5>
-								</div>
-								<div class="card-body py-3">
-									<div class="chart chart-sm">
-										<canvas id="chartjs-dashboard-line"></canvas>
-									</div>
-								</div>
-							</div>
-						</div>
-			</main>
 
 
+
+
+  <!-- JavaScript for Charts -->
+  <script>
+    // Recent Movement Line Chart
+    const ctx1 = document.getElementById('recentMovementChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+          label: 'Visitors',
+          data: [1200, 1900, 3000, 2500, 2800, 3200, 4100],
+          borderColor: '#7a614b',
+          backgroundColor: 'rgba(122, 97, 75, 0.2)',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4,
+          pointBackgroundColor: '#7a614b'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#eee' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+
+    // Monthly Sales Bar Chart
+    const ctx2 = document.getElementById('monthlySalesChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+        datasets: [{
+          label: 'Sales (in ₹000)',
+          data: [15, 22, 18, 25, 28, 35, 40, 38, 45],
+          backgroundColor: '#8b7a6f',
+          borderRadius: 6
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+          y: { beginAtZero: true, grid: { color: '#eee' } },
+          x: { grid: { display: false } }
+        }
+      }
+    });
+  </script>
 </body>
 </html>

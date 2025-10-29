@@ -1,3 +1,8 @@
+<?php
+include("database.php");
+?>
+
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -44,16 +49,16 @@
     <div class="cl"></div>
      <div class="reg-wrapper">
     <div class="reg-box">
-      <form action="#" method="post">
+      <form action="registration_action.php" method="post">
 
 
   <h2>Account Details</h2>
 
   <label for="email">Email</label>
-  <input type="email" id="email" name="email" placeholder="Enter your email" required>
+  <input type="email" id="email" name="email" class="email" placeholder="Enter your email" required>
 
    <label for="password">Password</label>
-  <input type="password" id="password" name="password" placeholder="Enter your password" required>
+  <input type="password" id="password" name="password" class="password" placeholder="Enter your password" required>
 
   <label for="confirm_password">Confirm Password</label>
   <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
@@ -64,8 +69,11 @@
 
   <h2>Personal Details</h2>
 
+  <label for="customer_image"></label>
+  <input type="file" class="image">
+
    <label for="fullname">Full Name</label>
-  <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+  <input type="text" id="fullname" name="fullname" class="fullname" placeholder="Enter your full name" required>
 
   <div class="col-12 personal">
 
@@ -79,42 +87,78 @@
 
     <div class="col-4">
   <label for="date_birth">Date of Birth</label>
-  <input type="date" id="dob" name="dob" placeholder="Enter your date of birth" required>
+  <input type="date" id="dob" name="dob" class="dob" placeholder="Enter your date of birth" required>
   </div>
 
   <div class="col-4">
   <label for="age">Age</label>
-  <input type="text" id="age" name="age" required>
+  <input type="text" id="age" name="age" class="age" required>
   </div>
 
   </div>
 
   <label for="phone">Phone Number</label>
-  <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" required>
+  <input type="tel" id="phone" name="phone" class="phone" placeholder="Enter your phone number" required>
 
     <label for="phone">WhatsApp Number</label>
-  <input type="tel" id="whatsapp_phone" name="whatsapp_phone" placeholder="Enter your whatsapp number" required>
+  <input type="tel" id="whatsapp_phone" name="whatsapp_phone" class="whatsapp_phone" placeholder="Enter your whatsapp number" required>
 
   <label for="address">Street Address</label>
-  <textarea id="address" placeholder="Enter your address"></textarea>
-
-  <label for="city">City</label>
-  <input type="text" id="city" name="city" placeholder="Enter your city" required>
-
-  <label for="state">State</label>
-  <input type="text" id="state" name="state" placeholder="Enter your state" required>
+  <textarea id="address" class="address" placeholder="Enter your address"></textarea>
 
   <label for="zip">Postal Code</label>
-  <input type="text" id="zip" name="zip" placeholder="Enter your pincode" required>
+  <input type="text" id="zip" name="zip" class="pincode" placeholder="Enter your pincode" required>
 
-  <label for="country">Country</label>
-  <select id="country" name="country" required>
-    <option value="">Select Country</option>
-    <option value="in">India</option>
-    <option value="us">United States</option>
-    <option value="uk">United Kingdom</option>
-    
+  <label for="city">City</label>
+  <input type="text" id="city" name="city" class="city" placeholder="Enter your city" required>
+
+
+  <?php
+  $select="SELECT `Id`, `Name` FROM `state` ";
+  $statemnt=mysqli_query($conn,$select);
+
+  if(mysqli_num_rows($statemnt)>0)
+  {  
+  
+  ?>
+
+  <label for="state" class="status">State</label>
+  <select>
+    <option value="0">Select State</option>
+    <?php   
+    while($details=mysqli_fetch_assoc($statemnt))
+    {
+    ?>
+    <option value="<?php echo $details["Id"];?>"><?php echo $details["Name"];?></option>
+
+  <?php  }
+  ?>
   </select>
+  <?php  } ?>
+  
+
+  <?php
+  
+  $select_country="SELECT `Id`, `Name` FROM `country`";
+  $country_statnmt=mysqli_query($conn,$select_country);
+
+  if(mysqli_num_rows($country_statnmt)>0){
+   
+
+  ?>
+  <label for="country" class="country">Country</label>
+  <select id="country" name="country" required>
+    <option value="0">Select Country</option>
+    <?php
+     while($country=mysqli_fetch_assoc($country_statnmt))
+    {
+    ?>
+    <option value="<?php echo $country["Id"];?>"><?php echo $country["Name"];?></option>
+    <?php  }?>
+
+  </select>
+
+<?php  }?>
 
  <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="checkDefault">
@@ -122,7 +166,7 @@
    I agree to the Terms & Conditions
   </label>
 </div>
-  <button type="submit">Register</button>
+  <button type="submit" class="button">Register</button>
 </form>
     </div>
   </div>
