@@ -1,3 +1,16 @@
+<?php 
+
+session_start();
+include('database.php');
+$emailerror="";
+if(isset($_SESSION['error']))
+{
+	$emailerror=$_SESSION['error'];
+	$_SESSION['error']="";
+}
+
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -41,11 +54,11 @@
     <div class="login-box">
       <h2>Login</h2>
       <p>Don't have an account yet? <a href="registratin_form.php">Create account</a></p>
-      <form action="#" method="post">
-        <input type="email" class="email" placeholder="Email" required>
-        <input type="password" class="password" placeholder="Password" required>
+      <form action="login_action.php" method="post">
+        <input type="email" class="email" name="email" placeholder="Email" required>
+        <input type="password" class="password" name="password" placeholder="Password" required>
         <a href="forgot_password.php" class="forgot">Forgot your password?</a>
-        <button type="submit" class="button">Sign In</button>
+        <button type="submit" name="button" class="button">Sign In</button>
       </form>
       <a href="index.php" class="return">Return to Store</a>
     </div>

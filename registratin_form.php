@@ -49,7 +49,7 @@ include("database.php");
     <div class="cl"></div>
      <div class="reg-wrapper">
     <div class="reg-box">
-      <form action="registration_action.php" method="post">
+      <form action="registration_action.php" method="post" enctype="multipart/form-data">
 
 
   <h2>Account Details</h2>
@@ -70,18 +70,19 @@ include("database.php");
   <h2>Personal Details</h2>
 
   <label for="customer_image"></label>
-  <input type="file" class="image">
+  <input type="file" class="image" name="image">
 
    <label for="fullname">Full Name</label>
   <input type="text" id="fullname" name="fullname" class="fullname" placeholder="Enter your full name" required>
 
   <div class="col-12 personal">
 
+
     <div class="col-4 gender">
     <label for="gender" id="gender">Gender</label>
-	<input type="radio" id="male" value="male" name="male_n" >
+	<input type="radio" id="male" value="0" name="male" >
 	<h3 class="male">Male</h3>
-	<input type="radio" id="female" value="female" name="male_n">
+	<input type="radio" id="female" value="1" name="male">
 	<h3 class="male">Female</h3>
     </div>
 
@@ -104,7 +105,7 @@ include("database.php");
   <input type="tel" id="whatsapp_phone" name="whatsapp_phone" class="whatsapp_phone" placeholder="Enter your whatsapp number" required>
 
   <label for="address">Street Address</label>
-  <textarea id="address" class="address" placeholder="Enter your address"></textarea>
+  <textarea id="address" name="address" class="address" placeholder="Enter your address"></textarea>
 
   <label for="zip">Postal Code</label>
   <input type="text" id="zip" name="zip" class="pincode" placeholder="Enter your pincode" required>
@@ -123,7 +124,7 @@ include("database.php");
   ?>
 
   <label for="state" class="status">State</label>
-  <select>
+  <select name="state">
     <option value="0">Select State</option>
     <?php   
     while($details=mysqli_fetch_assoc($statemnt))
@@ -166,7 +167,7 @@ include("database.php");
    I agree to the Terms & Conditions
   </label>
 </div>
-  <button type="submit" class="button">Register</button>
+  <button type="submit" name="button" class="button">Register</button>
 </form>
     </div>
   </div>
@@ -255,4 +256,9 @@ include("database.php");
     <div class="copyright">© 2025, Milon, you accept the Terms & Conditions -
                            Privacy Policies.</div>
 </body>
+
+<script>
+
+  
+</script>
 </html>
