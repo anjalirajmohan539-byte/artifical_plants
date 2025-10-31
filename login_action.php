@@ -4,13 +4,13 @@ include("database.php");
 
 if(isset($_POST["button"]))
 {
-    $email=$_POST("email");
-    $password=$_POST("password");
+    $email=$_POST['email'];
+    $password=$_POST['password'];
 }
 
 $select="SELECT `Id`, `UserEmail`, `Password`, `UserType` FROM `login` WHERE UserEmail='$email' AND Lpassword='$password'";
-
-if (!$s_statement=mysqli_query($conn,$select))
+var_dump($select);
+if ($s_statement=mysqli_query($conn,$select))
 	{
 		echo "error";
 	}
@@ -27,13 +27,17 @@ if (!$s_statement=mysqli_query($conn,$select))
 			$usertype=$l_array['UserType'];
 			$login_id=$l_array['Id'];
 			
-			$_SESSION['id']=$login_id;
+			$_SESSION['Id']=$login_id;
 			
 			if($usertype=="admin")
 			{
-				
+				header('location:dashboard.php');
 			}
-			
+
+			else if($usertype=="customer")
+			{
+			header('location:index.php');
+			}
 			
 		}
 	}

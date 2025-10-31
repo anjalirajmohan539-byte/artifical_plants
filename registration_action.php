@@ -4,8 +4,8 @@
 
  if(isset($_POST["button"]))
  {
-   $email=$_POST["email"];
-   $password=$_POST["password"];
+   $email=$_POST['email'];
+   $password=$_POST['password'];
    $image=$_FILES['image']['name'];
    $name=$_POST["fullname"];
    $gender=$_POST["male"];

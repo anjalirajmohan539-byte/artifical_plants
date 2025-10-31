@@ -49,19 +49,19 @@ include("database.php");
     <div class="cl"></div>
      <div class="reg-wrapper">
     <div class="reg-box">
-      <form action="registration_action.php" method="post" enctype="multipart/form-data">
+      <form action="#" method="post" enctype="multipart/form-data" onSubmit="return validation();">
 
 
   <h2>Account Details</h2>
 
   <label for="email">Email</label>
-  <input type="email" id="email" name="email" class="email" placeholder="Enter your email" required>
+  <input type="email" id="email" name="email" class="email" placeholder="Enter your email" oninput="remove_validation('email','emailErr');">
 
    <label for="password">Password</label>
-  <input type="password" id="password" name="password" class="password" placeholder="Enter your password" required>
+  <input type="password" id="password" name="password" class="password" placeholder="Enter your password" oninput="remove_validation('password','passwordErr');">
 
   <label for="confirm_password">Confirm Password</label>
-  <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm your password" required>
+  <input type="password" id="confirmpassword" name="confirm_password" placeholder="Confirm your password" oninput="remove_validation('confirmpassword','confirmpasswordErr');">
   <br>
   <br>
   <br>
@@ -69,11 +69,22 @@ include("database.php");
 
   <h2>Personal Details</h2>
 
+<aside class="card-right">
+<div class="avatar-preview" id="avatarBox">
+        <div style="text-align:center;padding:10px;color:var(--muted)">
+          <div style="font-size:18px;font-weight:700">Welcome!</div>
+          <div class="small1">Upload a profile photo to preview here.</div>
+        </div>
+      </div>
+     
+</aside>
+
   <label for="customer_image"></label>
-  <input type="file" class="image" name="image">
+   <div class="small">Upload a square photo (will be cropped).</div>
+  <input id="avatar" type="file" class="image" name="image">
 
    <label for="fullname">Full Name</label>
-  <input type="text" id="fullname" name="fullname" class="fullname" placeholder="Enter your full name" required>
+  <input type="text" id="fullname" name="fullname" class="fullname" placeholder="Enter your full name" oninput="remove_validation('fullname','fullnameErr');">
 
   <div class="col-12 personal">
 
@@ -82,36 +93,39 @@ include("database.php");
     <label for="gender" id="gender">Gender</label>
 	<input type="radio" id="male" value="0" name="male" >
 	<h3 class="male">Male</h3>
+  <div class="error" id="maleErr"></div>
+
 	<input type="radio" id="female" value="1" name="male">
 	<h3 class="male">Female</h3>
+  <div class="error" id="femaleErr"></div>
     </div>
 
     <div class="col-4">
   <label for="date_birth">Date of Birth</label>
-  <input type="date" id="dob" name="dob" class="dob" placeholder="Enter your date of birth" required>
+  <input type="date" id="dob" name="dob" class="dob" placeholder="Enter your date of birth" oninput="remove_validation('dob','dobErr');">
   </div>
 
   <div class="col-4">
   <label for="age">Age</label>
-  <input type="text" id="age" name="age" class="age" required>
+  <input type="text" id="age" name="age" class="age" oninput="remove_validation('age','ageErr');">
   </div>
 
   </div>
 
   <label for="phone">Phone Number</label>
-  <input type="tel" id="phone" name="phone" class="phone" placeholder="Enter your phone number" required>
+  <input type="tel" id="phone" name="phone" class="phone" placeholder="Enter your phone number" oninput="remove_validation('phoneno','phonenoErr');">
 
     <label for="phone">WhatsApp Number</label>
-  <input type="tel" id="whatsapp_phone" name="whatsapp_phone" class="whatsapp_phone" placeholder="Enter your whatsapp number" required>
+  <input type="tel" id="whatsappphone" name="whatsapp_phone" class="whatsapp_phone" placeholder="Enter your whatsapp number" oninput="remove_validation('whatsapp','whatsappErr');">
 
   <label for="address">Street Address</label>
-  <textarea id="address" name="address" class="address" placeholder="Enter your address"></textarea>
+  <textarea id="address" name="address" class="address" placeholder="Enter your address" onkeyup="remove_validation('address','addressErr')"></textarea>
 
   <label for="zip">Postal Code</label>
-  <input type="text" id="zip" name="zip" class="pincode" placeholder="Enter your pincode" required>
+  <input type="text" id="zip" name="zip" class="pincode" placeholder="Enter your pincode" oninput="remove_validation('pincode','pincodeErr');">
 
   <label for="city">City</label>
-  <input type="text" id="city" name="city" class="city" placeholder="Enter your city" required>
+  <input type="text" id="city" name="city" class="city" placeholder="Enter your city" oninput="remove_validation('cityname','cityErr');">
 
 
   <?php
@@ -259,6 +273,83 @@ include("database.php");
 
 <script>
 
-  
+function validation() {
+  let valid = true;
+
+  // Helper function
+  function showError(id, msg) {
+    let el = document.getElementById(id + "Err");
+    if (el) el.textContent = msg;
+    valid = false;
+  }
+
+  // Clear error text
+  document.querySelectorAll(".error").forEach(e => e.textContent = "");
+
+  // Get values
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+  let confirmpassword = document.getElementById("confirmpassword").value.trim();
+  let fullname = document.getElementById("fullname").value.trim();
+  let dob = document.getElementById("dob").value.trim();
+  let age = document.getElementById("age").value.trim();
+  let phone = document.getElementById("phone").value.trim();
+  let address = document.getElementById("address").value.trim();
+  let zip = document.getElementById("zip").value.trim();
+  let city = document.getElementById("city").value.trim();
+  let check = document.getElementById("checkDefault").checked;
+
+  // Email
+  if (email === "") showError("email", "Email is required");
+  else if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))
+    showError("email", "Invalid email format");
+
+  // Password
+  if (password === "") showError("password", "Password is required");
+  else if (password.length < 6) showError("password", "Min 6 characters");
+
+  // Confirm password
+  if (confirmpassword === "") showError("confirmpassword", "Please confirm password");
+  else if (confirmpassword !== password)
+    showError("confirmpassword", "Passwords do not match");
+
+  // Full name
+  if (fullname === "") showError("fullname", "Full name is required");
+
+  // DOB
+  if (dob === "") showError("dob", "Date of birth is required");
+
+  // Age
+  if (age === "" || isNaN(age) || age <= 0)
+    showError("age", "Enter a valid age");
+
+  // Phone
+  if (phone === "" || !/^[0-9]{10}$/.test(phone))
+    showError("phoneno", "Enter a valid 10-digit phone");
+
+  // Address
+  if (address === "") showError("address", "Address is required");
+
+  // Zip
+  if (zip === "" || !/^[0-9]{6}$/.test(zip))
+    showError("pincode", "Enter valid 6-digit pincode");
+
+  // City
+  if (city === "") showError("cityname", "City name is required");
+
+  // Terms checkbox
+  if (!check) {
+    alert("Please agree to Terms & Conditions");
+    valid = false;
+  }
+
+  return valid;
+}
+
+// To clear error when typing
+function remove_validation(inputId, errorId) {
+  document.getElementById(errorId)?.textContent = "";
+}
+
 </script>
 </html>

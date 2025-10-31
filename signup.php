@@ -54,12 +54,14 @@ if(isset($_SESSION['error']))
     <div class="login-box">
       <h2>Login</h2>
       <p>Don't have an account yet? <a href="registratin_form.php">Create account</a></p>
-      <form action="login_action.php" method="post">
-        <input type="email" class="email" name="email" placeholder="Email" required>
-        <input type="password" class="password" name="password" placeholder="Password" required>
+
+      <form action="#" method="post" onSubmit="return validation();">
+        <input type="email" id="email" class="email" name="email" placeholder="Email" onChange="removeValidation('email','emailErr');">
+        <input type="password" id="password" class="password" name="password" placeholder="Password" onChange="removeValidation('password','passwordErr');">
         <a href="forgot_password.php" class="forgot">Forgot your password?</a>
         <button type="submit" name="button" class="button">Sign In</button>
       </form>
+
       <a href="index.php" class="return">Return to Store</a>
     </div>
   </div>
@@ -149,4 +151,58 @@ if(isset($_SESSION['error']))
       <div class="copyright">© 2025, Milon.By signing up for Milon.com you accept the Terms & Conditions -
 Privacy Policies</div>
 </body>
+
+<script>
+
+function validation()
+{
+	var email=document.getElementById("email");
+	var password=document.getElementById("password");
+	var emailerror=document.getElementById("emailErr");
+	var passworderror=document.getElementById("passwordErr");
+	var f=0;
+
+
+	if(email.value == "")
+	{
+		email.style.border="1px solid red";
+		email.focus();
+		// emailerror.innerHTML="Enter your Email";
+		f=1;
+	}
+
+	if(password.value == "")
+	{
+		password.style.border="1px solid red";
+		password.focus();
+		// passworderror.innerHTML="Enter your Password";
+		f=1;
+	}
+
+			
+	if(f==0)
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
+	
+
+		function removeValidation(fieldId,errormessage)
+		{
+			
+			let email=document.getElementById(fieldId);
+			let emailerror=document.getElementById(errormessage);
+			
+			email.style.border="none";
+			emailerror.innerHTML="";
+			
+		}
+
+}
+
+	</script>
+
 </html>
