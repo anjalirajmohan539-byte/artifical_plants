@@ -16,12 +16,12 @@ if(isset($_SESSION['error']))
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artifical_plant_signup</title>
-<link href="css/signup.css" rel="stylesheet">
+<link href="css/login.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 </head>
 
 <body>
-    <div class="header">
+        <div class="header">
 
         <div class="col-3 search">     
   <div class="input-container">
@@ -37,7 +37,7 @@ if(isset($_SESSION['error']))
             <p class="text-body-secondary">Artifical Flowers and Home Decors</p>
         </div>
         <div class="col-3">
-            <a href="signup.php"><img src="images/contact.png"></a>
+            <a href="signup.html"><img src="images/contact.png"></a>
             <a href="#"><img src="images/shopping-cart.png"></a>
         </div>
     </div>
@@ -50,6 +50,7 @@ if(isset($_SESSION['error']))
         <a href="#" class="text-light">PEBBLES & MOSS</a>
         <a href="#" class="text-light">BLOG</a>
     </div>
+    
     <div class="login-wrapper">
     <div class="login-box">
       <h2>Login</h2>
@@ -57,7 +58,9 @@ if(isset($_SESSION['error']))
 
       <form action="#" method="post" onSubmit="return validation();">
         <input type="email" id="email" class="email" name="email" placeholder="Email" onChange="removeValidation('email','emailErr');">
+        <label id="emailErr"></label>
         <input type="password" id="password" class="password" name="password" placeholder="Password" onChange="removeValidation('password','passwordErr');">
+        <label id="passwordErr"></label>
         <a href="forgot_password.php" class="forgot">Forgot your password?</a>
         <button type="submit" name="button" class="button">Sign In</button>
       </form>
@@ -159,6 +162,7 @@ function validation()
 	var email=document.getElementById("email");
 	var password=document.getElementById("password");
 	var emailerror=document.getElementById("emailErr");
+  // alert(emailerror);
 	var passworderror=document.getElementById("passwordErr");
 	var f=0;
 
@@ -167,7 +171,7 @@ function validation()
 	{
 		email.style.border="1px solid red";
 		email.focus();
-		// emailerror.innerHTML="Enter your Email";
+		emailerror.innerHTML="Enter your Email";
 		f=1;
 	}
 
@@ -175,7 +179,7 @@ function validation()
 	{
 		password.style.border="1px solid red";
 		password.focus();
-		// passworderror.innerHTML="Enter your Password";
+		passworderror.innerHTML="Enter your Password";
 		f=1;
 	}
 
@@ -193,8 +197,8 @@ function validation()
 		function removeValidation(fieldId,errormessage)
 		{
 			
-			let email=document.getElementById(fieldId);
-			let emailerror=document.getElementById(errormessage);
+			var email=document.getElementById(fieldId);
+			var emailerror=document.getElementById(errormessage);
 			
 			email.style.border="none";
 			emailerror.innerHTML="";

@@ -36,8 +36,9 @@ a {
 
 .header
 {
-      text-align: center;
-      background-color:#a38f84;
+    margin: 0;
+    text-align: center;
+      background:#897869;
       color:white;
       display:flex;
       align-items:center;
@@ -45,6 +46,13 @@ a {
       
 }
 
+.header p{
+  color: black;
+  font-size:12px;
+  margin-top:-15px;
+  font-weight:600;
+  text-align: center;
+}
 .input-container {
   position: relative;
   display: flex;
@@ -81,8 +89,12 @@ a {
 }
 
 .icon {
+  position: absolute;
   left: 0;
-  fill: rgb(91, 107, 255);
+  height: 45px;
+  width: 45px;
+  background-color: #fff;
+  border-radius: 99px;
 }
 
 .input:focus + .icon,.input:not(:placeholder-shown) + .icon {
@@ -100,20 +112,27 @@ a {
 	padding-top:10px;
     font-size:80px;
     color:white;
+    font-family: Baskerville Old Face;
+}
+
+.header a
+{
+  padding:30px;
 }
 .menu
 {
 	padding-top:5px;
 	text-align: center;
-	background-color:#bdafa8;
+	background:#9A8C7A;
 	margin:0;
 	align-items:center;
 	justify-content: center;
 }
-a
+.menu a
 {
 	color:white;
 	padding:30px;
+  text-decoration: none;
 }
  body {
       margin: 0;
@@ -133,6 +152,8 @@ a
       margin: 0 0 10px;
       font-weight: 500;
       font-size:47px;
+      font-family: Footlight MT Light;
+      color: #a38f84;
     }
 
     .login-box p {
@@ -142,9 +163,9 @@ a
     }
 
     .login-box p a {
-      color: #3f2f25;
+      color: #7d6656;
       font-weight: bold;
-      text-decoration: none;
+      text-decoration: underline;
     }
 
     .login-box input {
@@ -161,7 +182,7 @@ a
       font-size: 13px;
       color: #666;
       text-decoration: none;
-      margin-top:-30px;
+      margin-bottom:10px;
     }
 
     .login-box button {
@@ -177,6 +198,14 @@ a
 
     .login-box button:hover {
       background: #5e4f42;
+    }
+
+    form label
+    {
+        margin-top: -8px;
+        font-size:12px;
+        margin-bottom: 5px;
+        color: red;
     }
 
     .return {

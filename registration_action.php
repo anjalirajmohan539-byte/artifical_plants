@@ -51,8 +51,8 @@ else
 				
 			$id=mysqli_insert_id($conn);
 
-         $register="INSERT INTO `customer_details`(`CustomerId`, `FullName`, `PhoneNo`, `WhatsappNo`, `Email`, `Password`, `DOB`, `Address`, `City`, `State`, `PinCode`, 	`Country`, `status`) 
-		 VALUES ('$id','$name','$phone','$whatsapp','$email','$password','$dob','$address','$city','$state',$pincode,'$country',1)";
+         $register="INSERT INTO `customer_details`(`CustomerId`, `FullName`, `PhoneNo`, `WhatsappNo`, `Email`, `Password`, `DOB`,`Gender`, `Address`, `City`, `State`, `PinCode`, `Country`, `status`) 
+		 VALUES ('$id','$name','$phone','$whatsapp','$email','$password','$dob','$gender','$address','$city','$state',$pincode,'$country',1)";
 			
 			var_dump($register);
 			$statement_register=mysqli_query($conn,$register);
