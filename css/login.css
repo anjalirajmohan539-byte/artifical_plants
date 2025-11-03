@@ -200,6 +200,14 @@ a {
       background: #5e4f42;
     }
 
+    .error {
+  color: red;
+  font-size: 13px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+
     form label
     {
         margin-top: -8px;

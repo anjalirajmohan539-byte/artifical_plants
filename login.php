@@ -46,7 +46,7 @@ if(isset($_SESSION['error']))
         <a href="#" class="text-light">NEW ARRIVALS</a>
         <a href="#" class="text-light">DECOR</a>
         <a href="#" class="text-light">ARTIFICAL FLOWERS</a>
-        <a href="#" class="text-light">VASE</a>
+        <a href="vase.php" class="text-light">VASE</a>
         <a href="#" class="text-light">PEBBLES & MOSS</a>
         <a href="#" class="text-light">BLOG</a>
     </div>
@@ -56,7 +56,7 @@ if(isset($_SESSION['error']))
       <h2>Login</h2>
       <p>Don't have an account yet? <a href="registratin_form.php">Create account</a></p>
 
-      <form action="#" method="post" onSubmit="return validation();">
+      <form action="login_action.php" method="post" onSubmit="return validation();">
         <input type="email" id="email" class="email" name="email" placeholder="Email" onChange="removeValidation('email','emailErr');">
         <label id="emailErr"></label>
         <input type="password" id="password" class="password" name="password" placeholder="Password" onChange="removeValidation('password','passwordErr');">

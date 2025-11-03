@@ -1,41 +1,29 @@
-<aside class="card-right">
-  <div class="avatar-preview" id="avatarBox">
-    <div style="text-align:center;padding:10px;color:var(--muted)">
-      <div style="font-size:18px;font-weight:700">Welcome!</div>
-      <div class="small1">Upload a profile photo to preview here.</div>
-    </div>
-  </div>
-</aside>
-
-<label for="avatar"></label>
-<div class="small">Upload a square photo (will be cropped).</div>
-<input id="avatar" name="image" class="image" type="file" accept="image/*">
-
 <script>
-  const input = document.getElementById("avatar");
-  const preview = document.getElementById("avatarBox");
+function validateForm() {
+  let email = document.getElementById("email").value.trim();
+  let password = document.getElementById("password").value.trim();
+  let emailErr = document.getElementById("emailErr");
+  let passwordErr = document.getElementById("passwordErr");
+  let valid = true;
 
-  input.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
+  emailErr.textContent = "";
+  passwordErr.textContent = "";
 
-      reader.addEventListener("load", function () {
-        preview.innerHTML = `
-          <img src="${this.result}" 
-               alt="Profile Preview" 
-               style="width:120px;height:120px;object-fit:cover;border-radius:50%;display:block;margin:auto;box-shadow:0 0 5px rgba(0,0,0,0.2);">
-        `;
-      });
+  // Email check
+  if (email === "") {
+    emailErr.textContent = "Please enter your email.";
+    valid = false;
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    emailErr.textContent = "Invalid email format.";
+    valid = false;
+  }
 
-      reader.readAsDataURL(file);
-    } else {
-      preview.innerHTML = `
-        <div style="text-align:center;padding:10px;color:var(--muted)">
-          <div style="font-size:18px;font-weight:700">Welcome!</div>
-          <div class="small1">Upload a profile photo to preview here.</div>
-        </div>
-      `;
-    }
-  });
+  // Password check
+  if (password === "") {
+    passwordErr.textContent = "Please enter your password.";
+    valid = false;
+  }
+
+  return valid;
+}
 </script>
