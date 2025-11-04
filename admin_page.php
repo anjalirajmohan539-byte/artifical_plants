@@ -18,7 +18,7 @@
       <a href="users_list.php"><li><img src="images/users_icon.jpg">User List</li></a>
       <a href="#"><li><img src="images/product_icon.jpg">Product List</li></a>
       <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
-      <a href="#"><li><img src="images/logout_icon.jpg">Logout</li></a>
+      <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
     </ul>
   </div>
 

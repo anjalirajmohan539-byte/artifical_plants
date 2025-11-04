@@ -58,9 +58,9 @@ if(isset($_SESSION['error']))
 
       <form action="login_action.php" method="post" onSubmit="return validation();">
         <input type="email" id="email" class="email" name="email" placeholder="Email" onChange="removeValidation('email','emailErr');">
-        <label id="emailErr"></label>
+        <div class="error" id="emailErr"></div>
         <input type="password" id="password" class="password" name="password" placeholder="Password" onChange="removeValidation('password','passwordErr');">
-        <label id="passwordErr"></label>
+        <div class="error" id="passwordErr"></div>
         <a href="forgot_password.php" class="forgot">Forgot your password?</a>
         <button type="submit" name="button" class="button">Sign In</button>
       </form>
@@ -156,57 +156,42 @@ Privacy Policies</div>
 </body>
 
 <script>
-
 function validation()
 {
-	var email=document.getElementById("email");
-	var password=document.getElementById("password");
-	var emailerror=document.getElementById("emailErr");
-  // alert(emailerror);
-	var passworderror=document.getElementById("passwordErr");
-	var f=0;
+  let email = document.getElementById("email");
+  let password = document.getElementById("password");
+  let emailErr = document.getElementById("emailErr");
+  let passwordErr = document.getElementById("passwordErr");
+  let valid = true;
 
+  emailErr.textContent = "";
+  passwordErr.textContent = "";
+  document.getElementById("email").style.border = "";
+  document.getElementById("password").style.border = "";
 
-	if(email.value == "")
-	{
-		email.style.border="1px solid red";
-		email.focus();
-		emailerror.innerHTML="Enter your Email";
-		f=1;
-	}
+  if (email.value.trim() === "") {
+    emailErr.textContent = "Enter your email";
+    document.getElementById("email").style.border = "1px solid red";
+    valid = false;
+  }
 
-	if(password.value == "")
-	{
-		password.style.border="1px solid red";
-		password.focus();
-		passworderror.innerHTML="Enter your Password";
-		f=1;
-	}
+  if (password.value.trim() === "") {
+    passwordErr.textContent = "Enter your password";
+    document.getElementById("password").style.border = "1px solid red";
+    valid = false;
+  }
 
-			
-	if(f==0)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}
-	
-
-		function removeValidation(fieldId,errormessage)
-		{
-			
-			var email=document.getElementById(fieldId);
-			var emailerror=document.getElementById(errormessage);
-			
-			email.style.border="none";
-			emailerror.innerHTML="";
-			
-		}
-
+  return valid; 
 }
 
-	</script>
+
+
+function removeValidation(inputId, errorId) 
+{
+  document.getElementById(errorId).textContent = "";
+  document.getElementById(inputId).style.border = "";
+}
+</script>
+
 
 </html>

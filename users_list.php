@@ -1,3 +1,15 @@
+<?php
+
+include('database.php');
+
+if(isset($_GET['Status']))
+{
+	$status=$_GET['Status'];
+}
+
+?>
+
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -13,34 +25,71 @@
 <div class="sidebar">
     <h2>Milon <br> Artifical Plants</h2>
     <ul>
-	  <a href="#"><li><img src="images/dashboard_icon.jpg">Dashboard</li></a>
+	  <a href="admin_page.php"><li><img src="images/dashboard_icon.jpg">Dashboard</li></a>
 	  <a href="#"><li><img src="images/product_icon.jpg">Orders</li></a>
-      <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
-      <a href="#"><li><img src="images/product_icon.jpg">Product List</li></a>
-      <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
-      <a href="#"><li><img src="images/logout_icon.jpg">Logout</li></a>
+    <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
+    <a href="#"><li><img src="images/product_icon.jpg">Product List</li></a>
+    <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
+    <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
     </ul>
   </div>
 
   <!-- main content -->
-
+   <div class="container-fluid content">
   <div class="container details">
-  <table>
+    <h1>Users</h1>
+  <table class="table table-hover table-bordered">
+  <thead>
     <tr>
-        <th>Id</th>
+        <th>Serial no</th>
         <th>Name</th>
         <th>Phone Number</th>
         <th>Email</th>
         <th>Status</th>
+        <th>Create Date</th>
+        <th></th>
     </tr>
+  </thead>
+  <?php
+  $select="SELECT `FullName`, `PhoneNo`, `Email`, `CreateDate`,
+           CASE WHEN Status =1 THEN 'Active'
+                WHEN Status =2 THEN 'Inactive'
+                WHEN Status =3 THEN 'Banned'
+           END AS Status
+          FROM `customer_details` WHERE Status=1";
+
+          // var_dump($select);
+
+  $statemnt=mysqli_query($conn,$select);
+
+  if(mysqli_num_rows($statemnt)>0)
+{
+  while($details=mysqli_fetch_assoc($statemnt))
+  {
+
+  ?>
+  <tbody>
     <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td>1</td>
+        <td><?php echo $details['FullName'];?></td>
+
+        <td><?php echo $details['PhoneNo'];?></td>
+
+        <td><?php echo $details['Email'];?></td>
+
+        <td><?php echo $details['Status'];?></td>
+
+        <td><?php echo $details['CreateDate'];?></td>
+
+        <td><a href="#"><button>Full details</button></a></td> 
     </tr>
-  </table>
+  </tbody>
+  <?php
+   }
+}
+  ?>
+</table>
+</div>
 </div>
 </body>
 </html>

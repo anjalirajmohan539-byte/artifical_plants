@@ -44,11 +44,12 @@ body {
       position: fixed;
       left: 0;
       top: 0;
-      width: 220px;
+      width: 309px;
       height: 100%;
       background: #897869;
       color: #fff;
       padding: 20px 0;
+      text-align:center;
     }
 
 
@@ -61,6 +62,12 @@ body {
       margin-bottom:80px;
       font-size: 18px;
     }
+
+     .sidebar h3 {
+      margin-top:30px;
+      font-size: 18px;
+    }
+
     .sidebar ul {
       list-style: none;
       padding: 0;
@@ -78,54 +85,31 @@ body {
 
     .sidebar img
     {
-      width:15%;
-      border-radius:20px;
+      width:100% !important;
     }
 
+    .users
+    {
+        padding-top:100px;
+        
+    }
 
+    .main_details
+    {
+        align-items: center;
+        margin-left:200px;
+    }
 
-.details
-{
-    margin-top:100px;
-}
+    .main_details h1
+    {
+        font-size: 50px;
+        font-weight: bold;
+        color: #a38f84;
+        font-family: Baskerville Old Face;
+    }
 
-table, td, th {
-  border: 1px solid;
-  padding: 14px !important;
-  
-}
-
-table {
-  border-collapse: collapse;
-  padding:none;
-}
-
-th
-{
-  font-size:20px;
-  text-align:center !important;
-}
-
-td
-{
-   font-size:15px;
-   font-weight: normal;
-   text-align:center;
-}
-
-table button
-{
-  padding:3px 7px;
-  border-color: none;
-  background-color:#897869;
-  color: white;
-}
-
-.details h1
-{
-  font-weight: bold;
-  margin-bottom: 30px;
-  color: #a38f84;
-  font-family: Baskerville Old Face;
-  font-size: 60px
-}
+    .main_details div
+    {
+        font-size:20px;
+        padding-top:20px;
+    }
