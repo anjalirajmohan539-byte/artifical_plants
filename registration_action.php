@@ -40,7 +40,7 @@ else
       $select_login="INSERT INTO `login`(`UserEmail`, `Lpassword`, `UserType`) VALUES ('$email','$password',2)";
 		$statement_select_login=mysqli_query($conn,$select_login);
 
-      var_dump($select_login);
+    //   var_dump($select_login);
 		
 		if(!$statement_select_login)
 		{
@@ -51,10 +51,10 @@ else
 				
 			$id=mysqli_insert_id($conn);
 
-         $register="INSERT INTO `customer_details`(`CustomerId`, `FullName`, `PhoneNo`, `WhatsappNo`, `Email`, `Password`, `DOB`,`Gender`, `Address`, `City`, `State`, `PinCode`, `Country`, `status`) 
-		 VALUES ('$id','$name','$phone','$whatsapp','$email','$password','$dob','$gender','$address','$city','$state',$pincode,'$country',1)";
+         $register="INSERT INTO `customer_details`(`CustomerId`,`UserImage`, `FullName`, `PhoneNo`, `WhatsappNo`, `Email`, `Password`, `DOB`,`Gender`, `Address`, `City`, `State`, `PinCode`, `Country`, `status`) 
+		 VALUES ('$id','$image','$name','$phone','$whatsapp','$email','$password','$dob','$gender','$address','$city','$state',$pincode,'$country',1)";
 			
-			var_dump($register);
+			// var_dump($register);
 			$statement_register=mysqli_query($conn,$register);
 			
 			
@@ -68,7 +68,7 @@ else
 				$c_pic=$c_path.basename($image);
 				echo $c_pic;
 				
-				if(move_uploaded_file($_FILES['img']['tmp_name'],$c_pic))
+				if(move_uploaded_file($_FILES['image']['tmp_name'],$c_pic))
 				{
 					header('location:index.php');
 				}

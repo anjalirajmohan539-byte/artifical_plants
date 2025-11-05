@@ -49,7 +49,7 @@ include("database.php");
     <div class="cl"></div>
      <div class="reg-wrapper">
     <div class="reg-box">
-      <form id="regForm" action="#" method="post" enctype="multipart/form-data" onSubmit="return validation();">
+      <form id="regForm" action="registration_action.php" method="post" enctype="multipart/form-data" onSubmit="return validation();">
 
 
   <h2>Account Details</h2>

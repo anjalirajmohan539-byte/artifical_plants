@@ -8,20 +8,20 @@
 </head>
 <body>
   <div class="header">
-    <h2>EXAMPLE PROFILE</h2>
+    <h2>USER PROFILE</h2>
     <div class="user-info">
       <span>Jane Doe</span>
-      <img src="https://i.pravatar.cc/40" alt="User Avatar">
+      <img src="images/girl_image.png" alt="User Avatar">
     </div>
   </div>
 
   <div class="profile-container">
     <div class="sidebar">
       <div class="profile-card">
-        <img src="https://i.pravatar.cc/200?img=47" alt="Jane Doe">
+        <img src="images/girl_image.png" alt="Jane Doe">
         <h3>Jane Doe</h3>
-        <p class="job">Owner at Her Company Inc.</p>
-        <p class="bio">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit, eligendi dolorum sequi illum qui unde aspernatur non deserunt.</p>
+        <p class="gender">Female</p>
+        <p class="num">7485962563</p>
         <div class="status">
           <span>Status</span>
           <span class="active">Active</span>
@@ -29,31 +29,26 @@
         <p class="member-since">Member since <strong>Nov 07, 2016</strong></p>
       </div>
 
-      <div class="similar">
-        <h4>Similar Profiles</h4>
-        <div class="profiles">
-          <div class="profile"><img src="https://i.pravatar.cc/40?img=12"><p>Kojstantin</p></div>
-          <div class="profile"><img src="https://i.pravatar.cc/40?img=32"><p>James</p></div>
-          <div class="profile"><img src="https://i.pravatar.cc/40?img=47"><p>Natie</p></div>
-          <div class="profile"><img src="https://i.pravatar.cc/40?img=54"><p>Casey</p></div>
-        </div>
-      </div>
+
     </div>
 
     <div class="main-content">
       <section class="about">
         <h3>About</h3>
         <div class="info-grid">
-          <div><strong>First Name</strong><p>Jane</p></div>
-          <div><strong>Last Name</strong><p>Doe</p></div>
+          <div><strong>Full Name</strong><p>Jane Doe</p></div>
           <div><strong>Gender</strong><p>Female</p></div>
-          <div><strong>Contact No.</strong><p>+11 998001001</p></div>
-          <div><strong>Current Address</strong><p>Beech Creek, PA, Pennsylvania</p></div>
-          <div><strong>Permanant Address</strong><p>Arlington Heights, IL, Illinois</p></div>
-          <div><strong>Email</strong><p><a href="#">jane@example.com</a></p></div>
+          <div><strong>Phone No</strong><p>7485962563</p></div>
+          <div><strong>Whatsapp No.</strong><p>8998001001</p></div>
+          <div><strong>Email</strong><p>jane@example.com</p></div>
+          <div><strong>Password</strong><p>jane123</p></div>
           <div><strong>Birthday</strong><p>Feb 06, 1998</p></div>
+          <div><strong>Address</strong><p></p></div>
+          <div><strong>Pincode</strong><p></p></div>
+          <div><strong>City</strong><p></p></div>
+          <div><strong>State</strong><p></p></div>
+          <div><strong>Country</strong><p></p></div>
         </div>
-        <a href="#" class="show-info">Show Full Information</a>
       </section>
 
       <div class="grid-section">
@@ -113,6 +108,7 @@ body {
 
 .user-info img {
   border-radius: 50%;
+  width: 30px;
 }
 
 /* Main Layout */
@@ -120,6 +116,7 @@ body {
   display: flex;
   padding: 30px;
   gap: 25px;
+  margin-top: 50px;
 }
 
 .sidebar {
@@ -140,7 +137,7 @@ body {
 }
 
 .profile-card img {
-  width: 100%;
+  width: 50%;
   border-radius: 10px;
 }
 
@@ -149,12 +146,12 @@ body {
   font-size: 20px;
 }
 
-.profile-card .job {
+.profile-card .gender {
   color: #5a9ecf;
   font-weight: 500;
 }
 
-.profile-card .bio {
+.profile-card .num {
   font-size: 14px;
   color: #666;
   margin: 10px 0;

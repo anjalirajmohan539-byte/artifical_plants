@@ -1,3 +1,9 @@
+<?php
+
+include('database.php');
+
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -10,38 +16,90 @@
 
 <body>
     
-        <div class="sidebar">
-            <img src="images/girl_image.png" alt="">
-            <h3>Olivia</h3>
-            <p>7485962563</p>
-            <h6>female</h6>
+  <div class="header">
+    <h2>USER PROFILE</h2>
+  </div>
 
-            <div>Status : Active</div>
-            <div>Create Date : Active</div>
+  <div class="profile-container">
+    <?php
+    
+    $select="SELECT `UserImage`, `FullName`, `PhoneNo`, `WhatsappNo`, `Email`, `Password`, `DOB`,
+             CASE WHEN Gender=0 THEN 'Male'
+                  WHEN Gender=1 THEN 'Female'
+                  END AS Gender,
+            `Address`, `City`, `State`, `PinCode`, `Country`, 
+             CASE WHEN Status=1 THEN 'Active'
+                  WHEN Status=2 THEN 'Inactive'
+                  WHEN Status=3 THEN 'Banned'
+                  END AS Status,
+            `CreateDate` FROM `customer_details` WHERE Status=1";
+    $statenmt=mysqli_query($conn,$select);
 
+    if(mysqli_num_rows($statenmt)>0)
+    {
+        $details=mysqli_fetch_assoc($statenmt);
+      
+    
+    ?>
+    <div class="sidebar">
+      <div class="profile-card">
+        <img src="images/img/<?php echo $details['UserImage'];?>" alt="">
+        <h3><?php echo $details['FullName'];?></h3>
+        <p class="gender">Female</p>
+        <p class="num"><?php echo $details['PhoneNo'];?></p>
+        <div class="status">
+          <span>Status</span>
+          <span class="active">Active</span>
         </div>
+        <p class="member-since">Member since :<strong><?php echo $details['CreateDate'];?></strong></p>
+      </div>
 
-        <div class="container users">
 
-        <div class="main_details">
-            <h1>About Users</h1>
-            <div class="col-6">
-                <div>Full Name : olivia</div>
-                <div>Phone no :</div>
-                <div>Email :</div>
-                <div>Date of Birth :</div>
-                <div>Address :</div>
-                <div>City :</div>
-            </div>
-            <div class="col-6">
-                <div>Whatsapp no :</div>
-                <div>Password :</div>
-                <div>gender :</div>
-                <div>Pincode :</div>
-                <div>State :</div>
-                <div>Country :</div>
-            </div>
-        </div>
     </div>
+
+    <div class="main-content">
+      <section class="about">
+        <h3>About</h3>
+        <div class="info-grid">
+          <div><strong>Full Name</strong><p><?php echo $details['FullName'];?></p></div>
+          <div><strong>Gender</strong><p>Female</p></div>
+          <div><strong>Phone No</strong><p><?php echo $details['PhoneNo'];?></p></div>
+          <div><strong>Whatsapp No.</strong><p><?php echo $details['WhatsappNo'];?></p></div>
+          <div><strong>Email</strong><p><?php echo $details['Email'];?></p></div>
+          <div><strong>Password</strong><p><?php echo $details['Password'];?></p></div>
+          <div><strong>Birthday</strong><p><?php echo $details['DOB'];?></p></div>
+          <div><strong>Address</strong><p><?php echo $details['Address'];?></p></div>
+          <div><strong>Pincode</strong><p><?php echo $details['PinCode'];?></p></div>
+          <div><strong>City</strong><p><?php echo $details['City'];?></p></div>
+          <div><strong>State</strong><p><?php echo $details['State'];?></p></div>
+          <div><strong>Country</strong><p><?php echo $details['Country'];?></p></div>
+        </div>
+      </section>
+
+      <?php
+      }
+      ?>
+
+      <div class="grid-section">
+        <section class="experience">
+          <h3>Customer Ordered Products</h3>
+          <ul>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+            <li><span></span></li>
+          </ul>
+        </section>
+
+        <section class="education">
+          <h3>Wishlist</h3>
+          <ul>
+            <li><span></span></li>
+            <li><span></span></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

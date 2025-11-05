@@ -5,6 +5,7 @@ include('database.php');
 if(isset($_GET['Status']))
 {
 	$status=$_GET['Status'];
+  echo $status;
 }
 
 ?>
@@ -81,7 +82,7 @@ if(isset($_GET['Status']))
 
         <td><?php echo $details['CreateDate'];?></td>
 
-        <td><a href="#"><button>Full details</button></a></td> 
+        <td><a href="users_details.php?userid="><button>Full details</button></a></td> 
     </tr>
   </tbody>
   <?php
