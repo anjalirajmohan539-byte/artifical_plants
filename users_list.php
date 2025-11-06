@@ -42,7 +42,7 @@ if(isset($_GET['Status']))
   <table class="table table-hover table-bordered">
   <thead>
     <tr>
-        <th>Serial no</th>
+        <th>Sl no</th>
         <th>Name</th>
         <th>Phone Number</th>
         <th>Email</th>
@@ -52,17 +52,17 @@ if(isset($_GET['Status']))
     </tr>
   </thead>
   <?php
-  $select="SELECT `FullName`, `PhoneNo`, `Email`, `CreateDate`,
+  $select="SELECT `CustomerId`, `FullName`, `PhoneNo`, `Email`, `CreateDate`,
            CASE WHEN Status =1 THEN 'Active'
                 WHEN Status =2 THEN 'Inactive'
                 WHEN Status =3 THEN 'Banned'
            END AS Status
-          FROM `customer_details` WHERE Status=1";
+          FROM `customer_details`";
 
           // var_dump($select);
 
   $statemnt=mysqli_query($conn,$select);
-
+  $i=1;
   if(mysqli_num_rows($statemnt)>0)
 {
   while($details=mysqli_fetch_assoc($statemnt))
@@ -71,7 +71,7 @@ if(isset($_GET['Status']))
   ?>
   <tbody>
     <tr>
-        <td>1</td>
+        <td><?php echo $i++;?></td>
         <td><?php echo $details['FullName'];?></td>
 
         <td><?php echo $details['PhoneNo'];?></td>
@@ -82,7 +82,7 @@ if(isset($_GET['Status']))
 
         <td><?php echo $details['CreateDate'];?></td>
 
-        <td><a href="users_details.php?userid="><button>Full details</button></a></td> 
+        <td><a href="users_details.php?userid=<?php echo $details['CustomerId'];?>"><button>Full details</button></a></td> 
     </tr>
   </tbody>
   <?php

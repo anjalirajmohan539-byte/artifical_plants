@@ -64,11 +64,11 @@ else
 			}
 			else
 			{
-				$c_path="images/img";
-				$c_pic=$c_path.basename($image);
+				$image_path="images/img";
+				$c_pic=$image_path.basename($image);
 				echo $c_pic;
 				
-				if(move_uploaded_file($_FILES['image']['tmp_name'],$c_pic))
+				if(move_uploaded_file($_FILES['image']['tmp_name'],$image_path))
 				{
 					header('location:index.php');
 				}

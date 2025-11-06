@@ -2,6 +2,9 @@
 
 include('database.php');
 
+$id=$_GET['userid'];
+
+
 ?>
 
 <html>
@@ -23,16 +26,19 @@ include('database.php');
   <div class="profile-container">
     <?php
     
-    $select="SELECT `UserImage`, `FullName`, `PhoneNo`, `WhatsappNo`, `Email`, `Password`, `DOB`,
+    $select="SELECT cd.`id`,`UserImage`, `FullName`, l.Lpassword AS Password,`PhoneNo`, `WhatsappNo`, `Email`, `DOB`,
              CASE WHEN Gender=0 THEN 'Male'
                   WHEN Gender=1 THEN 'Female'
                   END AS Gender,
-            `Address`, `City`, `State`, `PinCode`, `Country`, 
+            `Address`, `City`, st.Name AS State, `PinCode`, ct.Name AS Country, cd.Status AS StatusId,
              CASE WHEN Status=1 THEN 'Active'
                   WHEN Status=2 THEN 'Inactive'
                   WHEN Status=3 THEN 'Banned'
-                  END AS Status,
-            `CreateDate` FROM `customer_details` WHERE Status=1";
+                  END AS Status, DATE_FORMAT(cd.`CreateDate`,  '%d-%m-%Y') AS CreateDate
+             FROM `customer_details` cd
+            INNER JOIN state st ON st.Id = cd.State 
+            INNER JOIN country ct ON ct.Id = cd.Country
+            INNER JOIN login l ON l.Id = cd.CustomerId WHERE CustomerId=$id";
     $statenmt=mysqli_query($conn,$select);
 
     if(mysqli_num_rows($statenmt)>0)
@@ -45,11 +51,13 @@ include('database.php');
       <div class="profile-card">
         <img src="images/img/<?php echo $details['UserImage'];?>" alt="">
         <h3><?php echo $details['FullName'];?></h3>
-        <p class="gender">Female</p>
+        <p class="gender"><?php echo $details['Gender'];?></p>
         <p class="num"><?php echo $details['PhoneNo'];?></p>
         <div class="status">
           <span>Status</span>
-          <span class="active">Active</span>
+          <?php
+          ?>
+          <span class="<?php if($details['StatusId']==1){echo "active";}elseif($details['StatusId']==2){echo "inactive";}else{echo "banned";}?>"><?php echo $details['Status'];?></span>
         </div>
         <p class="member-since">Member since :<strong><?php echo $details['CreateDate'];?></strong></p>
       </div>
@@ -62,7 +70,7 @@ include('database.php');
         <h3>About</h3>
         <div class="info-grid">
           <div><strong>Full Name</strong><p><?php echo $details['FullName'];?></p></div>
-          <div><strong>Gender</strong><p>Female</p></div>
+          <div><strong>Gender</strong><p><?php echo $details['Gender'];?></p></div>
           <div><strong>Phone No</strong><p><?php echo $details['PhoneNo'];?></p></div>
           <div><strong>Whatsapp No.</strong><p><?php echo $details['WhatsappNo'];?></p></div>
           <div><strong>Email</strong><p><?php echo $details['Email'];?></p></div>
