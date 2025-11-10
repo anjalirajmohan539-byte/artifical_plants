@@ -1,43 +1,248 @@
-<?php
-// Database connection
-$conn = mysqli_connect("localhost", "root", "", "ecommerce_db");
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Details</title>
+<style>
 
-if (!$conn) {
-  die("Connection failed: " . mysqli_connect_error());
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f5f7fa;
+  color: #333;
+}
+.header {
+  background: #4CAF50;
+  color: #fff;
+  padding: 15px 20px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.header h2 {
+  margin: 0;
+  font-size: 22px;
+  letter-spacing: 1px;
 }
 
-if (isset($_POST['submit'])) {
-  $product_name  = $_POST['product_name'];
-  $product_price = $_POST['product_price'];
-  $description   = $_POST['description'];
-  $product_type  = $_POST['product_type'];
 
-  // Image upload
-  $image = $_FILES['product_image']['name'];
-  $temp_name = $_FILES['product_image']['tmp_name'];
-  $folder = "uploads/" . $image;
-
-  // Create uploads folder if it doesn't exist
-  if (!file_exists("uploads")) {
-    mkdir("uploads");
-  }
-
-  move_uploaded_file($temp_name, $folder);
-
-  // Insert into database
-  $sql = "INSERT INTO products (product_image, product_name, product_price, description, product_type)
-          VALUES ('$folder', '$product_name', '$product_price', '$description', '$product_type')";
-
-  if (mysqli_query($conn, $sql)) {
-    echo "<h3>✅ Product added successfully!</h3>";
-    echo "<a href='add_product.html'>Add another product</a>";
-  } else {
-    echo "❌ Error: " . mysqli_error($conn);
-  }
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 20px;
+  gap: 20px;
 }
 
-mysqli_close($conn);
-?>
+
+.sidebar {
+  flex: 1 1 300px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+  max-width: 320px;
+}
+
+.product-card img {
+  width: 100%;
+  border-radius: 8px;
+  object-fit: cover;
+}
+.product-card h3 {
+  margin: 10px 0;
+}
+.product-card p {
+  font-size: 14px;
+  margin: 5px 0;
+}
+.product-card .df {
+  display: flex;
+  gap: 6px;
+  margin-top: 8px;
+}
+.product-card .df span img {
+  width: 55px;
+  height: 55px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.product-card .df span img:hover {
+  transform: scale(1.05);
+}
+
+
+.main-content {
+  flex: 3 1 600px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+}
+
+.main-content h3 {
+  color: #4CAF50;
+  margin-bottom: 10px;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 15px;
+  background: #f9fafb;
+  padding: 15px;
+  border-radius: 8px;
+}
+.info-grid div {
+  background: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.info-grid strong {
+  display: block;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+
+.grid-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-top: 20px;
+}
+.grid-section section {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 15px;
+}
+.grid-section h3 {
+  margin-top: 0;
+  color: #4CAF50;
+}
+.grid-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.grid-section ul li {
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+}
+.grid-section ul li span {
+  font-size: 14px;
+}
+
+
+@media (max-width: 900px) {
+  .product-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-content, .sidebar {
+    max-width: 100%;
+  }
+  .grid-section {
+    grid-template-columns: 1fr;
+  }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h2>PRODUCT DETAILS</h2>
+</div>
+
+<div class="product-container">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="product-card">
+      <img id="mainImg" src="images/plant_5.png" alt="Product Image">
+      <h3 id="prodTitle">Artificial Plant</h3>
+      <p class="name"><strong style="color:#666;">Product Name:</strong> Artificial Plant</p>
+      <p class="color"><strong>Color:</strong> Dark Green</p>
+      <div class="df">
+        <span><img src="images/plant_3.png" alt=""></span>
+        <span><img src="images/plant_3.png" alt=""></span>
+        <span><img src="images/plant_3.png" alt=""></span>
+        <span><img src="images/plant_3.png" alt=""></span>
+      </div>
+      <p class="member-since">Different Images</p>
+    </div>
+  </div>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <section class="plant">
+      <h3>Plant Information</h3>
+      <div class="info-grid">
+        <div><strong>Product Name</strong><p id="infoName">Artificial Plant</p></div>
+        <div><strong>Primary Material</strong><p id="infoMaterial">Plastic</p></div>
+        <div><strong>Price</strong><p id="infoPrice">₹499</p></div>
+        <div><strong>Color</strong><p id="infoColor">Dark Green</p></div>
+        <div><strong>Incl. of All Tax</strong><p>Yes</p></div>       
+        <div><strong>Is It With Vase</strong><p>Yes</p></div>
+        <div><strong>Product Description</strong><p id="infoDesc">A beautiful artificial plant perfect for home decoration.</p></div>
+      </div>
+    </section>
+
+    <div class="grid-section">
+      <section class="experience">
+        <h3>Shipping Information</h3>
+        <ul>
+          <li><span>Availability: In Stock</span></li>
+          <li><span>Delivery by: 3-5 business days</span></li>
+          <li><span>Free Delivery</span></li>
+        </ul>
+      </section>
+
+      <section class="education">
+        <h3>Pair Well With</h3>
+        <ul>
+          <li><img src="images/plant_5.png" alt="" style="width:80px;border-radius:6px;"></li>
+          <li><span>Mini Vase</span></li>
+          <li><span>₹299</span></li>
+        </ul>
+      </section>
+    </div>
+  </div>
+</div>
+
+<!-- ==== SIMPLE JS ==== -->
+<script>
+// Change main image when thumbnails clicked
+const thumbnails = document.querySelectorAll('.df img');
+const mainImg = document.getElementById('mainImg');
+
+thumbnails.forEach(img => {
+  img.addEventListener('click', () => {
+    mainImg.src = img.src;
+  });
+});
+
+// Example of setting product details dynamically (optional)
+const productData = {
+  name: "Artificial Plant",
+  material: "Plastic",
+  price: "₹499",
+  color: "Dark Green",
+  desc: "Beautiful artificial plant ideal for living rooms and offices."
+};
+
+document.getElementById("infoName").textContent = productData.name;
+document.getElementById("infoMaterial").textContent = productData.material;
+document.getElementById("infoPrice").textContent = productData.price;
+document.getElementById("infoColor").textContent = productData.color;
+document.getElementById("infoDesc").textContent = productData.desc;
+</script>
+
+</body>
+</html>
 
 
 

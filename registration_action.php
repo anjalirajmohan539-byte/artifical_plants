@@ -18,7 +18,7 @@
    $state=$_POST["state"];
    $country=$_POST["country"];
 
- }
+
 
 
  $select="SELECT `Id` FROM `login` WHERE UserEmail='$email'";
@@ -81,5 +81,6 @@ else
 		}
 	}
 }
+ }
 
 ?>

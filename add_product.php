@@ -23,7 +23,7 @@ include('database.php');
 	<a href="#"><li><img src="images/product_icon.jpg">Orders</li></a>
     <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
     <a href="add_product.php"><li><img src="images/add-product.png">Add Product</li></a>
-    <a href="#"><li><img src="images/product_icon.jpg">Product List</li></a>
+    <a href="#"><li><img src="images/product_list.jpg">Product List</li></a>
     <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
     <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
     </ul>
@@ -37,7 +37,6 @@ include('database.php');
         <h1>Add Product</h1>
         <p class="small">Create a new product with image, price and type</p>
       </div>
-      <div class="hint">Fields marked required *</div>
     </div>
 
     <div class="layout">
@@ -47,7 +46,7 @@ include('database.php');
 
         <form action="add_product_action.php" method="post" id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
           <div class="field">
-            <label for="productImage">Product image *</label>
+            <label for="productImage">Product image <s>*</s></label>
             <div class="file-input">
               <div class="file-preview" id="imgPreview" title="Image preview">
                 <span class="small" style="color:var(--muted);padding:6px;text-align:center">No image</span>
@@ -61,20 +60,44 @@ include('database.php');
           </div>
 
           <div class="field">
-            <label for="productName">Product name *</label>
+            <label for="productName">Product name <s>*</s></label>
             <input id="productName" name="productName" type="text" placeholder="e.g. Classic White Vase" required >
           </div>
 
           <div class="field">
-            <label for="productPrice">Product price (₹) *</label>
+            <label for="productPrice">Product price (₹) <s>*</s></label>
             <input id="productPrice" name="productPrice" type="number" min="0" step="0.01" placeholder="e.g. 499.00" required >
+          </div>
+
+        
+          <div class="field">
+              <?php
+          $select_met="SELECT `Id`, `Name` FROM `material_type` WHERE IsDeleted = 0";
+          $statemnt=mysqli_query($conn,$select_met);
+
+          if(mysqli_num_rows($statemnt)>0)
+          {
+          
+          ?>
+            <label for="productMaterial">Product Materials <s>*</s></label>
+            <select name="productMaterial" id="productMaterial">
+              <option value="0">Choose Materials</option>
+              <?php
+              while($material=mysqli_fetch_assoc($statemnt))
+              {
+              
+              ?>
+              <option value="<?php echo $material["Id"];?>"><?php echo $material['Name'];?></option>
+              <?php }?>
+            </select>
+            <?php }?>
           </div>
 
        
           <div class="field">
                <?php
           
-          $select="SELECT `Id`, `Categorys` FROM `product_category`";
+          $select="SELECT `Id`, `Categorys` FROM `product_category` WHERE IsDeleted = 0";
           $statment=mysqli_query($conn,$select);
 
           if(mysqli_num_rows($statment)>0)
@@ -82,7 +105,7 @@ include('database.php');
             
           
           ?>
-            <label for="productType">Product type *</label>
+            <label for="productType">Product type <s>*</s></label>
             <select id="productType" name="productType" required>
               <option value="0">Choose type</option>
               <?php
@@ -102,7 +125,7 @@ include('database.php');
           </div>
 
           <div class="form-actions">
-            <button type="submit" class="btn" name="btn">Add product</button>
+            <button type="submit" class="btn" name="btn" style="background-color:#9A8C7A;color:white;">Add product</button>
             <button type="button" id="resetBtn" class="btn secondary">Reset</button>
             <div style="margin-left:auto" class="small" id="formMsg" aria-live="polite"></div>
           </div>
@@ -120,16 +143,15 @@ include('database.php');
                   <th>Sl no</th>
                   <th>Image</th>
                   <th>Product name</th>
-                  <th>Price</th>
                   <th>Type</th>
-                  <th>Description</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody id="productsTbody">
                 
                        <?php
-                $select_product="SELECT `Id`, `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `CreateDate`, `LastUpdated`, `IsDeleted` FROM `add_product`";
+                $select_product="SELECT ap.`Id`, `ProductImage`, `ProductName`, pc.Categorys AS `CategoryId`, ap.`CreateDate` FROM `add_product` ap
+                                 INNER JOIN product_category pc ON pc.Id = ap.CategoryId";
                 $product_statment=mysqli_query($conn,$select_product);
 
                 $s=1;
@@ -143,10 +165,8 @@ include('database.php');
                   <td class="small" style="color:var(--muted)"><?php echo $s++;?></td>
                   <td class="small" style="color:var(--muted)"><?php echo $product['ProductImage'];?></td>
                   <td class="small" style="color:var(--muted)"><?php echo $product['ProductName'];?></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $product['Price'];?></td>
                   <td class="small" style="color:var(--muted)"><?php echo $product['CategoryId'];?></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $product['Description'];?></td>
-                  <td><button class="p_details">Details</button></td>
+                  <td><a href="product_details.php"><button class="p_details">Details</button></a></td>
                   </tr>
 
                   <?php   }
@@ -163,123 +183,118 @@ include('database.php');
 
   <script>
 
-    // const form = document.getElementById('productForm');
-    // const imgInput = document.getElementById('productImage');
-    // const imgPreview = document.getElementById('imgPreview');
-    // const tbody = document.getElementById('productsTbody');
-    // const resetBtn = document.getElementById('resetBtn');
-    // const formMsg = document.getElementById('formMsg');
+    const form = document.getElementById('productForm');
+    const imgInput = document.getElementById('productImage');
+    const imgPreview = document.getElementById('imgPreview');
+    const tbody = document.getElementById('productsTbody');
+    const resetBtn = document.getElementById('resetBtn');
+    const formMsg = document.getElementById('formMsg');
 
-    // let products = []; 
+    let products = []; 
 
-    // function showImagePreview(file) {
-    //   imgPreview.innerHTML = '';
-    //   if (!file) {
-    //     imgPreview.innerHTML = '<span class="small" style="color:var(--muted);padding:6px;text-align:center">No image</span>';
-    //     return;
-    //   }
-    //   const img = document.createElement('img');
-    //   img.alt = 'product preview';
-    //   imgPreview.appendChild(img);
+    function showImagePreview(file) {
+      imgPreview.innerHTML = '';
+      if (!file) {
+        imgPreview.innerHTML = '<span class="small" style="color:var(--muted);padding:6px;text-align:center">No image</span>';
+        return;
+      }
+      const img = document.createElement('img');
+      img.alt = 'product preview';
+      imgPreview.appendChild(img);
 
-    //   const reader = new FileReader();
-    //   reader.onload = e => { img.src = e.target.result; };
-    //   reader.readAsDataURL(file);
-    // }
+      const reader = new FileReader();
+      reader.onload = e => { img.src = e.target.result; };
+      reader.readAsDataURL(file);
+    }
 
-    // imgInput.addEventListener('change', () => {
-    //   const file = imgInput.files && imgInput.files[0];
-    //   if (file && file.size > 2 * 1024 * 1024) {
-    //     formMsg.textContent = 'Image too large (max 2MB).';
-    //     formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
-    //     imgInput.value = '';
-    //     showImagePreview(null);
-    //     return;
-    //   }
-    //   formMsg.textContent = '';
-    //   showImagePreview(file);
-    // });
+    imgInput.addEventListener('change', () => {
+      const file = imgInput.files && imgInput.files[0];
+      if (file && file.size > 2 * 1024 * 1024) {
+        formMsg.textContent = 'Image too large (max 2MB).';
+        formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
+        imgInput.value = '';
+        showImagePreview(null);
+        return;
+      }
+      formMsg.textContent = '';
+      showImagePreview(file);
+    });
 
-    // function renderTable() {
-    //   tbody.innerHTML = '';
-    //   if (products.length === 0) {
-    //     const tr = document.createElement('tr');
-    //     tr.innerHTML = '<td colspan="6" class="small" style="padding:18px 10px;color:var(--muted)">No products added yet.</td>';
-    //     tbody.appendChild(tr);
-    //     return;
-    //   }
-    //   products.forEach((p, idx) => {
-    //     const tr = document.createElement('tr');
-    //     tr.innerHTML = `
-    //       <td>${idx + 1}</td>
-    //       <td><div class="product-thumb"><img src="${p.image}" alt="${escapeHtml(p.name)}" /></div></td>
-    //       <td>${escapeHtml(p.name)}</td>
-    //       <td class="price">₹ ${Number(p.price).toFixed(2)}</td>
-    //       <td>${escapeHtml(p.desc || '')}</td>
-    //       <td class="small">${escapeHtml(p.type)}</td>
-    //     `;
-    //     tbody.appendChild(tr);
-    //   });
-    // }
+    function renderTable() {
 
-    // function escapeHtml(text) {
-    //   if (!text) return '';
-    //   return text.replace(/[&<>"']/g, function (m) {
-    //     return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
-    //   });
-    // }
+      products.forEach((p, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td><div class="product-thumb"><img src="${p.image}" alt="${escapeHtml(p.name)}" /></div></td>
+          <td>${escapeHtml(p.name)}</td>
+          <td class="price">₹ ${Number(p.price).toFixed(2)}</td>
+          <td>${escapeHtml(p.desc || '')}</td>
+          <td class="small">${escapeHtml(p.type)}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
 
-    // form.addEventListener('submit', async (e) => {
-    //   e.preventDefault();
-    //   formMsg.textContent = '';
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text.replace(/[&<>"']/g, function (m) {
+        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
+      });
+    }
 
-    //   const name = document.getElementById('productName').value.trim();
-    //   const price = document.getElementById('productPrice').value;
-    //   const type = document.getElementById('productType').value;
-    //   const desc = document.getElementById('productDesc').value.trim();
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      formMsg.textContent = '';
 
-    //   if (!imgInput.files || !imgInput.files[0]) {
-    //     formMsg.textContent = 'Please choose a product image.';
-    //     formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
-    //     return;
-    //   }
-    //   if (!name || !price || !type) {
-    //     formMsg.textContent = 'Please fill required fields (name, price, type).';
-    //     formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
-    //     return;
-    //   }
+      const name = document.getElementById('productName').value.trim();
+      const price = document.getElementById('productPrice').value;
+      const type = document.getElementById('productType').value;
+      const desc = document.getElementById('productDesc').value.trim();
+
+      if (!imgInput.files || !imgInput.files[0]) {
+        formMsg.textContent = 'Please choose a product image.';
+        formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
+        return;
+      }
+      if (!name || !price || !type) {
+        formMsg.textContent = 'Please fill required fields (name, price, type).';
+        formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
+        return;
+      }
 
 
-    //   const file = imgInput.files[0];
-    //   const reader = new FileReader();
-    //   reader.onload = (ev) => {
-    //     const imageDataUrl = ev.target.result;
+      const file = imgInput.files[0];
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        const imageDataUrl = ev.target.result;
 
-    //     products.push({
-    //       image: imageDataUrl,
-    //       name,
-    //       price: Number(price),
-    //       desc,
-    //       type
-    //     });
+        products.push({
+          image: imageDataUrl,
+          name,
+          price: Number(price),
+          desc,
+          material
+          type
+        });
 
-    //     renderTable();
-    //     form.reset();
-    //     showImagePreview(null);
-    //     formMsg.textContent = 'Product added (client-side).';
-    //     formMsg.style.color = ''; 
-    //   };
-    //   reader.readAsDataURL(file);
-    // });
+        renderTable();
+        form.reset();
+        showImagePreview(null);
+        formMsg.textContent = 'Product added (client-side).';
+        formMsg.style.color = ''; 
+      };
+      reader.readAsDataURL(file);
+    });
 
-    // resetBtn.addEventListener('click', () => {
-    //   form.reset();
-    //   showImagePreview(null);
-    //   formMsg.textContent = '';
-    // });
+    resetBtn.addEventListener('click', () => {
+      form.reset();
+      showImagePreview(null);
+      formMsg.textContent = '';
+    });
 
  
-    // renderTable();
+    renderTable();
   </script>
 </body>
 </html
