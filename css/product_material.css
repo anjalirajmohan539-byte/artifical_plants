@@ -168,7 +168,7 @@ body {
       color:#081124;
     }
  
-    select{
+    input[type="text"]{
       border:1px solid rgba(12,20,40,0.08);
       padding:10px 12px;
       border-radius:8px;
@@ -177,7 +177,8 @@ body {
       outline:none;
       transition:box-shadow .12s, border-color .12s;
     }
-    select:focus{
+    
+    input:focus{
       box-shadow:0 6px 18px rgba(37,99,235,0.08);
       border-color:rgba(37,99,235,0.55);
     }
@@ -236,9 +237,9 @@ body {
       font-size:14px;
     }
 
-    #productsTbody
+    #productsTbody button
     {
-        
+        padding:5px 10px;
     }
 
     /* responsive */

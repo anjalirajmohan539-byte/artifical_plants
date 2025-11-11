@@ -1,3 +1,9 @@
+<?php
+
+include('database.php');
+
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -35,12 +41,10 @@
         <h2 id="form-title" style="margin:0 0 12px 0;font-size:15px;">Material details</h2>
 
         <form action="#" method="post" id="productForm" autocomplete="off" novalidate >
-          <div class="field">
-            <label for="productType">Material Type <s>*</s></label>
-            <select id="productType" name="productType" required>
-              <option value="0">Choose type</option>
-              <option value="#"></option>
-            </select>
+
+            <div class="field">
+            <label for="productType">Material name <s>*</s></label>
+            <input id="productType" name="productType" type="text" placeholder="eg.plastic"  required >
           </div>
 
           <div class="form-actions">
