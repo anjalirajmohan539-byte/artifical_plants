@@ -45,6 +45,7 @@ if(isset($_SESSION['error']))
         <a href="#" class="text-light">HOME</a>
         <a href="#" class="text-light">NEW ARRIVALS</a>
         <a href="#" class="text-light">DECOR</a>
+        <a href="#" class="text-light">ARTIFICAL PLANTS</a>
         <a href="#" class="text-light">ARTIFICAL FLOWERS</a>
         <a href="vase.php" class="text-light">VASE</a>
         <a href="#" class="text-light">PEBBLES & MOSS</a>

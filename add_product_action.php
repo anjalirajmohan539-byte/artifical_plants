@@ -10,12 +10,12 @@ if(isset($_POST['btn']))
     $type=$_POST['productType'];
     $description=$_POST['productDesc'];
 
-var_dump($image);
+   var_dump($image);
 
 			
 	$select="SELECT `Id` FROM `add_product` WHERE ProductName='$name' AND CategoryId=$type"; 
 	
-var_dump($select);
+    var_dump($select);
 	if (!$statemnt=mysqli_query($conn,$select))
 	{
 		echo "error";
