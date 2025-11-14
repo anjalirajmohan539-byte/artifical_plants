@@ -24,6 +24,7 @@ include('database.php');
     <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
     <a href="add_product.php"><li><img src="images/add-product.png">Add Product</li></a>
     <a href="#"><li><img src="images/product_list.jpg">Product List</li></a>
+    <a href="product_material.php"><li><img src="images/product_list.jpg">Product Materials</li></a>
     <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
     <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
     </ul>

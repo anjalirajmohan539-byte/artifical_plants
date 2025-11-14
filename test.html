@@ -1,150 +1,262 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Dashboard</title>
-  <link rel="stylesheet" href="css/test.css" />
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Materials - With Sidebar</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #dee8ff, #ffffff);
+        display: flex;
+    }
+
+    /* -------------------- SIDEBAR -------------------- */
+    .sidebar {
+        width: 240px;
+        background: #2b3d7a;
+        height: 100vh;
+        padding-top: 30px;
+        position: fixed;
+        box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+    }
+
+    .sidebar h2 {
+        text-align: center;
+        color: #fff;
+        margin-bottom: 30px;
+        font-size: 22px;
+    }
+
+    .sidebar a {
+        display: block;
+        padding: 14px 20px;
+        color: #e6e6e6;
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+        background: #4050d2;
+        color: #fff;
+        padding-left: 28px;
+    }
+
+    /* -------------------- MAIN CONTENT -------------------- */
+    .wrapper {
+        width: 100%;
+        margin-left: 260px;  /* space for sidebar */
+        padding: 30px;
+    }
+
+    .title {
+        font-size: 30px;
+        font-weight: 600;
+        color: #2b3d7a;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 32% auto;
+        gap: 25px;
+    }
+
+    .card {
+        background: #fff;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-left: 6px solid #4b6cff;
+        transition: 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+    }
+
+    label {
+        font-size: 14px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    input {
+        width: 100%;
+        padding: 12px;
+        border-radius: 6px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        font-size: 15px;
+    }
+
+    .error {
+        font-size: 12px;
+        color: red;
+        height: 15px;
+    }
+
+    .btn {
+        padding: 12px 18px;
+        border-radius: 6px;
+        border: none;
+        color: #fff;
+        cursor: pointer;
+        font-size: 15px;
+        margin-right: 10px;
+    }
+
+    .btn-save {
+        background: #4b6cff;
+    }
+
+    .btn-reset {
+        background: #6c757d;
+    }
+
+    .table-card {
+        background: #fff;
+        padding: 20px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        border-left: 6px solid #14c38e;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+    }
+
+    th {
+        background: #f0f4ff;
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 13px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        background: #4050d2;
+        color: #fff;
+    }
+
+    .btn-delete {
+        background: #d64040;
+    }
+</style>
 </head>
+
 <body>
-  <div class="container-fluid">
 
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Dashboard</h2>
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <h2>Milon<br><span>Artificial Plants</span></h2>
-      <ul>
-        <li><a href="#">User List</a></li>
-        <li><a href="#">Product List</a></li>
-        <li><a href="#">Create Date</a></li>
-        <li><a href="#">Last Update</a></li>
-      </ul>
-    </aside>
+    <a href="#"><img src="images/vvvv.png" alt="">Home</a>
+    <a href="#"><img src="" alt="">Products</a>
+    <a href="#"><img src="" alt="">Materials</a>
+    <a href="#"><img src="" alt="">Categories</a>
+    <a href="#"><img src="" alt="">Orders</a>
+    <a href="#"><img src="" alt="">Customers</a>
+    <a href="#"><img src="" alt="">Settings</a>
+</div>
 
-    <!-- Main Content -->
-    <main class="main-content">
-      <header class="topbar">
-        <h1><span>Admin</span> Dashboard</h1>
-        <div class="profile">
-          <img src="https://i.pravatar.cc/60" alt="Admin Profile" />
-          <p>Admin Profile</p>
+<!-- MAIN CONTENT -->
+<div class="wrapper">
+    <div class="title">Product Materials</div>
+
+    <div class="grid-container">
+
+        <!-- Left Card (Form) -->
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">Add New Material</h3>
+
+            <label>Material Name *</label>
+            <input type="text" id="material" placeholder="Enter material name" oninput="clearError()">
+            <div class="error" id="materialErr"></div>
+
+            <button class="btn btn-save" onclick="return validateForm()">Add Material</button>
+            <button class="btn btn-reset" onclick="resetForm()">Reset</button>
         </div>
-      </header>
 
-      <!-- Dashboard Cards -->
-      <section class="cards">
-        <div class="card"><h3>Sales</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
-        <div class="card"><h3>Earnings</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
-        <div class="card"><h3>Total Customer</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
-        <div class="card"><h3>Inactive users</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
-        <div class="card"><h3>Visitors</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
-        <div class="card"><h3>Orders</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
-        <div class="card"><h3>Active users</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
-        <div class="card"><h3>Orders</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
-      </section>
+        <!-- Right Table (Material List) -->
+        <div class="table-card">
+            <table>
+                <tr>
+                    <th>Sl no</th>
+                    <th>Material</th>
+                    <th>Categories</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
 
-      <!-- Graph Section -->
-      <section class="charts">
-        <div class="chart-card">
-          <h3>Recent Movement</h3>
-          <canvas id="recentMovementChart"></canvas>
+                <tr>
+                    <td>1</td>
+                    <td>Plastic</td>
+                    <td><button class="btn-sm">Category</button></td>
+                    <td><button class="btn-sm">Edit</button></td>
+                    <td><button class="btn-sm btn-delete">Delete</button></td>
+                </tr>
+
+                <tr>
+                    <td>2</td>
+                    <td>Silk</td>
+                    <td><button class="btn-sm">Category</button></td>
+                    <td><button class="btn-sm">Edit</button></td>
+                    <td><button class="btn-sm btn-delete">Delete</button></td>
+                </tr>
+
+            </table>
         </div>
-        <div class="chart-card">
-          <h3>Monthly Sales</h3>
-          <canvas id="monthlySalesChart"></canvas>
-        </div>
-      </section>
 
-      <!-- Products Section -->
-      <section class="products">
-        <h2>Most Selling</h2>
-        <div class="product-list">
-          <div class="product-card">
-            <img src="https://i.ibb.co/8bLccXL/plant1.jpg" alt="">
-            <p>Artificial plant</p>
-            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
-          </div>
-          <div class="product-card">
-            <img src="https://i.ibb.co/z82d6S0/plant2.jpg" alt="">
-            <p>Artificial plant</p>
-            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
-          </div>
-          <div class="product-card">
-            <img src="https://i.ibb.co/tPV3p4m/plant3.jpg" alt="">
-            <p>Artificial plant</p>
-            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
-          </div>
-          <div class="product-card">
-            <img src="https://i.ibb.co/xzpg1sK/plant4.jpg" alt="">
-            <p>Artificial plant</p>
-            <div class="price">₹9,999 <span>MRP ₹13,000</span></div>
-          </div>
-        </div>
-      </section>
-    </main>
-  </div>
+    </div>
+</div>
 
+<script>
+function validateForm() {
+    let mat = document.getElementById("material").value.trim();
 
+    if (mat === "") {
+        document.getElementById("materialErr").innerText = "Material name is required";
+        return false;
+    }
 
+    if (!/^[A-Za-z ]+$/.test(mat)) {
+        document.getElementById("materialErr").innerText = "Only letters allowed";
+        return false;
+    }
 
+    alert("Material added successfully");
+    return true;
+}
 
+function resetForm() {
+    document.getElementById("material").value = "";
+    clearError();
+}
 
+function clearError() {
+    document.getElementById("materialErr").innerText = "";
+}
+</script>
 
-
-  <!-- JavaScript for Charts -->
-  <script>
-    // Recent Movement Line Chart
-    const ctx1 = document.getElementById('recentMovementChart').getContext('2d');
-    new Chart(ctx1, {
-      type: 'line',
-      data: {
-        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-        datasets: [{
-          label: 'Visitors',
-          data: [1200, 1900, 3000, 2500, 2800, 3200, 4100],
-          borderColor: '#7a614b',
-          backgroundColor: 'rgba(122, 97, 75, 0.2)',
-          fill: true,
-          tension: 0.3,
-          pointRadius: 4,
-          pointBackgroundColor: '#7a614b'
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { beginAtZero: true, grid: { color: '#eee' } },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-
-    // Monthly Sales Bar Chart
-    const ctx2 = document.getElementById('monthlySalesChart').getContext('2d');
-    new Chart(ctx2, {
-      type: 'bar',
-      data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
-        datasets: [{
-          label: 'Sales (in ₹000)',
-          data: [15, 22, 18, 25, 28, 35, 40, 38, 45],
-          backgroundColor: '#8b7a6f',
-          borderRadius: 6
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: {
-          y: { beginAtZero: true, grid: { color: '#eee' } },
-          x: { grid: { display: false } }
-        }
-      }
-    });
-  </script>
 </body>
 </html>
+
+
 

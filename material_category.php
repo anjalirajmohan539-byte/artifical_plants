@@ -1,10 +1,22 @@
 <?php
-
 include('database.php');
 
-$id=$_GET['matId'];
+// Validate URL ID
+$matTypeName = "";
+if(isset($_GET['matId']) && is_numeric($_GET['matId'])) {
+    $id = intval($_GET['matId']);
 
+    $sql = "SELECT * FROM material_type WHERE Id = $id";
+    $result = mysqli_query($conn, $sql);
+
+    if($result && mysqli_num_rows($result) > 0) 
+      {
+        $row = mysqli_fetch_assoc($result);
+        $matTypeName = $row['Name'];
+      }
+}
 ?>
+
 
 <html>
 <head>
@@ -25,6 +37,7 @@ $id=$_GET['matId'];
     <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
     <a href="add_product.php"><li><img src="images/add-product.png">Add Product</li></a>
     <a href="#"><li><img src="images/product_list.jpg">Product List</li></a>
+    <a href="product_material.php"><li><img src="images/product_list.jpg">Product Materials</li></a>
     <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
     <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
     </ul>
@@ -48,6 +61,7 @@ $id=$_GET['matId'];
             <div class="field">
             <label for="productType">Material Categorys<s>*</s></label>
             <input id="productType" name="productType" type="text" placeholder="eg.PVC"  required >
+            <input type="hidden" name="id" value="<?php echo $id ?? ''; ?>">
           </div>
 
           <div class="form-actions">
@@ -77,27 +91,28 @@ $id=$_GET['matId'];
               </thead>
               <tbody id="productsTbody">
                 <?php
-                $select="SELECT mc.`Id`, mc.`Name`,mt.Name AS `Type`, mc.`IsDelete` FROM `material_category` mc
-                         INNER JOIN material_type mt ON mt.Id = mc.Type WHERE Id=$id";
-                $statenmt=mysqli_query($conn,$select); 
+            
+                $select="SELECT mc.`Id`, mc.`Name`,mt.Name AS `Type` FROM `material_category` mc
+                        INNER JOIN material_type mt ON mt.Id = mc.Type WHERE mt.Id=$id AND IsDelete=0";
+                $statemnt=mysqli_query($conn,$select);
+                // var_dump($select);
 
-                if(mysqli_num_rows($statenmt)>0)
+                $c=1;
+
+                if(mysqli_num_rows($statemnt)>0)
                 {
-                    $category=mysqli_fetch_assoc($statenmt);
-                    
-               
+                  while($cat=mysqli_fetch_assoc($statemnt))
+                  {
+              
                 ?>
                 <tr>
-                  <td class="small" style="color:var(--muted)"></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $category['Name']?></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $category['Type']?></td>
+                  <td class="small" style="color:var(--muted)"><?php echo $c++?></td>
+                  <td class="small" style="color:var(--muted)"><?php echo $cat['Name'];?></td>
+                  <td class="small" style="color:var(--muted)"><?php echo $cat['Type'];?></td>
                   <td class="small" style="color:var(--muted)"><a href="#"><button>Edit</button></a></td>
                   <td class="small" style="color:var(--muted)"><a href="#"><button>Delete</button></a></td>
                   </tr>
-                  <?php 
-                       
-                }
-                  ?>
+                  <?php }}?>
               </tbody>
             </table>
           </div>

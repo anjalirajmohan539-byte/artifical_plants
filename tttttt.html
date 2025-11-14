@@ -3,242 +3,175 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Details</title>
+<title>Product Details - Modern UI</title>
 <style>
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
+    body{background:#eef2f7;padding:25px;}
 
-body {
-  font-family: 'Poppins', sans-serif;
-  margin: 0;
-  background-color: #f5f7fa;
-  color: #333;
-}
-.header {
-  background: #4CAF50;
-  color: #fff;
-  padding: 15px 20px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-.header h2 {
-  margin: 0;
-  font-size: 22px;
-  letter-spacing: 1px;
-}
+    .header{
+        text-align:center;
+        padding:18px;
+        background:#1d3557;
+        color:#fff;
+        font-size:24px;
+        font-weight:600;
+        border-radius:12px;
+        letter-spacing:1px;
+        margin-bottom:25px;
+    }
 
+    .container{
+        display:grid;
+        grid-template-columns:30% 70%;
+        gap:25px;
+    }
 
-.product-container {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 20px;
-  gap: 20px;
-}
+    /* LEFT PRODUCT IMAGE CARD */
+    .left{
+        background:#fff;
+        border-radius:15px;
+        padding:20px;
+        box-shadow:0 6px 18px rgba(0,0,0,0.1);
+        transition:.3s;
+    }
+    .left:hover{transform:scale(1.01);}    
+    .main-img{
+        width:100%;
+        border-radius:12px;
+        object-fit:cover;
+    }
 
+    .product-title{font-size:22px;font-weight:600;margin:15px 0;color:#1d3557;}
 
-.sidebar {
-  flex: 1 1 300px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 15px;
-  max-width: 320px;
-}
+    .thumbs{
+        display:flex;
+        gap:12px;
+        margin-top:15px;
+    }
+    .thumbs img{
+        width:70px;height:70px;
+        border-radius:10px;
+        border:2px solid #ddd;
+        cursor:pointer;
+        transition:.3s;
+    }
+    .thumbs img:hover{border-color:#1d3557;transform:scale(1.07);}    
 
-.product-card img {
-  width: 100%;
-  border-radius: 8px;
-  object-fit: cover;
-}
-.product-card h3 {
-  margin: 10px 0;
-}
-.product-card p {
-  font-size: 14px;
-  margin: 5px 0;
-}
-.product-card .df {
-  display: flex;
-  gap: 6px;
-  margin-top: 8px;
-}
-.product-card .df span img {
-  width: 55px;
-  height: 55px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.product-card .df span img:hover {
-  transform: scale(1.05);
-}
+    /* RIGHT SIDE */
+    .right{
+        display:flex;
+        flex-direction:column;
+        gap:25px;
+    }
 
+    .card{
+        background:#fff;
+        padding:22px;
+        border-radius:15px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    }
+    .card-title{
+        font-size:20px;
+        font-weight:600;
+        color:#1d3557;
+        margin-bottom:15px;
+        border-left:5px solid #1d3557;
+        padding-left:10px;
+    }
 
-.main-content {
-  flex: 3 1 600px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 20px;
-}
+    .grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:15px;
+    }
 
-.main-content h3 {
-  color: #4CAF50;
-  margin-bottom: 10px;
-}
+    .info{
+        background:#f8faff;
+        padding:15px;
+        border-radius:10px;
+        border:1px solid #e0e6ef;
+    }
+    .label{font-size:13px;color:#6b7280;}
+    .value{font-size:16px;font-weight:600;color:#1d3557;margin-top:5px;}
 
-.info-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 15px;
-  background: #f9fafb;
-  padding: 15px;
-  border-radius: 8px;
-}
-.info-grid div {
-  background: #fff;
-  padding: 10px;
-  border-radius: 6px;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-}
-.info-grid strong {
-  display: block;
-  color: #555;
-  margin-bottom: 4px;
-}
+    .shipping li{margin-bottom:8px;color:#333;font-size:15px;}
 
+    .pair{
+        display:flex;align-items:center;gap:15px;
+    }
+    .pair img{width:85px;height:85px;border-radius:12px;}
 
-.grid-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 20px;
-}
-.grid-section section {
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  padding: 15px;
-}
-.grid-section h3 {
-  margin-top: 0;
-  color: #4CAF50;
-}
-.grid-section ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-.grid-section ul li {
-  padding: 6px 0;
-  border-bottom: 1px solid #eee;
-}
-.grid-section ul li span {
-  font-size: 14px;
-}
-
-
-@media (max-width: 900px) {
-  .product-container {
-    flex-direction: column;
-    align-items: center;
-  }
-  .main-content, .sidebar {
-    max-width: 100%;
-  }
-  .grid-section {
-    grid-template-columns: 1fr;
-  }
-}
+    /* Validation Example */
+    .error{color:red;font-size:14px;margin-top:6px;height:16px;}
 </style>
 </head>
 <body>
 
-<div class="header">
-  <h2>PRODUCT DETAILS</h2>
+<div class="header">PRODUCT DETAILS</div>
+
+<div class="container">
+
+    <!-- LEFT SIDE -->
+    <div class="left">
+        <img src="images/plant_3.png" class="main-img" id="mainImage">
+
+        <div class="product-title">Artificial Plant</div>
+
+        <p><b>Color:</b> Dark Green</p>
+
+        <div class="thumbs">
+            <img src="images/plant_1.jpg" onclick="swap(this)">
+            <img src="images/plant_2.jpg" onclick="swap(this)">
+            <img src="images/plant_4.png" onclick="swap(this)">
+        </div>
+    </div>
+
+    <!-- RIGHT SIDE -->
+    <div class="right">
+
+        <!-- Product Information -->
+        <div class="card">
+            <div class="card-title">Product Information</div>
+
+            <div class="grid">
+                <div class="info"><div class="label">Product Name</div><div class="value">Artificial Plant</div></div>
+                <div class="info"><div class="label">Primary Material</div><div class="value">Plastic</div></div>
+                <div class="info"><div class="label">Price</div><div class="value">₹499</div></div>
+                <div class="info"><div class="label">Color</div><div class="value">Dark Green</div></div>
+                <div class="info"><div class="label">Tax Included</div><div class="value">Yes</div></div>
+                <div class="info"><div class="label">With Vase</div><div class="value">Yes</div></div>
+            </div>
+        </div>
+
+        <!-- Shipping Info -->
+        <div class="card">
+            <div class="card-title">Shipping Details</div>
+            <ul class="shipping">
+                <li>Availability: In Stock</li>
+                <li>Delivery within: 3–5 business days</li>
+                <li>Free Delivery Available</li>
+            </ul>
+        </div>
+
+        <!-- Pair Well With -->
+        <div class="card">
+            <div class="card-title">Pair Well With</div>
+            <div class="pair">
+                <img src="images/vase1.jpg">
+                <div>
+                    <div style="font-size:17px;font-weight:600;color:#1d3557;">Mini Vase</div>
+                    <div style="color:#333;">₹299</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 
-<div class="product-container">
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="product-card">
-      <img id="mainImg" src="images/plant_5.png" alt="Product Image">
-      <h3 id="prodTitle">Artificial Plant</h3>
-      <p class="name"><strong style="color:#666;">Product Name:</strong> Artificial Plant</p>
-      <p class="color"><strong>Color:</strong> Dark Green</p>
-      <div class="df">
-        <span><img src="images/plant_3.png" alt=""></span>
-        <span><img src="images/plant_3.png" alt=""></span>
-        <span><img src="images/plant_3.png" alt=""></span>
-        <span><img src="images/plant_3.png" alt=""></span>
-      </div>
-      <p class="member-since">Different Images</p>
-    </div>
-  </div>
-
-  <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <section class="plant">
-      <h3>Plant Information</h3>
-      <div class="info-grid">
-        <div><strong>Product Name</strong><p id="infoName">Artificial Plant</p></div>
-        <div><strong>Primary Material</strong><p id="infoMaterial">Plastic</p></div>
-        <div><strong>Price</strong><p id="infoPrice">₹499</p></div>
-        <div><strong>Color</strong><p id="infoColor">Dark Green</p></div>
-        <div><strong>Incl. of All Tax</strong><p>Yes</p></div>       
-        <div><strong>Is It With Vase</strong><p>Yes</p></div>
-        <div><strong>Product Description</strong><p id="infoDesc">A beautiful artificial plant perfect for home decoration.</p></div>
-      </div>
-    </section>
-
-    <div class="grid-section">
-      <section class="experience">
-        <h3>Shipping Information</h3>
-        <ul>
-          <li><span>Availability: In Stock</span></li>
-          <li><span>Delivery by: 3-5 business days</span></li>
-          <li><span>Free Delivery</span></li>
-        </ul>
-      </section>
-
-      <section class="education">
-        <h3>Pair Well With</h3>
-        <ul>
-          <li><img src="images/plant_5.png" alt="" style="width:80px;border-radius:6px;"></li>
-          <li><span>Mini Vase</span></li>
-          <li><span>₹299</span></li>
-        </ul>
-      </section>
-    </div>
-  </div>
-</div>
-
-<!-- ==== SIMPLE JS ==== -->
 <script>
-// Change main image when thumbnails clicked
-const thumbnails = document.querySelectorAll('.df img');
-const mainImg = document.getElementById('mainImg');
-
-thumbnails.forEach(img => {
-  img.addEventListener('click', () => {
-    mainImg.src = img.src;
-  });
-});
-
-// Example of setting product details dynamically (optional)
-const productData = {
-  name: "Artificial Plant",
-  material: "Plastic",
-  price: "₹499",
-  color: "Dark Green",
-  desc: "Beautiful artificial plant ideal for living rooms and offices."
-};
-
-document.getElementById("infoName").textContent = productData.name;
-document.getElementById("infoMaterial").textContent = productData.material;
-document.getElementById("infoPrice").textContent = productData.price;
-document.getElementById("infoColor").textContent = productData.color;
-document.getElementById("infoDesc").textContent = productData.desc;
+function swap(img){
+    document.getElementById("mainImage").src = img.src;
+}
 </script>
 
 </body>
