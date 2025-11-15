@@ -19,14 +19,14 @@ include('database.php');
 <div class="sidebar">
     <h2>Milon <br> Artifical Plants</h2>
     <ul>
-	<a href="admin_page.php"><li><img src="images/dashboard_icon.jpg">Dashboard</li></a>
-	<a href="#"><li><img src="images/product_icon.jpg">Orders</li></a>
-    <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
-    <a href="add_product.php"><li><img src="images/add-product.png">Add Product</li></a>
-    <a href="#"><li><img src="images/product_list.jpg">Product List</li></a>
-    <a href="product_material.php"><li><img src="images/product_list.jpg">Product Materials</li></a>
-    <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
-    <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
+	<li><a href="admin_page.php"><img src="images/dashboard_icon.jpg">Dashboard</a></li>
+	<li><a href="#"><img src="images/product_icon.jpg">Orders</a></li>
+    <li><a href="#"><img src="images/users_icon.jpg">User List</a></li>
+    <li><a href="add_product.php"><img src="images/add-product.png">Add Product</a></li>
+    <li><a href="#"><img src="images/product_list.jpg">Product List</a></li>
+   <li> <a href="product_material.php"><img src="images/product_list.jpg">Product Materials</a></li>
+    <li><a href="#"><img src="images/report_icon.jpg">Report</a></li>
+    <li><a href="index.php"><img src="images/logout_icon.jpg">Logout</a></li>
     </ul>
   </div>
 

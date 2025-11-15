@@ -10,19 +10,19 @@
 
 <body>
 
+        <!-- SIDEBAR -->
 <div class="sidebar">
-    <h2>Milon <br> Artifical Plants</h2>
-    <ul>
-	  <a href="#"><li><img src="images/dashboard_icon.jpg">Dashboard</li></a>
-	  <a href="#"><li><img src="images/product_icon.jpg">Orders</li></a>
-      <a href="users_list.php"><li><img src="images/users_icon.jpg">User List</li></a>
-      <a href="add_product.php"><li><img src="images/add-product.png">Add Product</li></a>
-      <a href="#"><li><img src="images/product_list.jpg">Product List</li></a>
-      <a href="product_material.php"><li><img src="images/product_list.jpg">Product Materials</li></a>
-      <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
-      <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
-    </ul>
-  </div>
+    <h2>Dashboard</h2>
+
+    <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
+    <a href="add_product.php"><img src="images/add-product.png" alt="">Add Products</a>
+    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
+    <a href="#"><img src="images/product_list.jpg" alt="">Product List</a>
+    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
+    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
+    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
+    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
+</div>
 
      <!-- Main Content -->
     <main class="main-content">

@@ -1,20 +1,8 @@
 <?php
 include('database.php');
 
-// Validate URL ID
-$matTypeName = "";
-if(isset($_GET['matId']) && is_numeric($_GET['matId'])) {
-    $id = intval($_GET['matId']);
+  $id = $_GET['matId'];
 
-    $sql = "SELECT * FROM material_type WHERE Id = $id";
-    $result = mysqli_query($conn, $sql);
-
-    if($result && mysqli_num_rows($result) > 0) 
-      {
-        $row = mysqli_fetch_assoc($result);
-        $matTypeName = $row['Name'];
-      }
-}
 ?>
 
 
@@ -29,68 +17,52 @@ if(isset($_GET['matId']) && is_numeric($_GET['matId'])) {
 </head>
 
 <body>
-        <div class="sidebar">
-    <h2>Milon <br> Artifical Plants</h2>
-    <ul>
-	<a href="admin_page.php"><li><img src="images/dashboard_icon.jpg">Dashboard</li></a>
-	<a href="#"><li><img src="images/product_icon.jpg">Orders</li></a>
-    <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
-    <a href="add_product.php"><li><img src="images/add-product.png">Add Product</li></a>
-    <a href="#"><li><img src="images/product_list.jpg">Product List</li></a>
-    <a href="product_material.php"><li><img src="images/product_list.jpg">Product Materials</li></a>
-    <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
-    <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
-    </ul>
-  </div>
+        <!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Dashboard</h2>
 
-      <div class="container" role="main">
-    <div class="header">
-      <div>
-        <h1>Materials Categorys</h1>
-      </div>
-    </div>
+    <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
+    <a href="add_product.php"><img src="images/add-product.png" alt="">Add Products</a>
+    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
+    <a href="#"><img src="images/product_list.jpg" alt="">Product List</a>
+    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
+    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
+    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
+    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
+</div>
 
-    <div class="layout">
+<!-- MAIN CONTENT -->
+<div class="wrapper">
+    <div class="title">Categorys Details</div>
 
-      <!-- LEFT: FORM -->
-      <div class="card" aria-labelledby="form-title">
-        <h2 id="form-title" style="margin:0 0 12px 0;font-size:15px;">Categorys Details</h2>
+    <div class="grid-container">
 
-        <form action="material_category_action.php" method="post" id="productForm" autocomplete="off" novalidate >
-
-            <div class="field">
-            <label for="productType">Material Categorys<s>*</s></label>
-            <input id="productType" name="productType" type="text" placeholder="eg.PVC"  required >
+        <!-- Left Card (Form) -->
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">Add New Categorys</h3>
+            <form action="material_category_action.php" method="post" id="productForm" autocomplete="off">
+            <label>Material Categorys <s>*</s></label>
+            <input type="text" id="material" name="productType" placeholder="Enter material name" oninput="clearError()">
             <input type="hidden" name="id" value="<?php echo $id ?? ''; ?>">
-          </div>
+            <div class="error" id="materialErr"></div>
 
-          <div class="form-actions">
-            <button type="submit" class="btn" name="btn" style="background-color:#9A8C7A;color:white;">Add Categorys</button>
-            <button type="button" id="resetBtn" class="btn secondary">Reset</button>
-            <div style="margin-left:auto" class="small" id="formMsg" aria-live="polite"></div>
-          </div>
-        </form>
-      </div>
+            <button class="btn btn-save" name="btn" type="button" onclick="return validateForm()">Add Categorys</button>
+            <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
+            
+        </div>
 
-
-
-      <!-- RIGHT: TABLE -->
-      <div class="table-wrap">
-        <div class="card" style="padding:12px 16px;">
-          <h3 style="margin:0 0 12px 0;font-size:15px;">Material List</h3>
-          <div style="overflow:auto;">
-            <table aria-describedby="productsDesc">
-              <thead>
+       
+        <!-- Right Table (Material List) -->
+        <div class="table-card">
+            <table>
                 <tr>
-                  <th>Sl no</th>
-                  <th>Material Categorys</th>
-                  <th>Material Type</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                    <th>Sl no</th>
+                    <th>Material Categories</th>
+                    <th>Material Types</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-              </thead>
-              <tbody id="productsTbody">
-                <?php
+               <?php
             
                 $select="SELECT mc.`Id`, mc.`Name`,mt.Name AS `Type` FROM `material_category` mc
                         INNER JOIN material_type mt ON mt.Id = mc.Type WHERE mt.Id=$id AND IsDelete=0";
@@ -106,19 +78,53 @@ if(isset($_GET['matId']) && is_numeric($_GET['matId'])) {
               
                 ?>
                 <tr>
-                  <td class="small" style="color:var(--muted)"><?php echo $c++?></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $cat['Name'];?></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $cat['Type'];?></td>
-                  <td class="small" style="color:var(--muted)"><a href="#"><button>Edit</button></a></td>
-                  <td class="small" style="color:var(--muted)"><a href="#"><button>Delete</button></a></td>
-                  </tr>
-                  <?php }}?>
-              </tbody>
+                    <td><?php echo $c++;?></td>
+                    <td><?php echo $cat['Name'];?></td>
+                    <td><?php echo $cat['Type'];?></td>
+                    <td><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></td>
+                    <td><button type="button" class="btn-sm btn-delete">Delete</button></td>
+                </tr>
+                <?php }}?>
+
             </table>
-          </div>
         </div>
-      </div>
+
     </div>
-  </div>
+</div>
+
+<script>
+function validateForm() {
+    let material = document.getElementById("material");
+    let materialVal = material.value.trim();
+    let errorBox = document.getElementById("materialErr");
+
+   
+    errorBox.innerText = "";
+    material.style.border = "";
+
+    
+    if (materialVal === "") {
+        errorBox.innerText = "Category name is required";
+        material.style.border = "1px solid red";
+        return false;
+    }
+
+
+    return true; 
+}
+
+function resetForm() {
+    document.getElementById("material").value = "";
+    clearError();
+}
+
+function clearError() {
+    let material = document.getElementById("material");
+    document.getElementById("materialErr").innerText = "";
+    material.style.border = "";
+}
+</script>
+
+
 </body>
 </html>

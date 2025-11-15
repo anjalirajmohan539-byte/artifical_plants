@@ -15,64 +15,51 @@ include('database.php');
 </head>
 
 <body>
-    <div class="sidebar">
-    <h2>Milon <br> Artifical Plants</h2>
-    <ul>
-	<a href="admin_page.php"><li><img src="images/dashboard_icon.jpg">Dashboard</li></a>
-	<a href="#"><li><img src="images/product_icon.jpg">Orders</li></a>
-    <a href="#"><li><img src="images/users_icon.jpg">User List</li></a>
-    <a href="add_product.php"><li><img src="images/add-product.png">Add Product</li></a>
-    <a href="#"><li><img src="images/product_list.jpg">Product List</li></a>
-    <a href="product_material.php"><li><img src="images/product_list.jpg">Product Materials</li></a>
-    <a href="#"><li><img src="images/report_icon.jpg">Report</li></a>
-    <a href="index.php"><li><img src="images/logout_icon.jpg">Logout</li></a>
-    </ul>
-  </div>
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <h2>Dashboard</h2>
 
-    <div class="container" role="main">
-    <div class="header">
-      <div>
-        <h1>Product Materials</h1>
-      </div>
-    </div>
+    <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
+    <a href="add_product.php"><img src="images/add-product.png" alt="">Add Products</a>
+    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
+    <a href="#"><img src="images/product_list.jpg" alt="">Product List</a>
+    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
+    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
+    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
+    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
+</div>
 
-    <div class="layout">
-      <!-- LEFT: FORM -->
-      <div class="card" aria-labelledby="form-title">
-        <h2 id="form-title" style="margin:0 0 12px 0;font-size:15px;">Material Details</h2>
+<!-- MAIN CONTENT -->
+<div class="wrapper">
+    <div class="title">Product Materials</div>
 
-        <form action="product_material_action.php" method="post" id="productForm" autocomplete="off" novalidate >
+    <div class="grid-container">
 
-            <div class="field">
-            <label for="productType">Material Name <s>*</s></label>
-            <input id="productType" name="productType" type="text" placeholder="eg.plastic"  required >
-          </div>
+        <!-- Left Card (Form) -->
+        <div class="card">
+            <h3 style="margin-bottom: 15px;">Add New Material</h3>
+            <form action="product_material_action.php" method="post" id="productForm" autocomplete="off">
+            <label>Material Name <s>*</s></label>
+            <input type="text" id="material" name="productType" placeholder="Enter material name" oninput="clearError()">
+            <div class="error" id="materialErr"></div>
 
-          <div class="form-actions">
-            <button type="submit" class="btn" name="btn" style="background-color:#9A8C7A;color:white;">Add Material</button>
-            <button type="button" id="resetBtn" class="btn secondary">Reset</button>
-            <div style="margin-left:auto" class="small" id="formMsg" aria-live="polite"></div>
-          </div>
+            <button class="btn btn-save" name="btn" onclick="return validateForm()">Add Material</button>
+            <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
+        </div>
+
         </form>
-      </div>
-
-      <!-- RIGHT: TABLE -->
-      <div class="table-wrap">
-        <div class="card" style="padding:12px 16px;">
-          <h3 style="margin:0 0 12px 0;font-size:15px;">Material List</h3>
-          <div style="overflow:auto;">
-            <table aria-describedby="productsDesc">
-              <thead>
+        <!-- Right Table (Material List) -->
+        <div class="table-card">
+            <table>
                 <tr>
-                  <th>Sl no</th>
-                  <th>Material</th>
-                  <th>Material Categorys</th>
-                  <th>Edit</th>
-                  <th>Delete</th>
+                    <th>Sl no</th>
+                    <th>Material</th>
+                    <th>Categories</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
-              </thead>
-              <tbody id="productsTbody">
-                    <?php
+
+                            <?php
                 $select="SELECT `Id`, `Name` FROM `material_type` WHERE IsDeleted=0";
                 $statemnt=mysqli_query($conn,$select);
                 // var_dump($statemnt);
@@ -86,19 +73,48 @@ include('database.php');
                 
               ?>
                 <tr>
-                  <td class="small" style="color:var(--muted)"><?php echo $sl++;?></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $mat['Name'];?></td>
-                  <td class="small" style="color:var(--muted)"><a href="material_category.php?matId=<?php echo $mat['Id'];?>"><button>Categorys</button></a></td>
-                  <td class="small" style="color:var(--muted)"><a href="#"><button>Edit</button></a></td>
-                  <td class="small" style="color:var(--muted)"><a href="#"><button>Delete</button></a></td>
-                  </tr>
-                   <?php  }}?>
-              </tbody>
+                    <td><?php echo $sl++;?></td>
+                    <td><?php echo $mat['Name'];?></td>
+                    <td><a href="material_category.php?matId=<?php echo $mat['Id'];?>"><button class="btn-sm">Category</button></a></td>
+                    <td><button class="btn-sm" style="background-color: #3333f3;">Edit</button></td>
+                    <td><button class="btn-sm btn-delete">Delete</button></td>
+                </tr>
+                <?php }}?>
+
             </table>
-          </div>
         </div>
-      </div>
+
     </div>
-  </div>
+</div>
+
+<script>
+function validateForm() {
+    let mat = document.getElementById("material").value.trim();
+
+    if (mat === "") {
+        document.getElementById("materialErr").innerText = "Material name is required";
+        document.getElementById("material").style.border = "1px solid red";
+        return false;
+    }
+
+    if (!/^[A-Za-z ]+$/.test(mat)) {
+        document.getElementById("materialErr").innerText = "Only letters allowed";
+        return false;
+    }
+
+    alert("Material added successfully");
+    return true;
+}
+
+function resetForm() {
+    document.getElementById("material").value = "";
+    clearError();
+}
+
+function clearError() {
+    document.getElementById("materialErr").innerText = "";
+    document.getElementById("material").style.border = "";
+}
+</script>
 </body>
 </html>

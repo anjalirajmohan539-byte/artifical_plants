@@ -84,7 +84,7 @@ if(isset($_GET['Status']))
 
         <td><?php echo $details['CreateDate'];?></td>
 
-        <td><a href="users_details.php?userid=<?php echo $details['CustomerId'];?>"><button>Full details</button></a></td> 
+        <td><a href="users_details.php?userId=<?php echo $details['CustomerId'];?>"><button>Full details</button></a></td> 
     </tr>
   </tbody>
   <?php

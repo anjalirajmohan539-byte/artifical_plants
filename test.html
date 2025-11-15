@@ -3,260 +3,272 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Materials - With Sidebar</title>
-
+<title>Add Product</title>
+<link rel="stylesheet" href="style.css">
 <style>
     body {
-        margin: 0;
-        font-family: "Poppins", sans-serif;
-        background: linear-gradient(135deg, #dee8ff, #ffffff);
-        display: flex;
-    }
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f8faff;
+}
 
-    /* -------------------- SIDEBAR -------------------- */
-    .sidebar {
-        width: 240px;
-        background: #2b3d7a;
-        height: 100vh;
-        padding-top: 30px;
-        position: fixed;
-        box-shadow: 3px 0 10px rgba(0,0,0,0.2);
-    }
+.page-container {
+    display: flex;
+}
 
-    .sidebar h2 {
-        text-align: center;
-        color: #fff;
-        margin-bottom: 30px;
-        font-size: 22px;
-    }
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background: #b89a7c;
+    color: white;
+    height: 100vh;
+    padding: 20px;
+    position: fixed;
+}
 
-    .sidebar a {
-        display: block;
-        padding: 14px 20px;
-        color: #e6e6e6;
-        text-decoration: none;
-        font-size: 16px;
-        transition: 0.3s;
-    }
+.sidebar h2 {
+    margin-bottom: 30px;
+    line-height: 26px;
+}
 
-    .sidebar a:hover {
-        background: #4050d2;
-        color: #fff;
-        padding-left: 28px;
-    }
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
 
-    /* -------------------- MAIN CONTENT -------------------- */
-    .wrapper {
-        width: 100%;
-        margin-left: 260px;  /* space for sidebar */
-        padding: 30px;
-    }
+.sidebar ul li {
+    margin-bottom: 12px;
+}
 
-    .title {
-        font-size: 30px;
-        font-weight: 600;
-        color: #2b3d7a;
-        text-align: center;
-        margin-bottom: 25px;
-    }
+.sidebar ul li a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    text-decoration: none;
+    padding: 10px;
+    border-radius: 6px;
+}
 
-    .grid-container {
-        display: grid;
-        grid-template-columns: 32% auto;
-        gap: 25px;
-    }
+.sidebar ul li a img {
+    width: 20px;
+    height: 20px;
+}
 
-    .card {
-        background: #fff;
-        padding: 25px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-left: 6px solid #4b6cff;
-        transition: 0.3s;
-    }
+.sidebar ul li a:hover {
+    background: rgba(255,255,255,0.2);
+}
 
-    .card:hover {
-        transform: translateY(-3px);
-    }
+/* Content Section */
+.content {
+    margin-left: 260px;
+    padding: 30px;
+    width: calc(100% - 260px);
+}
 
-    label {
-        font-size: 14px;
-        font-weight: 600;
-        color: #333;
-    }
+.page-title {
+    font-size: 26px;
+    margin-bottom: 20px;
+}
 
-    input {
-        width: 100%;
-        padding: 12px;
-        border-radius: 6px;
-        margin: 8px 0;
-        border: 1px solid #ccc;
-        font-size: 15px;
-    }
+/* Cards Layout */
+.flex-row {
+    display: flex;
+    gap: 20px;
+}
 
-    .error {
-        font-size: 12px;
-        color: red;
-        height: 15px;
-    }
+.form-card, .table-card {
+    background: white;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.08);
+}
 
-    .btn {
-        padding: 12px 18px;
-        border-radius: 6px;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        font-size: 15px;
-        margin-right: 10px;
-    }
+.form-card {
+    width: 330px;
+}
 
-    .btn-save {
-        background: #4b6cff;
-    }
+.table-card {
+    flex-grow: 1;
+}
 
-    .btn-reset {
-        background: #6c757d;
-    }
+/* Product Image Box */
+.image-box {
+    width: 100%;
+    height: 180px;
+    border: 2px dashed #ddd;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #777;
+}
 
-    .table-card {
-        background: #fff;
-        padding: 20px;
-        border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-left: 6px solid #14c38e;
-        overflow-x: auto;
-    }
+/* Form Inputs */
+input, select, textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 6px 0 15px;
+    border-radius: 6px;
+    border: 1px solid #bbb;
+}
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 15px;
-    }
+textarea {
+    height: 80px;
+    resize: none;
+}
 
-    th {
-        background: #f0f4ff;
-        padding: 12px;
-        text-align: left;
-        font-weight: 600;
-    }
+/* Buttons */
+.btn-row {
+    display: flex;
+    gap: 10px;
+}
 
-    td {
-        padding: 12px;
-        border-bottom: 1px solid #eee;
-    }
+.add-btn {
+    background: #7ab97a;
+    padding: 10px 16px;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-    .btn-sm {
-        padding: 6px 12px;
-        font-size: 13px;
-        border-radius: 4px;
-        border: none;
-        cursor: pointer;
-        background: #4050d2;
-        color: #fff;
-    }
+.reset-btn {
+    background: #d9534f;
+    padding: 10px 16px;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+}
 
-    .btn-delete {
-        background: #d64040;
-    }
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+}
+
+.details-btn {
+    padding: 6px 12px;
+    border: 1px solid #333;
+    background: white;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>Dashboard</h2>
+<div class="page-container">
 
-    <a href="#"><img src="images/vvvv.png" alt="">Home</a>
-    <a href="#"><img src="" alt="">Products</a>
-    <a href="#"><img src="" alt="">Materials</a>
-    <a href="#"><img src="" alt="">Categories</a>
-    <a href="#"><img src="" alt="">Orders</a>
-    <a href="#"><img src="" alt="">Customers</a>
-    <a href="#"><img src="" alt="">Settings</a>
-</div>
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>Milon <br> Artifical Plants</h2>
+        <ul>
+            <li><a href="#"><img src="images/dashboard_icon.jpg"> Dashboard</a></li>
+            <li><a href="#"><img src="images/product_icon.jpg"> Orders</a></li>
+            <li><a href="#"><img src="images/users_icon.jpg"> User List</a></li>
+            <li><a href="#"><img src="images/add-product.png"> Add Product</a></li>
+            <li><a href="#"><img src="images/product_list.jpg"> Product List</a></li>
+            <li><a href="#"><img src="images/product_list.jpg"> Product Materials</a></li>
+            <li><a href="#"><img src="images/report_icon.jpg"> Report</a></li>
+            <li><a href="#"><img src="images/logout_icon.jpg"> Logout</a></li>
+        </ul>
+    </div>
 
-<!-- MAIN CONTENT -->
-<div class="wrapper">
-    <div class="title">Product Materials</div>
+    <!-- Content Area -->
+    <div class="content">
 
-    <div class="grid-container">
+        <div class="card-container">
 
-        <!-- Left Card (Form) -->
-        <div class="card">
-            <h3 style="margin-bottom: 15px;">Add New Material</h3>
+            <h1 class="page-title">Add Product</h1>
 
-            <label>Material Name *</label>
-            <input type="text" id="material" placeholder="Enter material name" oninput="clearError()">
-            <div class="error" id="materialErr"></div>
+            <div class="flex-row">
 
-            <button class="btn btn-save" onclick="return validateForm()">Add Material</button>
-            <button class="btn btn-reset" onclick="resetForm()">Reset</button>
-        </div>
+                <!-- Left Form -->
+                <div class="form-card">
+                    <h3>Product details</h3>
 
-        <!-- Right Table (Material List) -->
-        <div class="table-card">
-            <table>
-                <tr>
-                    <th>Sl no</th>
-                    <th>Material</th>
-                    <th>Categories</th>
-                    <th>Edit</th>
-                    <th>Delete</th>
-                </tr>
+                    <div class="image-box">
+                        <p>No image</p>
+                    </div>
 
-                <tr>
-                    <td>1</td>
-                    <td>Plastic</td>
-                    <td><button class="btn-sm">Category</button></td>
-                    <td><button class="btn-sm">Edit</button></td>
-                    <td><button class="btn-sm btn-delete">Delete</button></td>
-                </tr>
+                    <label>Product image *</label>
+                    <input type="file">
 
-                <tr>
-                    <td>2</td>
-                    <td>Silk</td>
-                    <td><button class="btn-sm">Category</button></td>
-                    <td><button class="btn-sm">Edit</button></td>
-                    <td><button class="btn-sm btn-delete">Delete</button></td>
-                </tr>
+                    <label>Product name *</label>
+                    <input type="text" placeholder="e.g. Classic White Vase">
 
-            </table>
+                    <label>Product price (₹) *</label>
+                    <input type="number" placeholder="e.g. 499">
+
+                    <label>Product Materials *</label>
+                    <select>
+                        <option>Choose Materials</option>
+                    </select>
+
+                    <label>Product type *</label>
+                    <select>
+                        <option>Choose type</option>
+                    </select>
+
+                    <label>Description</label>
+                    <textarea placeholder="Short description (optional)"></textarea>
+
+                    <div class="btn-row">
+                        <button class="add-btn">Add product</button>
+                        <button class="reset-btn">Reset</button>
+                    </div>
+                </div>
+
+                <!-- Right Table -->
+                <div class="table-card">
+                    <h3>Products list</h3>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Sl no</th>
+                                <th>Image</th>
+                                <th>Product name</th>
+                                <th>Type</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>artificial_plants_2.jpg</td>
+                                <td>plant</td>
+                                <td>Artificial Plants</td>
+                                <td><button class="details-btn">Details</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+
         </div>
 
     </div>
+
 </div>
-
-<script>
-function validateForm() {
-    let mat = document.getElementById("material").value.trim();
-
-    if (mat === "") {
-        document.getElementById("materialErr").innerText = "Material name is required";
-        return false;
-    }
-
-    if (!/^[A-Za-z ]+$/.test(mat)) {
-        document.getElementById("materialErr").innerText = "Only letters allowed";
-        return false;
-    }
-
-    alert("Material added successfully");
-    return true;
-}
-
-function resetForm() {
-    document.getElementById("material").value = "";
-    clearError();
-}
-
-function clearError() {
-    document.getElementById("materialErr").innerText = "";
-}
-</script>
 
 </body>
 </html>
+
+
+
 
 
 

@@ -2,7 +2,7 @@
 
 include('database.php');
 
-$id=$_GET['userid'];
+$id=$_GET['userId'];
 
 
 ?>
