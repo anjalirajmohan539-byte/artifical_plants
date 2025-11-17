@@ -1,6 +1,16 @@
 <?php
 
 include('database.php');
+$value="";
+$mid=0;
+$button="Add";
+
+if(isset($_POST['edit']))
+{
+    $mid=$_POST['id'];
+    $value=$_POST['name'];
+    $button="Update";
+}
 
 ?>
 
@@ -40,10 +50,11 @@ include('database.php');
             <h3 style="margin-bottom: 15px;">Add New Material</h3>
             <form action="product_material_action.php" method="post" id="productForm" autocomplete="off">
             <label>Material Name <s>*</s></label>
-            <input type="text" id="material" name="productType" placeholder="Enter material name" oninput="clearError()">
+            <input type="text" id="material" name="productType" placeholder="Enter material name" value="<?php echo $value;?>" oninput="clearError()">
             <div class="error" id="materialErr"></div>
+            <input type="hidden" name="mid" value="<?php echo $mid;?>">
 
-            <button class="btn btn-save" name="btn" onclick="return validateForm()">Add Material</button>
+            <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
         </div>
 
@@ -73,11 +84,28 @@ include('database.php');
                 
               ?>
                 <tr>
+                   
                     <td><?php echo $sl++;?></td>
                     <td><?php echo $mat['Name'];?></td>
                     <td><a href="material_category.php?matId=<?php echo $mat['Id'];?>"><button class="btn-sm">Category</button></a></td>
-                    <td><button class="btn-sm" style="background-color: #3333f3;">Edit</button></td>
-                    <td><button class="btn-sm btn-delete">Delete</button></td>
+                    <form action="#" method="post">
+                    <td>
+                         
+                        <!-- <a href="material_edit.php"><button class="btn-sm" style="background-color: #3333f3;">Edit</button></a> -->
+                         <input type="hidden" name="id" value="<?php echo $mat['Id'];?>">
+                         <input type="hidden" name="name" value="<?php echo $mat['Name'];?>">
+                         <input type="submit" name="edit" class="btn-sm" style="background-color: #3333f3;" value="Edit">
+                    </td>
+                    </form>
+
+                    <form action="#" method="post">
+                    <td>
+                        <!-- <button class="btn-sm btn-delete">Delete</button> -->
+                         <input type="hidden" name="id" value="<?php echo $mat['Id'];?>">
+                         <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
+                    </td>
+                    </form>
+                    
                 </tr>
                 <?php }}?>
 

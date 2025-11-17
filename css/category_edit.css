@@ -33,11 +33,6 @@ a {
   text-decoration: none;
 }
 
-s
-{
-    color: red;
-    text-decoration: none;
-}
     .wrapper {
         width: 100%;
         margin-left: 260px;  /* space for sidebar */
@@ -55,6 +50,7 @@ s
     .grid-container {
         display: grid;
         grid-template-columns: 32% auto;
+        gap: 25px;
     }
 
     .card {

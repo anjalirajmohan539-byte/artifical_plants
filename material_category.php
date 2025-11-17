@@ -46,10 +46,12 @@ include('database.php');
             <input type="hidden" name="id" value="<?php echo $id ?? ''; ?>">
             <div class="error" id="materialErr"></div>
 
-            <button class="btn btn-save" name="btn" type="button" onclick="return validateForm()">Add Categorys</button>
+            <button class="btn btn-save" name="btn" type="submit" onclick="return validateForm()">Add Categorys</button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
-            
+            </form>
         </div>
+
+        
 
        
         <!-- Right Table (Material List) -->
@@ -81,7 +83,7 @@ include('database.php');
                     <td><?php echo $c++;?></td>
                     <td><?php echo $cat['Name'];?></td>
                     <td><?php echo $cat['Type'];?></td>
-                    <td><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></td>
+                    <td><a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a></td>
                     <td><button type="button" class="btn-sm btn-delete">Delete</button></td>
                 </tr>
                 <?php }}?>
@@ -104,6 +106,7 @@ function validateForm() {
 
     
     if (materialVal === "") {
+        
         errorBox.innerText = "Category name is required";
         material.style.border = "1px solid red";
         return false;

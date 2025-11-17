@@ -26,7 +26,7 @@ if(isset($_POST['btn']))
     $result = mysqli_query($conn, $insert);
 
     if($result){
-        header("Location: material_category.php");
+        header("Location: material_category.php?matId=$cid");
         exit;
     } else {
         echo "Insert Error!";
