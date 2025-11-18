@@ -2,6 +2,17 @@
 include('database.php');
 
   $id = $_GET['matId'];
+//   echo $id;
+
+$editName = "";
+$editId = "";
+$button = "Add";
+
+if (isset($_POST['edit'])) {
+    $editId = $_POST['cid'];    
+    $editName = $_POST['name']; 
+    $button = "Update" ;
+}
 
 ?>
 
@@ -42,17 +53,18 @@ include('database.php');
             <h3 style="margin-bottom: 15px;">Add New Categorys</h3>
             <form action="material_category_action.php" method="post" id="productForm" autocomplete="off">
             <label>Material Categorys <s>*</s></label>
-            <input type="text" id="material" name="productType" placeholder="Enter material name" oninput="clearError()">
-            <input type="hidden" name="id" value="<?php echo $id ?? ''; ?>">
+            <input type="text" id="material" name="productType" value="<?php echo $editName; ?>" placeholder="Enter material name" oninput="clearError()">
+
+            <input type="hidden" name="typeid" value="<?php echo $id;?>">
+            <input type="hidden" name="categoryid" value="<?php echo $editId; ?>">
             <div class="error" id="materialErr"></div>
 
-            <button class="btn btn-save" name="btn" type="submit" onclick="return validateForm()">Add Categorys</button>
+             <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button; ?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
             </form>
         </div>
 
         
-
        
         <!-- Right Table (Material List) -->
         <div class="table-card">
@@ -69,7 +81,7 @@ include('database.php');
                 $select="SELECT mc.`Id`, mc.`Name`,mt.Name AS `Type` FROM `material_category` mc
                         INNER JOIN material_type mt ON mt.Id = mc.Type WHERE mt.Id=$id AND IsDelete=0";
                 $statemnt=mysqli_query($conn,$select);
-                // var_dump($select);
+                var_dump($select);
 
                 $c=1;
 
@@ -83,8 +95,23 @@ include('database.php');
                     <td><?php echo $c++;?></td>
                     <td><?php echo $cat['Name'];?></td>
                     <td><?php echo $cat['Type'];?></td>
-                    <td><a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a></td>
-                    <td><button type="button" class="btn-sm btn-delete">Delete</button></td>
+                    <form action="#" method="post">
+
+                    <td>
+                        <input type="hidden" name="cid" value="<?php echo $cat['Id'];?>">
+                        <input type="hidden" name="name" value="<?php echo $cat['Name'];?>">
+                        <input type="submit" name="edit"  class="btn-sm" type="button" style="background-color: #3333f3 !important;" value="Edit">
+                        <!-- <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a> -->
+                    </td>
+                    </form>
+
+                    <form action="material_category_action.php" method="post">
+                    <td>
+                        <input type="hidden" name="cid" value="<?php echo $cat['Id'];?>">
+                        <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
+                        <!-- <button type="button" name="delete" class="btn-sm btn-delete">Delete</button> -->
+                    </td>
+                    </form>
                 </tr>
                 <?php }}?>
 

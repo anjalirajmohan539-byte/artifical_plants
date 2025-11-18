@@ -98,7 +98,7 @@ if(isset($_POST['edit']))
                     </td>
                     </form>
 
-                    <form action="#" method="post">
+                    <form action="product_material_action.php" method="post">
                     <td>
                         <!-- <button class="btn-sm btn-delete">Delete</button> -->
                          <input type="hidden" name="id" value="<?php echo $mat['Id'];?>">

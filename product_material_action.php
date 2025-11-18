@@ -2,7 +2,8 @@
 
 include('database.php');
 
-if (isset($_POST['btn'])) {
+if (isset($_POST['btn'])) 
+    {
     $id = $_POST['mid'];
     $name = $_POST['productType'];
 
@@ -35,4 +36,23 @@ if (isset($_POST['btn'])) {
         }
     }
 }
+
+
+elseif (isset($_POST['delete'])) 
+{
+    $id = $_POST['id'];
+
+    $dupdate = "UPDATE material_type SET IsDeleted = 1 WHERE Id = $id";
+    var_dump($dupdate);
+
+    $dstatement = mysqli_query($conn, $dupdate);
+
+    if (!$dstatement) {
+        echo "Error updating";
+    } else {
+        header("Location: product_material.php");
+        exit();
+    }
+}
+
 ?>
