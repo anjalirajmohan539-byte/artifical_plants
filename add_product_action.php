@@ -7,7 +7,10 @@ if(isset($_POST['btn']))
     $image=$_FILES['image']['name'];
     $name=$_POST['productName'];
     $price=$_POST['productPrice'];
+	$material=$_POST['productMaterial'];
     $type=$_POST['productType'];
+	$colorname=$_POST['colorName'];
+	$colorcode=$_POST['colorCode'];
     $description=$_POST['productDesc'];
 
    var_dump($image);
@@ -29,8 +32,8 @@ if(isset($_POST['btn']))
 		else
 		{
 			
-			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`)  
-            VALUES ('$image','$name','$description',$price,$type)";
+			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `MaterialId`)  
+            VALUES ('$image','$name','$description',$price,$type,$material)";
 			var_dump($insert_product);
 
             $statement=mysqli_query($conn,$insert_product);

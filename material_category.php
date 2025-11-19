@@ -56,7 +56,7 @@ if (isset($_POST['edit'])) {
             <input type="text" id="material" name="productType" value="<?php echo $editName; ?>" placeholder="Enter material name" oninput="clearError()">
 
             <input type="hidden" name="typeid" value="<?php echo $id;?>">
-            <input type="hidden" name="categoryid" value="<?php echo $editId; ?>">
+            <input type="hidden" name="categoryid" value="<?php echo $editId;?>">
             <div class="error" id="materialErr"></div>
 
              <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button; ?></button>
@@ -81,7 +81,7 @@ if (isset($_POST['edit'])) {
                 $select="SELECT mc.`Id`, mc.`Name`,mt.Name AS `Type` FROM `material_category` mc
                         INNER JOIN material_type mt ON mt.Id = mc.Type WHERE mt.Id=$id AND IsDelete=0";
                 $statemnt=mysqli_query($conn,$select);
-                var_dump($select);
+                // var_dump($select);
 
                 $c=1;
 
@@ -108,6 +108,7 @@ if (isset($_POST['edit'])) {
                     <form action="material_category_action.php" method="post">
                     <td>
                         <input type="hidden" name="cid" value="<?php echo $cat['Id'];?>">
+                        <input type="hidden" name="tid" value="<?php echo $id;?>">
                         <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
                         <!-- <button type="button" name="delete" class="btn-sm btn-delete">Delete</button> -->
                     </td>

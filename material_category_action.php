@@ -15,7 +15,7 @@ if(isset($_POST['btn']))
          if (!$ustatemnt) {
                 echo "error2";
             } else {
-                header("Location: material_category.php?matId=$cid");
+                header("Location: material_category.php?matId=$tid");
             }
     } 
     else 
@@ -29,7 +29,7 @@ if(isset($_POST['btn']))
        
     $check = "SELECT * FROM material_category WHERE Name = '$name' AND Type = '$tid'";
     $checkResult = mysqli_query($conn, $check);
-    var_dump($check);
+    // var_dump($check);
 
     if(mysqli_num_rows($checkResult) > 0){
         echo "Category already exists!";
@@ -51,10 +51,12 @@ if(isset($_POST['btn']))
 
 elseif (isset($_POST['delete'])) 
 {
+    $typeid = $_POST['tid'];
     $id = $_POST['cid'];
 
+    
     $dupdate = "UPDATE material_category SET IsDelete = 1 WHERE Id = $id";
-    var_dump($dupdate);
+    // var_dump($dupdate);
 
     $dstatement = mysqli_query($conn, $dupdate);
 
@@ -64,7 +66,7 @@ elseif (isset($_POST['delete']))
     } 
     else 
     {
-        header("Location: material_category.php?matId=$id");
+        header("Location: material_category.php?matId=$typeid");
         exit();
     }
 }

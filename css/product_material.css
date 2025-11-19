@@ -199,6 +199,12 @@ a {
 
     .btn-delete {
         background: #d64040;
+        width:60px;
+    }
+
+    .btn-edit
+    {
+        width:60px;
     }
 
     /* responsive */

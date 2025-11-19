@@ -66,36 +66,6 @@ include('database.php');
           </div>
 
           <div class="field">
-            <label for="productPrice">Product price (₹) <s>*</s></label>
-            <input id="productPrice" name="productPrice" type="number" min="0" step="0.01" placeholder="e.g. 499.00" required >
-          </div>
-
-        
-          <div class="field">
-              <?php
-          $select_met="SELECT `Id`, `Name` FROM `material_type` WHERE IsDeleted = 0";
-          $statemnt=mysqli_query($conn,$select_met);
-
-          if(mysqli_num_rows($statemnt)>0)
-          {
-          
-          ?>
-            <label for="productMaterial">Product Materials <s>*</s></label>
-            <select name="productMaterial" id="productMaterial">
-              <option value="0">Choose Materials</option>
-              <?php
-              while($material=mysqli_fetch_assoc($statemnt))
-              {
-              
-              ?>
-              <option value="<?php echo $material["Id"];?>"><?php echo $material['Name'];?></option>
-              <?php }?>
-            </select>
-            <?php }?>
-          </div>
-
-       
-          <div class="field">
                <?php
           
           $select="SELECT `Id`, `Categorys` FROM `product_category` WHERE IsDeleted = 0";
@@ -119,6 +89,70 @@ include('database.php');
             </select>
             <?php }?>
           </div>
+        
+
+           <!-- <div class="fields">
+            <div style="display:flex; flex-direction:column;">
+              <label for="productDesc">Color Name</label>
+              <input type="text" name="colorName" class="color" id="colorName">
+            </div>
+            <div  style="display:flex;  flex-direction:column;">
+              <label for="productDesc">Color Code</label>
+              <input type="text" name="colorCode" class="color" id="colorCode">
+            </div>
+          </div> -->
+
+          <div style="display:flex; gap:15px;">
+            <div style="display:flex; flex-direction:column;">
+              <label>Color Name</label>
+              <input type="text" name="colorName" id="" style="width: 100%;">
+            </div>
+            <div style="display:flex; flex-direction:column;">
+              <label>Color Code</label>
+              <input type="text" name="colorCode" id="" style="width: 100%;">
+            </div>
+          </div>
+
+
+            <div class="field">
+            <label for="productPrice">Product price (₹) <s>*</s></label>
+            <input id="productPrice" name="productPrice" type="number" min="0" step="0.01" placeholder="e.g. 499.00" required >
+          </div>
+
+
+            <div class="field">
+              <?php
+          $select_met="SELECT `Id`, `Name` FROM `material_type` WHERE IsDeleted = 0";
+          $statemnt=mysqli_query($conn,$select_met);
+
+          if(mysqli_num_rows($statemnt)>0)
+          {
+          
+          ?>
+            <label for="productMaterial">Product Materials <s>*</s></label>
+            <select name="productMaterial" id="productMaterial">
+              <option value="0">Choose Materials</option>
+              <?php
+              while($material=mysqli_fetch_assoc($statemnt))
+              {
+              
+              ?>
+              <option value="<?php echo $material["Id"];?>"><?php echo $material['Name'];?></option>
+              <?php }?>
+            </select>
+            <?php }?>
+          </div>
+
+
+            <div class="field">
+            <label for="materialCategory">Product Category <s>*</s></label>
+            <select name="materialCategory" id="materialCategory">
+              <option value="0">Choose Category</option>
+              <option value=""></option>
+            </select>
+          </div>
+
+
 
           <div class="field">
             <label for="productDesc">Description</label>

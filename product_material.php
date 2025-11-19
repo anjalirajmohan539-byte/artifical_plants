@@ -94,7 +94,7 @@ if(isset($_POST['edit']))
                         <!-- <a href="material_edit.php"><button class="btn-sm" style="background-color: #3333f3;">Edit</button></a> -->
                          <input type="hidden" name="id" value="<?php echo $mat['Id'];?>">
                          <input type="hidden" name="name" value="<?php echo $mat['Name'];?>">
-                         <input type="submit" name="edit" class="btn-sm" style="background-color: #3333f3;" value="Edit">
+                         <input type="submit" name="edit" class="btn-sm btn-edit" style="background-color: #3333f3;" value="Edit">
                     </td>
                     </form>
 

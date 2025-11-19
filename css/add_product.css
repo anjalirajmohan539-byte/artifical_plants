@@ -162,6 +162,17 @@ body {
       gap:6px;
       margin-bottom:12px;
     }
+
+    .fields
+    {
+      display:flex;
+      gap:6px;
+      margin-bottom:12px;
+      flex-direction: row;
+    }
+
+
+
     label{
       font-size:13px;
       color:#081124;

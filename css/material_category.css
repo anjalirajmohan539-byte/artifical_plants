@@ -201,10 +201,12 @@ a {
         cursor: pointer;
         background: red;
         color: #fff;
+        width:60px;
     }
 
     .btn-delete {
         background: #d64040;
+        width:60px;
     }
 
     /* responsive */
