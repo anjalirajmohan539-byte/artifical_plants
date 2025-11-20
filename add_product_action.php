@@ -32,24 +32,38 @@ if(isset($_POST['btn']))
 		else
 		{
 			
-			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `MaterialId`)  
-            VALUES ('$image','$name','$description',$price,$type,$material)";
+			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `MaterialId`, `ColorName`, `ColorCode`)  
+            VALUES ('$image','$name','$description',$price,$type,$material,'$colorname', '$colorcode')";
 			var_dump($insert_product);
 
             $statement=mysqli_query($conn,$insert_product);
 	
 			if(!$statement)
 			{
-				echo "error";
+				echo "error2";
 			}
+
+
+			  $product_id = mysqli_insert_id($conn);
+
+
+             $insert_color = "INSERT INTO `product_color_details` (`ProductId`, `ColorCode`, `ColorName`)
+			 VALUES ($product_id, '$colorname', '$colorcode')";
+
+            $color_statement = mysqli_query($conn, $insert_color);
+
+           if(!$color_statement){
+                echo "Color insert error";
+                exit;
+           }
 
 			else
 			{
-				$image_path="images/product";
+				$image_path="images/product/";
 				$product_image=$image_path.basename($image);
 				if(move_uploaded_file($_FILES['image']['tmp_name'],$product_image))
 				{
-					echo "file uplode";
+					header('location:add_product.php');
 				}
 				else
 				{

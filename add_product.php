@@ -12,6 +12,7 @@ include('database.php');
 <link href="css/add_product.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/jquery.min"></script>
 </head>
 
 <body>
@@ -45,6 +46,9 @@ include('database.php');
       <div class="card" aria-labelledby="form-title">
         <h2 id="form-title" style="margin:0 0 12px 0;font-size:15px;">Product details</h2>
 
+
+        <!---------------------------------------------------- Product image ---------------------------------------------------->
+
         <form action="add_product_action.php" method="post" id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
           <div class="field">
             <label for="productImage">Product image <s>*</s></label>
@@ -60,10 +64,14 @@ include('database.php');
             </div>
           </div>
 
+          <!---------------------------------------------------- Product name ---------------------------------------------------->
+
           <div class="field">
             <label for="productName">Product name <s>*</s></label>
             <input id="productName" name="productName" type="text" placeholder="e.g. Classic White Vase" required >
           </div>
+
+          <!---------------------------------------------------- Product type ---------------------------------------------------->
 
           <div class="field">
                <?php
@@ -89,36 +97,30 @@ include('database.php');
             </select>
             <?php }?>
           </div>
-        
+      
+          <!---------------------------------------------------- color ------------------------------------------------------>
 
-           <!-- <div class="fields">
-            <div style="display:flex; flex-direction:column;">
-              <label for="productDesc">Color Name</label>
-              <input type="text" name="colorName" class="color" id="colorName">
-            </div>
-            <div  style="display:flex;  flex-direction:column;">
-              <label for="productDesc">Color Code</label>
-              <input type="text" name="colorCode" class="color" id="colorCode">
-            </div>
-          </div> -->
+
 
           <div style="display:flex; gap:15px;">
             <div style="display:flex; flex-direction:column;">
               <label>Color Name</label>
-              <input type="text" name="colorName" id="" style="width: 100%;">
+              <input type="text" name="colorName" id="" style="width: 100%;margin-bottom: 10px;">
             </div>
             <div style="display:flex; flex-direction:column;">
               <label>Color Code</label>
-              <input type="text" name="colorCode" id="" style="width: 100%;">
+              <input type="text" name="colorCode" id="" style="width: 100%;margin-bottom: 10px;">
             </div>
           </div>
 
+          <!---------------------------------------------------- Product price ---------------------------------------------------->
 
             <div class="field">
             <label for="productPrice">Product price (₹) <s>*</s></label>
             <input id="productPrice" name="productPrice" type="number" min="0" step="0.01" placeholder="e.g. 499.00" required >
           </div>
 
+          <!---------------------------------------------------- material_type ---------------------------------------------------->
 
             <div class="field">
               <?php
@@ -144,30 +146,50 @@ include('database.php');
           </div>
 
 
+
+          <!---------------------------------------------------- Product category ---------------------------------------------------->
+
             <div class="field">
+              <?php
+              $select_cat="SELECT `Id`, `Name`, `Type` FROM `material_category` WHERE  IsDelete = 0";
+              $statemnt_cat=mysqli_query($conn,$select_cat);
+
+              if(mysqli_num_rows($statemnt_cat)>0)
+              {
+
+
+              ?>
             <label for="materialCategory">Product Category <s>*</s></label>
             <select name="materialCategory" id="materialCategory">
               <option value="0">Choose Category</option>
-              <option value=""></option>
+              <?php
+               while($category=mysqli_fetch_assoc($statemnt_cat))
+                {
+              ?>
+              <option value="<?php echo $category['Id'];?>"><?php echo $category['Name'];?></option>
+              <?php }?>
             </select>
+            <?php }?>
           </div>
 
-
+          <!---------------------------------------------------- Description ---------------------------------------------------->
 
           <div class="field">
             <label for="productDesc">Description</label>
             <textarea id="productDesc" name="productDesc" placeholder="Short description (optional)"></textarea>
           </div>
 
+          <!---------------------------------------------------- button ---------------------------------------------------->
+
           <div class="form-actions">
-            <button type="submit" class="btn" name="btn" style="background-color:#9A8C7A;color:white;">Add product</button>
+            <button type="submit" id="btn" class="btn" name="btn" style="background-color:#9A8C7A;color:white;">Add product</button>
             <button type="button" id="resetBtn" class="btn secondary">Reset</button>
             <div style="margin-left:auto" class="small" id="formMsg" aria-live="polite"></div>
           </div>
         </form>
       </div>
 
-      <!-- RIGHT: TABLE -->
+      <!---------------------------------------------------- RIGHT: TABLE ---------------------------------------------------->
       <div class="table-wrap">
         <div class="card" style="padding:12px 16px;">
           <h3 style="margin:0 0 12px 0;font-size:15px;">Products list</h3>
@@ -330,6 +352,34 @@ include('database.php');
 
  
     renderTable();
+
+
+  </script>
+  <script>
+    // Ajax
+
+    $(document).ready(function()
+  {
+    $('#productMaterial').change(function()
+  {
+    var productMaterial = $('#productMaterial').val();
+
+    $.ajax(
+      {
+        type:"post",
+        url:"material_categoryId.php",
+        data:
+        {
+          productMaterial : productMaterial;
+        },
+        success: function(response) 
+        {
+          $('#materialCategory').html(response);
+        }
+         });
+  })
+  })
+   
   </script>
 </body>
 </html
