@@ -31,7 +31,7 @@ include('database.php');
     </ul>
   </div>
 
-  <!-- main content -->
+  <!---------------------------------------------------- main content ---------------------------------------------------->
 
   <div class="container" role="main">
     <div class="header">
@@ -42,7 +42,7 @@ include('database.php');
     </div>
 
     <div class="layout">
-      <!-- LEFT: FORM -->
+      <!---------------------------------------------------- LEFT: FORM ---------------------------------------------------->
       <div class="card" aria-labelledby="form-title">
         <h2 id="form-title" style="margin:0 0 12px 0;font-size:15px;">Product details</h2>
 
@@ -198,16 +198,20 @@ include('database.php');
               <thead>
                 <tr>
                   <th>Sl no</th>
-                  <th>Image</th>
                   <th>Product name</th>
                   <th>Type</th>
+                  <th>Price</th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
                   <th></th>
                 </tr>
               </thead>
               <tbody id="productsTbody">
                 
                        <?php
-                $select_product="SELECT ap.`Id`, `ProductImage`, `ProductName`, pc.Categorys AS `CategoryId`, ap.`CreateDate` FROM `add_product` ap
+                $select_product="SELECT ap.`Id`, `Price`, `ProductName`, pc.Categorys AS `CategoryId`, ap.`CreateDate` FROM `add_product` ap
                                  INNER JOIN product_category pc ON pc.Id = ap.CategoryId";
                 $product_statment=mysqli_query($conn,$select_product);
 
@@ -220,10 +224,14 @@ include('database.php');
                 ?>
                 <tr>
                   <td class="small" style="color:var(--muted)"><?php echo $s++;?></td>
-                  <td class="small" style="color:var(--muted)"><?php echo $product['ProductImage'];?></td>
                   <td class="small" style="color:var(--muted)"><?php echo $product['ProductName'];?></td>
                   <td class="small" style="color:var(--muted)"><?php echo $product['CategoryId'];?></td>
-                  <td><a href="product_details.php"><button class="p_details">Details</button></a></td>
+                  <td class="small" style="color:var(--muted)"><?php echo $product['Price'];?></td>
+                  <td><a href="product_details.php"><button class="p_view">View</button></a></td>
+                  <td><a href="color.php?productId=<?php echo $product['Id'];?>"><button class="p_color">Color</button></a></td>
+                  <td><a href="#"><button class="p_image">Image</button></a></td>
+                  <td><a href="#"><button class="p_edit">Edit</button></a></td>
+                  <td><a href="#"><button class="p_delete">Delete</button></a></td>
                   </tr>
 
                   <?php   }
@@ -238,6 +246,9 @@ include('database.php');
   </div>
 
 
+
+
+  <!---------------------------------------------------- validation ---------------------------------------------------->
   <script>
 
     const form = document.getElementById('productForm');
@@ -355,31 +366,31 @@ include('database.php');
 
 
   </script>
-  <script>
-    // Ajax
 
-    $(document).ready(function()
-  {
-    $('#productMaterial').change(function()
-  {
-    var productMaterial = $('#productMaterial').val();
 
-    $.ajax(
-      {
-        type:"post",
-        url:"material_categoryId.php",
-        data:
-        {
-          productMaterial : productMaterial;
+<!---------------------------------------------------- Ajax js ---------------------------------------------------->
+
+
+<script>
+$("#productMaterial").change(function () 
+{
+
+    let material = $(this).val();
+
+    $.ajax
+    ({
+        url: "categoryid.php",
+        type: "POST",
+        data: 
+        { 
+        productMaterial: material
         },
-        success: function(response) 
+        success: function (response)
         {
-          $('#materialCategory').html(response);
+            $("#materialCategory").html(response);
         }
-         });
-  })
-  })
-   
-  </script>
+    });
+});
+</script>
 </body>
 </html

@@ -1,3 +1,9 @@
+<?php
+
+include('database.php');
+
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -9,91 +15,91 @@
 </head>
 
 <body>
-   <div class="header">
-  <h2>PRODUCT DETAILS</h2>
-</div>
+<div class="header">PRODUCT DETAILS</div>
 
-<div class="product-container">
-  <!-- SIDEBAR -->
-  <div class="sidebar">
-    <div class="product-card">
-      <img id="mainImg" src="images/plant_5.png" alt="Product Image">
-      <h3 id="prodTitle">Artificial Plant</h3>
-      <p class="name"><strong style="color:#666;">Product Name:</strong> Artificial Plant</p>
-      <p class="color"><strong>Color:</strong> Dark Green</p>
-      <div class="df">
-        <span><img src="images/plant_3.png" alt=""></span>
-        <span><img src="images/plant_3.png" alt=""></span>
-        <span><img src="images/plant_3.png" alt=""></span>
-        <span><img src="images/plant_3.png" alt=""></span>
-      </div>
-      <p class="member-since">Different Images</p>
+<div class="container">
+
+    <!---------------------------------------------------- LEFT: SIDE ---------------------------------------------------->
+    <div class="left">
+
+    
+        <img src="images/plant_3.png" class="main-img" id="mainImage">
+
+        <div class="product-title">Artificial Plant</div>
+
+        <p><b>Price:</b> ₹499</p>
+        <p><b>Color:</b> Dark Green</p>
+
+        <div class="thumbs">
+            <img src="images/plant_1.jpg" onclick="swap(this)">
+            <img src="images/plant_2.jpg" onclick="swap(this)">
+            <img src="images/plant_4.png" onclick="swap(this)">
+            <img src="images/plant_5.png" onclick="swap(this)">
+        </div>
     </div>
-  </div>
 
-  <!-- MAIN CONTENT -->
-  <div class="main-content">
-    <section class="plant">
-      <h3>Plant Information</h3>
-      <div class="info-grid">
-        <div><strong>Product Name</strong><p id="infoName">Artificial Plant</p></div>
-        <div><strong>Primary Material</strong><p id="infoMaterial">Plastic</p></div>
-        <div><strong>Price</strong><p id="infoPrice">₹499</p></div>
-        <div><strong>Color</strong><p id="infoColor">Dark Green</p></div>
-        <div><strong>Incl. of All Tax</strong><p>Yes</p></div>       
-        <div><strong>Is It With Vase</strong><p>Yes</p></div>
-        <div><strong>Product Description</strong><p id="infoDesc">A beautiful artificial plant perfect for home decoration.</p></div>
-      </div>
-    </section>
+    <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
+    <div class="right">
 
-    <div class="grid-section">
-      <section class="experience">
-        <h3>Shipping Information</h3>
-        <ul>
-          <li><span>Availability: In Stock</span></li>
-          <li><span>Delivery by: 3-5 business days</span></li>
-          <li><span>Free Delivery</span></li>
-        </ul>
-      </section>
+        <!---------------------------------------------------- Product Information ---------------------------------------------------->
+        <div class="card">
+            <div class="card-title">Product Information</div>
 
-      <section class="education">
-        <h3>Pair Well With</h3>
-        <ul>
-          <li><img src="images/plant_5.png" alt="" style="width:80px;border-radius:6px;"></li>
-          <li><span>Mini Vase</span></li>
-          <li><span>₹299</span></li>
-        </ul>
-      </section>
+
+            <div class="grid">
+                <div class="info"><div class="label">Product Name</div><div class="value">Artificial Plant</div></div>
+                <div class="info"><div class="label">Primary Material</div><div class="value">Plastic</div></div>
+                <div class="info"><div class="label">Price</div><div class="value">₹499</div></div>
+                <div class="info"><div class="label">Color</div><div class="value">Dark Green</div></div>
+                <div class="info"><div class="label">Tax Included</div><div class="value">Yes</div></div>
+                <div class="info"><div class="label">With Vase</div><div class="value">Yes</div></div>
+            </div>
+        </div>
+
+        <!---------------------------------------------------- Shipping Info ---------------------------------------------------->
+        <div class="card">
+            <div class="card-title">Shipping Details</div>
+            <ul class="shipping">
+                <li>Availability: In Stock</li>
+                <li>Delivery within: 3–5 days</li>
+                <li>Free Delivery</li>
+            </ul>
+        </div>
+
+        <!---------------------------------------------------- Pair Well With ---------------------------------------------------->
+        <div class="card">
+            <div class="card-title">Pair Well With</div>
+            <div class="pair">
+                <img src="images/vase1.jpg">
+                <div>
+                    <div style="font-size:17px;font-weight:600;color:#1d3557;">Mini Vase</div>
+                    <div style="color:#333;">₹299</div>
+                </div>
+            </div>
+        </div>
+
+
+        <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
+                <div class="card">
+            <div class="card-title">Delivery Details</div>
+            <div class="delivery col-4">
+              <li><a href="">7-Day Return ></a></li>
+            </div>
+            <div class="delivery col-4">
+              <li><a href="">Cash on Delivery ></a></li>
+            </div>
+            <div class="delivery col-4">
+              <li><a href="">Customer Support ></a></li>
+            </div>
+        </div>
+
     </div>
-  </div>
 </div>
-
 
 <script>
-
-const thumbnails = document.querySelectorAll('.df img');
-const mainImg = document.getElementById('mainImg');
-
-thumbnails.forEach(img => {
-  img.addEventListener('click', () => {
-    mainImg.src = img.src;
-  });
-});
-
-
-const productData = {
-  name: "Artificial Plant",
-  material: "Plastic",
-  price: "₹499",
-  color: "Dark Green",
-  desc: "Beautiful artificial plant ideal for living rooms and offices."
-};
-
-document.getElementById("infoName").textContent = productData.name;
-document.getElementById("infoMaterial").textContent = productData.material;
-document.getElementById("infoPrice").textContent = productData.price;
-document.getElementById("infoColor").textContent = productData.color;
-document.getElementById("infoDesc").textContent = productData.desc;
+function swap(img){
+    document.getElementById("mainImage").src = img.src;
+}
 </script>
 </body>
 </html>
