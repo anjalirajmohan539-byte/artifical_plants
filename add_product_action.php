@@ -4,6 +4,7 @@ include('database.php');
 
 if(isset($_POST['btn']))
 {
+	$id =$_POST['product'];
     $image=$_FILES['image']['name'];
     $name=$_POST['productName'];
     $price=$_POST['productPrice'];
@@ -13,9 +14,25 @@ if(isset($_POST['btn']))
 	$colorcode=$_POST['colorCode'];
     $description=$_POST['productDesc'];
 
-   var_dump($image);
+//    var_dump($image);
 
-			
+
+    if ($id != 0) {
+
+        $update = "UPDATE `add_product` SET `ProductImage`='$image',`ProductName`='$name',`Description`='$description',`Price`=$price,
+		          `ColorName`='$colorname',`ColorCode`='$colorcode',`CategoryId`=$type,`MaterialId`=$material,
+		          `LastUpdated`=CURRENT_TIMESTAMP WHERE Id = $id AND `IsDeleted` = 0";
+				  
+        $ustatemnt=mysqli_query($conn,$update);
+         if (!$ustatemnt) {
+                echo "error2";
+            } else {
+                header("location:add_product.php");
+            }
+    } 
+    else
+	{
+		
 	$select="SELECT `Id` FROM `add_product` WHERE ProductName='$name' AND CategoryId=$type"; 
 	
     var_dump($select);
@@ -73,5 +90,26 @@ if(isset($_POST['btn']))
 		}
 	}
 	}
+	}
+	elseif (isset($_POST['delete'])) 
+{
+    $id = $_POST['productid'];
+
+    
+    $dupdate = "UPDATE add_product SET IsDeleted = 1 WHERE Id = $id";
+    // var_dump($dupdate);
+
+    $dstatement = mysqli_query($conn, $dupdate);
+
+    if (!$dstatement) 
+        {
+        echo "Error updating";
+    } 
+    else 
+    {
+        header("Location: location:add_product.php");
+        exit();
+    }
+}
 
 ?>

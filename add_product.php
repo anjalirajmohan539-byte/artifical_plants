@@ -2,6 +2,16 @@
 
 include('database.php');
 
+
+$editId = "";
+$button = "Add Product";
+
+if (isset($_POST['edit'])) {
+    $editId = $_POST['productid'];     
+    $button = "Update" ;
+}
+
+
 ?>
 
 <html>
@@ -60,6 +70,8 @@ include('database.php');
               <div style="flex:1;">
                 <input id="productImage" name="image" type="file" aria-describedby="imgHelp">
                 <div id="imgHelp" class="small" style="margin-top:6px">Recommended : square image Max 2MB.</div>
+
+                <input type="hidden" name="product" value="<?php echo $editId;?>">
               </div>
             </div>
           </div>
@@ -122,7 +134,7 @@ include('database.php');
 
           <!---------------------------------------------------- material_type ---------------------------------------------------->
 
-            <div class="field">
+          <div class="field">
               <?php
           $select_met="SELECT `Id`, `Name` FROM `material_type` WHERE IsDeleted = 0";
           $statemnt=mysqli_query($conn,$select_met);
@@ -150,26 +162,9 @@ include('database.php');
           <!---------------------------------------------------- Product category ---------------------------------------------------->
 
             <div class="field">
-              <?php
-              $select_cat="SELECT `Id`, `Name`, `Type` FROM `material_category` WHERE  IsDelete = 0";
-              $statemnt_cat=mysqli_query($conn,$select_cat);
-
-              if(mysqli_num_rows($statemnt_cat)>0)
-              {
-
-
-              ?>
             <label for="materialCategory">Product Category <s>*</s></label>
             <select name="materialCategory" id="materialCategory">
-              <option value="0">Choose Category</option>
-              <?php
-               while($category=mysqli_fetch_assoc($statemnt_cat))
-                {
-              ?>
-              <option value="<?php echo $category['Id'];?>"><?php echo $category['Name'];?></option>
-              <?php }?>
             </select>
-            <?php }?>
           </div>
 
           <!---------------------------------------------------- Description ---------------------------------------------------->
@@ -229,9 +224,24 @@ include('database.php');
                   <td class="small" style="color:var(--muted)"><?php echo $product['Price'];?></td>
                   <td><a href="product_details.php"><button class="p_view">View</button></a></td>
                   <td><a href="color.php?productId=<?php echo $product['Id'];?>"><button class="p_color">Color</button></a></td>
-                  <td><a href="#"><button class="p_image">Image</button></a></td>
-                  <td><a href="#"><button class="p_edit">Edit</button></a></td>
-                  <td><a href="#"><button class="p_delete">Delete</button></a></td>
+                  <td><a href="image.php?productId=<?php echo $product['Id'];?>"><button class="p_image">Image</button></a></td>
+                  <td>
+                  <form action="#" method="post">
+                  
+                    <input type="hidden" name="productid" value="<?php echo $product['Id'];?>">
+                    <input type="submit" name="edit" type="button" class="p_edit" value="Edit">
+                    <!-- <a href="#"><button class="p_edit">Edit</button></a> -->
+                  
+                  </form>
+                  </td>
+                  <td>
+                    <form action="add_product_action.php" method="post">
+
+                    <input type="hidden" name="productid" value="<?php echo $product['Id'];?>">
+                    <input type="submit" name="delete" class="p_delete" value="Delete">
+                    <!-- <a href="#"><button class="p_delete">Delete</button></a> -->
+                    </form>
+                  </td>
                   </tr>
 
                   <?php   }

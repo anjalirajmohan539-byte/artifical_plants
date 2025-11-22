@@ -51,17 +51,24 @@ $proId=$_GET['productId'];
             <input type="hidden" name="productId" value="<?php echo $proId;?>">
 
             <?php
-            $select = "SELECT `Id`, `Status` FROM `product_color_details` WHERE  IsDelete= 0";
-            $statemnt = mysqli_query($conn,$select);
+            $select = "SELECT `Id`,CASE WHEN Status=0 THEN 'Inactive'
+                                        WHEN Status=1 THEN 'Active'
+                                        END AS Status
+                       FROM `product_color_details` WHERE  IsDelete= 0";
 
-            if(mysqli_num_rows($statement)>0)
+            $statemnt = mysqli_query($conn,$select);
+            // var_dump($select);
+
+            if(mysqli_num_rows($statemnt)>0)
             {
-                $status = mysqli_fetch_assoc($statement);
+                $status = mysqli_fetch_assoc($statemnt);
 
             ?>
             <label>Status<s>*</s></label>
             <select name="colorStatus" id="colorStatus">
-                <option value="#"></option> 
+                <option value="#">Status</option>
+                <option value="1" <?php if($status == 1) echo "selected"; ?>>Active</option>
+                <option value="0" <?php if($status == 0) echo "selected"; ?>>Inactive</option>
             </select>
             <div class="error" id="materialErr"></div>
             <?php }?>
@@ -75,9 +82,6 @@ $proId=$_GET['productId'];
        
         <!-- Right Table (Material List) -->
         <div class="table-card">
-            <?php
-            $colorselect = "SELECT `Id`, `ProductId`, `ColorCode`, `ColorName`, `Status` FROM `product_color_details` WHERE IsDelete = 0";
-            ?>
             <table>
                 <tr>
                     <th>Sl no</th>
@@ -87,18 +91,34 @@ $proId=$_GET['productId'];
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                
+                <?php
+            $colorselect = "SELECT `ProductId`,`ProductName`, pd.`ColorCode`, pd.`ColorName`, `Status` FROM `product_color_details` pd
+                            INNER JOIN add_product ap ON ap.Id = pd.ProductId WHERE ap.Id = $proId AND IsDelete = 0";
+            $colorstatemnt = mysqli_query($conn,$colorselect);
+
+            $c = 1;
+            if($colorstatemnt && mysqli_num_rows($colorstatemnt)>0)
+            {
+                while($colors = mysqli_fetch_assoc($colorstatemnt))
+                {
+
+            ?>
+            <tr>
+                    <td><?php echo $c++;?></td>
+                    <td><?php echo $colors['ProductName'];?></td>
+                    <td><?php echo $colors['ColorName'];?></td>
+                    <td><?php echo $colors['ColorCode'];?></td>
                     <td>
                         <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a>
                     </td>
                     <td>
                         <button type="button" name="delete" class="btn-sm btn-delete">Delete</button>
                     </td>
-                </tr>
+                    </tr>
+                    <?php  }  }
+            ?>
+                
 
             </table>
         </div>

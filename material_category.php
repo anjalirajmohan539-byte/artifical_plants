@@ -95,24 +95,27 @@ if (isset($_POST['edit'])) {
                     <td><?php echo $c++;?></td>
                     <td><?php echo $cat['Name'];?></td>
                     <td><?php echo $cat['Type'];?></td>
+                    <td>
                     <form action="#" method="post">
 
-                    <td>
                         <input type="hidden" name="cid" value="<?php echo $cat['Id'];?>">
                         <input type="hidden" name="name" value="<?php echo $cat['Name'];?>">
                         <input type="submit" name="edit"  class="btn-sm" type="button" style="background-color: #3333f3 !important;" value="Edit">
                         <!-- <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a> -->
-                    </td>
+                    
                     </form>
+                    </td>
 
-                    <form action="material_category_action.php" method="post">
                     <td>
+                    <form action="material_category_action.php" method="post">
+                    
                         <input type="hidden" name="cid" value="<?php echo $cat['Id'];?>">
                         <input type="hidden" name="tid" value="<?php echo $id;?>">
                         <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
                         <!-- <button type="button" name="delete" class="btn-sm btn-delete">Delete</button> -->
-                    </td>
+                    
                     </form>
+                    </td>
                 </tr>
                 <?php }}?>
 
