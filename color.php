@@ -4,6 +4,22 @@ include('database.php');
 
 $proId=$_GET['productId'];
 
+$colorid = "";
+$cname = "";
+$ccode = "";
+$status = 1;
+$button = "Save";
+
+if(isset($_POST['edit']))
+{
+    $colorid = $_POST['colorId'];
+    $cname = $_POST['color'];
+    $ccode = $_POST['colorCode'];
+    $status = $_POST['colorStatus'];
+    $button = "Update";
+}
+
+
 ?>
 
 <html>
@@ -42,38 +58,22 @@ $proId=$_GET['productId'];
             <h3 style="margin-bottom: 15px;">Add New Color</h3>
             <form action="color_action.php" method="post" id="productForm" autocomplete="off">
             <label>Color Name<s>*</s></label>
-            <input type="text" id="color" name="color" value="" placeholder="Enter color name" oninput="clearError()">
-            <div class="error" id="materialErr"></div>
+            <input type="text" id="color" name="color" value="<?php echo $cname;?>" placeholder="Enter color name" oninput="clearError()">
+            <div class="error" id="colorErr"></div>
 
             <label>Color Code<s>*</s></label>
-            <input type="text" id="colorCode" name="colorCode" value="" placeholder="Enter colorCode" oninput="clearError()">
-            <div class="error" id="materialErr"></div>
+            <input type="text" id="colorCode" name="colorCode" value="<?php echo $ccode;?>" placeholder="Enter colorCode" oninput="clearError()">
+            <div class="error" id="codeErr"></div>
             <input type="hidden" name="productId" value="<?php echo $proId;?>">
-
-            <?php
-            $select = "SELECT `Id`,CASE WHEN Status=0 THEN 'Inactive'
-                                        WHEN Status=1 THEN 'Active'
-                                        END AS Status
-                       FROM `product_color_details` WHERE  IsDelete= 0";
-
-            $statemnt = mysqli_query($conn,$select);
-            // var_dump($select);
-
-            if(mysqli_num_rows($statemnt)>0)
-            {
-                $status = mysqli_fetch_assoc($statemnt);
-
-            ?>
+            <input type="hidden" name="coid" value="<?php echo $colorid?>">
             <label>Status<s>*</s></label>
             <select name="colorStatus" id="colorStatus">
-                <option value="#">Status</option>
                 <option value="1" <?php if($status == 1) echo "selected"; ?>>Active</option>
                 <option value="0" <?php if($status == 0) echo "selected"; ?>>Inactive</option>
             </select>
-            <div class="error" id="materialErr"></div>
-            <?php }?>
+            <div class="error" id="statusErr"></div>
 
-             <button class="btn btn-save" name="btn" onclick="return validateForm()">Save</button>
+             <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
             </form>
         </div>
@@ -88,12 +88,17 @@ $proId=$_GET['productId'];
                     <th>Product</th>
                     <th>Color</th>
                     <th>Color Code</th>
+                    <th>Status</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                 
                 <?php
-            $colorselect = "SELECT `ProductId`,`ProductName`, pd.`ColorCode`, pd.`ColorName`, `Status` FROM `product_color_details` pd
+            $colorselect = "SELECT pd.`Id`,`ProductId`,`ProductName`, pd.`ColorCode`, pd.`ColorName`, 
+                              CASE WHEN Status=0 THEN 'Inactive'
+                                   WHEN Status=1 THEN 'Active'
+                               END AS Status,`Status` AS StatusId
+                             FROM `product_color_details` pd
                             INNER JOIN add_product ap ON ap.Id = pd.ProductId WHERE ap.Id = $proId AND IsDelete = 0";
             $colorstatemnt = mysqli_query($conn,$colorselect);
 
@@ -109,11 +114,24 @@ $proId=$_GET['productId'];
                     <td><?php echo $colors['ProductName'];?></td>
                     <td><?php echo $colors['ColorName'];?></td>
                     <td><?php echo $colors['ColorCode'];?></td>
+                    <td><?php echo $colors['Status'];?></td>
                     <td>
-                        <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a>
+                        <form action="#" method="post">
+                            <input type="hidden" name="colorId" value="<?php echo $colors['Id'];?>">
+                            <input type="hidden" name="color" value="<?php echo $colors['ColorName'];?>">
+                            <input type="hidden" name="colorCode" value="<?php echo $colors['ColorCode'];?>">
+                            <input type="hidden" name="colorStatus" value="<?php echo $colors['StatusId'];?>">
+                            <input type="submit" name="edit" value="Edit" class="btn-sm" style="background-color: #3333f3 !important;">
+                        <!-- <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a> -->
+                        </form>
                     </td>
                     <td>
-                        <button type="button" name="delete" class="btn-sm btn-delete">Delete</button>
+                        <form action="color_action.php" method="post">
+                            <input type="hidden" name="colorId" value="<?php echo $colors['Id'];?>">
+                            <input type="hidden" name="proId" value="<?php echo $proId;?>">
+                            <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
+                        </form>
+                        <!-- <button type="button" name="delete" class="btn-sm btn-delete">Delete</button> -->
                     </td>
                     </tr>
                     <?php  }  }
@@ -125,5 +143,63 @@ $proId=$_GET['productId'];
 
     </div>
 </div>
+
+<script>
+function validateForm() {
+    let color = document.getElementById("color");
+    let code = document.getElementById("colorCode");
+    let status = document.getElementById("colorStatus");
+    let colorVal = color.value.trim();
+    let codeVal = code.value.trim();
+    let statusVal = status.value.trim();
+    let errorBox1 = document.getElementById("colorErr");
+    let errorBox2 = document.getElementById("codeErr");
+    let errorBox3 = document.getElementById("statusErr");
+
+   
+    errorBox1.innerText = "";
+    errorBox2.innerText = "";
+    errorBox3.innerText = "";
+    color.style.border = "";
+    code.style.border = "";
+    status.style.border = "";
+
+    
+    if (materialVal === "") {
+        
+        errorBox1.innerText = "Color name is required";
+        material.style.border = "1px solid red";
+        return false;
+    }
+
+    if (colorVal === "") {
+        
+        errorBox2.innerText = "Code name is required";
+        material.style.border = "1px solid red";
+        return false;
+    }
+
+    if (statusVal === "") {
+        
+        errorBox3.innerText = "status name is required";
+        material.style.border = "1px solid red";
+        return false;
+    }
+
+
+    return true; 
+}
+
+function resetForm() {
+    document.getElementById("color").value = "";
+    clearError();
+}
+
+function clearError() {
+    let material = document.getElementById("color");
+    document.getElementById("materialErr").innerText = "";
+    material.style.border = "";
+}
+</script>
 </body>
 </html>

@@ -6,6 +6,16 @@ include('database.php');
 $editId = "";
 $button = "Add Product";
 
+// variables to fill form
+$editProductName = "";
+$editPrice = "";
+$editCategory = "";
+$editMaterial = "";
+$editDesc = "";
+$editColorName = "";
+$editColorCode = "";
+$editImage = "";
+
 if (isset($_POST['edit'])) {
     $editId = $_POST['productid'];     
     $button = "Update" ;

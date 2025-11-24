@@ -1,3 +1,11 @@
+<?php
+
+include('database.php');
+
+$productid = $_GET['productId'];
+
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -35,6 +43,7 @@
             <form action="#" method="post" id="productForm" autocomplete="off">
             <label>Image<s>*</s></label>
             <input type="file" id="image" name="image" value="" oninput="clearError()">
+            <input type="hidden" name="proId" value="<?php echo $productid;?>">
             <div class="error" id="materialErr"></div>
 
 
@@ -48,6 +57,11 @@
         <!-- Right Table (Material List) -->
         <div class="table-card">
             <table>
+                <?php
+                $select = "SELECT pi.`Id`,`ProductName`, pi.`Images`, `ProductId`, `IsDelete` FROM `product_images` pi
+INNER JOIN add_product ap ON ap.Id = pi.ProductId";
+                
+                ?>
                 <tr>
                     <th>Sl no</th>
                     <th>Product</th>

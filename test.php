@@ -1,51 +1,45 @@
-<select id="cat" onchange="goNext(this.value)">
-    <option value="">Select Category</option>
-    <option value="1">Plants</option>
-    <option value="2">Vase</option>
-</select>
+$colorid = "";
+$cname = "";
+$ccode = "";
+$button = "Save";
 
-<script>
-function goNext(value) {
-    window.location.href = "test2.php?catId=" + value;
+if(isset($_POST['edit']))
+{
+    $colorid = $_POST['colorId'];
+    $cname = $_POST['color'];
+    $ccode = $_POST['colorCode'];
+    $button = "Update";
 }
-</script>
 
-<form action="test2.php" method="POST">
-    <select name="category">
-        <option value="1">Plants</option>
-        <option value="2">Vase</option>
-    </select>
 
-    <button type="submit">Next</button>
-</form>
 
-<?php session_start(); ?>
 
-<form action="test2.php" method="POST">
-    <select name="category">
-        <option value="1">Plant</option>
-        <option value="2">Vase</option>
-    </select>
 
-    <button type="submit">Next</button>
-</form>
 
-<select onchange="goNext(this.value)">
-    <option value="">Select Type</option>
-    <?php
-    include('database.php');
-    $q = mysqli_query($conn, "SELECT * FROM material_type WHERE IsDelete=0");
-    while ($t = mysqli_fetch_assoc($q)) {
-        echo "<option value='".$t['Id']."'>".$t['Name']."</option>";
-    }
-    ?>
-</select>
 
-<script>
-function goNext(typeId) {
-    window.location.href = "select_category.php?typeId=" + typeId;
-}
-</script>
+            <input type="hidden" name="coid" value="<?php echo $colorid?>">
+
+
+
+                                <td>
+                        <form action="#" method="post">
+                            <input type="hidden" name="colorId" value="<?php echo $colors['Id'];?>">
+                            <input type="hidden" name="color" value="<?php echo $colors['ColorName'];?>">
+                            <input type="hidden" name="colorCode" value="<?php echo $colors['ColorCode'];?>">
+                            <input type="hidden" name="colorStatus" value="<?php echo $colors['Status'];?>">
+                            <input type="submit" name="edit" value="Edit" class="btn-sm" style="background-color: #3333f3 !important;">
+                        <!-- <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a> -->
+                        </form>
+                    </td>
+                    <td>
+                        <form action="#" method="post">
+                            <input type="hidden" name="colorId" value="<?php echo $colors['Id'];?>">
+                            <input type="hidden" name="proId" value="<?php echo $proId;?>">
+                            <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
+                        </form>
+                        <!-- <button type="button" name="delete" class="btn-sm btn-delete">Delete</button> -->
+                    </td>
+
 
 
 
