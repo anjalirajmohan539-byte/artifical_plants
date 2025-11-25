@@ -192,6 +192,7 @@ function validateForm() {
 
 function resetForm() {
     document.getElementById("color").value = "";
+    document.getElementById("productForm").reset();
     clearError();
 }
 
@@ -200,6 +201,7 @@ function clearError() {
     document.getElementById("materialErr").innerText = "";
     material.style.border = "";
 }
+
 </script>
 </body>
 </html>
