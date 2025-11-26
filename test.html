@@ -1,138 +1,55 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MILON – Artificial Flowers & Home Décor</title>
-    <link rel="stylesheet" href="style.css">
+<script>
+    function validateForm() {
+        const image = document.getElementById("image").value;
+        let isValid = true;
 
-    <style>
-    /* RESET */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Segoe UI", sans-serif;
-}
+        // Reset previous errors
+        document.getElementById("imageErr").innerHTML = "";
 
-/* TOP HEADER */
-.top-header {
-    width: 100%;
-    background: #E7F3EC;  /* Deep Taupe */
-    color: white;
-    padding: 18px 40px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+        // Image validation
+        if (image.trim() == "") {
+            document.getElementById("imageErr").innerHTML = "Please upload an image.";
+            isValid = false;
+        }
 
-.logo {
-    font-size: 36px;
-    font-weight: bold;
-    letter-spacing: 3px;
-}
+        return isValid;
+    }
 
-/* NAVBAR */
-.navbar {
-    background: #A89584;  /* Warm Beige */
-    padding: 12px 0;
-}
+    function clearError(id) {
+        document.getElementById(id).innerHTML = "";
+    }
 
-.navbar ul {
-    list-style: none;
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-}
+    function resetForm() {
+        document.getElementById("productForm").reset();
+        avatarBox.innerHTML = `
+            <div style="text-align:center;padding:10px;color:var(--muted);">
+                <div style="font-size:18px;font-weight:700">Welcome!</div>
+                <div class="small">Upload a photo to preview here.</div>
+            </div>
+        `;
+    }
 
-.navbar ul li a {
-    text-decoration: none;
-    font-size: 16px;
-    color: #fff;
-    transition: 0.3s;
-}
+    // IMAGE PREVIEW SCRIPT
+    const avatarInput = document.getElementById('image');
+    const avatarBox = document.getElementById('avatarBox');
 
-.navbar ul li a:hover {
-    color: #0F5A27;  /* Forest Green */
-    font-weight: bold;
-}
+    avatarInput.addEventListener('change', (e)=>{
+        const f = e.target.files && e.target.files[0];
+        if (!f) return;
 
-/* HERO SECTION */
-.hero {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 60px 100px;
-    background: #F3F1EC;  /* Soft Cream */
-}
+        const url = URL.createObjectURL(f);
 
-.hero-content h1 {
-    font-size: 48px;
-    color: #3E7E55;  /* Forest Green */
-    margin-bottom: 30px;
-}
+        avatarBox.innerHTML = '';
 
-.btn {
-    background: #1C7A35;  /* Natural Button Green */
-    color: white;
-    padding: 14px 30px;
-    font-size: 20px;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: 0.3s;
-}
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = 'image';
 
-.btn:hover {
-    background: #0E4C1D; /* Darker green */
-}
-
-.hero-img img {
-    width: 450px;
-    border-radius: 10px;
-}
+        avatarBox.appendChild(img);
+    });
+</script>
 
 
-    </style>
-</head>
-<body>
-
-    <!-- TOP HEADER -->
-    <header class="top-header">
-        <div class="logo">MILON</div>
-        <div class="header-icons">
-            <i class="icon">🔍</i>
-            <i class="icon">👤</i>
-            <i class="icon">🛒</i>
-        </div>
-    </header>
-
-    <!-- NAVBAR -->
-    <nav class="navbar">
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">New Arrivals</a></li>
-            <li><a href="#">Decor</a></li>
-            <li><a href="#">Artificial Flowers</a></li>
-            <li><a href="#">Vases</a></li>
-            <li><a href="#">Pebbles & Moss</a></li>
-            <li><a href="#">Blog</a></li>
-        </ul>
-    </nav>
-
-    <!-- HERO SECTION -->
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Your Daily Routine,<br>Redefined</h1>
-            <a href="#" class="btn">Order Now</a>
-        </div>
-        <div class="hero-img">
-            <img src="your-image.jpg" alt="Flower Vase">
-        </div>
-    </section>
-
-</body>
-</html>
 
 
 

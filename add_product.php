@@ -217,7 +217,7 @@ if (isset($_POST['edit'])) {
                 
                        <?php
                 $select_product="SELECT ap.`Id`, `Price`, `ProductName`, pc.Categorys AS `CategoryId`, ap.`CreateDate` FROM `add_product` ap
-                                 INNER JOIN product_category pc ON pc.Id = ap.CategoryId";
+                                 INNER JOIN product_category pc ON pc.Id = ap.CategoryId WHERE ap.IsDeleted = 0";
                 $product_statment=mysqli_query($conn,$select_product);
 
                 $s=1;
@@ -239,6 +239,9 @@ if (isset($_POST['edit'])) {
                   <form action="#" method="post">
                   
                     <input type="hidden" name="productid" value="<?php echo $product['Id'];?>">
+                    <input type="hidden" name="fullname" value="<?php echo $product['ProductName'];?>">
+                    <input type="hidden" name="productType" value="<?php echo $product['CategoryId'];?>">
+                    <input type="hidden" name="productcolor" value="<?php echo $product['CategoryId'];?>">
                     <input type="submit" name="edit" type="button" class="p_edit" value="Edit">
                     <!-- <a href="#"><button class="p_edit">Edit</button></a> -->
                   

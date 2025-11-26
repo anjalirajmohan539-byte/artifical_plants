@@ -8,7 +8,7 @@ $colorid = "";
 $cname = "";
 $ccode = "";
 $status = 1;
-$button = "Save";
+$button = "Add";
 
 if(isset($_POST['edit']))
 {
@@ -58,11 +58,11 @@ if(isset($_POST['edit']))
             <h3 style="margin-bottom: 15px;">Add New Color</h3>
             <form action="color_action.php" method="post" id="productForm" autocomplete="off">
             <label>Color Name<s>*</s></label>
-            <input type="text" id="color" name="color" value="<?php echo $cname;?>" placeholder="Enter color name" oninput="clearError()">
+            <input type="text" id="color" name="color" value="<?php echo $cname;?>" placeholder="Enter color name" oninput="clearError('colorErr')">
             <div class="error" id="colorErr"></div>
 
             <label>Color Code<s>*</s></label>
-            <input type="text" id="colorCode" name="colorCode" value="<?php echo $ccode;?>" placeholder="Enter colorCode" oninput="clearError()">
+            <input type="text" id="colorCode" name="colorCode" value="<?php echo $ccode;?>" placeholder="Enter color Code" oninput="clearError('codeErr')">
             <div class="error" id="codeErr"></div>
             <input type="hidden" name="productId" value="<?php echo $proId;?>">
             <input type="hidden" name="coid" value="<?php echo $colorid?>">
@@ -71,9 +71,8 @@ if(isset($_POST['edit']))
                 <option value="1" <?php if($status == 1) echo "selected"; ?>>Active</option>
                 <option value="0" <?php if($status == 0) echo "selected"; ?>>Inactive</option>
             </select>
-            <div class="error" id="statusErr"></div>
 
-             <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
+             <button class="btn btn-save" id="add" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
             </form>
         </div>
@@ -118,9 +117,9 @@ if(isset($_POST['edit']))
                     <td>
                         <form action="#" method="post">
                             <input type="hidden" name="colorId" value="<?php echo $colors['Id'];?>">
-                            <input type="hidden" name="color" value="<?php echo $colors['ColorName'];?>">
-                            <input type="hidden" name="colorCode" value="<?php echo $colors['ColorCode'];?>">
-                            <input type="hidden" name="colorStatus" value="<?php echo $colors['StatusId'];?>">
+                            <input type="hidden" id="oldColor" name="color" value="<?php echo $colors['ColorName'];?>">
+                            <input type="hidden" id="oldCode" name="colorCode" value="<?php echo $colors['ColorCode'];?>">
+                            <input type="hidden" id="status" name="colorStatus" value="<?php echo $colors['StatusId'];?>">
                             <input type="submit" name="edit" value="Edit" class="btn-sm" style="background-color: #3333f3 !important;">
                         <!-- <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a> -->
                         </form>
@@ -146,62 +145,43 @@ if(isset($_POST['edit']))
 
 <script>
 function validateForm() {
-    let color = document.getElementById("color");
-    let code = document.getElementById("colorCode");
-    let status = document.getElementById("colorStatus");
-    let colorVal = color.value.trim();
-    let codeVal = code.value.trim();
-    let statusVal = status.value.trim();
-    let errorBox1 = document.getElementById("colorErr");
-    let errorBox2 = document.getElementById("codeErr");
-    let errorBox3 = document.getElementById("statusErr");
+    let isValid = true;
 
-   
-    errorBox1.innerText = "";
-    errorBox2.innerText = "";
-    errorBox3.innerText = "";
-    color.style.border = "";
-    code.style.border = "";
-    status.style.border = "";
+    let color = document.getElementById("color").value.trim();
+    let colorCode = document.getElementById("colorCode").value.trim();
 
-    
-    if (materialVal === "") {
-        
-        errorBox1.innerText = "Color name is required";
-        material.style.border = "1px solid red";
-        return false;
+    clearError('colorErr');
+    clearError('codeErr');
+
+    if (color === "") {
+        document.getElementById("colorErr").innerHTML = "Please enter color name";
+        isValid = false;
     }
 
-    if (colorVal === "") {
-        
-        errorBox2.innerText = "Code name is required";
-        material.style.border = "1px solid red";
-        return false;
+    if (colorCode === "") {
+        document.getElementById("codeErr").innerHTML = "Please enter color code";
+        isValid = false;
     }
 
-    if (statusVal === "") {
-        
-        errorBox3.innerText = "status name is required";
-        material.style.border = "1px solid red";
-        return false;
-    }
-
-
-    return true; 
+    return isValid;
 }
 
-function resetForm() {
-    document.getElementById("color").value = "";
-    document.getElementById("productForm").reset();
-    clearError();
+function clearError(id) {
+    document.getElementById(id).innerHTML = "";
 }
 
-function clearError() {
-    let material = document.getElementById("color");
-    document.getElementById("materialErr").innerText = "";
-    material.style.border = "";
-}
+function resetForm()
+{
+    let add = document.getElementById('add');
+    clearError('colorErr');
+    clearError('codeErr');
 
+    document.getElementById("color").value ="";
+    document.getElementById("colorCode").value = "";
+    document.getElementById("colorStatus").value = "1";
+    document.getElementById("add").innerText = "Add";
+
+}
 </script>
 </body>
 </html>

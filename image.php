@@ -6,7 +6,7 @@ $productid = $_GET['productId'];
 
 $imgs = "";
 $imgId = "";
-$button = "Save";
+$button = "Add";
 
 if(isset($_POST['edit']))
 {
@@ -54,27 +54,33 @@ if(isset($_POST['edit']))
         <div class="card">
             
             <h3 style="margin-bottom: 15px;">Add New Image</h3>
-            <form action="image_action.php" method="post" id="productForm" autocomplete="off" enctype="multipart/form-data">
+            <form action="#" method="post" id="productForm" autocomplete="off" enctype="multipart/form-data">
             <label>Image<s>*</s></label><br>
             <div class="card-right">
 
             <div class="avatar-preview" id="avatarBox">
-        <div style="text-align:center;padding:10px;color:var(--muted)">
+        <div style="text-align:center;padding:10px;color:var(--muted);<?php echo $imgs != "" ? 'display:none' : ''?>">
           <div style="font-size:18px;font-weight:700">Welcome!</div>
           <div class="small">Upload a photo to preview here.</div>
         </div>
+        <?php
+        if($imgs != '')
+        {
+
+        ?>
         
         <img src="images/product/<?php echo $imgs;?>" alt="">
+        <?php }?>
       </div>
       </div>
 
-            <input type="file" id="image" name="image" value="" oninput="clearError()">
+            <input type="file" id="image" name="image" value="" oninput="clearError('imageErr')">
             <input type="hidden" name="proId" value="<?php echo $productid;?>">
             <input type="hidden" name="imageId" value="<?php echo $imgId;?>">
-            <div class="error" id="materialErr"></div>
+            <div class="error" id="imageErr"></div>
 
 
-             <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
+             <button class="btn btn-save" id="add" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
             </form>
         </div>
@@ -148,6 +154,40 @@ if(isset($_POST['edit']))
       const img = document.createElement('img'); img.src = url; img.alt = 'image';
       avatarBox.appendChild(img);
     });
+
+
+
+    function validateForm() {
+        const image = document.getElementById("image").value;
+        let isValid = true;
+
+        document.getElementById("imageErr").innerHTML = "";
+
+        if (image.trim() == "") {
+            document.getElementById("imageErr").innerHTML = "Please upload an image.";
+            isValid = false;
+        }
+
+        return isValid;
+    }
+
+    function clearError(id) {
+        document.getElementById(id).innerHTML = "";
+    }
+
+    function resetForm() {
+
+        let add = document.getElementById("add");
+        document.getElementById("productForm").reset();
+        avatarBox.innerHTML = `
+            <div style="text-align:center;padding:10px;color:var(--muted);">
+                <div style="font-size:18px;font-weight:700">Welcome!</div>
+                <div class="small">Upload a photo to preview here.</div>
+            </div>
+        `;
+
+        document.getElementById("add").innerText ="Add";
+    }
 
 </script>
 </body>
