@@ -5,21 +5,27 @@ include('database.php');
 
 $editId = "";
 $button = "Add Product";
+$prows = "";
 
-// variables to fill form
-$editProductName = "";
-$editPrice = "";
-$editCategory = "";
-$editMaterial = "";
-$editDesc = "";
-$editColorName = "";
-$editColorCode = "";
-$editImage = "";
-
-if (isset($_POST['edit'])) {
+if (isset($_POST['edit']))
+{
     $editId = $_POST['productid'];     
     $button = "Update" ;
+
+    $editselect = "SELECT `ProductImage`, `Price`,`Description`, `ProductName`,`ColorName`, `ColorCode`, `CategoryId`,  `MaterialId` FROM `add_product` ap
+                   WHERE ap.Id = $editId AND ap.IsDeleted = 0";
+                  //  var_dump($editselect);
+
+    $statmnt = mysqli_query($conn,$editselect);
+
+    if(mysqli_num_rows($statmnt)>0)
+    {
+      $prows = mysqli_fetch_assoc($statmnt);
+      
+    }
 }
+// var_dump($prows);
+// echo $prows['ProductImage'];
 
 
 ?>
@@ -69,16 +75,18 @@ if (isset($_POST['edit'])) {
 
         <!---------------------------------------------------- Product image ---------------------------------------------------->
 
-        <form action="add_product_action.php" method="post" id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
+        <form action="#" method="post" id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
           <div class="field">
             <label for="productImage">Product image <s>*</s></label>
             <div class="file-input">
               <div class="file-preview" id="imgPreview" title="Image preview">
                 <span class="small" style="color:var(--muted);padding:6px;text-align:center">No image</span>
+                <img src="images/plant_1.jpg" alt="">
               </div>
 
               <div style="flex:1;">
                 <input id="productImage" name="image" type="file" aria-describedby="imgHelp">
+                 <div class="error small" id="imgErr"></div>
                 <div id="imgHelp" class="small" style="margin-top:6px">Recommended : square image Max 2MB.</div>
 
                 <input type="hidden" name="product" value="<?php echo $editId;?>">
@@ -88,16 +96,18 @@ if (isset($_POST['edit'])) {
 
           <!---------------------------------------------------- Product name ---------------------------------------------------->
 
+
           <div class="field">
             <label for="productName">Product name <s>*</s></label>
-            <input id="productName" name="productName" type="text" placeholder="e.g. Classic White Vase" required >
+            <input id="productName" name="productName" type="text" placeholder="e.g. Classic White Vase" 
+            value="<?php echo $prows == '' ? '' : $prows['ProductName'] ?>" required>
           </div>
+          <div class="error small" id="nameErr"></div>
 
           <!---------------------------------------------------- Product type ---------------------------------------------------->
 
           <div class="field">
                <?php
-          
           $select="SELECT `Id`, `Categorys` FROM `product_category` WHERE IsDeleted = 0";
           $statment=mysqli_query($conn,$select);
 
@@ -117,6 +127,7 @@ if (isset($_POST['edit'])) {
               <option value="<?php echo $type["Id"];?>"><?php echo $type['Categorys'];?></option>
               <?php }?>
             </select>
+            <div class="error small" id="typeErr"></div>
             <?php }?>
           </div>
       
@@ -127,11 +138,11 @@ if (isset($_POST['edit'])) {
           <div style="display:flex; gap:15px;">
             <div style="display:flex; flex-direction:column;">
               <label>Color Name</label>
-              <input type="text" name="colorName" id="" style="width: 100%;margin-bottom: 10px;">
+              <input type="text" name="colorName" id="" style="width: 100%;margin-bottom: 10px;" value="<?php echo $prows == "" ? "" : $prows['ColorName']?>">
             </div>
             <div style="display:flex; flex-direction:column;">
               <label>Color Code</label>
-              <input type="text" name="colorCode" id="" style="width: 100%;margin-bottom: 10px;">
+              <input type="text" name="colorCode" id="" style="width: 100%;margin-bottom: 10px;" value="<?php echo $prows == "" ? "" : $prows['ColorCode']?>">
             </div>
           </div>
 
@@ -139,8 +150,10 @@ if (isset($_POST['edit'])) {
 
             <div class="field">
             <label for="productPrice">Product price (₹) <s>*</s></label>
-            <input id="productPrice" name="productPrice" type="number" min="0" step="0.01" placeholder="e.g. 499.00" required >
+            <input id="productPrice" name="productPrice" type="number" min="0" step="0.01" placeholder="e.g. 499.00" required value="<?php echo $prows == "" ? "" : $prows['Price']?>">
+            <div class="error small" id="priceErr"></div>
           </div>
+          
 
           <!---------------------------------------------------- material_type ---------------------------------------------------->
 
@@ -164,6 +177,7 @@ if (isset($_POST['edit'])) {
               <option value="<?php echo $material["Id"];?>"><?php echo $material['Name'];?></option>
               <?php }?>
             </select>
+            <div class="error small" id="materialErr"></div>
             <?php }?>
           </div>
 
@@ -175,19 +189,20 @@ if (isset($_POST['edit'])) {
             <label for="materialCategory">Product Category <s>*</s></label>
             <select name="materialCategory" id="materialCategory">
             </select>
+            <div class="error small" id="catErr"></div>
           </div>
 
           <!---------------------------------------------------- Description ---------------------------------------------------->
 
           <div class="field">
             <label for="productDesc">Description</label>
-            <textarea id="productDesc" name="productDesc" placeholder="Short description (optional)"></textarea>
+            <textarea id="productDesc" name="productDesc" placeholder="Short description (optional)"><?php echo $prows == "" ? "" : $prows['Description']?></textarea>
           </div>
 
           <!---------------------------------------------------- button ---------------------------------------------------->
 
           <div class="form-actions">
-            <button type="submit" id="btn" class="btn" name="btn" style="background-color:#9A8C7A;color:white;">Add product</button>
+            <button type="submit" id="btn" class="btn" name="btn" style="background-color:#9A8C7A;color:white;" onsubmit="ValidationForm()">Add product</button>
             <button type="button" id="resetBtn" class="btn secondary">Reset</button>
             <div style="margin-left:auto" class="small" id="formMsg" aria-live="polite"></div>
           </div>
@@ -239,9 +254,6 @@ if (isset($_POST['edit'])) {
                   <form action="#" method="post">
                   
                     <input type="hidden" name="productid" value="<?php echo $product['Id'];?>">
-                    <input type="hidden" name="fullname" value="<?php echo $product['ProductName'];?>">
-                    <input type="hidden" name="productType" value="<?php echo $product['CategoryId'];?>">
-                    <input type="hidden" name="productcolor" value="<?php echo $product['CategoryId'];?>">
                     <input type="submit" name="edit" type="button" class="p_edit" value="Edit">
                     <!-- <a href="#"><button class="p_edit">Edit</button></a> -->
                   
@@ -272,123 +284,102 @@ if (isset($_POST['edit'])) {
 
 
   <!---------------------------------------------------- validation ---------------------------------------------------->
-  <script>
 
-    const form = document.getElementById('productForm');
-    const imgInput = document.getElementById('productImage');
-    const imgPreview = document.getElementById('imgPreview');
-    const tbody = document.getElementById('productsTbody');
-    const resetBtn = document.getElementById('resetBtn');
-    const formMsg = document.getElementById('formMsg');
 
-    let products = []; 
+<script>
 
-    function showImagePreview(file) {
-      imgPreview.innerHTML = '';
-      if (!file) {
-        imgPreview.innerHTML = '<span class="small" style="color:var(--muted);padding:6px;text-align:center">No image</span>';
-        return;
-      }
-      const img = document.createElement('img');
-      img.alt = 'product preview';
-      imgPreview.appendChild(img);
+document.getElementById("productForm").addEventListener("submit", function (e) {
+    let hasError = false;
 
-      const reader = new FileReader();
-      reader.onload = e => { img.src = e.target.result; };
-      reader.readAsDataURL(file);
+    clearErrors();
+
+    let image = document.getElementById("productImage");
+    let name = document.getElementById("productName");
+    let type = document.getElementById("productType");
+    let price = document.getElementById("productPrice");
+    let material = document.getElementById("productMaterial");
+    let category = document.getElementById("materialCategory");
+
+  
+    if (image.files.length === 0) {
+        showError("imgErr", "Product image is required");
+        hasError = true;
+    } else {
+        let file = image.files[0];
+        if (file.size > 2 * 1024 * 1024) {
+            showError("imgErr", "Image must be less than 2MB");
+            hasError = true;
+        }
     }
 
-    imgInput.addEventListener('change', () => {
-      const file = imgInput.files && imgInput.files[0];
-      if (file && file.size > 2 * 1024 * 1024) {
-        formMsg.textContent = 'Image too large (max 2MB).';
-        formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
-        imgInput.value = '';
-        showImagePreview(null);
-        return;
-      }
-      formMsg.textContent = '';
-      showImagePreview(file);
-    });
 
-    function renderTable() {
-
-      products.forEach((p, idx) => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${idx + 1}</td>
-          <td><div class="product-thumb"><img src="${p.image}" alt="${escapeHtml(p.name)}" /></div></td>
-          <td>${escapeHtml(p.name)}</td>
-          <td class="price">₹ ${Number(p.price).toFixed(2)}</td>
-          <td>${escapeHtml(p.desc || '')}</td>
-          <td class="small">${escapeHtml(p.type)}</td>
-        `;
-        tbody.appendChild(tr);
-      });
+    if (name.value.trim() === "") {
+        showError("nameErr", "Product name is required");
+        name.style.border = "1px solid red";
+        hasError = true;
     }
 
-    function escapeHtml(text) {
-      if (!text) return '';
-      return text.replace(/[&<>"']/g, function (m) {
-        return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m];
-      });
+    if (type.value == "0") {
+        showError("typeErr", "Please choose product type");
+        type.style.border = "1px solid red";
+        hasError = true;
     }
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      formMsg.textContent = '';
+    if (price.value.trim() === "" || Number(price.value) <= 0) {
+        showError("priceErr", "Enter a valid price");
+        price.style.border = "1px solid red";
+        hasError = true;
+    }
 
-      const name = document.getElementById('productName').value.trim();
-      const price = document.getElementById('productPrice').value;
-      const type = document.getElementById('productType').value;
-      const desc = document.getElementById('productDesc').value.trim();
+    if (material.value == "0") {
+        showError("materialErr", "Please select a material");
+        material.style.border = "1px solid red";
+        hasError = true;
+    }
 
-      if (!imgInput.files || !imgInput.files[0]) {
-        formMsg.textContent = 'Please choose a product image.';
-        formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
-        return;
-      }
-      if (!name || !price || !type) {
-        formMsg.textContent = 'Please fill required fields (name, price, type).';
-        formMsg.style.color = getComputedStyle(document.documentElement).getPropertyValue('--danger') || '#dc2626';
-        return;
-      }
+    if (category.value == "0" || category.value === "") {
+        showError("catErr", "Please select a category");
+        category.style.border = "1px solid red";
+        hasError = true;
+    }
 
-
-      const file = imgInput.files[0];
-      const reader = new FileReader();
-      reader.onload = (ev) => {
-        const imageDataUrl = ev.target.result;
-
-        products.push({
-          image: imageDataUrl,
-          name,
-          price: Number(price),
-          desc,
-          material
-          type
-        });
-
-        renderTable();
-        form.reset();
-        showImagePreview(null);
-        formMsg.textContent = 'Product added (client-side).';
-        formMsg.style.color = ''; 
-      };
-      reader.readAsDataURL(file);
-    });
-
-    resetBtn.addEventListener('click', () => {
-      form.reset();
-      showImagePreview(null);
-      formMsg.textContent = '';
-    });
-
- 
-    renderTable();
+    if (hasError) {
+        e.preventDefault();
+    }
+});
 
 
-  </script>
+function clearErrors() {
+    document.querySelectorAll(".error").forEach(err => err.innerText = "");
+    document.querySelectorAll("input, select").forEach(el => el.style.border = "");
+}
+
+
+function showError(id, msg) {
+    document.getElementById(id).innerText = msg;
+}
+
+
+document.getElementById("resetBtn").addEventListener("click", function () {
+    document.getElementById("productForm").reset();
+    clearErrors();
+});
+
+
+document.getElementById("productImage").addEventListener("change", function () {
+    let file = this.files[0];
+    let preview = document.getElementById("imgPreview");
+
+    if (file) {
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`;
+        };
+        reader.readAsDataURL(file);
+    }
+});
+</script>
+
 
 
 <!---------------------------------------------------- Ajax js ---------------------------------------------------->

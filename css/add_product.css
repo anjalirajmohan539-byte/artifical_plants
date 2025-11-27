@@ -345,6 +345,13 @@ body {
       border: none;
     }
 
+    .error { 
+  color: red; 
+  margin-top: 3px; 
+  font-size: 12px; 
+}
+
+
     /* responsive */
     @media (max-width:880px){
       .layout{ grid-template-columns: 1fr; }
