@@ -1,53 +1,97 @@
-<script>
-    function validateForm() {
-        const image = document.getElementById("image").value;
-        let isValid = true;
+        /* Sidebar Animation */
+    body {
+        margin: 0;
+        font-family: "Poppins", sans-serif;
+        background: linear-gradient(135deg, #dee8ff, #ffffff);
+        display: flex;
+    }
 
-        // Reset previous errors
-        document.getElementById("imageErr").innerHTML = "";
+    /* -------------------- SIDEBAR -------------------- */
+    .sidebar {
+        width: 240px;
+        background: #736559;
+        height: 100vh;
+        padding-top: 30px;
+        position: fixed;
+        box-shadow: 3px 0 10px rgba(0,0,0,0.2);
+    }
 
-        // Image validation
-        if (image.trim() == "") {
-            document.getElementById("imageErr").innerHTML = "Please upload an image.";
-            isValid = false;
+    .sidebar h2 {
+        text-align: center;
+        color: #fff;
+        margin-bottom: 80px;
+        font-size: 22px;
+    }
+
+    .sidebar a {
+        display: block;
+        padding: 20px 20px;
+        color: #e6e6e6;
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+        background: #9b8b7d;
+        color: #fff;
+        padding-left: 28px;
+    }
+
+    .sidebar img
+    {
+      width:15%;
+      border-radius:20px;
+    }
+        s
+    {
+      color: red;
+      text-decoration: none;
+    }
+        body {
+            background: #f1f2f6;
+        }
+        .container-box {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        .avatar-preview {
+            width: 150px;
+            height: 150px;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            margin-bottom: 10px;
+            background: #fafafa;
+        }
+        .avatar-preview img {
+            width: 100%;
+        }
+        .error-msg {
+            color: red;
+            font-size: 14px;
+            margin-top: 3px;
         }
 
-        return isValid;
+        .btn.secondary {
+            background:#eef2ff;
+            color:var(--accent);
+            border:1px solid rgba(37,99,235,0.08);
+        }
+
+            .p_view
+    {
+      border-radius:5px;
+      background-color:#897869;
+      color: white;
+      padding:5px 10px;
+      border: none;
     }
-
-    function clearError(id) {
-        document.getElementById(id).innerHTML = "";
-    }
-
-    function resetForm() {
-        document.getElementById("productForm").reset();
-        avatarBox.innerHTML = `
-            <div style="text-align:center;padding:10px;color:var(--muted);">
-                <div style="font-size:18px;font-weight:700">Welcome!</div>
-                <div class="small">Upload a photo to preview here.</div>
-            </div>
-        `;
-    }
-
-    // IMAGE PREVIEW SCRIPT
-    const avatarInput = document.getElementById('image');
-    const avatarBox = document.getElementById('avatarBox');
-
-    avatarInput.addEventListener('change', (e)=>{
-        const f = e.target.files && e.target.files[0];
-        if (!f) return;
-
-        const url = URL.createObjectURL(f);
-
-        avatarBox.innerHTML = '';
-
-        const img = document.createElement('img');
-        img.src = url;
-        img.alt = 'image';
-
-        avatarBox.appendChild(img);
-    });
-</script>
 
 
 

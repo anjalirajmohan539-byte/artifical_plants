@@ -1,45 +1,118 @@
-$colorid = "";
-$cname = "";
-$ccode = "";
-$button = "Save";
+<?php
 
-if(isset($_POST['edit']))
+include('database.php');
+
+if(isset($_POST['btn']))
 {
-    $colorid = $_POST['colorId'];
-    $cname = $_POST['color'];
-    $ccode = $_POST['colorCode'];
-    $button = "Update";
+	$id =$_POST['product'];
+    $image=$_FILES['image']['name'];
+    $name=$_POST['productName'];
+    $price=$_POST['productPrice'];
+	$material=$_POST['productMaterial'];
+    $type=$_POST['productType'];
+	$colorname=$_POST['colorName'];
+	$colorcode=$_POST['colorCode'];
+    $description=$_POST['productDesc'];
+
+//    var_dump($image);
+
+
+    if ($id != 0) {
+
+        $update = "UPDATE `add_product` SET `ProductImage`='$image',`ProductName`='$name',`Description`='$description',`Price`=$price,
+		          `ColorName`='$colorname',`ColorCode`='$colorcode',`CategoryId`=$type,`MaterialId`=$material,
+		          `LastUpdated`=CURRENT_TIMESTAMP WHERE Id = $id AND `IsDeleted` = 0";
+				  
+        $ustatemnt=mysqli_query($conn,$update);
+         if (!$ustatemnt) {
+                echo "error2";
+            } else {
+                header("location:add_product.php");
+            }
+    } 
+    else
+	{
+		
+	$select="SELECT `Id` FROM `add_product` WHERE ProductName='$name' AND CategoryId=$type"; 
+	
+    var_dump($select);
+	if (!$statemnt=mysqli_query($conn,$select))
+	{
+		echo "error";
+	}
+	else 
+	{
+		if(mysqli_num_rows($statemnt)>0)
+		{
+			echo "exist";
+		}
+		else
+		{
+			
+			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `MaterialId`, `ColorName`, `ColorCode`)  
+            VALUES ('$image','$name','$description',$price,$type,$material,'$colorname', '$colorcode')";
+			var_dump($insert_product);
+
+            $statement=mysqli_query($conn,$insert_product);
+	
+			if(!$statement)
+			{
+				echo "error2";
+			}
+
+
+			  $product_id = mysqli_insert_id($conn);
+
+
+             $insert_color = "INSERT INTO `product_color_details` (`ProductId`, `ColorCode`, `ColorName`)
+			 VALUES ($product_id, '$colorname', '$colorcode')";
+
+            $color_statement = mysqli_query($conn, $insert_color);
+
+           if(!$color_statement){
+                echo "Color insert error";
+                exit;
+           }
+
+			else
+			{
+				$image_path="images/product/";
+				$product_image=$image_path.basename($image);
+				if(move_uploaded_file($_FILES['image']['tmp_name'],$product_image))
+				{
+					header('location:add_product.php');
+				}
+				else
+				{
+					echo "something is else";
+				}
+			}
+		}
+	}
+	}
+	}
+	elseif (isset($_POST['delete'])) 
+{
+    $id = $_POST['productid'];
+
+    
+    $dupdate = "UPDATE add_product SET IsDeleted = 1 WHERE Id = $id";
+    // var_dump($dupdate);
+
+    $dstatement = mysqli_query($conn, $dupdate);
+
+    if (!$dstatement) 
+        {
+        echo "Error updating";
+    } 
+    else 
+    {
+        header("Location: location:add_product.php");
+        exit();
+    }
 }
 
-
-
-
-
-
-
-            <input type="hidden" name="coid" value="<?php echo $colorid?>">
-
-
-
-                                <td>
-                        <form action="#" method="post">
-                            <input type="hidden" name="colorId" value="<?php echo $colors['Id'];?>">
-                            <input type="hidden" name="color" value="<?php echo $colors['ColorName'];?>">
-                            <input type="hidden" name="colorCode" value="<?php echo $colors['ColorCode'];?>">
-                            <input type="hidden" name="colorStatus" value="<?php echo $colors['Status'];?>">
-                            <input type="submit" name="edit" value="Edit" class="btn-sm" style="background-color: #3333f3 !important;">
-                        <!-- <a href="category_edit.php"><button class="btn-sm" type="button" style="background-color: #3333f3 !important;">Edit</button></a> -->
-                        </form>
-                    </td>
-                    <td>
-                        <form action="#" method="post">
-                            <input type="hidden" name="colorId" value="<?php echo $colors['Id'];?>">
-                            <input type="hidden" name="proId" value="<?php echo $proId;?>">
-                            <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
-                        </form>
-                        <!-- <button type="button" name="delete" class="btn-sm btn-delete">Delete</button> -->
-                    </td>
-
+?>
 
 
 

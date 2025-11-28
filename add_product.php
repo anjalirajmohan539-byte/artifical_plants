@@ -6,10 +6,12 @@ include('database.php');
 $editId = "";
 $button = "Add Product";
 $prows = "";
+$imgs = "";
 
 if (isset($_POST['edit']))
 {
-    $editId = $_POST['productid'];     
+    $editId = $_POST['productid'];  
+    $imgs = $_POST['img'];   
     $button = "Update" ;
 
     $editselect = "SELECT `ProductImage`, `Price`,`Description`, `ProductName`,`ColorName`, `ColorCode`, `CategoryId`,  `MaterialId` FROM `add_product` ap
@@ -80,9 +82,14 @@ if (isset($_POST['edit']))
             <label for="productImage">Product image <s>*</s></label>
             <div class="file-input">
               <div class="file-preview" id="imgPreview" title="Image preview">
-                <span class="small" style="color:var(--muted);padding:6px;text-align:center">No image</span>
-                <img src="images/plant_1.jpg" alt="">
-              </div>
+                <span class="small" style="color:var(--muted);padding:6px;text-align:center;<?php echo $imgs != "" ? 'display:none' : ''?>">No image</span>
+                <?php
+                    if($imgs != '')
+                      {
+                        ?> 
+                        <img src="images/product/<?php echo $imgs;?>" alt="">
+                        <?php }?>
+        </div>
 
               <div style="flex:1;">
                 <input id="productImage" name="image" type="file" aria-describedby="imgHelp">
@@ -108,27 +115,31 @@ if (isset($_POST['edit']))
 
           <div class="field">
                <?php
-          $select="SELECT `Id`, `Categorys` FROM `product_category` WHERE IsDeleted = 0";
-          $statment=mysqli_query($conn,$select);
+          // $select="SELECT `Id`, `Categorys` FROM `product_category` WHERE IsDeleted = 0";
+          // $statment=mysqli_query($conn,$select);
 
-          if(mysqli_num_rows($statment)>0)
-          {
+          // if(mysqli_num_rows($statment)>0)
+          // {
             
           
           ?>
             <label for="productType">Product type <s>*</s></label>
             <select id="productType" name="productType" required>
               <option value="0">Choose type</option>
+              <option value="1" <?php echo 1 == $prows['CategoryId'] ? 'selcted' : ''?>>Choose type</option>
+              <option value="2" <?php echo 2 == $prows['CategoryId'] ? 'selcted' : ''?>>Artifical Plants</option>
+              <option value="3" <?php echo 3 == $prows['CategoryId'] ? 'selcted' : ''?>>Vases</option>
+              <option value="4" <?php echo 4 == $prows['CategoryId'] ? 'selcted' : ''?>>Other</option>
               <?php
-              while($type=mysqli_fetch_assoc($statment))
-              {
+              // while($type=mysqli_fetch_assoc($statment))
+              // {
 
               ?>
-              <option value="<?php echo $type["Id"];?>"><?php echo $type['Categorys'];?></option>
-              <?php }?>
+              <!-- <option value="<?php //echo $type["Id"];?>"<?php //echo $type['Id'] == $prows['CategoryId'] ? 'selcted' : '';?>><?php //echo $type['Categorys'];?></option> -->
+              <?php //}?>
             </select>
             <div class="error small" id="typeErr"></div>
-            <?php }?>
+            <?php //}?>
           </div>
       
           <!---------------------------------------------------- color ------------------------------------------------------>
@@ -231,13 +242,14 @@ if (isset($_POST['edit']))
               <tbody id="productsTbody">
                 
                        <?php
-                $select_product="SELECT ap.`Id`, `Price`, `ProductName`, pc.Categorys AS `CategoryId`, ap.`CreateDate` FROM `add_product` ap
+                $select_product="SELECT ap.`Id`,`ProductImage`, `Price`, `ProductName`, pc.Categorys AS `CategoryId`, ap.`CreateDate` FROM `add_product` ap
                                  INNER JOIN product_category pc ON pc.Id = ap.CategoryId WHERE ap.IsDeleted = 0";
                 $product_statment=mysqli_query($conn,$select_product);
 
                 $s=1;
                 if(mysqli_num_rows($product_statment)>0)
                 {
+                  $Count = 1;
                   while($product=mysqli_fetch_assoc($product_statment))
                   {
                     
@@ -253,8 +265,9 @@ if (isset($_POST['edit']))
                   <td>
                   <form action="#" method="post">
                   
-                    <input type="hidden" name="productid" value="<?php echo $product['Id'];?>">
-                    <input type="submit" name="edit" type="button" class="p_edit" value="Edit">
+                    <input type="hidden" name="productid" id="hidRowId_<?php echo $Count; ?>" value="<?php echo $product['Id'];?>">
+                    <input type="hidden" name="img" value="<?php echo $product['ProductImage'];?>">
+                    <input type="submit" name="edit" type="button" class="p_edit" value="Edit" onclick="GetRecordById('hidRowId_<?php echo $Count; ?>');">
                     <!-- <a href="#"><button class="p_edit">Edit</button></a> -->
                   
                   </form>
@@ -269,7 +282,9 @@ if (isset($_POST['edit']))
                   </td>
                   </tr>
 
-                  <?php   }
+                  <?php 
+                  $Count++;
+                    }
                 }?>
                 
               </tbody>
@@ -405,6 +420,9 @@ $("#productMaterial").change(function ()
         }
     });
 });
+function GetRecordById(){
+  let 
+}
 </script>
 </body>
 </html

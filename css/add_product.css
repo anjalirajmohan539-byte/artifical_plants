@@ -198,8 +198,8 @@ body {
       align-items:center;
     }
     .file-preview {
-      width:96px;
-      height:96px;
+      width:109px;
+      height:123px;
       border-radius:8px;
       background:linear-gradient(180deg,#f8fafc,#fff);
       border:1px dashed rgba(12,20,40,0.06);
@@ -208,7 +208,7 @@ body {
       justify-content:center;
       overflow:hidden;
       position:relative;
-      padding: 60px;
+      margin-bottom: 20px;
     }
     .file-preview img{
       width:100%;
