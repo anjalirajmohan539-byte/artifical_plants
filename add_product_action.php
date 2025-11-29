@@ -9,6 +9,7 @@ if(isset($_POST['btn']))
     $name=$_POST['productName'];
     $price=$_POST['productPrice'];
 	$material=$_POST['productMaterial'];
+	$materialType = $_POST['materialCategory'];
     $type=$_POST['productType'];
 	$colorname=$_POST['colorName'];
 	$colorcode=$_POST['colorCode'];
@@ -20,7 +21,7 @@ if(isset($_POST['btn']))
     if ($id != 0) {
 
         $update = "UPDATE `add_product` SET `ProductImage`='$image',`ProductName`='$name',`Description`='$description',`Price`=$price,
-		          `ColorName`='$colorname',`ColorCode`='$colorcode',`CategoryId`=$type,`MaterialId`=$material,
+		          `ColorName`='$colorname',`ColorCode`='$colorcode',`CategoryId`=$type,`MaterialId`=$material,`MaterialTypeId`=$materialType,
 		          `LastUpdated`=CURRENT_TIMESTAMP WHERE Id = $id AND `IsDeleted` = 0";
 				  
         $ustatemnt=mysqli_query($conn,$update);
@@ -49,8 +50,8 @@ if(isset($_POST['btn']))
 		else
 		{
 			
-			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `MaterialId`, `ColorName`, `ColorCode`)  
-            VALUES ('$image','$name','$description',$price,$type,$material,'$colorname', '$colorcode')";
+			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `MaterialId`,`MaterialTypeId`, `ColorName`, `ColorCode`)  
+            VALUES ('$image','$name','$description',$price,$type,$material,$materialType,'$colorname', '$colorcode')";
 			var_dump($insert_product);
 
             $statement=mysqli_query($conn,$insert_product);
@@ -91,6 +92,7 @@ if(isset($_POST['btn']))
 	}
 	}
 	}
+
 	elseif (isset($_POST['delete'])) 
 {
     $id = $_POST['productid'];

@@ -2,6 +2,8 @@
 
 include('database.php');
 
+$product_id = $_GET['productId'];
+
 ?>
 
 <html>
@@ -21,6 +23,9 @@ include('database.php');
 
     <!---------------------------------------------------- LEFT: SIDE ---------------------------------------------------->
     <div class="left">
+        <?php
+        $select = "";
+        ?>
 
     
         <img src="images/plant_3.png" class="main-img" id="mainImage">
