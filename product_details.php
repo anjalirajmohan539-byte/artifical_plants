@@ -17,31 +17,48 @@ $product_id = $_GET['productId'];
 </head>
 
 <body>
-<div class="header">PRODUCT DETAILS</div>
+<div class="header">
+    <p>PRODUCT DETAILS</p>
+    <p style="margin-left: 90%;margin-top: -53px;"><a href="#">Edit</a></p>
+    <p style="margin-right: 90%;margin-top: -53px;font-size: 30px;"><a href="#">⟵</a></p>
+
+</div>
 
 <div class="container">
 
     <!---------------------------------------------------- LEFT: SIDE ---------------------------------------------------->
     <div class="left">
+<?php
+$select = "SELECT ap.`Id`, ap.ProductImage, pi.Images, ProductName, Price, ColorName 
+           FROM add_product ap
+           INNER JOIN product_images pi ON pi.ProductId = ap.Id 
+           WHERE ap.Id = $product_id AND pi.IsDelete = 0";
+
+$statemnt = mysqli_query($conn,$select);
+
+if(mysqli_num_rows($statemnt)>0)
+{
+  
+    $image = mysqli_fetch_assoc($statemnt);
+?>
+    <img src="images/product/<?php echo $image['ProductImage']; ?>" class="main-img" id="mainImage">
+
+    <div class="product-title"><?php echo $image['ProductName']; ?></div>
+
+    <p><b>Price:</b> ₹<?php echo $image['Price']; ?></p>
+    <p><b>Color:</b> <?php echo $image['ColorName']; ?></p>
+
+    <div class="thumbs">
         <?php
-        $select = "";
+      
+        while($img = mysqli_fetch_assoc($statemnt)) {
         ?>
-
-    
-        <img src="images/plant_3.png" class="main-img" id="mainImage">
-
-        <div class="product-title">Artificial Plant</div>
-
-        <p><b>Price:</b> ₹499</p>
-        <p><b>Color:</b> Dark Green</p>
-
-        <div class="thumbs">
-            <img src="images/plant_1.jpg" onclick="swap(this)">
-            <img src="images/plant_2.jpg" onclick="swap(this)">
-            <img src="images/plant_4.png" onclick="swap(this)">
-            <img src="images/plant_5.png" onclick="swap(this)">
-        </div>
+            <img src="images/product/<?php echo $img['Images']; ?>" onclick="swap(this)">
+        <?php } ?>
     </div>
+
+<?php } ?>
+</div>
 
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
     <div class="right">
@@ -49,16 +66,26 @@ $product_id = $_GET['productId'];
         <!---------------------------------------------------- Product Information ---------------------------------------------------->
         <div class="card">
             <div class="card-title">Product Information</div>
+            <?php
+            $productSelect = "SELECT ap.`Id`, `ProductName`, `Price`, `ColorName`, mt.Name AS `MaterialId` FROM `add_product` ap
+                              INNER JOIN material_type mt ON mt.Id = ap.MaterialId WHERE ap.Id = $product_id ";
+            $product_statment = mysqli_query($conn,$productSelect);
 
+            if(mysqli_num_rows( $product_statment)> 0)
+            {
+                $product = mysqli_fetch_assoc($product_statment);
+            
+            ?>
 
             <div class="grid">
-                <div class="info"><div class="label">Product Name</div><div class="value">Artificial Plant</div></div>
-                <div class="info"><div class="label">Primary Material</div><div class="value">Plastic</div></div>
-                <div class="info"><div class="label">Price</div><div class="value">₹499</div></div>
-                <div class="info"><div class="label">Color</div><div class="value">Dark Green</div></div>
+                <div class="info"><div class="label">Product Name</div><div class="value"><?php echo $product['ProductName'];?></div></div>
+                <div class="info"><div class="label">Primary Material</div><div class="value"><?php echo $product['MaterialId'];?></div></div>
+                <div class="info"><div class="label">Price</div><div class="value">₹<?php echo $product['Price'];?></div></div>
+                <div class="info"><div class="label">Color</div><div class="value"><?php echo $product['ColorName'];?></div></div>
                 <div class="info"><div class="label">Tax Included</div><div class="value">Yes</div></div>
                 <div class="info"><div class="label">With Vase</div><div class="value">Yes</div></div>
             </div>
+            <?php }?>
         </div>
 
         <!---------------------------------------------------- Shipping Info ---------------------------------------------------->

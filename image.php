@@ -54,7 +54,7 @@ if(isset($_POST['edit']))
         <div class="card">
             
             <h3 style="margin-bottom: 15px;">Add New Image</h3>
-            <form action="#" method="post" id="productForm" autocomplete="off" enctype="multipart/form-data">
+            <form action="image_action.php" method="post" id="productForm" autocomplete="off" enctype="multipart/form-data">
             <label>Image<s>*</s></label><br>
             <div class="card-right">
 

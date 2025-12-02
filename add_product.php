@@ -13,14 +13,12 @@ $categoryType = 0;
 if (isset($_POST['edit'])) {
   $editId = $_POST['productid'];
   $imgs = $_POST['img'];
-  $button = "Update";
+  $button = "Update Product";
   $category = true;
 
 
-  $editselect = "SELECT `ProductImage`, `Price`,`Description`, `ProductName`,`ColorName`, `ColorCode`, `CategoryId`,  `MaterialId` FROM `add_product` ap
+  $editselect = "SELECT `ProductImage`, `Price`,`Description`, `ProductName`,`ColorName`, `ColorCode`, `CategoryId`,  `MaterialId`, `MaterialTypeId` FROM `add_product` ap
                    WHERE ap.Id = $editId AND ap.IsDeleted = 0";
-  //  var_dump($editselect);
-
   $statmnt = mysqli_query($conn, $editselect);
 
   if (mysqli_num_rows($statmnt) > 0) {
@@ -28,8 +26,7 @@ if (isset($_POST['edit'])) {
 
   }
 }
-// var_dump($prows);
-// echo $prows['ProductImage'];
+
 
 
 ?>
@@ -43,7 +40,6 @@ if (isset($_POST['edit'])) {
   <link href="css/add_product.css" rel="stylesheet">
   <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"
     integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="js/jquery.min"></script>
 </head>
 
@@ -81,7 +77,7 @@ if (isset($_POST['edit'])) {
 
         <!---------------------------------------------------- Product image ---------------------------------------------------->
 
-        <form action="#" method="post" id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
+        <form action="add_product_action.php" method="post" id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
           <div class="field">
             <label for="productImage">Product image <s>*</s></label>
             <div class="file-input">
@@ -150,11 +146,13 @@ if (isset($_POST['edit'])) {
               <label>Color Name</label>
               <input type="text" name="colorName" id="" style="width: 100%;margin-bottom: 10px;"
                 value="<?php echo $prows == "" ? "" : $prows['ColorName'] ?>">
+                <div class="error small" id="colorErr"></div>
             </div>
             <div style="display:flex; flex-direction:column;">
               <label>Color Code</label>
               <input type="text" name="colorCode" id="" style="width: 100%;margin-bottom: 10px;"
                 value="<?php echo $prows == "" ? "" : $prows['ColorCode'] ?>">
+                <div class="error small" id="codeErr"></div>
             </div>
           </div>
 
@@ -185,7 +183,8 @@ if (isset($_POST['edit'])) {
                 while ($material = mysqli_fetch_assoc($statemnt)) {
 
                   ?>
-                  <option value="<?php echo $material["Id"]; ?>" <?php echo ($prows != "" && $material['Id'] == $prows['MaterialId']) ? 'selected' : '' ?>><?php echo $material['Name']; ?></option>
+                  <option value="<?php echo $material["Id"]; ?>" <?php echo ($prows != "" && $material['Id'] == $prows['MaterialId']) ? 'selected' : '' ?>>
+                    <?php echo $material['Name']; ?></option>
                 <?php } ?>
               </select>
               <div class="error small" id="materialErr"></div>
@@ -215,7 +214,11 @@ if (isset($_POST['edit'])) {
 
           <div class="form-actions">
             <button type="submit" id="btn" class="btn" name="btn" style="background-color:#9A8C7A;color:white;"
-              onsubmit="ValidationForm()">Add product</button>
+              onsubmit="ValidationForm()"><?php echo $button; ?></button>
+
+
+
+
             <button type="button" id="resetBtn" class="btn secondary">Reset</button>
             <div style="margin-left:auto" class="small" id="formMsg" aria-live="polite"></div>
           </div>
@@ -301,7 +304,6 @@ if (isset($_POST['edit'])) {
 
 
 
-
   <!---------------------------------------------------- validation ---------------------------------------------------->
 
 
@@ -368,6 +370,7 @@ if (isset($_POST['edit'])) {
     });
 
 
+
     function clearErrors() {
       document.querySelectorAll(".error").forEach(err => err.innerText = "");
       document.querySelectorAll("input, select").forEach(el => el.style.border = "");
@@ -405,7 +408,8 @@ if (isset($_POST['edit'])) {
 
 
   <script>
-
+    let category = <?php echo $prows != "" ? $prows['MaterialTypeId'] : '0' ?>;
+    // alert(category);
     <?php
     if ($category) {
       ?>
@@ -413,7 +417,8 @@ if (isset($_POST['edit'])) {
 
       $(document).ready(function () {
         let id = document.getElementById("materialCategory");
-        alert(id.value);
+
+        // alert(id.value);
       });
 
       <?php
@@ -433,6 +438,11 @@ if (isset($_POST['edit'])) {
           },
           success: function (response) {
             $("#materialCategory").html(response);
+
+            if(category != "")
+            {
+              $("#materialCategory").val(category);
+            }
           }
         });
     };
@@ -440,6 +450,7 @@ if (isset($_POST['edit'])) {
 
 
   </script>
+
 </body>
 
 </html

@@ -40,13 +40,19 @@ a {
     {
         text-align:center;
         padding:18px;
-        background:#1d3557;
+        background:#0c192b;
         color:#fff;
         font-size:24px;
         font-weight:600;
         border-radius:12px;
         letter-spacing:1px;
         margin-bottom:25px;
+    }
+
+    .header a
+    {
+      text-decoration: none;
+      color: white;
     }
 
     .container

@@ -1,118 +1,178 @@
 <?php
+include "database.php";
 
-include('database.php');
+$edit = false;
+$prow = [];
 
-if(isset($_POST['btn']))
-{
-	$id =$_POST['product'];
-    $image=$_FILES['image']['name'];
-    $name=$_POST['productName'];
-    $price=$_POST['productPrice'];
-	$material=$_POST['productMaterial'];
-    $type=$_POST['productType'];
-	$colorname=$_POST['colorName'];
-	$colorcode=$_POST['colorCode'];
-    $description=$_POST['productDesc'];
+// If Edit button clicked
+if (isset($_GET['edit_id'])) {
+    $edit = true;
+    $id = $_GET['edit_id'];
 
-//    var_dump($image);
-
-
-    if ($id != 0) {
-
-        $update = "UPDATE `add_product` SET `ProductImage`='$image',`ProductName`='$name',`Description`='$description',`Price`=$price,
-		          `ColorName`='$colorname',`ColorCode`='$colorcode',`CategoryId`=$type,`MaterialId`=$material,
-		          `LastUpdated`=CURRENT_TIMESTAMP WHERE Id = $id AND `IsDeleted` = 0";
-				  
-        $ustatemnt=mysqli_query($conn,$update);
-         if (!$ustatemnt) {
-                echo "error2";
-            } else {
-                header("location:add_product.php");
-            }
-    } 
-    else
-	{
-		
-	$select="SELECT `Id` FROM `add_product` WHERE ProductName='$name' AND CategoryId=$type"; 
-	
-    var_dump($select);
-	if (!$statemnt=mysqli_query($conn,$select))
-	{
-		echo "error";
-	}
-	else 
-	{
-		if(mysqli_num_rows($statemnt)>0)
-		{
-			echo "exist";
-		}
-		else
-		{
-			
-			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `MaterialId`, `ColorName`, `ColorCode`)  
-            VALUES ('$image','$name','$description',$price,$type,$material,'$colorname', '$colorcode')";
-			var_dump($insert_product);
-
-            $statement=mysqli_query($conn,$insert_product);
-	
-			if(!$statement)
-			{
-				echo "error2";
-			}
-
-
-			  $product_id = mysqli_insert_id($conn);
-
-
-             $insert_color = "INSERT INTO `product_color_details` (`ProductId`, `ColorCode`, `ColorName`)
-			 VALUES ($product_id, '$colorname', '$colorcode')";
-
-            $color_statement = mysqli_query($conn, $insert_color);
-
-           if(!$color_statement){
-                echo "Color insert error";
-                exit;
-           }
-
-			else
-			{
-				$image_path="images/product/";
-				$product_image=$image_path.basename($image);
-				if(move_uploaded_file($_FILES['image']['tmp_name'],$product_image))
-				{
-					header('location:add_product.php');
-				}
-				else
-				{
-					echo "something is else";
-				}
-			}
-		}
-	}
-	}
-	}
-	elseif (isset($_POST['delete'])) 
-{
-    $id = $_POST['productid'];
-
-    
-    $dupdate = "UPDATE add_product SET IsDeleted = 1 WHERE Id = $id";
-    // var_dump($dupdate);
-
-    $dstatement = mysqli_query($conn, $dupdate);
-
-    if (!$dstatement) 
-        {
-        echo "Error updating";
-    } 
-    else 
-    {
-        header("Location: location:add_product.php");
-        exit();
-    }
+    $q = mysqli_query($conn, "SELECT * FROM products WHERE Id='$id'");
+    $prow = mysqli_fetch_assoc($q);
 }
-
 ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Add / Edit Product</title>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        .container {
+            width: 60%;
+            margin: auto;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 0 0 10px #ccc;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #aaa;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .preview-box {
+            width: 150px;
+            height: 150px;
+            background: #eee;
+            border-radius: 6px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+        button {
+            background: #1a73e8;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 6px;
+            font-size: 17px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2><?php echo $edit ? "Edit Product" : "Add Product"; ?></h2>
+
+    <form method="POST" action="product_action.php" enctype="multipart/form-data">
+
+        <!-- If editing, send the ID -->
+        <?php if ($edit) { ?>
+            <input type="hidden" name="edit_id" value="<?php echo $prow['Id']; ?>">
+        <?php } ?>
+
+        <!-- MATERIAL -->
+        <label>Material</label>
+        <select id="materialSelect" name="material" onchange="loadCategory()">
+            <option value="">Choose Material</option>
+
+            <?php
+            $m = mysqli_query($conn, "SELECT * FROM material_type WHERE IsDeleted=0");
+            while ($row = mysqli_fetch_assoc($m)) {
+
+                $sel = ($edit && $prow['MaterialId'] == $row['Id']) ? "selected" : "";
+
+                echo "<option value='{$row['Id']}' $sel>{$row['Name']}</option>";
+            }
+            ?>
+        </select>
+
+        <!-- CATEGORY -->
+        <label>Category</label>
+        <select id="categorySelect" name="category">
+            <option value="">Choose Category</option>
+        </select>
+
+        <!-- PRICE -->
+        <label>Price</label>
+        <input type="number" name="price"
+               value="<?php echo $edit ? $prow['Price'] : ""; ?>" required>
+
+        <!-- DESCRIPTION -->
+        <label>Description</label>
+        <textarea name="description" rows="4"><?php
+            echo $edit ? $prow['Description'] : "";
+        ?></textarea>
+
+        <!-- IMAGE -->
+        <label>Product Image</label>
+        <div class="preview-box" id="imgPreview">
+
+            <?php if ($edit && $prow['ProductImage'] != "") { ?>
+                <img src="images/<?php echo $prow['ProductImage']; ?>"
+                     style="width:100%;height:100%;object-fit:cover;">
+            <?php } else { ?>
+                No Image
+            <?php } ?>
+
+        </div>
+
+        <input type="file" name="productImage" id="productImage">
+        <input type="hidden" name="oldImage" value="<?php echo $edit ? $prow['ProductImage'] : ""; ?>">
+
+        <button type="submit">
+            <?php echo $edit ? "Update Product" : "Add Product"; ?>
+        </button>
+    </form>
+</div>
+
+<script>
+    // Image Preview
+    $("#productImage").change(function () {
+        let file = this.files[0];
+        let box = $("#imgPreview");
+
+        if (file) {
+            let reader = new FileReader();
+            reader.onload = function (e) {
+                box.html(`<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;">`);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Load Category via AJAX
+    function loadCategory(selectedCategory = null) {
+
+        let materialId = $("#materialSelect").val();
+
+        $.ajax({
+            url: "fetch_category.php",
+            type: "POST",
+            data: { material_id: materialId },
+            success: function (response) {
+                $("#categorySelect").html(response);
+
+                if (selectedCategory) {
+                    $("#categorySelect").val(selectedCategory);
+                }
+            }
+        });
+    }
+
+    // Auto-load category in EDIT mode
+    <?php if ($edit) { ?>
+        $(document).ready(function () {
+            loadCategory(<?php echo $prow['CategoryId']; ?>);
+        });
+    <?php } ?>
+</script>
+
+</body>
+</html>
 
 
 
