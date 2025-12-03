@@ -90,7 +90,7 @@ a {
         }
         .container-box {
             background: #fff;
-            padding: 20px;
+            padding: 7px;
             border-radius: 12px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
         }
@@ -127,6 +127,7 @@ a {
       border-radius:5px;
       background-color:#897869;
       color: white;
-      padding:5px 10px;
+      padding:3px 9px;
       border: none;
+      font-size: 13px;
     }

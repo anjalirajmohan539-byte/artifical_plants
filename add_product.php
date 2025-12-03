@@ -97,7 +97,7 @@ if (isset($_POST['edit'])) {
                 <div class="error small" id="imgErr"></div>
                 <div id="imgHelp" class="small" style="margin-top:6px">Recommended : square image Max 2MB.</div>
 
-                <input type="hidden" name="product" value="<?php echo $editId; ?>">
+                <input type="hidden" id="productId" name="product" value="<?php echo $editId; ?>">
               </div>
             </div>
           </div>
@@ -144,13 +144,13 @@ if (isset($_POST['edit'])) {
           <div style="display:flex; gap:15px;">
             <div style="display:flex; flex-direction:column;">
               <label>Color Name</label>
-              <input type="text" name="colorName" id="" style="width: 100%;margin-bottom: 10px;"
+              <input type="text" name="colorName" id="color" style="width: 100%;margin-bottom: 10px;"
                 value="<?php echo $prows == "" ? "" : $prows['ColorName'] ?>">
                 <div class="error small" id="colorErr"></div>
             </div>
             <div style="display:flex; flex-direction:column;">
               <label>Color Code</label>
-              <input type="text" name="colorCode" id="" style="width: 100%;margin-bottom: 10px;"
+              <input type="text" name="colorCode" id="code" style="width: 100%;margin-bottom: 10px;"
                 value="<?php echo $prows == "" ? "" : $prows['ColorCode'] ?>">
                 <div class="error small" id="codeErr"></div>
             </div>
@@ -195,7 +195,7 @@ if (isset($_POST['edit'])) {
 
           <!---------------------------------------------------- Product category ---------------------------------------------------->
 
-          <div class="field">
+          <div class="field" id="category">
             <label for="materialCategory">Product Category <s>*</s></label>
             <select name="materialCategory" id="materialCategory">
             </select>
@@ -304,104 +304,156 @@ if (isset($_POST['edit'])) {
 
 
 
-  <!---------------------------------------------------- validation ---------------------------------------------------->
+  <!---------------------------------------------------- Form validation ---------------------------------------------------->
 
 
-  <script>
+<script>
 
-    document.getElementById("productForm").addEventListener("submit", function (e) {
-      let hasError = false;
+document.getElementById("productImage").addEventListener("change", function () {
+    const file = this.files[0];
+    const preview = document.getElementById("imgPreview");
 
-      clearErrors();
-
-      let image = document.getElementById("productImage");
-      let name = document.getElementById("productName");
-      let type = document.getElementById("productType");
-      let price = document.getElementById("productPrice");
-      let material = document.getElementById("productMaterial");
-      let category = document.getElementById("materialCategory");
-
-
-      if (image.files.length === 0) {
-        showError("imgErr", "Product image is required");
-        hasError = true;
-      } else {
-        let file = image.files[0];
+    if (file) {
         if (file.size > 2 * 1024 * 1024) {
-          showError("imgErr", "Image must be less than 2MB");
-          hasError = true;
+            document.getElementById("imgErr").innerText = "Max size allowed is 2MB.";
+            this.value = "";
+            preview.innerHTML = "<span class='small' style='color:gray;padding:6px;'>No image</span>";
+            return;
         }
-      }
 
-
-      if (name.value.trim() === "") {
-        showError("nameErr", "Product name is required");
-        name.style.border = "1px solid red";
-        hasError = true;
-      }
-
-      if (type.value == "0") {
-        showError("typeErr", "Please choose product type");
-        type.style.border = "1px solid red";
-        hasError = true;
-      }
-
-      if (price.value.trim() === "" || Number(price.value) <= 0) {
-        showError("priceErr", "Enter a valid price");
-        price.style.border = "1px solid red";
-        hasError = true;
-      }
-
-      if (material.value == "0") {
-        showError("materialErr", "Please select a material");
-        material.style.border = "1px solid red";
-        hasError = true;
-      }
-
-      if (category.value == "0" || category.value === "") {
-        showError("catErr", "Please select a category");
-        category.style.border = "1px solid red";
-        hasError = true;
-      }
-
-      if (hasError) {
-        e.preventDefault();
-      }
-    });
-
-
-
-    function clearErrors() {
-      document.querySelectorAll(".error").forEach(err => err.innerText = "");
-      document.querySelectorAll("input, select").forEach(el => el.style.border = "");
-    }
-
-
-    function showError(id, msg) {
-      document.getElementById(id).innerText = msg;
-    }
-
-
-    document.getElementById("resetBtn").addEventListener("click", function () {
-      document.getElementById("productForm").reset();
-      clearErrors();
-    });
-
-
-    document.getElementById("productImage").addEventListener("change", function () {
-      let file = this.files[0];
-      let preview = document.getElementById("imgPreview");
-
-      if (file) {
-        let reader = new FileReader();
-        reader.onload = function (e) {
-          preview.innerHTML = `<img src="${e.target.result}" style="width:100%;height:100%;object-fit:cover;border-radius:6px;">`;
+        const reader = new FileReader();
+        reader.onload = function () {
+            preview.innerHTML = `<img src="${this.result}" 
+                                  style="width:100%;height:100%;object-fit:cover;">`;
         };
         reader.readAsDataURL(file);
-      }
-    });
-  </script>
+    } else {
+        preview.innerHTML = "<span class='small' style='color:gray;padding:6px;'>No image</span>";
+    }
+});
 
+
+
+function ValidationForm() {
+    let valid = true;
+
+    let image = document.getElementById("productImage").value;
+    let name = document.getElementById("productName").value.trim();
+    let type = document.getElementById("productType").value;
+    let price = document.getElementById("productPrice").value;
+    let material = document.getElementById("productMaterial").value;
+    let category = document.getElementById("materialCategory").value;
+
+    
+    document.querySelectorAll(".error").forEach(e => e.innerText = "");
+
+    
+    let isEdit = "<?php echo $editId; ?>";
+
+    if (image === "" && isEdit === "") {
+        document.getElementById("imgErr").innerText = "Please upload image";
+        valid = false;
+    }
+
+    if (name === "") {
+        document.getElementById("nameErr").innerText = "Product name required";
+        valid = false;
+    }
+
+    if (type == 0) {
+        document.getElementById("typeErr").innerText = "Select type";
+        valid = false;
+    }
+
+    if (price === "" || price <= 0) {
+        document.getElementById("priceErr").innerText = "Enter valid price";
+        valid = false;
+    }
+
+    if (material == 0) {
+        document.getElementById("materialErr").innerText = "Select material";
+        valid = false;
+    }
+
+    if (category == 0 || category === "") {
+        document.getElementById("catErr").innerText = "Select category";
+        valid = false;
+    }
+
+    return valid;
+}
+
+
+
+document.getElementById("productForm").addEventListener("submit", function (e) {
+    if (!ValidationForm()) {
+        e.preventDefault();
+    }
+});
+
+
+
+document.getElementById("resetBtn").addEventListener("click", function () {
+
+    document.getElementById("productName").value="";
+    document.getElementById("productType").value="0";
+    document.getElementById("productPrice").value="";
+    document.getElementById("color").value="";
+    document.getElementById("code").value="";
+    document.getElementById("productMaterial").value="0";
+    document.getElementById("materialCategory").value="";
+    document.getElementById("productDesc").value="";
+    document.getElementById("productId").value="";
+    document.getElementById("btn").innerText="Add Product";
+
+
+ 
+    document.getElementById("imgPreview").innerHTML =
+        "<span class='small' style='color:gray;padding:6px;'>No image</span>";
+
+
+    document.querySelectorAll(".error").forEach(e => e.innerText = "");
+
+
+});
+
+
+
+document.getElementById("productMaterial").addEventListener("change", function ()
+{
+  let selectedValue = parseInt(this.value);
+  let category = document.getElementById("category");
+// alert(typeof(selectedValue));
+
+  if(selectedValue === 0)
+  {
+    category.style.display = "none";
+    
+  }
+  else
+  {
+    category.style.display = "flex";
+  }
+});
+
+
+
+$(document).ready(function () {
+ 
+    if ($("#productMaterial").val() == "0") {
+      
+      $("#category").hide();
+    } 
+    else 
+      {
+        $("#category").show();
+      }
+
+});
+
+
+
+</script>
 
 
   <!---------------------------------------------------- Ajax js ---------------------------------------------------->

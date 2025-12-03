@@ -4,7 +4,7 @@ include('database.php');
 
 if(isset($_POST['btn']))
 {
-	$id =$_POST['product'];
+	echo $id =$_POST['product'];
     $image=$_FILES['image']['name'];
     $name=$_POST['productName'];
     $price=$_POST['productPrice'];
