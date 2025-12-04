@@ -1,183 +1,530 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Details - Modern UI</title>
-<style>
-    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
-    body{background:#eef2f7;padding:25px;}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Product - Milon Artificial Plants (Demo)</title>
 
-    .header{
-        text-align:center;
-        padding:18px;
-        background:#1d3557;
-        color:#fff;
-        font-size:24px;
-        font-weight:600;
-        border-radius:12px;
-        letter-spacing:1px;
-        margin-bottom:25px;
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <style>
+    :root{
+      --brown:#6f584c;
+      --light-brown:#e9e6e6;
+      --accent:#b38f80;
+      --muted:#f7f7f9;
     }
 
-    .container{
-        display:grid;
-        grid-template-columns:30% 70%;
-        gap:25px;
+    body{
+      background: linear-gradient(90deg,#f3f6fb 0%, #ffffff 100%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    /* LEFT PRODUCT IMAGE CARD */
-    .left{
-        background:#fff;
-        border-radius:15px;
-        padding:20px;
-        box-shadow:0 6px 18px rgba(0,0,0,0.1);
-        transition:.3s;
+    /* Sidebar */
+    .sidebar{
+      background: var(--brown);
+      color: #fff;
+      min-height: 100vh;
+      padding: 1.5rem 0.5rem;
     }
-    .left:hover{transform:scale(1.01);}    
-    .main-img{
-        width:100%;
-        border-radius:12px;
-        object-fit:cover;
+    .sidebar h2{
+      font-size: 1.05rem;
+      margin-bottom: 1.2rem;
+      text-align:center;
+      line-height:1.1;
+    }
+    .sidebar .nav-link{
+      color: #fff;
+      padding: .6rem .8rem;
+      border-radius: .35rem;
+      display:flex;
+      gap:.6rem;
+      align-items:center;
+    }
+    .sidebar .nav-link img{ width:22px; height:22px; object-fit:cover; }
+
+    .sidebar a {
+        display: block;
+        padding: 20px 20px;
+        color: #e6e6e6;
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
     }
 
-    .product-title{font-size:22px;font-weight:600;margin:15px 0;color:#1d3557;}
+    .sidebar a:hover {
+        background: #9b8b7d;
+        color: #fff;
+        padding-left: 28px;
+    }
+
+    .sidebar img
+    {
+      width:15%;
+      border-radius:20px;
+    }
+
+
+    /* Main content */
+    .container-main{
+      padding: 1.2rem 2rem;
+    }
+
+    /* Left panel (form) box */
+    .panel-card{
+      background: #fff;
+      border-radius: .5rem;
+      box-shadow: 0 4px 12px rgba(29,29,29,0.06);
+      padding: 1rem;
+      margin-bottom:1rem;
+    }
+
+    .avatar-preview{
+      width:170px;
+      height:170px;
+      border:2px dashed #e0dede;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+      overflow:hidden;
+      background:#fafafa;
+      color:#9aa3ad;
+      margin-bottom: .6rem;
+    }
+    .avatar-preview img{ width:100%; height:100%; object-fit:cover; }
 
     .thumbs{
-        display:flex;
-        gap:12px;
-        margin-top:15px;
+      display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem;
     }
     .thumbs img{
-        width:70px;height:70px;
-        border-radius:10px;
-        border:2px solid #ddd;
-        cursor:pointer;
-        transition:.3s;
+      width:72px; height:72px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent;
     }
-    .thumbs img:hover{border-color:#1d3557;transform:scale(1.07);}    
+    .thumbs img:hover{ border-color:var(--accent); transform:scale(1.02); }
 
-    /* RIGHT SIDE */
-    .right{
-        display:flex;
-        flex-direction:column;
-        gap:25px;
+    .main-img{
+      width:100%;
+      max-height:420px;
+      object-fit:contain;
+      border-radius:6px;
+      background:#fff;
     }
 
-    .card{
-        background:#fff;
-        padding:22px;
-        border-radius:15px;
-        box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    .btn-brown{
+      background:var(--brown);
+      color:#fff;
+      border:0;
     }
-    .card-title{
-        font-size:20px;
-        font-weight:600;
-        color:#1d3557;
-        margin-bottom:15px;
-        border-left:5px solid #1d3557;
-        padding-left:10px;
+    .btn-brown:active, .btn-brown:focus{ outline: none; box-shadow:none; }
+
+    /* small screens */
+    @media (max-width:991px){
+      .sidebar{ display:none; }
+      .container-main{ padding:1rem; }
     }
-
-    .grid{
-        display:grid;
-        grid-template-columns:repeat(3,1fr);
-        gap:15px;
-    }
-
-    .info{
-        background:#f8faff;
-        padding:15px;
-        border-radius:10px;
-        border:1px solid #e0e6ef;
-    }
-    .label{font-size:13px;color:#6b7280;}
-    .value{font-size:16px;font-weight:600;color:#1d3557;margin-top:5px;}
-
-    .shipping li{margin-bottom:8px;color:#333;font-size:15px;}
-
-    .pair{
-        display:flex;align-items:center;gap:15px;
-    }
-    .pair img{width:85px;height:85px;border-radius:12px;}
-
-    /* Validation Example */
-    .error{color:red;font-size:14px;margin-top:6px;height:16px;}
-</style>
+  </style>
 </head>
 <body>
 
-<div class="header">PRODUCT DETAILS</div>
+<div class="d-flex">
+  <!-- Sidebar -->
+  <aside class="sidebar col-12 col-md-2 d-none d-md-block">
+    <h2>Milon<br>Artificial Plants</h2>
+    <nav class="nav flex-column">
+     <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
+    <a href="add_product.php"><img src="images/add-product.png" alt="">Add Products</a>
+    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
+    <a href="#"><img src="images/product_list.jpg" alt="">Product List</a>
+    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
+    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
+    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
+    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
+    </nav>
+  </aside>
 
-<div class="container">
+  <!-- Main area -->
+  <main class="flex-grow-1">
+    <div class="container-fluid container-main">
+      <div class="row gx-4">
+        <!-- Form column -->
+        <div class="col-lg-4">
+          <div class="panel-card">
+            <h5 class="mb-3">Product details</h5>
 
-    <!-- LEFT SIDE -->
-    <div class="left">
-        <img src="images/plant_3.png" class="main-img" id="mainImage">
+            <form id="productForm" novalidate>
+              <!-- Image preview + input -->
+              <label class="form-label">Product image *</label>
+              <div class="mb-2">
+                <div class="avatar-preview" id="imagePreview">No image</div>
+                <input class="form-control form-control-sm" type="file" id="productImage" accept="image/*">
+                <div class="form-text">Recommended: square image. Max 2MB.</div>
+              </div>
 
-        <div class="product-title">Artificial Plant</div>
+              <!-- Product name -->
+              <div class="mb-3">
+                <label class="form-label">Product name *</label>
+                <input type="text" id="productName" class="form-control" placeholder="e.g. Classic White Vase" required>
+                <div class="invalid-feedback">Product name is required.</div>
+              </div>
 
-        <p><b>Price:</b> ₹499</p>
-        <p><b>Color:</b> Dark Green</p>
+              <!-- Product type -->
+              <div class="mb-3">
+                <label class="form-label">Product type *</label>
+                <select class="form-select" id="productType" required>
+                  <option value="">Choose type</option>
+                  <option>Artificial Plants</option>
+                  <option>Vases</option>
+                  <option>Accessories</option>
+                </select>
+                <div class="invalid-feedback">Please choose type.</div>
+              </div>
 
-        <div class="thumbs">
-            <img src="images/plant_1.jpg" onclick="swap(this)">
-            <img src="images/plant_2.jpg" onclick="swap(this)">
-            <img src="images/plant_4.png" onclick="swap(this)">
-        </div>
-    </div>
-
-    <!-- RIGHT SIDE -->
-    <div class="right">
-
-        <!-- Product Information -->
-        <div class="card">
-            <div class="card-title">Product Information</div>
-
-            <div class="grid">
-                <div class="info"><div class="label">Product Name</div><div class="value">Artificial Plant</div></div>
-                <div class="info"><div class="label">Primary Material</div><div class="value">Plastic</div></div>
-                <div class="info"><div class="label">Price</div><div class="value">₹499</div></div>
-                <div class="info"><div class="label">Color</div><div class="value">Dark Green</div></div>
-                <div class="info"><div class="label">Tax Included</div><div class="value">Yes</div></div>
-                <div class="info"><div class="label">With Vase</div><div class="value">Yes</div></div>
-            </div>
-        </div>
-
-        <!-- Shipping Info -->
-        <div class="card">
-            <div class="card-title">Shipping Details</div>
-            <ul class="shipping">
-                <li>Availability: In Stock</li>
-                <li>Delivery within: 3–5 days</li>
-                <li>Free Delivery</li>
-                <li>Cash On Delivery Available</li>
-            </ul>
-        </div>
-
-        <!-- Pair Well With -->
-        <div class="card">
-            <div class="card-title">Pair Well With</div>
-            <div class="pair">
-                <img src="images/vase1.jpg">
-                <div>
-                    <div style="font-size:17px;font-weight:600;color:#1d3557;">Mini Vase</div>
-                    <div style="color:#333;">₹299</div>
+              <div class="row g-2 mb-3">
+                <div class="col">
+                  <label class="form-label">Color Name</label>
+                  <input type="text" id="colorName" class="form-control" placeholder="e.g. Beige">
                 </div>
+                <div class="col-4">
+                  <label class="form-label">Color Code</label>
+                  <input type="text" id="colorCode" class="form-control" placeholder="#FFFFFF">
+                </div>
+              </div>
+
+              <!-- Price -->
+              <div class="mb-3">
+                <label class="form-label">Product price (₹) *</label>
+                <input type="number" id="productPrice" class="form-control" placeholder="e.g. 499.00" step="0.01" min="0" required>
+                <div class="invalid-feedback">Please enter a valid price.</div>
+              </div>
+
+              <!-- Materials select -->
+              <div class="mb-3">
+                <label class="form-label">Product Materials *</label>
+                <select class="form-select" id="productMaterials" required>
+                  <option value="">Choose Materials</option>
+                  <option value="0">Plastic</option>
+                  <option value="1">Ceramic</option>
+                  <option value="2">Fabric</option>
+                </select>
+                <div class="invalid-feedback">Please choose a material.</div>
+              </div>
+
+              <!-- Category select - toggled depending on materials -->
+              <div class="mb-3" id="categoryContainer">
+                <label class="form-label">Product Category *</label>
+                <select class="form-select" id="productCategory" required>
+                  <option value="">Choose Category</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                </select>
+                <div class="invalid-feedback">Please choose a category.</div>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea id="description" class="form-control" rows="4" placeholder="Short description (optional)"></textarea>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-brown">Add product</button>
+                <button type="button" id="resetBtn" class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Thumbnail preview area (for additional gallery images) -->
+          <div class="panel-card mt-3">
+            <h6>Gallery thumbnails (click to swap)</h6>
+            <div class="thumbs" id="galleryThumbs">
+              <!-- thumbnails inserted here -->
             </div>
+          </div>
         </div>
 
+        <!-- Right column: product list + main image -->
+        <div class="col-lg-8">
+          <div class="panel-card mb-3">
+            <h5>Products list</h5>
+            <div class="table-responsive">
+              <table class="table table-sm align-middle">
+                <thead>
+                  <tr>
+                    <th>Sl no</th>
+                    <th>Product name</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="productsTable">
+                  <!-- sample rows -->
+                  <tr>
+                    <td>1</td>
+                    <td>plant</td>
+                    <td>Artificial Plants</td>
+                    <td>325.00</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-secondary">View</button>
+                      <button class="btn btn-sm btn-brown">Image</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>vase</td>
+                    <td>Vases</td>
+                    <td>499.00</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-secondary">View</button>
+                      <button class="btn btn-sm btn-brown">Image</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h6>Preview (main image)</h6>
+            <img id="mainImage" class="main-img" src="https://via.placeholder.com/1200x700?text=Main+Image+Preview" alt="Main product preview">
+            <div class="mt-2 text-muted small">Click a thumbnail to swap the main image.</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </main>
 </div>
 
 <script>
-function swap(img){
-    document.getElementById("mainImage").src = img.src;
-}
-</script>
+/* ---------------------------
+   IMAGE PREVIEW, GALLERY, SWAP
+   --------------------------- */
+const productImageInput = document.getElementById('productImage');
+const imagePreview = document.getElementById('imagePreview');
+const galleryThumbs = document.getElementById('galleryThumbs');
+const mainImage = document.getElementById('mainImage');
 
+let galleryImages = []; // store uploaded images as data URLs
+
+// Show single image preview and also add to gallery thumbnails
+productImageInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+
+  // file size check (2MB)
+  if(file.size > 2 * 1024 * 1024){
+    alert('Image size exceeds 2MB. Please pick a smaller file.');
+    e.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    const dataUrl = ev.target.result;
+    // set preview box
+    imagePreview.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = dataUrl;
+    imagePreview.appendChild(img);
+
+    // set main image as well
+    mainImage.src = dataUrl;
+
+    // add to gallery (prepend so it's first)
+    addToGallery(dataUrl);
+  };
+  reader.readAsDataURL(file);
+});
+
+function addToGallery(dataUrl){
+  // ensure unique or just push — here we push
+  galleryImages.unshift(dataUrl);
+  renderGallery();
+}
+
+function renderGallery(){
+  galleryThumbs.innerHTML = '';
+  galleryImages.forEach((src, idx) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'thumb-' + idx;
+    img.addEventListener('click', () => swap(img));
+    galleryThumbs.appendChild(img);
+  });
+  // Also ensure main image uses first gallery if available
+  if(galleryImages.length > 0) mainImage.src = galleryImages[0];
+}
+
+// swap main image with clicked thumbnail
+function swap(imgElement){
+  const clickedSrc = imgElement.src;
+  // change main image
+  mainImage.src = clickedSrc;
+  // optionally: highlight clicked thumb (simple visual)
+  document.querySelectorAll('.thumbs img').forEach(i=> i.style.borderColor = 'transparent');
+  imgElement.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#b38f80';
+}
+
+/* ---------------------------
+   RESET BUTTON + MATERIALS → CATEGORY TOGGLE
+   --------------------------- */
+const resetBtn = document.getElementById('resetBtn');
+const productMaterials = document.getElementById('productMaterials');
+const categoryContainer = document.getElementById('categoryContainer');
+
+function updateCategoryVisibility(){
+  // In your earlier conversation you wanted: if materials value == 0 -> show or hide?
+  // Here: if materials value === "0" then hide category (example rule). Adjust as needed.
+  if(productMaterials.value === "0"){
+    categoryContainer.style.display = 'none';
+    // clear category value when hidden
+    document.getElementById('productCategory').value = '';
+  } else {
+    categoryContainer.style.display = 'block';
+  }
+}
+productMaterials.addEventListener('change', updateCategoryVisibility);
+
+// reset behaviour
+resetBtn.addEventListener('click', () => {
+  // reset form fields
+  document.getElementById('productForm').reset();
+
+  // reset previews
+  imagePreview.innerHTML = 'No image';
+  galleryThumbs.innerHTML = '';
+  galleryImages = [];
+  mainImage.src = 'https://via.placeholder.com/1200x700?text=Main+Image+Preview';
+
+  // ensure materials select goes to 0 (if exists) and update category display
+  // Set value to "" (empty) by default; if you want to force to 0 do: productMaterials.value = "0";
+  productMaterials.value = "";
+  updateCategoryVisibility();
+
+  // remove validation classes
+  document.querySelectorAll('#productForm .is-invalid, #productForm .is-valid').forEach(el=>{
+    el.classList.remove('is-invalid','is-valid');
+  });
+});
+
+/* ---------------------------
+   CLIENT-SIDE FORM VALIDATION
+   --------------------------- */
+const form = document.getElementById('productForm');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+  // Reset previous validation
+  const inputs = form.querySelectorAll('[required]');
+  let formValid = true;
+
+  inputs.forEach(input => {
+    // custom checks: for selects check value not empty
+    if((input.tagName === 'INPUT' || input.tagName === 'TEXTAREA') && input.value.trim() === ''){
+      input.classList.add('is-invalid');
+      input.classList.remove('is-valid');
+      formValid = false;
+    } else if(input.tagName === 'SELECT' && input.value === ''){
+      input.classList.add('is-invalid');
+      input.classList.remove('is-valid');
+      formValid = false;
+    } else {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+    }
+
+    // price additional check
+    if(input.id === 'productPrice'){
+      const v = parseFloat(input.value);
+      if(isNaN(v) || v < 0){
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        formValid = false;
+      }
+    }
+  });
+
+  // image required check - ensure main image not default placeholder
+  if(mainImage.src.includes('placeholder') || imagePreview.innerHTML.trim() === 'No image'){
+    // show a visual small danger
+    productImageInput.classList.add('is-invalid');
+    formValid = false;
+  } else {
+    productImageInput.classList.remove('is-invalid');
+    productImageInput.classList.add('is-valid');
+  }
+
+  if(!formValid){
+    // scroll to first invalid
+    const firstError = form.querySelector('.is-invalid');
+    if(firstError){
+      firstError.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    return;
+  }
+
+  // If valid, "submit" — here we'll just add a product row to the table as demo
+  addProductToTable({
+    name: document.getElementById('productName').value.trim(),
+    type: document.getElementById('productType').value,
+    price: parseFloat(document.getElementById('productPrice').value).toFixed(2),
+    image: mainImage.src || ''
+  });
+
+  // show success quick feedback
+  alert('Product added (demo). In your real app you would POST the form via fetch or submit to the server.');
+
+  // optionally reset form or keep values
+  // form.reset();
+});
+
+/* ---------------------------
+   SIMPLE DEMO: add product row to table
+   --------------------------- */
+function addProductToTable({name, type, price, image}){
+  const table = document.getElementById('productsTable');
+  const row = document.createElement('tr');
+  const idx = table.rows.length + 1;
+  row.innerHTML = `
+    <td>${idx}</td>
+    <td>${escapeHtml(name)}</td>
+    <td>${escapeHtml(type)}</td>
+    <td>${escapeHtml(price)}</td>
+    <td>
+      <button class="btn btn-sm btn-outline-secondary">View</button>
+      <button class="btn btn-sm btn-brown" onclick='viewImage("${image.replace(/"/g,"'")}")'>Image</button>
+    </td>
+  `;
+  table.appendChild(row);
+}
+
+/* small helper to open image in new tab */
+function viewImage(src){
+  if(!src) return;
+  window.open(src, '_blank');
+}
+
+/* small helper to escape insertion */
+function escapeHtml(unsafe) {
+  return unsafe
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#039;');
+}
+
+/* initialize category visibility on load */
+updateCategoryVisibility();
+
+</script>
 </body>
 </html>
+
 
 
 

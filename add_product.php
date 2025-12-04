@@ -417,43 +417,43 @@ document.getElementById("resetBtn").addEventListener("click", function () {
 
 });
 
+</script>
 
 
-document.getElementById("productMaterial").addEventListener("change", function ()
-{
-  let selectedValue = parseInt(this.value);
-  let category = document.getElementById("category");
-// alert(typeof(selectedValue));
+<script>
 
-  if(selectedValue === 0)
-  {
-    category.style.display = "none";
-    
-  }
-  else
-  {
-    category.style.display = "flex";
-  }
+function toggleCategoryDropdown() {
+    let material = document.getElementById("productMaterial");
+    let categoryField = document.getElementById("category");
+
+    if (material.value == "0") {
+        categoryField.style.display = "none"; 
+        document.getElementById("materialCategory").innerHTML = ""; 
+    } else {
+        categoryField.style.display = "flex"; 
+        loadCategoryOptions(material.value);  
+    }
+}
+
+document.getElementById("productMaterial").addEventListener("change", function () {
+    toggleCategoryDropdown();
 });
 
+document.getElementById("resetBtn").addEventListener("click", function () {
 
+    document.getElementById("productMaterial").value = "0";
 
-$(document).ready(function () {
- 
-    if ($("#productMaterial").val() == "0") {
-      
-      $("#category").hide();
-    } 
-    else 
-      {
-        $("#category").show();
-      }
+    document.getElementById("category").style.display = "none";
 
+    document.getElementById("materialCategory").innerHTML = "";
 });
 
-
+window.onload = function () {
+    toggleCategoryDropdown();
+};
 
 </script>
+
 
 
   <!---------------------------------------------------- Ajax js ---------------------------------------------------->

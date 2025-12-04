@@ -13,33 +13,37 @@ $product_id = $_GET['productId'];
 <title>Artifical_plant_registration</title>
 <link href="css/product_details.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
 <div class="header">
     <p>PRODUCT DETAILS</p>
     <p style="margin-left: 90%;margin-top: -53px;"><a href="#">Edit</a></p>
-    <p style="margin-right: 90%;margin-top: -53px;font-size: 30px;"><a href="#">⟵</a></p>
+    <p style="margin-right: 90%;margin-top: -53px;font-size: 30px;"><a href="add_product.php">⟵</a></p>
 
 </div>
 
 <div class="container">
 
     <!---------------------------------------------------- LEFT: SIDE ---------------------------------------------------->
-    <div class="left">
+<div class="left">
+    <!---------------------------------------------------- IMAGE ---------------------------------------------------->
 <?php
-$select = "SELECT ap.`Id`, ap.ProductImage, pi.Images, ProductName, Price, ColorName 
+$select = "SELECT ap.Id, ap.ProductImage, pi.Images, ProductName, Price, ColorName 
            FROM add_product ap
            INNER JOIN product_images pi ON pi.ProductId = ap.Id 
            WHERE ap.Id = $product_id AND pi.IsDelete = 0";
 
 $statemnt = mysqli_query($conn,$select);
 
-if(mysqli_num_rows($statemnt)>0)
+if(mysqli_num_rows($statemnt) > 0)
 {
-  
-    $image = mysqli_fetch_assoc($statemnt);
+    $allImages = [];
+    while($row = mysqli_fetch_assoc($statemnt)) {
+        $allImages[] = $row;
+    }
+
+    $image = $allImages[0];
 ?>
     <img src="images/product/<?php echo $image['ProductImage']; ?>" class="main-img" id="mainImage">
 
@@ -50,15 +54,16 @@ if(mysqli_num_rows($statemnt)>0)
 
     <div class="thumbs">
         <?php
-      
-        while($img = mysqli_fetch_assoc($statemnt)) {
+        foreach($allImages as $img) {
         ?>
             <img src="images/product/<?php echo $img['Images']; ?>" onclick="swap(this)">
-        <?php } ?>
+            <?php } ?>
+            <img src="images/product/<?php echo $image['ProductImage']; ?>" onclick="swap(this)">
     </div>
 
 <?php } ?>
 </div>
+
 
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
     <div class="right">
