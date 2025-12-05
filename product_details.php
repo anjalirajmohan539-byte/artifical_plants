@@ -28,6 +28,7 @@ $product_id = $_GET['productId'];
     <!---------------------------------------------------- LEFT: SIDE ---------------------------------------------------->
 <div class="left">
     <!---------------------------------------------------- IMAGE ---------------------------------------------------->
+    
 <?php
 $select = "SELECT ap.Id, ap.ProductImage, pi.Images, ProductName, Price, ColorName 
            FROM add_product ap
@@ -69,6 +70,7 @@ if(mysqli_num_rows($statemnt) > 0)
     <div class="right">
 
         <!---------------------------------------------------- Product Information ---------------------------------------------------->
+
         <div class="card">
             <div class="card-title">Product Information</div>
             <?php
@@ -94,6 +96,7 @@ if(mysqli_num_rows($statemnt) > 0)
         </div>
 
         <!---------------------------------------------------- Shipping Info ---------------------------------------------------->
+
         <div class="card">
             <div class="card-title">Shipping Details</div>
             <ul class="shipping">
@@ -104,6 +107,7 @@ if(mysqli_num_rows($statemnt) > 0)
         </div>
 
         <!---------------------------------------------------- Pair Well With ---------------------------------------------------->
+
         <div class="card">
             <div class="card-title">Pair Well With</div>
             <div class="pair">
@@ -117,6 +121,7 @@ if(mysqli_num_rows($statemnt) > 0)
 
 
         <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
+
                 <div class="card">
             <div class="card-title">Delivery Details</div>
             <div class="delivery col-4">

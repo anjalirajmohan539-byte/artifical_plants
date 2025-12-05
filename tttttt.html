@@ -28,10 +28,11 @@
       color: #fff;
       min-height: 100vh;
       padding: 1.5rem 0.5rem;
+      width: 240px;
     }
     .sidebar h2{
       font-size: 1.05rem;
-      margin-bottom: 1.2rem;
+      margin-bottom: 6.2rem;
       text-align:center;
       line-height:1.1;
     }
@@ -66,6 +67,11 @@
       border-radius:20px;
     }
 
+    s
+  {
+    color: red;
+    text-decoration: none;
+  }
 
     /* Main content */
     .container-main{
@@ -82,8 +88,8 @@
     }
 
     .avatar-preview{
-      width:170px;
-      height:170px;
+      width:147px;
+      height:147px;
       border:2px dashed #e0dede;
       display:flex;
       align-items:center;
@@ -155,7 +161,7 @@
 
             <form id="productForm" novalidate>
               <!-- Image preview + input -->
-              <label class="form-label">Product image *</label>
+              <label class="form-label">Product image <s>*</s></label>
               <div class="mb-2">
                 <div class="avatar-preview" id="imagePreview">No image</div>
                 <input class="form-control form-control-sm" type="file" id="productImage" accept="image/*">
@@ -164,14 +170,14 @@
 
               <!-- Product name -->
               <div class="mb-3">
-                <label class="form-label">Product name *</label>
+                <label class="form-label">Product name <s>*</s></label>
                 <input type="text" id="productName" class="form-control" placeholder="e.g. Classic White Vase" required>
                 <div class="invalid-feedback">Product name is required.</div>
               </div>
 
               <!-- Product type -->
               <div class="mb-3">
-                <label class="form-label">Product type *</label>
+                <label class="form-label">Product type <s>*</s></label>
                 <select class="form-select" id="productType" required>
                   <option value="">Choose type</option>
                   <option>Artificial Plants</option>
@@ -194,14 +200,14 @@
 
               <!-- Price -->
               <div class="mb-3">
-                <label class="form-label">Product price (₹) *</label>
+                <label class="form-label">Product price (₹) <s>*</s></label>
                 <input type="number" id="productPrice" class="form-control" placeholder="e.g. 499.00" step="0.01" min="0" required>
                 <div class="invalid-feedback">Please enter a valid price.</div>
               </div>
 
               <!-- Materials select -->
               <div class="mb-3">
-                <label class="form-label">Product Materials *</label>
+                <label class="form-label">Product Materials <s>*</s></label>
                 <select class="form-select" id="productMaterials" required>
                   <option value="">Choose Materials</option>
                   <option value="0">Plastic</option>
@@ -213,7 +219,7 @@
 
               <!-- Category select - toggled depending on materials -->
               <div class="mb-3" id="categoryContainer">
-                <label class="form-label">Product Category *</label>
+                <label class="form-label">Product Category <s>*</s></label>
                 <select class="form-select" id="productCategory" required>
                   <option value="">Choose Category</option>
                   <option>Small</option>
@@ -270,6 +276,9 @@
                     <td>
                       <button class="btn btn-sm btn-outline-secondary">View</button>
                       <button class="btn btn-sm btn-brown">Image</button>
+                      <button class="btn btn-sm btn-brown">Color</button>
+                      <button class="btn btn-sm btn-outline-primary">Edit</button>
+                      <button class="btn btn-sm btn-outline-danger">Delete</button>
                     </td>
                   </tr>
                   <tr>
@@ -299,22 +308,19 @@
 </div>
 
 <script>
-/* ---------------------------
-   IMAGE PREVIEW, GALLERY, SWAP
-   --------------------------- */
 const productImageInput = document.getElementById('productImage');
 const imagePreview = document.getElementById('imagePreview');
 const galleryThumbs = document.getElementById('galleryThumbs');
 const mainImage = document.getElementById('mainImage');
 
-let galleryImages = []; // store uploaded images as data URLs
+let galleryImages = []; 
 
-// Show single image preview and also add to gallery thumbnails
+
 productImageInput.addEventListener('change', (e) => {
   const file = e.target.files[0];
   if(!file) return;
 
-  // file size check (2MB)
+  
   if(file.size > 2 * 1024 * 1024){
     alert('Image size exceeds 2MB. Please pick a smaller file.');
     e.target.value = '';
@@ -324,23 +330,22 @@ productImageInput.addEventListener('change', (e) => {
   const reader = new FileReader();
   reader.onload = function(ev){
     const dataUrl = ev.target.result;
-    // set preview box
+ 
     imagePreview.innerHTML = '';
     const img = document.createElement('img');
     img.src = dataUrl;
     imagePreview.appendChild(img);
 
-    // set main image as well
+
     mainImage.src = dataUrl;
 
-    // add to gallery (prepend so it's first)
     addToGallery(dataUrl);
   };
   reader.readAsDataURL(file);
 });
 
 function addToGallery(dataUrl){
-  // ensure unique or just push — here we push
+
   galleryImages.unshift(dataUrl);
   renderGallery();
 }
@@ -354,33 +359,28 @@ function renderGallery(){
     img.addEventListener('click', () => swap(img));
     galleryThumbs.appendChild(img);
   });
-  // Also ensure main image uses first gallery if available
   if(galleryImages.length > 0) mainImage.src = galleryImages[0];
 }
 
-// swap main image with clicked thumbnail
+
 function swap(imgElement){
   const clickedSrc = imgElement.src;
-  // change main image
+
   mainImage.src = clickedSrc;
-  // optionally: highlight clicked thumb (simple visual)
+
   document.querySelectorAll('.thumbs img').forEach(i=> i.style.borderColor = 'transparent');
   imgElement.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#b38f80';
 }
 
-/* ---------------------------
-   RESET BUTTON + MATERIALS → CATEGORY TOGGLE
-   --------------------------- */
 const resetBtn = document.getElementById('resetBtn');
 const productMaterials = document.getElementById('productMaterials');
 const categoryContainer = document.getElementById('categoryContainer');
 
 function updateCategoryVisibility(){
-  // In your earlier conversation you wanted: if materials value == 0 -> show or hide?
-  // Here: if materials value === "0" then hide category (example rule). Adjust as needed.
+
   if(productMaterials.value === "0"){
     categoryContainer.style.display = 'none';
-    // clear category value when hidden
+
     document.getElementById('productCategory').value = '';
   } else {
     categoryContainer.style.display = 'block';
@@ -388,42 +388,39 @@ function updateCategoryVisibility(){
 }
 productMaterials.addEventListener('change', updateCategoryVisibility);
 
-// reset behaviour
+
 resetBtn.addEventListener('click', () => {
-  // reset form fields
+
   document.getElementById('productForm').reset();
 
-  // reset previews
+
   imagePreview.innerHTML = 'No image';
   galleryThumbs.innerHTML = '';
   galleryImages = [];
   mainImage.src = 'https://via.placeholder.com/1200x700?text=Main+Image+Preview';
 
-  // ensure materials select goes to 0 (if exists) and update category display
-  // Set value to "" (empty) by default; if you want to force to 0 do: productMaterials.value = "0";
+
   productMaterials.value = "";
   updateCategoryVisibility();
 
-  // remove validation classes
+
   document.querySelectorAll('#productForm .is-invalid, #productForm .is-valid').forEach(el=>{
     el.classList.remove('is-invalid','is-valid');
   });
 });
 
-/* ---------------------------
-   CLIENT-SIDE FORM VALIDATION
-   --------------------------- */
+
 const form = document.getElementById('productForm');
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
 
-  // Reset previous validation
+
   const inputs = form.querySelectorAll('[required]');
   let formValid = true;
 
   inputs.forEach(input => {
-    // custom checks: for selects check value not empty
+    
     if((input.tagName === 'INPUT' || input.tagName === 'TEXTAREA') && input.value.trim() === ''){
       input.classList.add('is-invalid');
       input.classList.remove('is-valid');
@@ -437,7 +434,7 @@ form.addEventListener('submit', (e) => {
       input.classList.add('is-valid');
     }
 
-    // price additional check
+   
     if(input.id === 'productPrice'){
       const v = parseFloat(input.value);
       if(isNaN(v) || v < 0){
@@ -448,9 +445,9 @@ form.addEventListener('submit', (e) => {
     }
   });
 
-  // image required check - ensure main image not default placeholder
+  
   if(mainImage.src.includes('placeholder') || imagePreview.innerHTML.trim() === 'No image'){
-    // show a visual small danger
+  
     productImageInput.classList.add('is-invalid');
     formValid = false;
   } else {
@@ -459,7 +456,7 @@ form.addEventListener('submit', (e) => {
   }
 
   if(!formValid){
-    // scroll to first invalid
+    
     const firstError = form.querySelector('.is-invalid');
     if(firstError){
       firstError.scrollIntoView({behavior:'smooth', block:'center'});
@@ -467,7 +464,7 @@ form.addEventListener('submit', (e) => {
     return;
   }
 
-  // If valid, "submit" — here we'll just add a product row to the table as demo
+  
   addProductToTable({
     name: document.getElementById('productName').value.trim(),
     type: document.getElementById('productType').value,
@@ -475,16 +472,11 @@ form.addEventListener('submit', (e) => {
     image: mainImage.src || ''
   });
 
-  // show success quick feedback
+ 
   alert('Product added (demo). In your real app you would POST the form via fetch or submit to the server.');
 
-  // optionally reset form or keep values
-  // form.reset();
 });
 
-/* ---------------------------
-   SIMPLE DEMO: add product row to table
-   --------------------------- */
 function addProductToTable({name, type, price, image}){
   const table = document.getElementById('productsTable');
   const row = document.createElement('tr');
@@ -502,13 +494,13 @@ function addProductToTable({name, type, price, image}){
   table.appendChild(row);
 }
 
-/* small helper to open image in new tab */
+
 function viewImage(src){
   if(!src) return;
   window.open(src, '_blank');
 }
 
-/* small helper to escape insertion */
+
 function escapeHtml(unsafe) {
   return unsafe
     .replaceAll('&','&amp;')
@@ -518,7 +510,7 @@ function escapeHtml(unsafe) {
     .replaceAll("'",'&#039;');
 }
 
-/* initialize category visibility on load */
+
 updateCategoryVisibility();
 
 </script>
