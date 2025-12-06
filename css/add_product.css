@@ -31,6 +31,7 @@ a {
   -moz-transition: 0.5s all;
   -o-transition: 0.5s all;
   text-decoration: none;
+  
 }
 
 body {
@@ -241,6 +242,17 @@ body {
       min-height:96px;
       resize:vertical;
     }
+
+    .delete
+    {
+      border: none;
+    }
+
+    td a
+    {
+      color: rgb(94 82 19) !important;
+    }
+
 
     .form-actions{
       display:flex;
