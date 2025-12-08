@@ -18,8 +18,7 @@ $product_id = $_GET['productId'];
 <body>
 <div class="header">
     <p>PRODUCT DETAILS</p>
-    <p style="margin-left: 90%;margin-top: -53px;"><a href="#">Edit</a></p>
-    <p style="margin-right: 90%;margin-top: -53px;font-size: 30px;"><a href="add_product.php">⟵</a></p>
+    <p style="margin-right: 90%;margin-top: -64px;font-size: 30px;"><a href="add_product.php">⟵</a></p>
 
 </div>
 
@@ -109,7 +108,7 @@ if(mysqli_num_rows($statemnt) > 0)
         <!---------------------------------------------------- Pair Well With ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title">Pair Well With</div>
+            <div class="card-title">Pair Well With </div>
             <div class="pair">
                 <img src="images/vase1.jpg">
                 <div>

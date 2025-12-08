@@ -32,3 +32,87 @@ a {
   -o-transition: 0.5s all;
   text-decoration: none;
 }
+
+/* MAIN CONTAINER */
+.main {
+    width: 90%;
+    margin: 30px auto;
+    font-family: Arial, sans-serif;
+}
+
+/* EACH FORM */
+.main form {
+    width: 48%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.main img
+{
+	width: 50%;
+}
+
+/* FIELDSET */
+fieldset {
+    border: 2px solid #0c192b;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+legend {
+    padding: 5px 10px;
+    font-weight: bold;
+    color: #0c192b;
+    font-size: 17px;
+}
+
+/* LABELS */
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+}
+
+/* INPUTS & SELECTS */
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #0c192b50;
+}
+
+/* BUTTON */
+.btn1 {
+    margin-top: 18px;
+    padding: 12px;
+    background-color: #0c192b;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn1:hover {
+    background-color: #0c192b;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .main form {
+        width: 100%;
+    }
+}
