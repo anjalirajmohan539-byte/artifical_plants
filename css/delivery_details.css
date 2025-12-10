@@ -33,26 +33,184 @@ a {
   text-decoration: none;
 }
 
-/* MAIN CONTAINER */
-.main {
-    width: 90%;
-    margin: 30px auto;
-    font-family: Arial, sans-serif;
-}
+    *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
+    body{background:#eef2f7;padding:25px;}
 
-/* EACH FORM */
-.main form {
-    width: 48%;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
+    .header
+    {
+        text-align:center;
+        padding:18px;
+        background:#0c192b;
+        color:#fff;
+        font-size:24px;
+        font-weight:600;
+        border-radius:12px;
+        letter-spacing:1px;
+        margin-bottom:25px;
+    }
 
-.main img
-{
-	width: 50%;
-}
+    .header a
+    {
+      text-decoration: none;
+      color: white;
+    }
+
+    .container
+    {
+        display:grid;
+        grid-template-columns:30% 70%;
+        gap:25px;
+    }
+
+    /* LEFT PRODUCT IMAGE CARD */
+
+    .left img:hover
+    {
+      transform:scale(1.01);
+    }
+
+    .left p
+    {
+        text-align: center;
+    }
+
+    .main-img
+    {
+        transition:.3s;
+        width:100%;
+        object-fit:cover;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 1.1);
+    }
+
+    .product-title
+    {
+      font-size:22px;font-weight:600;margin:15px 0;color:#1d3557;
+    }
+
+    .thumbs
+    {
+        display:flex;
+        gap:12px;
+        margin-top:15px;
+    }
+    .thumbs img
+    {
+        width:70px;height:70px;
+        border-radius:10px;
+        border:2px solid #ddd;
+        cursor:pointer;
+        transition:.3s;
+    }
+    .thumbs img:hover
+    {
+      border-color:#1d3557;transform:scale(1.07);
+    }    
+
+    /* RIGHT SIDE */
+    .right
+    {
+        display:flex;
+        flex-direction:column;
+        gap:25px;
+    }
+
+    .card
+    {
+        background:#fff;
+        padding:22px;
+        border-radius:15px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    }
+    .card-title
+    {
+        font-size:20px;
+        font-weight:600;
+        color:#1d3557;
+        margin-bottom:15px;
+        border-left:5px solid #1d3557;
+        padding-left:10px;
+    }
+
+    .ondelivery 
+    {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .ondelivery input[type="radio"]
+    {
+        margin-top: 3px;
+    }
+
+    .grid
+    {
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:15px;
+    }
+
+    .payment
+    {
+        white-space: nowrap;
+    }
+
+    .deliveryt
+    {
+        font-size: 65%;
+        white-space: nowrap;
+    }
+
+    .info
+    {
+        background:#f8faff;
+        padding:15px;
+        border-radius:10px;
+        border:1px solid #e0e6ef;
+    }
+    .label
+    {
+      font-size:13px;color:#6b7280;
+    }
+    .value
+    {
+      font-size:16px;font-weight:600;color:#1d3557;margin-top:5px;
+    }
+
+    .shipping li
+    {
+      margin-bottom:8px;color:#333;font-size:15px;
+    }
+
+    s
+    {
+      margin-left:75%;
+    }
+    .delivery a
+    {
+      color:#333;
+      font-size:15px;
+      text-decoration: none;
+    }
+    .delivery
+    {
+      padding: 3px;
+    }
+
+    .pair
+    {
+        display:flex;align-items:center;gap:15px;
+    }
+    .pair img
+    {
+      width:85px;height:85px;border-radius:12px;
+    }
+
+    /* Validation Example */
+    .error
+    {
+      color:red;font-size:14px;margin-top:6px;height:16px;
+    }
 
 /* FIELDSET */
 fieldset {

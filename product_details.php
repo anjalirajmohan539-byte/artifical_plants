@@ -97,7 +97,9 @@ if(mysqli_num_rows($statemnt) > 0)
         <!---------------------------------------------------- Shipping Info ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title">Shipping Details</div>
+            <div class="card-title">Shipping Details <s><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+</svg></a></s></div>
             <ul class="shipping">
                 <li>Availability: In Stock</li>
                 <li>Delivery within: 3–5 days</li>
@@ -121,8 +123,10 @@ if(mysqli_num_rows($statemnt) > 0)
 
         <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
 
-                <div class="card">
-            <div class="card-title">Delivery Details</div>
+        <div class="card">
+            <div class="card-title">Delivery Details<s><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+</svg></a></s></div>
             <div class="delivery col-4">
               <li><a href="">7-Day Return ></a></li>
             </div>
