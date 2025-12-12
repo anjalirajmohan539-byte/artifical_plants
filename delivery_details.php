@@ -4,6 +4,8 @@ include('database.php');
 
 $product_id = $_GET['productId'];
 
+$deliveryType = 1;
+
 ?>
 
 <html>
@@ -64,7 +66,7 @@ if(mysqli_num_rows($statemnt) > 0)
 
         <div class="card">
             <div class="card-title">Shipping Details</div>
-           <form action="#" method="post">
+           <form action="Shipping _Details_action.php" method="post">
 
         <fieldset>
             <?php
@@ -86,21 +88,18 @@ if(mysqli_num_rows($statemnt) > 0)
                 <?php }?>
             </select>
             <?php }?>
-
-            <?php
-            $date = "2024-12-11";
-            ?>
             <label for="">Delivery Days</label>
-            <input type="text" class="dday" name="dday" value="<?php echo date("d M, l", strtotime($date));?>">
+            <input type="text" class="dday" name="dday">
 
-            <label for="">Delivery Charge</label>
+            <label for="">Delivery Type</label>
             <select name="charge" id="charge">
-              <option value="">Free Delivery</option>
-              <option value="">With Delivery fee</option>
+              <option value="1"<?php echo ($deliveryType == 1) ? "selected" : ""; ?>>Free Delivery</option>
+              <option value="2"<?php echo ($deliveryType == 2) ? "selected" : ""; ?>>With Delivery fee</option>
             </select>
+            <input type="hidden" name="proId" id="proId" value="<?php echo $product_id;?>">
         </fieldset>
-        <button class="btn1">Add</button>
-        
+        <button class="btn1" name="btn">Add</button>
+
       </form>
         </div>
 
@@ -113,18 +112,22 @@ if(mysqli_num_rows($statemnt) > 0)
             <label for="">Return</label>
             <input type="text" name="return" id="return">
 
-          <div class="col-4 ondelivery">
-            <label for="" class="Payment">Payment Method</label>
+            <label for="" class="Payment">Payment Method</label><br>
+
+          <div class="col-4 ondelivery"> 
 	         <input type="radio" id="ondelivery" value="" name="ondelivery" >
 	        <h3 class="deliveryt">Cash on Delivery</h3>
 
-	        <input type="radio" id="charge" value="" name="charge">
-	        <h3 class="deliveryt">Delivery Charge</h3>
+	        <input type="radio" id="ondelivery" value="" name="ondelivery">
+	        <h3 class="deliveryt">UPI</h3>
+
+	        <input type="radio" id="ondelivery" value="" name="ondelivery">
+	        <h3 class="deliveryt">Credit/Debit Card</h3>
          </div>
 
          <div class="cl"></div>
 
-            <label for="">Customer Support</label>
+            <label for="" style="margin-bottom: 8px;">Customer Support</label>
             <select name="customer" id="customer">
               <option value="">Yes</option>
               <option value="">No</option>

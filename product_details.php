@@ -102,7 +102,12 @@ if(mysqli_num_rows($statemnt) > 0)
 </svg></a></s></div>
             <ul class="shipping">
                 <li>Availability: In Stock</li>
-                <li>Delivery within: 3–5 days</li>
+                <?php
+                 $date=date_create();
+                 $days="4 days";
+                  date_add($date,date_interval_create_from_date_string($days));
+                ?>
+                <li>Delivery by <?php echo date_format($date,"d M, D");?></li>
                 <li>Free Delivery</li>
             </ul>
         </div>
