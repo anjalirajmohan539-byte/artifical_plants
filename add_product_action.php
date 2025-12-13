@@ -5,7 +5,8 @@ include('database.php');
 if(isset($_POST['btn']))
 {
 	echo $id =$_POST['product'];
-    $image=$_FILES['image']['name'];
+	
+    
     $name=$_POST['productName'];
     $price=$_POST['productPrice'];
 	$count=$_POST['productcount'];
@@ -18,13 +19,21 @@ if(isset($_POST['btn']))
 
 //    var_dump($image);
 
+if(!empty($_FILES['image']) && $_FILES['image']['name'] != "")
+{
+$image=$_FILES['image']['name'];
+}
+else
+{
+$image = $_POST['himage'];
+}
 
     if ($id != 0) {
 
         $update = "UPDATE `add_product` SET `ProductImage`='$image',`ProductName`='$name',`Description`='$description',`Price`=$price,
 		          `ColorName`='$colorname',`ColorCode`='$colorcode',`CategoryId`=$type,`MaterialId`=$material,`MaterialTypeId`=$materialType,`ProductCount`=$count,
 		          `LastUpdated`=CURRENT_TIMESTAMP WHERE Id = $id AND `IsDeleted` = 0";
-				  
+				  var_dump($update);
         $ustatemnt=mysqli_query($conn,$update);
          if (!$ustatemnt) {
                 echo "error2";

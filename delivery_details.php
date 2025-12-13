@@ -62,13 +62,17 @@ if(mysqli_num_rows($statemnt) > 0)
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
     <div class="right">
 
-        <!---------------------------------------------------- Product Information ---------------------------------------------------->
+    <!---------------------------------------------------- Product Information ---------------------------------------------------->
 
         <div class="card">
+          
             <div class="card-title">Shipping Details</div>
            <form action="Shipping _Details_action.php" method="post">
 
         <fieldset>
+
+ <!------- Availability ------->
+
             <?php
             $select = "SELECT `Id`, `Name` FROM `product_availability` WHERE `IsDeleted` = 0";
             $statemnt = mysqli_query($conn, $select);
@@ -88,14 +92,29 @@ if(mysqli_num_rows($statemnt) > 0)
                 <?php }?>
             </select>
             <?php }?>
+
+<!------- Delivery Days ------->
+
+            <?php
+             if (isset($_POST['btn']))
+            {
+             $days = $_POST['delivery_days'];
+             mysqli_query($conn, "UPDATE `shipping_details` SET `DeliveryDays`=$days WHERE Id = $product");
+            }
+            ?>
+
             <label for="">Delivery Days</label>
-            <input type="text" class="dday" name="dday">
+            <input type="text" class="form-control" name="dday">
+
+<!------- Delivery Type ------->
 
             <label for="">Delivery Type</label>
-            <select name="charge" id="charge">
+            <select name="type" id="charge" onchange="showDeliveryCharge()">
               <option value="1"<?php echo ($deliveryType == 1) ? "selected" : ""; ?>>Free Delivery</option>
               <option value="2"<?php echo ($deliveryType == 2) ? "selected" : ""; ?>>With Delivery fee</option>
             </select>
+            <input type="text" id="deliveryCharge" name="deliveryCharge" min="0" placeholder="Enter Delivery Charge">
+
             <input type="hidden" name="proId" id="proId" value="<?php echo $product_id;?>">
         </fieldset>
         <button class="btn1" name="btn">Add</button>
@@ -109,8 +128,12 @@ if(mysqli_num_rows($statemnt) > 0)
 
         <fieldset>
             
+<!------- Return ------->
+
             <label for="">Return</label>
             <input type="text" name="return" id="return">
+
+<!------- Payment Method ------->
 
             <label for="" class="Payment">Payment Method</label><br>
 
@@ -126,6 +149,8 @@ if(mysqli_num_rows($statemnt) > 0)
          </div>
 
          <div class="cl"></div>
+
+<!------- Customer Support ------->
 
             <label for="" style="margin-bottom: 8px;">Customer Support</label>
             <select name="customer" id="customer">
@@ -159,4 +184,27 @@ if(mysqli_num_rows($statemnt) > 0)
       </div>
 </div>
 </body>
+<script>
+  showDeliveryCharge();
+function showDeliveryCharge()
+{
+ 
+  let deliveryType = document.getElementById('charge');
+  let charge = document.getElementById('deliveryCharge');
+
+  if(deliveryType.value == 1)
+  {
+    charge.value = "";
+    charge.style.display = "none"; 
+  }
+
+  else
+  {
+    charge.value = "";
+    charge.style.display = "block";
+    charge.focus = "";
+  }
+
+}
+</script>
 </html>

@@ -33,6 +33,7 @@ $select = "SELECT ap.Id, ap.ProductImage, pi.Images, ProductName, Price, ColorNa
            FROM add_product ap
            INNER JOIN product_images pi ON pi.ProductId = ap.Id 
            WHERE ap.Id = $product_id AND pi.IsDelete = 0";
+        //    var_dump($select);
 
 $statemnt = mysqli_query($conn,$select);
 
@@ -76,6 +77,7 @@ if(mysqli_num_rows($statemnt) > 0)
             $productSelect = "SELECT ap.`Id`, `ProductName`, `Price`, `ColorName`, mt.Name AS `MaterialId` FROM `add_product` ap
                               INNER JOIN material_type mt ON mt.Id = ap.MaterialId WHERE ap.Id = $product_id ";
             $product_statment = mysqli_query($conn,$productSelect);
+            // var_dump($productSelect);
 
             if(mysqli_num_rows( $product_statment)> 0)
             {
@@ -97,20 +99,59 @@ if(mysqli_num_rows($statemnt) > 0)
         <!---------------------------------------------------- Shipping Info ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title">Shipping Details <s><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title">Shipping Details <s><a href="delivery_details.php?productId=<?php echo $product_id;?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></s></div>
             <ul class="shipping">
                 <li>Availability: In Stock</li>
+
+                <!------- Delivery Days ------->
+
                 <?php
-                 $date=date_create();
-                 $days="4 days";
-                  date_add($date,date_interval_create_from_date_string($days));
+                $sql = "SELECT `DeliveryDays` FROM `shipping_details` WHERE Id = $product_id";
+                $res = mysqli_query($conn, $sql);
+                $row = mysqli_fetch_assoc($res);
+                
+                $days = $row['delivery_days'] ?? 4;
+                
+                $date = date_create();
+                date_add($date, date_interval_create_from_date_string($days . " days"));
                 ?>
+
                 <li>Delivery by <?php echo date_format($date,"d M, D");?></li>
+
+                <!------- Count Days ------->
+        
+                <p id="deliveryCountdown">
+                    
+                Order within <strong><?php echo $days; ?> days</strong> for fastest delivery
+            </p>
+
+
                 <li>Free Delivery</li>
             </ul>
         </div>
+
+
+                <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
+
+        <div class="card">
+            <div class="card-title">Delivery Details<s><a href="delivery_details.php?productId=<?php echo $product_id;?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+</svg></a></s></div>
+            <div class="delivery col-4">
+              <li><a href="">7-Day Return ></a></li>
+            </div>
+            <div class="delivery col-4">
+              <li><a href="">Cash on Delivery ></a></li>
+            </div>
+            <div class="delivery col-4">
+              <li><a href="">Customer Support ></a></li>
+            </div>
+        </div>
+
+    
+
 
         <!---------------------------------------------------- Pair Well With ---------------------------------------------------->
 
@@ -125,26 +166,9 @@ if(mysqli_num_rows($statemnt) > 0)
             </div>
         </div>
 
-
-        <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
-
-        <div class="card">
-            <div class="card-title">Delivery Details<s><a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-</svg></a></s></div>
-            <div class="delivery col-4">
-              <li><a href="">7-Day Return ></a></li>
-            </div>
-            <div class="delivery col-4">
-              <li><a href="">Cash on Delivery ></a></li>
-            </div>
-            <div class="delivery col-4">
-              <li><a href="">Customer Support ></a></li>
-            </div>
-        </div>
-
-    </div>
 </div>
+</div>
+
 
 <script>
 function swap(img){

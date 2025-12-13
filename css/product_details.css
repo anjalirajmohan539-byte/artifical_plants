@@ -175,6 +175,12 @@ a {
       padding: 3px;
     }
 
+    #deliveryCountdown
+    {
+      font-size: 11px;
+      margin-top: -9px;
+    }
+
     .pair
     {
         display:flex;align-items:center;gap:15px;
