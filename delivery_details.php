@@ -62,7 +62,7 @@ if(mysqli_num_rows($statemnt) > 0)
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
     <div class="right">
 
-    <!---------------------------------------------------- Product Information ---------------------------------------------------->
+    <!---------------------------------------------------- Shipping Details ---------------------------------------------------->
 
         <div class="card">
           
@@ -98,7 +98,7 @@ if(mysqli_num_rows($statemnt) > 0)
             <?php
              if (isset($_POST['btn']))
             {
-             $days = $_POST['delivery_days'];
+             $days = $_POST['DeliveryDays'];
              mysqli_query($conn, "UPDATE `shipping_details` SET `DeliveryDays`=$days WHERE Id = $product");
             }
             ?>
@@ -116,53 +116,52 @@ if(mysqli_num_rows($statemnt) > 0)
             <input type="text" id="deliveryCharge" name="deliveryCharge" min="0" placeholder="Enter Delivery Charge">
 
             <input type="hidden" name="proId" id="proId" value="<?php echo $product_id;?>">
+
+            <!------- Payment Method ------->
+
+            <label for="" class="Payment">Payment Method</label><br>
+
+          <div class="col-4 ondelivery"> 
+	         <input type="radio" id="ondelivery" value="1" name="ondelivery" >
+	        <h3 class="deliveryt">Cash on Delivery</h3>
+
+	        <input type="radio" id="ondelivery" value="2" name="ondelivery">
+	        <h3 class="deliveryt">UPI</h3>
+
+	        <input type="radio" id="ondelivery" value="3" name="ondelivery">
+	        <h3 class="deliveryt">Credit/Debit Card</h3>
+         </div>
+
+         <div class="cl"></div>
+
         </fieldset>
         <button class="btn1" name="btn">Add</button>
 
       </form>
         </div>
 
+
+        <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
+
         <div class="card">
           <div class="card-title">Delivery Details</div>
-           <form action="#" method="post">
+           <form action="delivery_action_page.php" method="post">
 
         <fieldset>
-            
 <!------- Return ------->
 
-            <label for="">Return</label>
-            <input type="text" name="return" id="return">
-
-<!------- Payment Method ------->
-
-            <label for="" class="Payment">Payment Method</label><br>
-
-          <div class="col-4 ondelivery"> 
-	         <input type="radio" id="ondelivery" value="" name="ondelivery" >
-	        <h3 class="deliveryt">Cash on Delivery</h3>
-
-	        <input type="radio" id="ondelivery" value="" name="ondelivery">
-	        <h3 class="deliveryt">UPI</h3>
-
-	        <input type="radio" id="ondelivery" value="" name="ondelivery">
-	        <h3 class="deliveryt">Credit/Debit Card</h3>
-         </div>
-
-         <div class="cl"></div>
-
-<!------- Customer Support ------->
-
-            <label for="" style="margin-bottom: 8px;">Customer Support</label>
-            <select name="customer" id="customer">
-              <option value="">Yes</option>
-              <option value="">No</option>
-              <option value=""></option>
-            </select>
+            <label for="">Return Days</label>
+            <input type="text" name="return" id="return"> 
+            
         </fieldset>
-        <button class="btn1">Add</button>
+        <input type="hidden" name="product" id="product" value="<?php echo $product_id;?>">
+        <button class="btn1" name="btn">Add</button>
         
       </form>
         </div>
+
+
+        <!---------------------------------------------------- Dimensions ---------------------------------------------------->
 
         <div class="card">
         <div class="card-title">Dimensions</div>

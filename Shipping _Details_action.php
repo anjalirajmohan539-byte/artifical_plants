@@ -5,7 +5,7 @@ if(isset($_POST['btn'])){
 
     $product = $_POST['proId'];
     $available = $_POST['available'];
-     $deliveryday = $_POST['dday'];
+    $deliveryday = $_POST['dday'];
     echo $charge =empty($_POST['deliveryCharge']) ? 0 : $_POST['deliveryCharge'];
     $type = $_POST['type'];
 

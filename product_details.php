@@ -108,12 +108,11 @@ if(mysqli_num_rows($statemnt) > 0)
                 <!------- Delivery Days ------->
 
                 <?php
-                $sql = "SELECT `DeliveryDays` FROM `shipping_details` WHERE Id = $product_id";
+                $sql = "SELECT `DeliveryDays` FROM `shipping_details` WHERE productId = $product_id";
                 $res = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($res);
                 
-                $days = $row['delivery_days'] ?? 4;
-                
+                $days = $row['DeliveryDays'] ?? 4;
                 $date = date_create();
                 date_add($date, date_interval_create_from_date_string($days . " days"));
                 ?>
@@ -124,7 +123,7 @@ if(mysqli_num_rows($statemnt) > 0)
         
                 <p id="deliveryCountdown">
                     
-                Order within <strong><?php echo $days; ?> days</strong> for fastest delivery
+                Order within <strong><?php echo $days;?> days</strong> for fastest delivery
             </p>
 
 
