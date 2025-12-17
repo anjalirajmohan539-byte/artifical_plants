@@ -63,7 +63,33 @@ if(mysqli_num_rows($statemnt) > 0)
     </div>
 
 <?php } ?>
+
+<br>
+
+<?php
+$select = mysqli_query($conn, "SELECT * FROM product_dimensions WHERE ProductId = $product_id");
+$data = mysqli_fetch_assoc($select);
+?>
+
+<div class="card-title" style="margin-top: 25px;">Dimensions Details</div>
+
+  <div class="dimension-row" style="margin-top:30px;">
+    <span>Width : </span>
+    <span><?php echo $data['Width']; ?></span>
+  </div>
+
+  <div class="dimension-row">
+    <span>Height : </span>
+    <span><?php echo $data['Height']; ?></span>
+  </div>
+
+  <div class="dimension-row">
+    <span>Weight : </span>
+    <span><?php echo $data['Weight']; ?></span>
+  </div>
 </div>
+
+
 
 
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
@@ -126,8 +152,17 @@ if(mysqli_num_rows($statemnt) > 0)
                 Order within <strong><?php echo $days;?> days</strong> for fastest delivery
             </p>
 
+                <?php
+                    $sql = "SELECT DeliveryType, DeliveryCharge FROM shipping_details WHERE productId = $product_id";
+                    $res = mysqli_query($conn, $sql);
+                    $row = mysqli_fetch_assoc($res);
 
-                <li>Free Delivery</li>
+                    $deliveryType   = $row['DeliveryType'] ?? 1;
+                    $deliveryCharge = $row['DeliveryCharge'] ?? 0;
+                ?>
+
+                <li><?php if ($deliveryType == 1) {echo "Free Delivery";} else {echo "Delivery Fee: ₹" . number_format($deliveryCharge, 2);}?></li>
+
             </ul>
         </div>
 
@@ -138,16 +173,30 @@ if(mysqli_num_rows($statemnt) > 0)
             <div class="card-title">Delivery Details<s><a href="delivery_details.php?productId=<?php echo $product_id;?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></s></div>
+
+<!------- Return Days ------->
+
+<?php
+$sql = "SELECT s.DeliveryDays, r.ReturnDays FROM shipping_details s
+        JOIN return_details r ON s.productId = r.productId
+        WHERE s.productId = $product_id";
+
+$res = mysqli_query($conn, $sql);
+$row = mysqli_fetch_assoc($res);
+
+$deliveryDays = $row['DeliveryDays'] ?? 4;
+$returnDays   = $row['ReturnDays'] ?? 7;
+
+$returnDate = date_create();
+date_add($returnDate, date_interval_create_from_date_string(($deliveryDays + $returnDays) . " days"));
+
+?>
             <div class="delivery col-4">
-              <li><a href="">7-Day Return ></a></li>
-            </div>
-            <div class="delivery col-4">
-              <li><a href="">Cash on Delivery ></a></li>
-            </div>
-            <div class="delivery col-4">
-              <li><a href="">Customer Support ></a></li>
+            <li><a href="">Return within <?php echo $returnDays; ?> days</a></li>
             </div>
         </div>
+
+
 
     
 

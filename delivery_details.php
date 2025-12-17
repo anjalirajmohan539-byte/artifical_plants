@@ -154,7 +154,7 @@ if(mysqli_num_rows($statemnt) > 0)
             <input type="text" name="return" id="return"> 
             
         </fieldset>
-        <input type="hidden" name="product" id="product" value="<?php echo $product_id;?>">
+        <input type="hidden" name="proId" id="product" value="<?php echo $product_id;?>">
         <button class="btn1" name="btn">Add</button>
         
       </form>
@@ -165,7 +165,7 @@ if(mysqli_num_rows($statemnt) > 0)
 
         <div class="card">
         <div class="card-title">Dimensions</div>
-           <form action="#" method="post">
+           <form action="Dimensions_action_page.php" method="post">
 
         <fieldset>
             
@@ -175,9 +175,10 @@ if(mysqli_num_rows($statemnt) > 0)
             <input type="text" name="Height" id="Height">
             <label for="">Weight</label>
             <input type="text" name="Weight" id="Weight">
+            <input type="hidden" name="prodId" id="prodId" value="<?php echo $product_id;?>">
 
         </fieldset>
-        <button class="btn1">Add</button>
+        <button class="btn1" name="btn" id="btn3">Add</button>
         
       </form>
       </div>

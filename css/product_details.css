@@ -160,10 +160,29 @@ a {
       margin-bottom:8px;color:#333;font-size:15px;
     }
 
+    .dimension-row
+    {
+      margin-top: 20px;
+    }
+
     s
     {
       margin-left:75%;
     }
+
+    g
+    {
+      margin-left: 20%;
+    }
+    
+    .dem ul
+    {
+      color: #333 !important;
+      font-size: 15px !important;
+      text-decoration: none !important;
+    }
+
+
     .delivery a
     {
       color:#333;
