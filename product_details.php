@@ -73,19 +73,18 @@ $data = mysqli_fetch_assoc($select);
 
 <div class="card-title" style="margin-top: 25px;">Dimensions Details</div>
 
-  <div class="dimension-row" style="margin-top:30px;">
-    <span>Width : </span>
-    <span><?php echo $data['Width']; ?></span>
+  <div class="dimension-row">
+    <li><span>Width : </span><span><?php echo $data['Width']; ?></span></li>
   </div>
 
   <div class="dimension-row">
-    <span>Height : </span>
-    <span><?php echo $data['Height']; ?></span>
+    <li><span>Height : </span><span><?php echo $data['Height']; ?></span></li>
+    
   </div>
 
   <div class="dimension-row">
-    <span>Weight : </span>
-    <span><?php echo $data['Weight']; ?></span>
+    <li><span>Weight : </span><span><?php echo $data['Weight']; ?></span></li>
+    
   </div>
 </div>
 

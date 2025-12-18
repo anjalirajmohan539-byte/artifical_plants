@@ -6,8 +6,8 @@
   <title>Add Product - Milon Artificial Plants (Demo)</title>
 
   <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 
   <style>
     :root{
@@ -290,7 +290,7 @@
 
           <div class="panel-card">
             <h6>Preview (main image)</h6>
-            <img id="mainImage" class="main-img" src="https://via.placeholder.com/1200x700?text=Main+Image+Preview" alt="Main product preview">
+            <img id="mainImage" class="main-img" src="" alt="Main product preview">
             <div class="mt-2 text-muted small">Click a thumbnail to swap the main image.</div>
           </div>
         </div>
@@ -331,7 +331,6 @@ productImageInput.addEventListener('change', (e) => {
 
     mainImage.src = dataUrl;
 
-    addToGallery(dataUrl);
   };
   reader.readAsDataURL(file);
 });
@@ -339,11 +338,10 @@ productImageInput.addEventListener('change', (e) => {
 function addToGallery(dataUrl){
 
   galleryImages.unshift(dataUrl);
-  renderGallery();
+ 
 }
 
 function renderGallery(){
-  galleryThumbs.innerHTML = '';
   galleryImages.forEach((src, idx) => {
     const img = document.createElement('img');
     img.src = src;
@@ -387,9 +385,7 @@ resetBtn.addEventListener('click', () => {
 
 
   imagePreview.innerHTML = 'No image';
-  galleryThumbs.innerHTML = '';
   galleryImages = [];
-  mainImage.src = 'https://via.placeholder.com/1200x700?text=Main+Image+Preview';
 
 
   productMaterials.value = "";
@@ -506,6 +502,26 @@ function escapeHtml(unsafe) {
 updateCategoryVisibility();
 
 </script>
+
+<script>
+document.getElementById("resetBtn").addEventListener("click", function () {
+
+  const form = document.getElementById("productForm");
+
+  form.reset();
+
+  form.classList.remove("was-validated");
+
+  form.querySelectorAll(".is-invalid, .is-valid").forEach(el => {
+    el.classList.remove("is-invalid", "is-valid");
+  });
+
+  document.getElementById("imagePreview").innerHTML = "No image";
+  document.getElementById("mainImage").display = "none";
+
+});
+</script>
+
 </body>
 </html>
 

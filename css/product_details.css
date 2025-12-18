@@ -189,6 +189,14 @@ a {
       font-size:15px;
       text-decoration: none;
     }
+
+    .dimension-row 
+    {
+      color:#333;
+      font-size:15px;
+      text-decoration: none;
+    }
+    
     .delivery
     {
       padding: 3px;

@@ -122,13 +122,13 @@ if(mysqli_num_rows($statemnt) > 0)
             <label for="" class="Payment">Payment Method</label><br>
 
           <div class="col-4 ondelivery"> 
-	         <input type="radio" id="ondelivery" value="1" name="ondelivery" >
+	         <input type="checkbox" id="ondelivery" value="1" name="ondelivery" >
 	        <h3 class="deliveryt">Cash on Delivery</h3>
 
-	        <input type="radio" id="ondelivery" value="2" name="ondelivery">
+	        <input type="checkbox" id="ondelivery" value="2" name="ondelivery">
 	        <h3 class="deliveryt">UPI</h3>
 
-	        <input type="radio" id="ondelivery" value="3" name="ondelivery">
+	        <input type="checkbox" id="ondelivery" value="3" name="ondelivery">
 	        <h3 class="deliveryt">Credit/Debit Card</h3>
          </div>
 
@@ -169,11 +169,11 @@ if(mysqli_num_rows($statemnt) > 0)
 
         <fieldset>
             
-            <label for="">Width</label>
+            <label for="Width">Width</label>
             <input type="text" name="Width" id="Width">
-            <label for="">Height</label>
+            <label for="Height">Height</label>
             <input type="text" name="Height" id="Height">
-            <label for="">Weight</label>
+            <label for="Weight">Weight</label>
             <input type="text" name="Weight" id="Weight">
             <input type="hidden" name="prodId" id="prodId" value="<?php echo $product_id;?>">
 
