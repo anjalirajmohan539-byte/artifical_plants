@@ -126,10 +126,16 @@ if(mysqli_num_rows($statemnt) > 0)
 	        <h3 class="deliveryt">Cash on Delivery</h3>
 
 	        <input type="checkbox" id="ondelivery" value="2" name="ondelivery">
-	        <h3 class="deliveryt">UPI</h3>
+	        <h3 class="deliveryt">GooglePay</h3>
 
 	        <input type="checkbox" id="ondelivery" value="3" name="ondelivery">
+	        <h3 class="deliveryt">Phonepe</h3>
+
+          <input type="checkbox" id="ondelivery" value="3" name="ondelivery">
 	        <h3 class="deliveryt">Credit/Debit Card</h3>
+
+          <input type="checkbox" id="ondelivery" value="3" name="ondelivery">
+	        <h3 class="deliveryt">EMI</h3>
          </div>
 
          <div class="cl"></div>
