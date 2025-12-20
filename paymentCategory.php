@@ -2,6 +2,17 @@
 
 include('database.php');
 
+$categoryId = 0;
+$category = "";
+$button = "Save";
+
+if(isset($_POST['edit']))
+{
+    $categoryId = $_POST['categoryId'];
+    $category = $_POST['categoryName'];
+    $button = "Update";
+}
+
 ?>
 
 <html>
@@ -39,11 +50,11 @@ include('database.php');
             <h3 style="margin-bottom: 15px;">Add New Payment Category</h3>
             <form action="paymentCategory_action.php" method="post" id="productForm" autocomplete="off">
             <label>Payment Category <s>*</s></label>
-            <input type="text" id="Payment" name="Payment" placeholder="Enter Payment Category" value="" oninput="clearError()">
+            <input type="text" id="Payment" name="Payment" placeholder="Enter Payment Category" value="<?php echo $category;?>" oninput="clearError()">
             <div class="error" id="PaymentErr"></div>
-            <input type="hidden" name="mid" value="">
+            <input type="hidden" name="catid" value="<?php echo $categoryId;?>">
 
-            <button class="btn btn-save" name="btn" onclick="return validateForm()">Save</button>
+            <button class="btn btn-save" name="btn" id="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
         </div>
 
@@ -72,13 +83,22 @@ include('database.php');
                 <tr>
                     <td><?php echo $sl++;?></td>
                     <td><?php echo $rows['Name'];?></td>
-                    <td><a href="paymentMethod.php?methodId=<?php echo $rows['Id'];?>"><button class="btn-sm">Method</button></a></td>
+                    <td><a href="paymentMethod.php?methodId=<?php echo $rows['Id'];?>"><button class="btn-sm" style="padding: 6px 44px;">Method</button></a></td>
+                    <form action="#" method="post">
                     <td> 
-                        <a href="#"><button class="btn-sm" style="background-color: #3333f3;">Edit</button></a>
+                        <input type="hidden" name="categoryId" id="categoryId" value="<?php echo $rows['Id'];?>">
+                        <input type="hidden" name="categoryName" id="categoryName" value="<?php echo $rows['Name'];?>">
+                        <input type="submit" name="edit" class="btn-sm" style="background-color: #3333f3;" value="Edit">
+                        <!-- <a href="#"><button class="btn-sm" style="background-color: #3333f3;">Edit</button></a> -->
                     </td>
+                    </form>
+                    <form action="paymentCategory_action.php" method="post">
                     <td>
-                        <button class="btn-sm btn-delete">Delete</button>
+                        <input type="hidden" name="cateId" id="cateId" value="<?php echo $rows['Id'];?>">
+                        <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
+                        <!-- <button class="btn-sm btn-delete">Delete</button> -->
                     </td>
+                    </form>
                     </tr>
                     <?php }
                    }?>
@@ -90,4 +110,51 @@ include('database.php');
     </div>
 </div>
 </body>
+<script>
+function validateForm() {
+    let payment = document.getElementById("Payment");
+    let error = document.getElementById("PaymentErr");
+
+    let value = payment.value.trim();
+
+    if (value === "") {
+        error.innerHTML = "Payment category is required";
+        payment.style.border = "1px solid red";
+        payment.classList.add("input-error");
+        payment.focus();
+        return false;
+    }
+
+    if (value.length < 3) {
+        error.innerHTML = "Enter at least 3 characters";
+        payment.classList.add("input-error");
+        payment.focus();
+        return false;
+    }
+
+    error.innerHTML = "";
+    payment.classList.remove("input-error");
+    return true;
+}
+
+
+function clearError() {
+    document.getElementById("PaymentErr").innerHTML = "";
+    document.getElementById("Payment").style.border = "";
+    document.getElementById("Payment").classList.remove("input-error");
+}
+
+
+function resetForm() {
+    document.getElementById("productForm").reset();
+    document.getElementById("PaymentErr").innerHTML = "";
+    document.getElementById("Payment").style.border = "";
+    document.getElementById("Payment").classList.remove("input-error");
+    document.getElementById("Payment").value = "";
+    document.getElementById("btn").innerText = "Save";
+    clearError();
+}
+
+</script>
+
 </html>

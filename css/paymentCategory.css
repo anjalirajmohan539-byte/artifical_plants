@@ -212,6 +212,17 @@ a {
         width:60px;
     }
 
+    .error {
+    color: red;
+    font-size: 13px;
+    margin-top: 4px;
+    }
+
+    .input-error {
+    border: 1px solid red !important;
+    }
+
+
     /* responsive */
     @media (max-width:880px){
       .layout{ grid-template-columns: 1fr; }

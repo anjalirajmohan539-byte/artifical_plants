@@ -2,6 +2,20 @@
 
 include('database.php');
 
+$paymentId = $_GET['methodId'];
+// var_dump($paymentId);
+
+$methodId = 0;
+$methodName = "";
+$button = "Save";
+
+if(isset($_POST['edit']))
+{
+    $methodId = $_POST['methodId'];
+    $methodName =$_POST['methodName'];
+    $button = "Update";
+}
+
 ?>
 
 <html>
@@ -37,13 +51,14 @@ include('database.php');
         <!-- Left Card (Form) -->
         <div class="card">
             <h3 style="margin-bottom: 15px;">Add New Payment Method</h3>
-            <form action="#" method="post" id="productForm" autocomplete="off">
+            <form action="paymentMethod_action.php" method="post" id="productForm" autocomplete="off">
             <label>Payment Method <s>*</s></label>
-            <input type="text" id="material" name="productType" placeholder="Enter Payment Method" value="" oninput="clearError()">
-            <div class="error" id="materialErr"></div>
-            <input type="hidden" name="mid" value="">
+            <input type="text" id="PaymentMethod" name="PaymentMethod" placeholder="Enter Payment Method" value="<?php echo $methodName;?>" oninput="clearError()">
+            <div class="error" id="methodErr"></div>
+            <input type="hidden" name="payid" value="<?php echo $paymentId;?>">
+            <input type="hidden" name="methId" value="<?php echo $methodId;?>">
 
-            <button class="btn btn-save" name="btn" onclick="return validateForm()">Save</button>
+            <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
         </div>
 
@@ -54,23 +69,93 @@ include('database.php');
                 <tr>
                     <th>Sl no</th>
                     <th>Payment Method</th>
+                    <th>Payment Category</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
+                <?php
+                $select = "SELECT pm.`Id`, pm.`Name`, pc.Name AS`CategoryId` FROM `payment_method` pm
+                           INNER JOIN payment_category pc ON pc.Id = pm.CategoryId
+                           WHERE pc.`Id` = $paymentId AND pm.`IsDeleted` = 0";
+                        //    var_dump($select);
+                $statement = mysqli_query($conn,$select);
+
+                $sl = 1;
+                if(mysqli_num_rows($statement)>0)
+                {
+                    while($rows = mysqli_fetch_assoc($statement))
+                    {
+
+                ?>
                 <tr>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $sl++;?></td>
+                    <td><?php echo $rows['Name']?></td>
+                    <td><?php echo $rows['CategoryId']?></td>
+                    <form action="#" method="post">
                     <td> 
-                        <a href="#"><button class="btn-sm" style="background-color: #3333f3;">Edit</button></a>
+                        <input type="hidden" name="methodId" id="methodId" value="<?php echo $rows['Id'];?>">
+                        <input type="hidden" name="methodName" id="methodName" value="<?php echo $rows['Name'];?>">
+                        <input type="submit" name="edit" class="btn-sm" style="background-color: #3333f3;" value="Edit">
+                        <!-- <a href="#"><button class="btn-sm" style="background-color: #3333f3;">Edit</button></a> -->
                     </td>
+                    </form>
+                    <form action="paymentMethod_action.php" method="post">
                     <td>
-                        <button class="btn-sm btn-delete">Delete</button>
+                        <input type="hidden" name="mainId" value="<?php echo $paymentId;?>">
+                        <input type="hidden" name="secondId" value="<?php echo $rows['Id'];?>">
+                        <input type="submit" name="delete" class="btn-sm btn-delete" value="Delete">
+                        <!-- <button class="btn-sm btn-delete">Delete</button> -->
                     </td>
+                    </form>
                     </tr>
+                    <?php    }
+                }?>
             </table>
         </div>
 
     </div>
 </div>
 </body>
+<script>
+function validateForm() {
+    let paymentMethod = document.getElementById("PaymentMethod");
+    let methodErr = document.getElementById("methodErr");
+
+    let value = paymentMethod.value.trim();
+
+    if (value === "") {
+        methodErr.innerHTML = "Payment method is required";
+        paymentMethod.style.border = "1px soild red";
+        paymentMethod.classList.add("input-error");
+        paymentMethod.focus();
+        return false;
+    }
+
+    if (value.length < 3) {
+        methodErr.innerHTML = "Enter at least 3 characters";
+        paymentMethod.classList.add("input-error");
+        paymentMethod.focus();
+        return false;
+    }
+
+    methodErr.innerHTML = "";
+    paymentMethod.classList.remove("input-error");
+
+    return true; 
+}
+
+
+function clearError() {
+    document.getElementById("methodErr").innerHTML = "";
+    document.getElementById("PaymentMethod").classList.remove("input-error");
+}
+
+
+function resetForm() {
+    document.getElementById("productForm").reset();
+    document.getElementById("methodErr").innerHTML = "";
+    document.getElementById("PaymentMethod").classList.remove("input-error");
+}
+</script>
+
 </html>

@@ -121,22 +121,27 @@ if(mysqli_num_rows($statemnt) > 0)
 
             <label for="" class="Payment">Payment Method</label><br>
 
+           
           <div class="col-4 ondelivery"> 
-	         <input type="checkbox" id="ondelivery" value="1" name="ondelivery" >
-	        <h3 class="deliveryt">Cash on Delivery</h3>
 
-	        <input type="checkbox" id="ondelivery" value="2" name="ondelivery">
-	        <h3 class="deliveryt">GooglePay</h3>
+             <?php
+            $selectMethod = "SELECT `Id`, `Name` FROM `payment_method` WHERE `IsDeleted` = 0";
+            $check = mysqli_query($conn,$selectMethod);
 
-	        <input type="checkbox" id="ondelivery" value="3" name="ondelivery">
-	        <h3 class="deliveryt">Phonepe</h3>
+            if(mysqli_num_rows($check)>0)
+            {
+              while($method = mysqli_fetch_assoc($check))
+              {
+ 
+            ?>
+	         <input type="checkbox" id="ondelivery" value="<?php echo $method['Id'];?>" name="ondelivery" >
+	        <h3 class="deliveryt"><?php echo $method['Name'];?></h3>
 
-          <input type="checkbox" id="ondelivery" value="3" name="ondelivery">
-	        <h3 class="deliveryt">Credit/Debit Card</h3>
-
-          <input type="checkbox" id="ondelivery" value="3" name="ondelivery">
-	        <h3 class="deliveryt">EMI</h3>
+          <?php   }
+            }?>
+            
          </div>
+         
 
          <div class="cl"></div>
 
