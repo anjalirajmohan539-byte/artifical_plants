@@ -58,7 +58,7 @@ if(isset($_POST['edit']))
             <input type="hidden" name="payid" value="<?php echo $paymentId;?>">
             <input type="hidden" name="methId" value="<?php echo $methodId;?>">
 
-            <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
+            <button class="btn btn-save" name="btn" id="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
         </div>
 
@@ -155,6 +155,8 @@ function resetForm() {
     document.getElementById("productForm").reset();
     document.getElementById("methodErr").innerHTML = "";
     document.getElementById("PaymentMethod").classList.remove("input-error");
+    document.getElementById("PaymentMethod").value = "";
+    document.getElementById("btn").innerText = "Save";
 }
 </script>
 

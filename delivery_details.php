@@ -35,7 +35,7 @@ $select = "SELECT ap.Id, ap.ProductImage, pi.Images, ProductName, Price, ColorNa
            FROM add_product ap
            INNER JOIN product_images pi ON pi.ProductId = ap.Id 
            WHERE ap.Id = $product_id AND pi.IsDelete = 0";
-
+// var_dump($select);
 $statemnt = mysqli_query($conn,$select);
 
 if(mysqli_num_rows($statemnt) > 0)
@@ -67,7 +67,7 @@ if(mysqli_num_rows($statemnt) > 0)
         <div class="card">
           
             <div class="card-title">Shipping Details</div>
-           <form action="Shipping _Details_action.php" method="post">
+           <form action="Shipping_Details_action.php" method="post">
 
         <fieldset>
 
@@ -117,12 +117,22 @@ if(mysqli_num_rows($statemnt) > 0)
 
             <input type="hidden" name="proId" id="proId" value="<?php echo $product_id;?>">
 
-            <!------- Payment Method ------->
+        </fieldset>
+        <button class="btn1" name="btn">Add</button>
 
+      </form>
+        </div>
+
+
+            <!---------------------------------------------------- Payment Details ---------------------------------------------------->
+
+        <div class="card">
+          <div class="card-title">Payment Method Details</div>
+           <form action="paymentDetails_action.php" method="post">
+
+        <fieldset>
             <label for="" class="Payment">Payment Method</label><br>
-
-           
-          <div class="col-4 ondelivery"> 
+          <div class="col-12"> 
 
              <?php
             $selectMethod = "SELECT `Id`, `Name` FROM `payment_method` WHERE `IsDeleted` = 0";
@@ -134,23 +144,24 @@ if(mysqli_num_rows($statemnt) > 0)
               {
  
             ?>
-	         <input type="checkbox" id="ondelivery" value="<?php echo $method['Id'];?>" name="ondelivery" >
-	        <h3 class="deliveryt"><?php echo $method['Name'];?></h3>
-
+           
+              <div class="col-10" style="width: 5.666667%;">
+                <input type="checkbox" name="ondelivery[]" id="ondelivery" value="<?php echo $method['Id'];?>">    
+              </div>
+              <div class="col-2" style="width: 10.666667%;">
+              <h3 class="deliveryt" name="ondeliveryName"><?php echo $method['Name'];?></h3>
+              </div>
           <?php   }
             }?>
             
-         </div>
-         
-
-         <div class="cl"></div>
-
+         </div> 
+            
         </fieldset>
+        <input type="hidden" name="proId" id="product" value="<?php echo $product_id;?>">
         <button class="btn1" name="btn">Add</button>
-
+        
       </form>
         </div>
-
 
         <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
 
