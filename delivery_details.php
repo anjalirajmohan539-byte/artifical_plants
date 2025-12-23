@@ -135,7 +135,10 @@ if(mysqli_num_rows($statemnt) > 0)
           <div class="col-12"> 
 
              <?php
-            $selectMethod = "SELECT `Id`, `Name` FROM `payment_method` WHERE `IsDeleted` = 0";
+            $selectMethod = "SELECT pm.`Id`,ppm.Id AS productMethodId, `Name` FROM `payment_method` pm
+                             LEFT JOIN payment_product_method ppm ON ppm.PaymentMethodId = pm.Id AND ppm.ProductId = $product_id
+                             WHERE pm.`IsDeleted` = 0";
+                             $product_method=1;
             $check = mysqli_query($conn,$selectMethod);
 
             if(mysqli_num_rows($check)>0)
@@ -146,7 +149,7 @@ if(mysqli_num_rows($statemnt) > 0)
             ?>
            
               <div class="col-10" style="width: 5.666667%;">
-                <input type="checkbox" name="ondelivery[]" id="ondelivery" value="<?php echo $method['Id'];?>">    
+                <input type="checkbox" name="ondelivery[]" id="ondelivery" value="<?php echo $method['Id'];?>" <?php echo $method['productMethodId'] != "" ? "Checked" : ""?>>    
               </div>
               <div class="col-2" style="width: 10.666667%;">
               <h3 class="deliveryt" name="ondeliveryName"><?php echo $method['Name'];?></h3>

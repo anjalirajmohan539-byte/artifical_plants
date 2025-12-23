@@ -46,23 +46,23 @@
                 <h1>MILON</h1>
                 <h3 class="one">Artifical Flowers</h3>
                 <p class="onep">"Love is the flower you've got to let grow."</p>
-                <img src="images/1555.png">
+                <img src="images/s_1.jpg">
             </div>
             <div class="my_slider">
                 <h3 class="two">Inspired By Nature - Crafted By Hand</h3>
                 <h2 class="twoo">FLORAL INSPIRATION</h2>
                 <p class="twop">10 stunning ideas to add a touch of<br> beauty and color to your home</p>
-                <img src="images/3-3.jpg">
+                <img src="images/s_2.jpg">
             </div>
             <div class="my_slider">
                 <p class="threep">Style your Home , with Fake Plants</p>
                 <button class="three">Order now</button>
-                <img src="images/7.jpg">
+                <img src="images/s_3.jpg">
             </div>
             <div class="my_slider">
                 <p class="fourp">Add a touch of unfading beauty with ,</p>
                 <h2 class="four">FAUS FLOWERS & GREENS</h2>
-                <img src="images/6.jpg">
+                <img src="images/s_4.jpg">
             </div>
             <div class="my_slider">
                  <p class="fivep">Your Daily Routine, Redefined</p>
@@ -91,7 +91,7 @@
             <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
         </div>
         <div class="col-3">
-            <img src="images/plant_6.webp" alt="">
+            <img src="images/plant_6.jpeg" alt="">
             <p1>Artifical plant</p1><br>
             <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
         </div>
@@ -113,7 +113,7 @@
             <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
         </div>
         <div class="col-3">
-            <img src="images/plant_6.webp" alt="">
+            <img src="images/plant_6.jpeg" alt="">
             <p1>Artifical plant</p1><br>
             <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
         </div>
@@ -181,7 +181,7 @@
 
         <div class="col-12 shop_product3">
         <div class="col-6 image_3">
-            <img src="images/artificial_plants_3.jpg" alt="">
+            <img src="images/plant_6.jpeg" alt="">
         </div>
         <div class="col-6 text">
             <h2>Vase</h2>
@@ -242,103 +242,40 @@
 <div class="video-head">
   <h1>Watch & Buy</h1>
 </div>
-<section>
-  <div class="swiper">
-  <div class="swiper-wrapper">
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="front">
-          <video width="100%" height="100%" autoplay muted>
+
+	<div class="main" id="main">
+		<div class="box">
+			<video width="100%" height="100%" autoplay loop muted>
           <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
           </video>
-          <button>See Details</button>
-        </div>
-        <div class="back">
-          <video width="100%" height="100%" autoplay muted>
+		</div>
+		<div class="box">
+			<video width="100%" height="100%" autoplay loop muted>
+          <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
+          </video>
+		</div>
+		<div class="box">
+			<video width="100%" height="100%" autoplay loop muted>
           <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
           </video>
-          <p1>Artifical plant</p1><br>
-          <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="front">
-          <video width="100%" height="100%" autoplay muted>
+		</div>
+		<div class="box">
+			<video width="100%" height="100%" autoplay loop muted>
           <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
           </video>
-          <button>See Details</button>
-        </div>
-        <div class="back">
-          <video width="100%" height="100%" autoplay muted>
-          <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
-          </video>
-          <p1>Artifical plant</p1><br>
-          <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="front">
-          <video width="100%" height="100%" autoplay muted>
-          <source src="videos/Roses_Petal.mp4" type="video/mp4">
-          </video>
-          <button>See Details</button>
-        </div>
-        <div class="back">
-          <video width="100%" height="100%" autoplay muted>
-          <source src="videos/Roses_Petal.mp4" type="video/mp4">
-          </video>
-          <p1>Artifical plant</p1><br>
-          <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="front">
-          <video width="100%" height="100%" autoplay muted>
+		</div>
+		<div class="box">
+			<video width="100%" height="100%" autoplay loop muted>
           <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
           </video>
-          <button>See Details</button>
-        </div>
-        <div class="back">
-          <video width="100%" height="100%" autoplay muted>
-          <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
-          </video>
-          <p1>Artifical plant</p1><br>
-          <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
-        </div>
-      </div>
-    </div>
-
-    <div class="swiper-slide">
-      <div class="card">
-        <div class="front">
-          <video width="100%" height="100%" autoplay muted>
-          <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
-          </video>
-          <button>See Details</button>
-        </div>
-        <div class="back">
-          <video width="100%" height="100%" autoplay muted>
-          <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
-          </video>
-          <p1>Artifical plant</p1><br>
-          <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
-        </div>
-      </div>
-    </div>
-
-  </div>
-  <div class="swiper-pagination"></div>
-</div>
-</section>
+		</div>
+	</div>
+	<div class="main">
+		<ul>
+			<li  onClick="pre()">◄</li>
+			<li  onClick="nxt()">►</li>
+		</ul>
+	</div>
 
 
 
@@ -567,50 +504,14 @@
 
 <script>
 
-var swiper = new Swiper(".swiper", {
-  initialSlide: 3,
-  centeredSlides: true,
-  loop: true,
-  speed: 900,
-  grabCursor: true,
-  allowTouchMove: false,
-  effect: "coverflow",
-  coverflowEffect:
-  {
-    ratio: -10,
-
-    stretch: -45,
-
-    depth: 90,
-
-    modifier: 1,
-
-    sliderShadow: true,
-  },
-
-  mouseWhile:
-  {
-  thresholdDelta: 50,
-  sensitivity: 1,
-  },
-  pagination:
-  {
-    el: ".swiper-pagination",
-  },
-  breakpoints:
-  {
-    0:{
-      slidesperView:1,
-      spacebetween: 20,
-    },
-    600:{
-      slidesperView:3,
-    },
-    1200:{
-      slidesperView:5,
-    },
-  }
-})
-
+	var main=document.getElementById("main");
+		function nxt(){
+			var pic=document.querySelectorAll(".box");
+			main.appendChild(pic[0]);
+		}
+		function pre(){
+			var pic=document.querySelectorAll(".box");
+			main.prepend(pic[pic.length-1]);
+		}
 </script>
 </html>
