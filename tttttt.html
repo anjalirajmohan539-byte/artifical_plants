@@ -505,6 +505,24 @@ function escapeHtml(unsafe) {
 
 updateCategoryVisibility();
 
+resetBtn.addEventListener('click', () => {
+
+  productForm.reset();
+
+  imagePreview.innerHTML = 'No image';
+  productImageInput.value = '';
+
+  galleryThumbs.innerHTML = '';
+  galleryImages = [];
+
+  mainImage.src = 'https://via.placeholder.com/1200x700?text=Main+Image+Preview';
+
+  updateCategoryVisibility();
+
+  document.querySelectorAll('#productForm .is-invalid, #productForm .is-valid')
+    .forEach(el => el.classList.remove('is-invalid', 'is-valid'));
+});
+
 </script>
 </body>
 </html>

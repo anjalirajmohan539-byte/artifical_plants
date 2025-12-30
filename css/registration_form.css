@@ -37,7 +37,7 @@ a {
 {
     margin: 0;
     text-align: center;
-      background:#897869;
+      background:#0c192b;
       color:white;
       display:flex;
       align-items:center;
@@ -46,7 +46,7 @@ a {
 }
 
 .header p{
-  color: black;
+color: #dbdbdb !important;
   font-size:12px;
   margin-top:-15px;
   font-weight:600;
@@ -122,7 +122,7 @@ a {
 {
 	padding-top:5px;
 	text-align: center;
-	background:#9A8C7A;
+	background:#071d3c;
 	margin:0;
 	align-items:center;
 	justify-content: center;
@@ -152,7 +152,7 @@ a {
       width:210px;
       height:210px;
       border-radius:9px;
-      background-color: #b2a299;
+      background-color: #071d3c;
       display:flex;
       align-items:center;
       justify-content:center;
@@ -200,11 +200,11 @@ a {
 }
 
 form h2 {
-  color:#a38f84;
+  color:#0c192b;
   font-family:Footlight MT Light;
   margin-bottom: 37px;
   font-size: 45px;
-  border-bottom: 2px solid #7d6656;
+  border-bottom: 2px solid #071d3c;
   display: inline-block;
   padding-bottom: 5px;
 }
@@ -260,7 +260,7 @@ form select:focus {
 }
 
 button[type="submit"] {
-  background: #7d6656;
+  background: #0c192b;
   color: #fff;
   border: none;
   border-radius: 8px;
@@ -273,7 +273,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: #5e4f42;
+  background: #082347;
 }
 
 /* Checkbox */
@@ -356,14 +356,14 @@ footer a{
   padding: 5px;
   border: none;
   border-radius: 4px;
-  background: #7d6656;
+  background: #0c192b;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
 }
 
 .newsletter-form input[type="submit"]:hover {
-  background-color: #ff8533;
+  background-color: #071d3c;
 }
 
 
@@ -380,7 +380,7 @@ footer a{
 
 .wrapper .icon {
   position: relative;
-  background:#a38f84 ;
+  background:#0c192b ;
   color:#fff ;
   border-radius: 50%;
   margin: 10px;

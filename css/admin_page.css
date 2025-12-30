@@ -43,7 +43,7 @@ a {
     /* -------------------- SIDEBAR -------------------- */
     .sidebar {
         width: 240px;
-        background: #736559;
+        background: #0c192b;
         height: 100vh;
         padding-top: 30px;
         position: fixed;
@@ -67,7 +67,7 @@ a {
     }
 
     .sidebar a:hover {
-        background: #9b8b7d;
+        background: #071d3c;
         color: #fff;
         padding-left: 28px;
     }
@@ -100,8 +100,9 @@ a {
 }
 
 .topbar h1 span {
-  color: #7a614b;
+  color: #0c192b;
   font-weight: 700;
+  text-shadow:1px 1px #225daf !important;
 }
 
 .profile {

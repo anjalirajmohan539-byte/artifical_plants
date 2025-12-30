@@ -6,7 +6,6 @@
 <link href="css/index.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css">
 </head>
 
 <body>
@@ -67,7 +66,7 @@
             <div class="my_slider">
                  <p class="fivep">Your Daily Routine, Redefined</p>
                  <button class="five">Order now</button>
-                <img src="images/1-9.jpg">
+                <img src="images/s_5.jpg">
             </div>
         </figure>
     </div>
@@ -244,31 +243,77 @@
 </div>
 
 	<div class="main" id="main">
+
+	<div class="box">
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay Text -->
+    <div class="video-overlay">
+      <h2>Beautiful Flower Bouquet</h2>
+      <p>Buy Now</p>
+    </div>
+  </div>
+</div>
+
 		<div class="box">
-			<video width="100%" height="100%" autoplay loop muted>
-          <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
-          </video>
-		</div>
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="videos/Roses_Petal.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay Text -->
+    <div class="video-overlay">
+      <h2>Beautiful Flower Bouquet</h2>
+      <p>Buy Now</p>
+    </div>
+  </div>
+</div>
+
 		<div class="box">
-			<video width="100%" height="100%" autoplay loop muted>
-          <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
-          </video>
-		</div>
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay Text -->
+    <div class="video-overlay">
+      <h2>Beautiful Flower Bouquet</h2>
+      <p>Buy Now</p>
+    </div>
+  </div>
+</div>
+
 		<div class="box">
-			<video width="100%" height="100%" autoplay loop muted>
-          <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
-          </video>
-		</div>
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="videos/Roses_Petal.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay Text -->
+    <div class="video-overlay">
+      <h2>Beautiful Flower Bouquet</h2>
+      <p>Buy Now</p>
+    </div>
+  </div>
+</div>
+
 		<div class="box">
-			<video width="100%" height="100%" autoplay loop muted>
-          <source src="videos/Flowers_Bouquet.mp4" type="video/mp4">
-          </video>
-		</div>
-		<div class="box">
-			<video width="100%" height="100%" autoplay loop muted>
-          <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
-          </video>
-		</div>
+  <div class="video-container">
+    <video autoplay loop muted>
+      <source src="videos/Bouquet_Flowers.mp4" type="video/mp4">
+    </video>
+
+    <!-- Overlay Text -->
+    <div class="video-overlay">
+      <h2>Beautiful Flower Bouquet</h2>
+      <p>Buy Now</p>
+    </div>
+  </div>
+</div>
+
 	</div>
 	<div class="main">
 		<ul>

@@ -15,6 +15,7 @@ $deliveryType = 1;
 <title>Artifical_plant_registration</title>
 <link href="css/delivery_details.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -168,7 +169,7 @@ if(mysqli_num_rows($statemnt) > 0)
 
         <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
 
-        <div class="card">
+        <div class="card" id="deliverydetails">
           <div class="card-title">Delivery Details</div>
            <form action="delivery_action_page.php" method="post">
 
@@ -176,7 +177,7 @@ if(mysqli_num_rows($statemnt) > 0)
 <!------- Return ------->
 
             <label for="">Return Days</label>
-            <input type="text" name="return" id="return"> 
+            <input type="text" name="return" id="returnId"> 
             
         </fieldset>
         <input type="hidden" name="proId" id="product" value="<?php echo $product_id;?>">
@@ -231,5 +232,13 @@ function showDeliveryCharge()
   }
 
 }
+</script>
+<script>
+  // let details = <?php //echo $_GET['sectionId']?>;
+  let details = "<?php echo $_GET['sectionId']?>";
+  // alert(details);
+  document.getElementById(details).focus();
+  // alert(details);
+ 
 </script>
 </html>

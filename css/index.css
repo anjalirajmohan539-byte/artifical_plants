@@ -123,7 +123,7 @@ a {
 {
 	padding-top:5px;
 	text-align: center;
-	background:rgb(7 29 60);
+	background:#071d3c;
 	margin:0;
 	align-items:center;
 	justify-content: center;
@@ -176,9 +176,9 @@ a {
 }
 
 .my_slider h1{
-  margin-top:250px;
+  margin-top:306px;
   font-size:90px;
-  margin-left:30%;
+  margin-left:17%;
   color:green;
   font-family: Castellar;
   font-weight:bold;
@@ -188,7 +188,7 @@ a {
 .one{
   margin-top:400px;
   font-size:80px;
-  margin-left:25%;
+  margin-left:12%;
   color: gold;
   font-family: Baskerville Old Face;
   font-weight: bold;
@@ -199,7 +199,7 @@ a {
 {
    margin-top:495px;
    font-size:40px;
-  margin-left:20%;
+  margin-left:7%;
   font-family: Footlight MT Light;
   text-shadow: 1px 1px black;
   color: white;
@@ -240,7 +240,7 @@ a {
 .threep
 {
   margin-top:300px;
-  margin-left:30%;
+  margin-left:5%;
   font-size:80px;
   font-family: Times New Roman;
   color:white;
@@ -253,7 +253,7 @@ a {
   margin-top:450px;
   text-align: center;
   padding:10px 25px;
-  margin-left:59%;
+  margin-left:33%;
   background: green;
   color: white;
   font-size: 20px;
@@ -285,8 +285,8 @@ a {
 .fivep
 {
   text-align: center;
-  margin-top:230px;
-  margin-left:50%;
+  margin-top:295px;
+  margin-left:5%;
   font-size:80px;
   font-family: Times New Roman;
   color: green;
@@ -295,12 +295,13 @@ a {
 
 .five
 {
-  margin-top:500px;
+  margin-top:429px;
   text-align: center;
   padding:10px 25px;
-  margin-left:72%;
+  margin-left:30%;
   background: green;
   color: white;
+  font-size: 17px;
 }
 
 
@@ -335,7 +336,7 @@ a {
   font-size: 50px;
   margin-top:50px;
   font-weight:normal;
-  color:#897869;
+  color:#0c192b;
   font-family:Footlight MT Light;
   margin-left:160px;
 }
@@ -363,7 +364,7 @@ a {
 .new_arrival p1
 {
   font-size:15px;
-  color:#a38f84;
+  color:#264b7c;
   font-weight: normal;
 }
 
@@ -375,7 +376,7 @@ a {
 
 .new_arrival p2
 {
-  color:#bdafa8;
+  color:#071d3c;
   padding-left:20px;
   
 }
@@ -399,7 +400,7 @@ a {
   background-color: #fff;
   border: 1px solid;
   border-radius: 8px;
-  color: #a38f84;
+  color: #071d3c;
   font-weight: 400;
   font-family: inherit;
   z-index: 0;
@@ -410,18 +411,18 @@ a {
 }
 
 .new_arrival button span {
-  color: #a38f84;
+  color: #071d3c;
   font-size:16px;
   font-weight: 500;
   letter-spacing: 0.7px;
 }
 
 .new_arrival button:hover {
-  animation: rotate624 0.7s ease-in-out both;
+  animation: rotate624 0.7s ease-in-out both loop;
 }
 
 .new_arrival button:hover span {
-  animation: storm1261 0.7s ease-in-out both;
+  animation: storm1261 0.7s ease-in-out both loop;
   animation-delay: 0.06s;
 }
 
@@ -480,7 +481,7 @@ a {
 }
 
 .btn-shine:after {
-  background: #917a6e;
+  background: #071d3c;
   content: "";
   height: 155px;
   left: -75px;
@@ -523,7 +524,7 @@ a {
 .category_h h1
 {
   font-size:66px;
-  color:#a38f84;
+  color:#0c192b;
   font-family:Footlight MT Light;
   text-align: center;
   font-weight:normal;
@@ -536,14 +537,14 @@ a {
   font-size:25px;
   font-weight: normal;
   text-align:left;
-  color: #d3cac5;
+  color: #264b7c;
   
 }
 
 .shop_product1 h2
 {
   font-size:60px;
-  color:#a38f84;
+  color:#0c192b;
 }
 
 .shop_product1 {
@@ -570,13 +571,13 @@ display: flex;
   font-weight: normal;
   text-align:right;
   margin-left:100px;
-  color: #d3cac5;
+  color: #264b7c;
 }
 
 .shop_product2 h2
 {
   font-size:60px;
-  color:#a38f84;
+  color:#0c192b;
 }
 
 
@@ -586,13 +587,13 @@ display: flex;
   font-size:25px;
   font-weight: normal;
   text-align:left;
-  color: #d3cac5;
+  color: #264b7c;
 }
 
 .shop_product3 h2
 {
   font-size:60px;
-  color:#a38f84;
+  color:#0c192b;
 }
 
 
@@ -611,7 +612,7 @@ display: flex;
 .btn-17 {
   -webkit-tap-highlight-color: transparent;
   -webkit-appearance: button;
-  background-color: #a38f84;
+  background-color: #0c192b;
   background-image: none;
   color: white;
   cursor: pointer;
@@ -622,7 +623,7 @@ display: flex;
   font-weight: 900;
   line-height: 1.5;
   margin: 0;
-  -webkit-mask-image: -webkit-radial-gradient(#a38f84, #fff);
+  -webkit-mask-image: -webkit-radial-gradient(#0c192b, #fff);
   padding: 0;
   text-transform: uppercase;
 }
@@ -711,7 +712,7 @@ display: flex;
 .btn-17:after,
 .btn-17:before {
   --skew: 0.2;
-  background: #bdafa8;
+  background: #264b7c;;
   content: "";
   display: block;
   height: 102%;
@@ -760,14 +761,14 @@ display: flex;
 {
   font-size:30px;
   margin-left:108px;
-  color: #a38f84;
+  color: #0c192b;
 }
 
 .decor p1
 {
   font-size:20px;
   font-weight:normal;
-  color:#a38f84;
+  color:#264b7c;
   font-weight: normal;
 }
 
@@ -779,7 +780,7 @@ display: flex;
 
 .decor p2
 {
-  color:#bdafa8;
+  color:#071d3c;
   padding-left:20px;
   
 }
@@ -810,7 +811,7 @@ display: flex;
   background-color: #fff;
   border: 1px solid;
   border-radius: 8px;
-  color: #a38f84;
+  color: #071d3c;
   font-weight: 400;
   font-family: inherit;
   z-index: 0;
@@ -821,7 +822,7 @@ display: flex;
 }
 
 .decor button span {
-  color: #a38f84;
+  color: #071d3c;
   font-size:16px;
   font-weight: 500;
   letter-spacing: 0.7px;
@@ -1049,7 +1050,7 @@ display: flex;
 
   .customer_review h1 {
     font-size: clamp(24px, 4vw, 38px);
-    color: var(--accent);
+    color: #0c192b;
     margin-bottom: 50px;
     position: relative;
   }
@@ -1059,7 +1060,7 @@ display: flex;
     display: block;
     width: 80px;
     height: 4px;
-    background: var(--accent);
+    background: #0c192b;
     margin: 10px auto 0;
     border-radius: 2px;
   }
@@ -1159,6 +1160,7 @@ footer h4{
   margin-top:20px;
   font-size:30px;
   font-weight: bold;
+  color: #264672;
 }
 
 footer a{
@@ -1206,7 +1208,7 @@ footer a{
   padding: 5px;
   border: none;
   border-radius: 4px;
-  background: #7d6656;
+  background: #0c192b;
   color: #fff;
   font-weight: bold;
   cursor: pointer;
@@ -1230,7 +1232,7 @@ footer a{
 
 .wrapper .icon {
   position: relative;
-  background:#a38f84 ;
+  background:#0c192b ;
   color:#fff ;
   border-radius: 50%;
   margin: 10px;
@@ -1318,7 +1320,7 @@ footer a{
 .video-head h1
 {
   font-size:66px;
-  color:#a38f84;
+  color:#0c192b;
   font-family:Footlight MT Light;
   text-align: center;
   font-weight:normal;
@@ -1397,4 +1399,99 @@ footer a{
 			color: #fff;
 			background-color: #2A608C;
 		}
+
+
+    .video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay text */
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.3); /* optional dark layer */
+  color: #fff;
+  text-align: center;
+}
+
+.video-overlay h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-top: 323px;
+}
+
+.video-overlay p {
+  margin-top: 10px;
+  padding:1px 9px;
+  background: #0c192b;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+
+
+.video-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* Video */
+.video-container video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Overlay hidden by default */
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.4s ease;
+}
+
+
+.video-container:hover .video-overlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+
+.video-overlay h2 {
+  color: #fff;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+
+
+
 

@@ -110,12 +110,12 @@
         datasets: [{
           label: 'Visitors',
           data: [1200, 1900, 3000, 2500, 2800, 3200, 4100],
-          borderColor: '#7a614b',
-          backgroundColor: 'rgba(122, 97, 75, 0.2)',
+          borderColor: '#0c192b',
+          backgroundColor: '#023275ff',
           fill: true,
           tension: 0.3,
           pointRadius: 4,
-          pointBackgroundColor: '#7a614b'
+          pointBackgroundColor: '#0c192b'
         }]
       },
       options: {
@@ -137,7 +137,7 @@
         datasets: [{
           label: 'Sales (in ₹000)',
           data: [15, 22, 18, 25, 28, 35, 40, 38, 45],
-          backgroundColor: '#8b7a6f',
+          backgroundColor: '#023275ff',
           borderRadius: 6
         }]
       },

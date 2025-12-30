@@ -74,8 +74,8 @@ include("database.php");
 
 <aside class="card-right">
 <div class="avatar-preview" id="avatarBox">
-        <div style="text-align:center;padding:10px;color:var(--muted)">
-          <div style="font-size:18px;font-weight:700">Welcome!</div>
+        <div style="text-align:center;padding:10px;color:white">
+          <div style="font-size:18px;font-weight:700;color:white">Welcome!</div>
           <div class="small1">Upload a profile photo to preview here.</div>
         </div>
       </div>

@@ -122,6 +122,11 @@ a {
         border-radius:15px;
         box-shadow:0 4px 15px rgba(0,0,0,0.08);
     }
+
+    /* .card-title s
+    {
+      margin-left: 65px;
+    } */
     .card-title
     {
         font-size:20px;
@@ -163,11 +168,6 @@ a {
     .dimension-row
     {
       margin-top: 20px;
-    }
-
-    s
-    {
-      margin-left:75%;
     }
 
     g

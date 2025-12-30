@@ -517,7 +517,7 @@ document.getElementById("resetBtn").addEventListener("click", function () {
   });
 
   document.getElementById("imagePreview").innerHTML = "No image";
-  document.getElementById("mainImage").display = "none";
+  document.getElementById("mainImage").display = "";
 
 });
 </script>
