@@ -46,7 +46,7 @@ if(isset($_POST['edit']))
 
 <!-- MAIN CONTENT -->
 <div class="wrapper">
-    <div class="title">Color Details</div>
+    <div class="title">Image Details</div>
 
     <div class="grid-container">
 

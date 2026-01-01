@@ -71,7 +71,7 @@ $select = mysqli_query($conn, "SELECT * FROM product_dimensions WHERE ProductId 
 $data = mysqli_fetch_assoc($select);
 ?>
 
-<div class="card-title" style="display: flex;justify-content: space-between">Dimensions Details<sv><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=Width"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+<div class="card-title" style="display: flex;justify-content: space-between">Dimensions Details<sv><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=Width" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></sv></div>
 
@@ -99,7 +99,7 @@ $data = mysqli_fetch_assoc($select);
         <!---------------------------------------------------- Product Information ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Product Information<sk><a href="add_product.php?productid=<?php echo $product_id;?>"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between">Product Information<sk><a href="add_product.php?productid=<?php echo $product_id;?>" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></sk></div>
             <?php
@@ -128,7 +128,7 @@ $data = mysqli_fetch_assoc($select);
         <!---------------------------------------------------- Shipping Info ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Shipping Details <s><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=available"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between">Shipping Details <s><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=available" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></s></div>
             <ul class="shipping">
@@ -179,7 +179,7 @@ $data = mysqli_fetch_assoc($select);
 
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Payment Method<s><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=ondelivery"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between">Payment Method<s><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=ondelivery" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></s></div>
 
@@ -215,7 +215,7 @@ if(mysqli_num_rows($res)>0)
                 <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Delivery Details<s><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=returnId"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between">Delivery Details<s><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=returnId" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></s></div>
 
@@ -249,13 +249,29 @@ date_add($returnDate, date_interval_create_from_date_string(($deliveryDays + $re
         <!---------------------------------------------------- Pair Well With ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title" >Pair Well With </div>
+            <div class="card-title" style="display: flex;justify-content: space-between;">Pair Well With <s><a href="product_pair.php?productId=<?php echo $product_id;?>" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
+</svg></a></s></div>
             <div class="pair">
-                <img src="images/vase1.jpg">
+                           <?php
+            
+            $pair = "SELECT `Image`, `Name`, `Price` FROM `product_pair` WHERE `ProductId` = $product_id AND `IsDeleted` = 0";
+            $check = mysqli_query($conn,$pair);
+
+            if(mysqli_num_rows($check)>0)
+            {
+                while($pairs = mysqli_fetch_assoc($check))
+                {
+                    
+             
+            ?>
+                <img src="images/pair/<?php echo $pairs['Image'];?>">
                 <div>
-                    <div style="font-size:17px;font-weight:600;color:#1d3557;">Mini Vase</div>
-                    <div style="color:#333;">₹299</div>
+                    <div style="font-size:17px;font-weight:600;color:#1d3557;"><?php echo $pairs['Name'];?></div>
+                    <div style="color:#333;">₹<?php echo $pairs['Price'];?></div>
                 </div>
+                <?php    }
+            }?>
             </div>
         </div>
 

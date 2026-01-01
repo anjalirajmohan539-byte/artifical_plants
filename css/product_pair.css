@@ -43,7 +43,7 @@ a {
     /* -------------------- SIDEBAR -------------------- */
     .sidebar {
         width: 240px;
-        background: #736559;
+        background: #0c192b;
         height: 100vh;
         padding-top: 30px;
         position: fixed;
@@ -58,16 +58,17 @@ a {
     }
 
     .sidebar a {
-        display: block;
+        display: flex;
         padding: 20px 20px;
         color: #e6e6e6;
         text-decoration: none;
         font-size: 16px;
         transition: 0.3s;
+        gap:10%;
     }
 
     .sidebar a:hover {
-        background: #9b8b7d;
+        background: #071d3c;
         color: #fff;
         padding-left: 28px;
     }
@@ -84,6 +85,13 @@ a {
       text-decoration: none;
     }
 
+    .error {
+    color: red;
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+
     /* -------------------- MAIN CONTENT -------------------- */
     .wrapper {
         width: 100%;
@@ -94,7 +102,7 @@ a {
     .title {
         font-size: 50px;
         font-weight: 600;
-        color: #9b8b7d;
+        color: #071d3c;
         text-align: center;
         margin-bottom: 60px;
     }
@@ -110,7 +118,7 @@ a {
         padding: 25px;
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-left: 6px solid #736559 !important;
+        border-left: 6px solid #071d3c !important;
         transition: 0.3s;
     }
 
@@ -172,7 +180,7 @@ a {
 
 
     .btn-save {
-        background: #9b8b7d;
+        background: #071d3c;
          padding: 12px 18px !important;
         border-radius: 6px !important;
         border: none !important;
@@ -180,7 +188,7 @@ a {
         cursor: pointer !important;
         font-size: 15px !important;
         margin-right: 10px;
-        background: #9b8b7d !important;
+        background: #071d3c !important;
     }
 
     .btn-reset {
@@ -192,7 +200,7 @@ a {
         cursor: pointer !important;
         font-size: 15px !important;
         margin-right: 10px;
-        background: #9b8b7d !important;
+        background: #071d3c !important;
     }
 
     .table-card {
@@ -200,7 +208,7 @@ a {
         padding: 20px;
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-left: 6px solid #736559;
+        border-left: 6px solid #071d3c;
         overflow-x: auto;
     }
 

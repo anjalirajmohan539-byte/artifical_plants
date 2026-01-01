@@ -8,7 +8,7 @@ if(isset($_POST["button"]))
     $password=$_POST['password'];
 }
 
-$select="SELECT `Id`, `UserEmail`, `Lpassword`, `UserType` FROM `login` WHERE UserEmail='$email' AND Lpassword='$password'";
+$select="SELECT `Id`, `UserEmail`, `UserType` FROM `login` WHERE UserEmail='$email' AND Lpassword='$password'";
 // var_dump($select);
 $s_statement=mysqli_query($conn,$select);
 
