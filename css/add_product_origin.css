@@ -149,10 +149,24 @@ a {
         font-size: 12px;
     }
 
+    .small_error
+    {
+      color: red;
+      font-size: 12px;
+    }
+
     .btn-brown{
-      background:var(--brown);
-      color:#fff;
+      background:#0c192b !important;
+      color:#fff !important;
       border:0;
+    }
+
+    .btn.secondary
+    {
+     background: #eef2ff;
+    color:#0c192b;
+    border: 1px solid rgba(37, 99, 235, 0.08);
+
     }
     .btn-brown:active, .btn-brown:focus{ outline: none; box-shadow:none; }
 

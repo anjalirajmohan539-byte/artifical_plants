@@ -557,7 +557,7 @@ window.onload = function () {
 
       $.ajax
         ({
-          url: "categoryid.php",
+          url: "categoryId.php",
           type: "POST",
           data:
           {

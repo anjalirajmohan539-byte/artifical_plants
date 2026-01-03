@@ -3,7 +3,7 @@ include("database.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
-    $material = $_POST['productMaterials'];  
+    $material = $_POST['productMaterial'];  
 
     $select = "SELECT `Id`, `Name`, `Type` FROM material_category WHERE Type = $material AND IsDelete = 0";
     echo $select;
