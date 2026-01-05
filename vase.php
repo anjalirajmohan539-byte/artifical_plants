@@ -1,3 +1,8 @@
+<?php
+include('database.php');
+
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
@@ -55,6 +60,7 @@
     <!-- Sidebar -->
     <div class="sidebar">
       <h2>Vase Types</h2>
+
       <ul>
         <li><img src="images/bowl_vase.jpg"><a href="#">Bowl Vase</a></li>
 
@@ -77,92 +83,37 @@
     <!-- Product Grid -->
 
     <div class="products">
+
+    <?php
+    $select = "";
+    
+    ?>
       
-      <div class="product-card">
+      <div class="col-3 product-card">
         <img src="images/download (14).jpg" alt="">
         <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
+        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
+        <p></p>
       </div>
 
-      <div class="product-card">
+      <!-- <div class="col-3 product-card">
+        <img src="images/artificial_plants_2.jpg" alt="">
+        <h3>Vase</h3>
+        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
+      </div>
+
+        <div class="col-3 product-card">
         <img src="images/download (14).jpg" alt="">
         <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
+        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
+        
       </div>
 
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
+      <div class="col-3 product-card">
+        <img src="images/plant_6.jpeg" alt="">
         <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-      <div class="product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p><span>₹9,999</span> <s>₹13,000</s></p>
-        <p class="discount">25% off</p>
-      </div>
-
-
+        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
+      </div> -->
     </div>
 
   </div>

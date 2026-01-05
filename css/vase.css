@@ -38,7 +38,7 @@ a {
 {
     margin: 0;
     text-align: center;
-      background:#897869;
+      background:#0c192b;
       color:white;
       display:flex;
       align-items:center;
@@ -47,7 +47,7 @@ a {
 }
 
 .header p{
-  color: black;
+  color: #e5e3e3 !important;
   font-size:12px;
   margin-top:-15px;
   font-weight:600;
@@ -123,7 +123,7 @@ a {
 {
 	padding-top:5px;
 	text-align: center;
-	background:#9A8C7A;
+	background:#071d3c;
 	margin:0;
 	align-items:center;
 	justify-content: center;
@@ -185,119 +185,6 @@ a {
   text-shadow: 1px 1px black;
 }
 
-.one{
-  margin-top:400px;
-  font-size:80px;
-  margin-left:55%;
-  color: orangered;
-  font-family: Baskerville Old Face;
-  font-weight: bold;
-  text-shadow: 1px 1px black;
-}
-
-.onep
-{
-   margin-top:495px;
-   font-size:40px;
-  margin-left:50%;
-  font-family: Footlight MT Light;
-  text-shadow: 1px 1px black;
-}
-
-.two
-{
-  text-align: center;
-  margin-top:300px;
-  margin-left:32%;
-  font-size:42px;
-  font-family: Times New Roman;
-}
-
-.twoo
-{
-  text-align: center;
-  margin-top:370px;
-  font-size:30px;
-  margin-left:32%;
-  font-size:52px;
-  font-weight: bolder;
-  color:darkgreen;
-  font-family: Trajan Pro;
-}
-
-.twop
-{
-   text-align: center;
-  margin-top:450px;
-  margin-left:31%;
-  font-size:42px;
-}
-
-
-.threep
-{
-  margin-top:300px;
-  margin-left:10%;
-  font-size:80px;
-  font-family: Times New Roman;
-  color:white;
-  font-weight: bolder;
-  text-shadow: 3px 3px black;
-}
-
-.three
-{
-  margin-top:450px;
-  text-align: center;
-  padding:10px 25px;
-  margin-left:40%;
-  background: green;
-  color: white;
-}
-
-.four
-{
-  text-align: center;
-  margin-top:180px;
-  margin-left:60%;
-  font-size:70px;
-  font-family: Times New Roman;
-  color: darkgreen;;
-  font-weight: bolder;
-  text-shadow: 2px 2px black;
-}
-
-.fourp
-{
-  text-align: center;
-  margin-top:80px;
-  margin-left:56%;
-  font-size:50px;
-  font-family: Times New Roman;
-  color: white;
-  text-shadow: 1px 1px black;
-}
-
-.fivep
-{
-  text-align: center;
-  margin-top:230px;
-  margin-left:50%;
-  font-size:80px;
-  font-family: Times New Roman;
-  color: green;
-  text-shadow: 1px 1px black;
-}
-
-.five
-{
-  margin-top:500px;
-  text-align: center;
-  padding:10px 25px;
-  margin-left:72%;
-  background: green;
-  color: white;
-}
 
 
 @keyframes my_slider
@@ -341,7 +228,7 @@ a {
 /* Sidebar */
 .sidebar {
   width: 220px;
-  background: #a38f84;
+  background: #0c192b;
   color: #fff;
   border-radius: 12px;
   padding: 20px;
@@ -382,7 +269,7 @@ a {
 }
 
 .sidebar ul li a:hover {
-  color: lightgreen;
+  color: #071d3c;
   margin-left: 20px;
   
 }
@@ -390,9 +277,6 @@ a {
 /* Product Grid */
 .products {
   flex: 3;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
   padding: 0 217px;
 }
 
@@ -404,7 +288,7 @@ a {
 }
 .product-card
 {
-  margin-top:50px;
+  margin-top:10px;
 }
 
 
@@ -413,7 +297,7 @@ a {
 }
 
 .product-card img {
-  width: 103%;
+  width: 100%;
   height: 362px;
   object-fit: cover;
   border-radius: 8px;
@@ -423,6 +307,7 @@ a {
   margin: 10px 0 5px;
   color: #333;
   width:30%;
+  font-weight: bold;
 }
 
 .product-card p {
@@ -432,7 +317,7 @@ a {
 }
 
 .product-card span {
-  color: #2b8a3e;
+  color: #0c192b;
   font-weight: bold;
   margin-right: 5px;
 }
@@ -440,11 +325,6 @@ a {
 .product-card s {
   color: #999;
    font-family: Arial, Helvetica, sans-serif;
-}
-
-.discount {
-  color: #f03e3e;
-  font-weight: 600;
 }
 
 /* Responsive Design */
