@@ -1,6 +1,5 @@
 <?php
 include('database.php');
-
 ?>
 
 <html>
@@ -56,67 +55,69 @@ include('database.php');
   <!-- Main Section -->
   <div class="main_content">
 
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <h2>Vase Types</h2>
+    <ul>
+      <li><img src="images/bowl_vase.jpg"><a href="#">Bowl Vase</a></li>
+      <li><img src="images/bud_vase.jpg"><a href="#">Bud Vase</a></li>
+      <li><img src="images/cylinder_vase.jpg"><a href="#">Cylinder Vase</a></li>
+      <li><img src="images/Ceramic_vase.jpg"><a href="#">Ceramic Vase</a></li>
+      <li><img src="images/cube_vase.jpg"><a href="#">Cube Vase</a></li>
+      <li><img src="images/pitcher_vase.jpg"><a href="#">Pitcher Vase</a></li>
+      <li><img src="images/setting_icon.jpg"><a href="#">Settings</a></li>
+      <li><img src="images/exit.jpg"><a href="#">Logout</a></li>
+    </ul>
+  </div>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <h2>Vase Types</h2>
-
-      <ul>
-        <li><img src="images/bowl_vase.jpg"><a href="#">Bowl Vase</a></li>
-
-        <li><img src="images/bud_vase.jpg"><a href="#">Bud Vase</a></li>
-
-        <li><img src="images/cylinder_vase.jpg"><a href="#">Cylinder Vase</a></li>
-
-        <li><img src="images/Ceramic_vase.jpg"><a href="#">Ceramic Vase</a></li>
-
-        <li><img src="images/cube_vase.jpg"><a href="#">Cube Vase</a></li>
-
-        <li><img src="images/pitcher_vase.jpg"><a href="#">Pitcher Vase</a></li>
-
-        <li><img src="images/setting_icon.jpg"><a href="#">Settings</a></li>
-
-        <li><img src="images/exit.jpg"><a href="#">Logout</a></li>
-      </ul>
-    </div>
-
-    <!-- Product Grid -->
-
-    <div class="products">
+  <!-- Products -->
+  <div class="products row">
 
     <?php
-    $select = "";
-    
+    $select = "SELECT Id, ProductImage, ProductName, Price FROM add_product WHERE IsDeleted = 0 AND CategoryId = 2";
+
+    $check = mysqli_query($conn, $select);
+
+    if ($check && mysqli_num_rows($check) > 0) 
+      {
+      while ($vase = mysqli_fetch_assoc($check)) 
+        {
+
+        // Get delivery days for THIS product
+        $sql = "SELECT DeliveryDays FROM shipping_details WHERE ProductId = {$vase['Id']}";
+        $res = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_assoc($res);
+
+        $days = $row['DeliveryDays'] ?? 4;
+
+        $date = new DateTime();
+        $date->modify("+$days days");
     ?>
-      
-      <div class="col-3 product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
-        <p></p>
-      </div>
-
-      <!-- <div class="col-3 product-card">
-        <img src="images/artificial_plants_2.jpg" alt="">
-        <h3>Vase</h3>
-        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
-      </div>
-
-        <div class="col-3 product-card">
-        <img src="images/download (14).jpg" alt="">
-        <h3>Vase</h3>
-        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
-        
-      </div>
 
       <div class="col-3 product-card">
-        <img src="images/plant_6.jpeg" alt="">
-        <h3>Vase</h3>
-        <p>25% <s>₹13,000</s> <span>₹9,999</span></p>
-      </div> -->
-    </div>
+        <img src="images/product/<?php echo $vase['ProductImage']; ?>" alt="<?php echo $vase['ProductName']; ?>">
+
+        <input type="hidden" class="pid" value="<?php echo $vase['Id']; ?>">
+
+        <h3><?php echo $vase['ProductName']; ?></h3>
+
+        <p>
+          <span>₹<?php echo number_format($vase['Price']); ?></span>
+        </p>
+
+        <p>
+          Delivery by <?php echo $date->format("d M, D"); ?>
+        </p>
+      </div>
+
+    <?php
+      }
+    }
+    ?>
 
   </div>
+</div>
+
 
   <div class="cl"></div>
 

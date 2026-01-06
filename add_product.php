@@ -194,6 +194,8 @@ if (isset($_POST['edit']) || isset($_GET['productid'])) {
                 <div class="small_error" id="descErr"></div>
               </div>
 
+               <!---------------------------------------------------- Btn ---------------------------------------------------->
+
               <div class="d-flex gap-2">
                 <button type="submit" class="btn btn-brown" id="btn" name="btn" onsubmit="ValidationForm()"><?php echo $button; ?></button>
                 <button type="button" id="resetBtn" class="btn secondary">Reset</button>
@@ -335,8 +337,13 @@ if (isset($_POST['edit']) || isset($_GET['productid'])) {
   </main>
 </div>
 
+ <!---------------------------------------------------- JAVASCRIPT ---------------------------------------------------->
+
 
 <script>
+
+/* ================= IMAGEPREVIEW ================= */
+
 document.getElementById("productImage").addEventListener("change", function () {
     let file = this.files[0];
     if (file) {
@@ -433,6 +440,10 @@ function ValidationForm() {
 </script>
 
 <script>
+
+  /* ================= RESETBTN ================= */
+
+
 document.getElementById("resetBtn").addEventListener("click", function () {
 
   // Reset form fields
@@ -468,6 +479,10 @@ document.getElementById("categoryContainer").style.display = "none";
 
 
 <script>
+
+  /* ================= AJAX ================= */
+
+
 $(document).ready(function () {
     $('#categoryContainer').hide();
 
