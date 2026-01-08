@@ -1,8 +1,16 @@
+<?php
+
+include('database.php');
+
+$product_id = $_GET['productId'];
+$status = 0;
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Add Product - Milon Artificial Plants </title>
   <link rel="stylesheet" href="css/product_Offers.css">
   <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -27,47 +35,96 @@
 
   <!-- Main area -->
   <main class="flex-grow-1">
-    <div class="container-fluid container-main">
+
+  <h1>Add Offers</h1>
+    <div class="container-fluid container-main" style="margin-top: 25px;">
       <div class="row gx-4">
  
         <div class="col-lg-4">
           <div class="panel-card">
-            <h5 class="mb-3">Add Product</h5>
+            <h5 class="mb-3">Add Offers</h5>
 
-            <form action="#" method="post"  id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
+            <form action="product_Offers_action.php" method="post"  id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
 
               <!---------------------------------------------------- Product Name ---------------------------------------------------->
               <div class="mb-3">
                 <label class="form-label">Offers name <s>*</s></label>
-                <input type="text" id="productName" name="productName" class="form-control" placeholder="e.g. Classic White Vase"
-                value="" required>
+                <input type="text" id="offerName" name="offerName" class="form-control"  required>
+                <input type="hidden" id="proId" name="proId" value="<?php echo $product_id;?>">
               </div>
 
               <!---------------------------------------------------- Product Type ---------------------------------------------------->
+
               <div class="mb-3">
+                <?php
+                $offerSelect = "SELECT `Id`, `Name` FROM `offer_type` WHERE `IsDeleted` = 0";
+                $check1 = mysqli_query($conn,$offerSelect);
+
+                if(mysqli_num_rows($check1)>0)
+                {
+
+                ?>
                 <label class="form-label">Offers type <s>*</s></label>
-                <select class="form-select" name="productType" id="productType" required>
+                <select class="form-select" name="offerType" id="offerType" required>
                   <option value="0">Choose type</option>
-                  <option value="" ></option>
+                  <?php
+                   while($offer = mysqli_fetch_assoc($check1))
+                  {
+                  ?>
+                  <option value="<?php echo $offer['Id'];?>" ><?php echo $offer['Name'];?></option>
+                  <?php }?>
                 </select>
+                <?php }?>
               </div>
 
             <!---------------------------------------------------- Product Material ---------------------------------------------------->
               <div class="mb-3">
                 <label class="form-label">Offer Code <s>*</s></label>
-                <select class="form-select" name="productMaterial" id="productMaterials" required>
-                  <option value="0">Choose Materials</option>
-                  <option value=""></option>
-                </select>
+                  <input type="text" id="offerCode" name="offerCode" class="form-control" required>
               </div>
 
 
             <!---------------------------------------------------- Product Material ---------------------------------------------------->
-              <div class="mb-3">
+       
+                <div class="mb-3">
+                  <?php
+                  $discount = "SELECT `Id`, `Name` FROM `discount_type` WHERE  `IsDeleted` = 0";
+                  $statement = mysqli_query($conn,$discount);
+
+                  if(mysqli_num_rows($statement)>0)
+                  {
+
+                  ?>
+                <label class="form-label">Discount type <s>*</s></label>
+                <select class="form-select" name="discountType" id="discountType" required>
+                  <option value="0">Choose type</option>
+                  <?php
+                  while($discount = mysqli_fetch_assoc($statement))
+                  {
+
+                  ?>
+                  <option value="<?php echo $discount['Id'];?>"><?php echo $discount['Name'];?></option>
+                  <?php  }?>
+                </select>
+                <?php }?>
+              </div>
+
+            <!---------------------------------------------------- Product Material ---------------------------------------------------->
+
+                <div class="mb-3">
+                <label class="form-label">Discount Value <s>*</s></label>
+                <input type="number" id="discountvalue" name="discountvalue" class="form-control">
+                </select>
+              </div>
+
+            <!---------------------------------------------------- Product Material ---------------------------------------------------->
+
+                     <div class="mb-3">
                 <label class="form-label">Status <s>*</s></label>
-                <select class="form-select" name="productMaterial" id="productMaterials" required>
-                  <option value="0">Choose Materials</option>
-                  <option value=""></option>
+                <select class="form-select" name="Status" id="Status" required>
+                  <option value="0" <?php if($status == 0) echo "selected"; ?>>Active</option>
+                  <option value="1" <?php if($status == 1) echo "selected"; ?>>InActive</option>
+                  <option value="2" <?php if($status == 2) echo "selected"; ?>>Expired</option>
                 </select>
               </div>
 
@@ -85,7 +142,7 @@
         <!-- Right column: product list + main image -->
         <div class="col-lg-8">
           <div class="panel-card mb-3">
-            <h5>Products list</h5>
+            <h5>Offer Details</h5>
             <div class="table-responsive">
               <table class="table table-sm align-middle">
                 <thead>
