@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Add Product - Milon Artificial Plants (Demo)</title>
+
+  <!-- Bootstrap 5 CSS -->
+  <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+
+  <style>
+    :root{
+      --brown:#6f584c;
+      --light-brown:#e9e6e6;
+      --accent:#b38f80;
+      --muted:#f7f7f9;
+    }
+
+    body{
+      background: linear-gradient(90deg,#f3f6fb 0%, #ffffff 100%);
+      font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+
+    /* Sidebar */
+    .sidebar{
+      background: var(--brown);
+      color: #fff;
+      min-height: 100vh;
+      padding: 1.5rem 0.5rem;
+      width: 240px;
+    }
+    .sidebar h2{
+      font-size: 1.05rem;
+      margin-bottom: 6.2rem;
+      text-align:center;
+      line-height:1.1;
+    }
+    .sidebar .nav-link{
+      color: #fff;
+      padding: .6rem .8rem;
+      border-radius: .35rem;
+      display:flex;
+      gap:.6rem;
+      align-items:center;
+    }
+    .sidebar .nav-link img{ width:22px; height:22px; object-fit:cover; }
+
+    .sidebar a {
+        display: block;
+        padding: 20px 20px;
+        color: #e6e6e6;
+        text-decoration: none;
+        font-size: 16px;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+        background: #9b8b7d;
+        color: #fff;
+        padding-left: 28px;
+    }
+
+    .sidebar img
+    {
+      width:15%;
+      border-radius:20px;
+    }
+
+    s
+  {
+    color: red;
+    text-decoration: none;
+  }
+
+    /* Main content */
+    .container-main{
+      padding: 1.2rem 2rem;
+    }
+
+    /* Left panel (form) box */
+    .panel-card{
+      background: #fff;
+      border-radius: .5rem;
+      box-shadow: 0 4px 12px rgba(29,29,29,0.06);
+      padding: 1rem;
+      margin-bottom:1rem;
+    }
+
+    .avatar-preview{
+      width:147px;
+      height:147px;
+      border:2px dashed #e0dede;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:6px;
+      overflow:hidden;
+      background:#fafafa;
+      color:#9aa3ad;
+      margin-bottom: .6rem;
+    }
+    .avatar-preview img{ width:100%; height:100%; object-fit:cover; }
+
+    .thumbs{
+      display:flex; gap:.5rem; flex-wrap:wrap; margin-top:.6rem;
+    }
+    .thumbs img{
+      width:72px; height:72px; object-fit:cover; border-radius:6px; cursor:pointer; border:2px solid transparent;
+    }
+    .thumbs img:hover{ border-color:var(--accent); transform:scale(1.02); }
+
+    .main-img{
+      width:100%;
+      max-height:420px;
+      object-fit:contain;
+      border-radius:6px;
+      background:#fff;
+    }
+
+    .btn-brown{
+      background:var(--brown);
+      color:#fff;
+      border:0;
+    }
+    .btn-brown:active, .btn-brown:focus{ outline: none; box-shadow:none; }
+
+    /* small screens */
+    @media (max-width:991px){
+      .sidebar{ display:none; }
+      .container-main{ padding:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="d-flex">
+  <!-- Sidebar -->
+  <aside class="sidebar col-12 col-md-2 d-none d-md-block">
+    <h2>Milon<br>Artificial Plants</h2>
+    <nav class="nav flex-column">
+     <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
+    <a href="add_product.php"><img src="images/add-product.png" alt="">Add Products</a>
+    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
+    <a href="#"><img src="images/product_list.jpg" alt="">Product List</a>
+    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
+    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
+    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
+    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
+    </nav>
+  </aside>
+
+  <!-- Main area -->
+  <main class="flex-grow-1">
+    <div class="container-fluid container-main">
+      <div class="row gx-4">
+        <!-- Form column -->
+        <div class="col-lg-4">
+          <div class="panel-card">
+            <h5 class="mb-3">Product details</h5>
+
+            <form id="productForm" novalidate>
+              <!-- Image preview + input -->
+              <label class="form-label">Product image <s>*</s></label>
+              <div class="mb-2">
+                <div class="avatar-preview" id="imagePreview">No image</div>
+                <input class="form-control form-control-sm" type="file" id="productImage" accept="image/*">
+                <div class="form-text">Recommended: square image. Max 2MB.</div>
+              </div>
+
+              <!-- Product name -->
+              <div class="mb-3">
+                <label class="form-label">Product name <s>*</s></label>
+                <input type="text" id="productName" class="form-control" placeholder="e.g. Classic White Vase" required>
+                <div class="invalid-feedback">Product name is required.</div>
+              </div>
+
+              <!-- Product type -->
+              <div class="mb-3">
+                <label class="form-label">Product type <s>*</s></label>
+                <select class="form-select" id="productType" required>
+                  <option value="">Choose type</option>
+                  <option>Artificial Plants</option>
+                  <option>Vases</option>
+                  <option>Accessories</option>
+                </select>
+                <div class="invalid-feedback">Please choose type.</div>
+              </div>
+
+              <div class="row g-2 mb-3">
+                <div class="col">
+                  <label class="form-label">Color Name</label>
+                  <input type="text" id="colorName" class="form-control" placeholder="e.g. Beige">
+                </div>
+                <div class="col-4">
+                  <label class="form-label">Color Code</label>
+                  <input type="text" id="colorCode" class="form-control" placeholder="#FFFFFF">
+                </div>
+              </div>
+
+              <!-- Price -->
+              <div class="mb-3">
+                <label class="form-label">Product price (₹) <s>*</s></label>
+                <input type="number" id="productPrice" class="form-control" placeholder="e.g. 499.00" step="0.01" min="0" required>
+                <div class="invalid-feedback">Please enter a valid price.</div>
+              </div>
+
+              <!-- Materials select -->
+              <div class="mb-3">
+                <label class="form-label">Product Materials <s>*</s></label>
+                <select class="form-select" id="productMaterials" required>
+                  <option value="">Choose Materials</option>
+                  <option value="0">Plastic</option>
+                  <option value="1">Ceramic</option>
+                  <option value="2">Fabric</option>
+                </select>
+                <div class="invalid-feedback">Please choose a material.</div>
+              </div>
+
+              <!-- Category select - toggled depending on materials -->
+              <div class="mb-3" id="categoryContainer">
+                <label class="form-label">Product Category <s>*</s></label>
+                <select class="form-select" id="productCategory" required>
+                  <option value="">Choose Category</option>
+                  <option>Small</option>
+                  <option>Medium</option>
+                  <option>Large</option>
+                </select>
+                <div class="invalid-feedback">Please choose a category.</div>
+              </div>
+
+              <!-- Description -->
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea id="description" class="form-control" rows="4" placeholder="Short description (optional)"></textarea>
+              </div>
+
+              <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-brown">Add product</button>
+                <button type="button" id="resetBtn" class="btn btn-outline-secondary">Reset</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- Right column: product list + main image -->
+        <div class="col-lg-8">
+          <div class="panel-card mb-3">
+            <h5>Products list</h5>
+            <div class="table-responsive">
+              <table class="table table-sm align-middle">
+                <thead>
+                  <tr>
+                    <th>Sl no</th>
+                    <th>Product name</th>
+                    <th>Type</th>
+                    <th>Price</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody id="productsTable">
+                  <!-- sample rows -->
+                  <tr>
+                    <td>1</td>
+                    <td>plant</td>
+                    <td>Artificial Plants</td>
+                    <td>325.00</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-secondary">View</button>
+                      <button class="btn btn-sm btn-brown">Image</button>
+                      <button class="btn btn-sm btn-brown">Color</button>
+                      <button class="btn btn-sm btn-outline-primary">Edit</button>
+                      <button class="btn btn-sm btn-outline-danger">Delete</button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>2</td>
+                    <td>vase</td>
+                    <td>Vases</td>
+                    <td>499.00</td>
+                    <td>
+                      <button class="btn btn-sm btn-outline-secondary">View</button>
+                      <button class="btn btn-sm btn-brown">Image</button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel-card">
+            <h6>Preview (main image)</h6>
+            <img id="mainImage" class="main-img" src="" alt="Main product preview">
+            <div class="mt-2 text-muted small">Click a thumbnail to swap the main image.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script>
+const productImageInput = document.getElementById('productImage');
+const imagePreview = document.getElementById('imagePreview');
+const galleryThumbs = document.getElementById('galleryThumbs');
+const mainImage = document.getElementById('mainImage');
+
+let galleryImages = []; 
+
+
+productImageInput.addEventListener('change', (e) => {
+  const file = e.target.files[0];
+  if(!file) return;
+
+  
+  if(file.size > 2 * 1024 * 1024){
+    alert('Image size exceeds 2MB. Please pick a smaller file.');
+    e.target.value = '';
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(ev){
+    const dataUrl = ev.target.result;
+ 
+    imagePreview.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = dataUrl;
+    imagePreview.appendChild(img);
+
+
+    mainImage.src = dataUrl;
+
+  };
+  reader.readAsDataURL(file);
+});
+
+function addToGallery(dataUrl){
+
+  galleryImages.unshift(dataUrl);
+ 
+}
+
+function renderGallery(){
+  galleryImages.forEach((src, idx) => {
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = 'thumb-' + idx;
+    img.addEventListener('click', () => swap(img));
+    galleryThumbs.appendChild(img);
+  });
+  if(galleryImages.length > 0) mainImage.src = galleryImages[0];
+}
+
+
+function swap(imgElement){
+  const clickedSrc = imgElement.src;
+
+  mainImage.src = clickedSrc;
+
+  document.querySelectorAll('.thumbs img').forEach(i=> i.style.borderColor = 'transparent');
+  imgElement.style.borderColor = getComputedStyle(document.documentElement).getPropertyValue('--accent') || '#b38f80';
+}
+
+const resetBtn = document.getElementById('resetBtn');
+const productMaterials = document.getElementById('productMaterials');
+const categoryContainer = document.getElementById('categoryContainer');
+
+function updateCategoryVisibility(){
+
+  if(productMaterials.value === "0"){
+    categoryContainer.style.display = 'none';
+
+    document.getElementById('productCategory').value = '';
+  } else {
+    categoryContainer.style.display = 'block';
+  }
+}
+productMaterials.addEventListener('change', updateCategoryVisibility);
+
+
+resetBtn.addEventListener('click', () => {
+
+  document.getElementById('productForm').reset();
+
+
+  imagePreview.innerHTML = 'No image';
+  galleryImages = [];
+
+
+  productMaterials.value = "";
+  updateCategoryVisibility();
+
+
+  document.querySelectorAll('#productForm .is-invalid, #productForm .is-valid').forEach(el=>{
+    el.classList.remove('is-invalid','is-valid');
+  });
+});
+
+
+const form = document.getElementById('productForm');
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+
+
+  const inputs = form.querySelectorAll('[required]');
+  let formValid = true;
+
+  inputs.forEach(input => {
+    
+    if((input.tagName === 'INPUT' || input.tagName === 'TEXTAREA') && input.value.trim() === ''){
+      input.classList.add('is-invalid');
+      input.classList.remove('is-valid');
+      formValid = false;
+    } else if(input.tagName === 'SELECT' && input.value === ''){
+      input.classList.add('is-invalid');
+      input.classList.remove('is-valid');
+      formValid = false;
+    } else {
+      input.classList.remove('is-invalid');
+      input.classList.add('is-valid');
+    }
+
+   
+    if(input.id === 'productPrice'){
+      const v = parseFloat(input.value);
+      if(isNaN(v) || v < 0){
+        input.classList.add('is-invalid');
+        input.classList.remove('is-valid');
+        formValid = false;
+      }
+    }
+  });
+
+  
+  if(mainImage.src.includes('placeholder') || imagePreview.innerHTML.trim() === 'No image'){
+  
+    productImageInput.classList.add('is-invalid');
+    formValid = false;
+  } else {
+    productImageInput.classList.remove('is-invalid');
+    productImageInput.classList.add('is-valid');
+  }
+
+  if(!formValid){
+    
+    const firstError = form.querySelector('.is-invalid');
+    if(firstError){
+      firstError.scrollIntoView({behavior:'smooth', block:'center'});
+    }
+    return;
+  }
+
+  
+  addProductToTable({
+    name: document.getElementById('productName').value.trim(),
+    type: document.getElementById('productType').value,
+    price: parseFloat(document.getElementById('productPrice').value).toFixed(2),
+    image: mainImage.src || ''
+  });
+
+ 
+  alert('Product added (demo). In your real app you would POST the form via fetch or submit to the server.');
+
+});
+
+function addProductToTable({name, type, price, image}){
+  const table = document.getElementById('productsTable');
+  const row = document.createElement('tr');
+  const idx = table.rows.length + 1;
+  row.innerHTML = `
+    <td>${idx}</td>
+    <td>${escapeHtml(name)}</td>
+    <td>${escapeHtml(type)}</td>
+    <td>${escapeHtml(price)}</td>
+    <td>
+      <button class="btn btn-sm btn-outline-secondary">View</button>
+      <button class="btn btn-sm btn-brown" onclick='viewImage("${image.replace(/"/g,"'")}")'>Image</button>
+    </td>
+  `;
+  table.appendChild(row);
+}
+
+
+function viewImage(src){
+  if(!src) return;
+  window.open(src, '_blank');
+}
+
+
+function escapeHtml(unsafe) {
+  return unsafe
+    .replaceAll('&','&amp;')
+    .replaceAll('<','&lt;')
+    .replaceAll('>','&gt;')
+    .replaceAll('"','&quot;')
+    .replaceAll("'",'&#039;');
+}
+
+
+updateCategoryVisibility();
+
+</script>
+
+<script>
+document.getElementById("resetBtn").addEventListener("click", function () {
+
+  const form = document.getElementById("productForm");
+
+  form.reset();
+
+  form.classList.remove("was-validated");
+
+  form.querySelectorAll(".is-invalid, .is-valid").forEach(el => {
+    el.classList.remove("is-invalid", "is-valid");
+  });
+
+  document.getElementById("imagePreview").innerHTML = "No image";
+  document.getElementById("mainImage").display = "";
+
+});
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
