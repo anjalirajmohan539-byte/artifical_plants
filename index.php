@@ -7,7 +7,7 @@ include('header.php');
     <div class="image_slider">
         <figure>
             <div class="my_slider">
-                <h1>MILON</h1>
+                <h1>MILONN</h1>
                 <h3 class="one">Artifical Flowers</h3>
                 <p class="onep">"Love is the flower you've got to let grow."</p>
                 <img src="images/s_1.jpg">
