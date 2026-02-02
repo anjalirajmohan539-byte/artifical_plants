@@ -55,7 +55,7 @@ if(isset($_POST['edit']))
             <input type="hidden" name="mid" value="<?php echo $mid;?>">
 
             <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
-            <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
+            <button class="btn btn-reset" type="button" style="background-color: #071d3c !important;" onclick="resetForm()">Reset</button>
         </div>
 
         </form>

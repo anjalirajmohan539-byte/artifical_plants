@@ -3,7 +3,8 @@
 include('header.php');
 
 ?>
-    
+    <link href="css/forgot_password.css" rel="stylesheet">
+
        <div class="forgot-wrapper">
     <div class="forgot-box">
       <h2>Reset Your Password</h2>

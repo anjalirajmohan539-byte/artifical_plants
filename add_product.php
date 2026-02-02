@@ -371,6 +371,8 @@ document.getElementById("productImage").addEventListener("change", function () {
         reader.readAsDataURL(file);
     }
 });
+
+
 </script>
 
 <script>

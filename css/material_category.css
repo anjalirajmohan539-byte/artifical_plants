@@ -40,49 +40,6 @@ a {
         display: flex;
     }
 
-    /* -------------------- SIDEBAR -------------------- */
-    .sidebar {
-        width: 240px;
-        background: #736559;
-        height: 100vh;
-        padding-top: 30px;
-        position: fixed;
-        box-shadow: 3px 0 10px rgba(0,0,0,0.2);
-    }
-
-    .sidebar h2 {
-        text-align: center;
-        color: #fff;
-        margin-bottom: 80px;
-        font-size: 22px;
-    }
-
-    .sidebar a {
-        display: block;
-        padding: 20px 20px;
-        color: #e6e6e6;
-        text-decoration: none;
-        font-size: 16px;
-        transition: 0.3s;
-    }
-
-    .sidebar a:hover {
-        background: #9b8b7d;
-        color: #fff;
-        padding-left: 28px;
-    }
-
-    .sidebar img
-    {
-      width:15%;
-      border-radius:20px;
-    }
-
-    s
-    {
-      color: red;
-      text-decoration: none;
-    }
 
     /* -------------------- MAIN CONTENT -------------------- */
     .wrapper {
@@ -94,7 +51,7 @@ a {
     .title {
         font-size: 50px;
         font-weight: 600;
-        color: #9b8b7d;
+        color: #071d3c;
         text-align: center;
         margin-bottom: 60px;
     }
@@ -110,7 +67,7 @@ a {
         padding: 25px;
         border-radius: 12px !important;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-left: 6px solid #736559 !important;
+        border-left: 6px solid #071d3c !important;
         transition: 0.3s;
     }
 
@@ -143,7 +100,7 @@ a {
 
 
     .btn-save {
-        background: #9b8b7d;
+        background: #071d3c;
          padding: 12px 18px !important;
         border-radius: 6px !important;
         border: none !important;
@@ -151,7 +108,7 @@ a {
         cursor: pointer !important;
         font-size: 15px !important;
         margin-right: 10px;
-        background: #9b8b7d !important;
+        background: #071d3c !important;
     }
 
     .btn-reset {
@@ -163,7 +120,7 @@ a {
         cursor: pointer !important;
         font-size: 15px !important;
         margin-right: 10px;
-        background: #9b8b7d !important;
+        background: #071d3c !important;
     }
 
     .table-card {
@@ -171,7 +128,7 @@ a {
         padding: 20px;
         border-radius: 12px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-        border-left: 6px solid #736559;
+        border-left: 6px solid #071d3c;
         overflow-x: auto;
     }
 

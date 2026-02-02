@@ -31,198 +31,11 @@ a {
   -moz-transition: 0.5s all;
   -o-transition: 0.5s all;
   text-decoration: none;
-}
-
-.usecode
-{
-    background-color:maroon;
-    text-align: center;
-    color: white;
-    height:40px;
-}
-.usecode p
-{
-    padding-top:10px;
-}
-.header
-{
-    margin: 0;
-    text-align: center;
-      background:#0c192b;
-      color:white;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      
-}
-
-.header p{
-  color:#e1e1e1 !important;
-  font-size:12px;
-  margin-top:-15px;
-  font-weight:600;
-  text-align: center;
-}
-
-.input-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-.input {
-  width: 40px;
-  height: 40px;
-  border-radius: 20px;
-  border: none;
-  outline: none;
-  padding: 18px 16px;
-  background-color: transparent;
-  cursor: pointer;
-  transition: all .5s ease-in-out;
-  margin-left: 143px;
-}
-
-.input::placeholder {
-  color: transparent;
-}
-
-.input:focus::placeholder {
-  color: rgb(131, 128, 128);
-}
-
-.input:focus,.input:not(:placeholder-shown) {
-  background-color: #fff;
-  border: 1px solid rgb(91, 107, 255);
-  width: 290px;
-  cursor: none;
-  padding: 18px 16px 18px 45px;
-}
-
-.icon {
-  left: 0;
-  fill: rgb(91, 107, 255);
-}
-
-.input:focus + .icon,.input:not(:placeholder-shown) + .icon {
-  z-index: 0;
-  background-color: transparent;
-  border: none;
-}
-
-.header img
-{
-    width:5%;
-}
-.header h1
-{
-	padding-top:10px;
-    font-size:80px;
-    color:white;
-    font-family: Baskerville Old Face;
-}
-
-.header a
-{
-  padding:30px;
-}
-.menu
-{
-	padding-top:5px;
-	text-align: center;
-	background:#071d3c;
-	margin:0;
-	align-items:center;
-	justify-content: center;
-}
-.menu a
-{
-	color:white;
-	padding:30px;
-  text-decoration: none;
-}
-
-
- body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #faf8f6;
-      color: #3f2f25;
-    }
-
-    .forgot-wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 45vh;
-      margin-right:160px;
-    }
-
-    .forgot-box h2 {
-      margin: 0 0 5px;
-      font-weight: normal;
-      font-size:30px;
-      color:#071d3c;
-      font-family:Footlight MT Light;
-      margin-top:-50px;
-    }
-
-    .forgot-box p {
-      font-size: 18px;
-      color: #777;
-      margin-bottom: 20px;
-      font-weight: normal;
-      font-family: Segoe UI Historic;
-    }
-
-    .forgot-box p a {
-      color: #3f2f25;
-      font-weight: bold;
-      text-decoration: none;
-    }
-
-    .forgot-box input {
-      width: 150%;
-      padding: 12px;
-      margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    .forgot-box .forgot {
-      display: block;
-      font-size: 13px;
-      color: #666;
-      text-decoration: none;
-      margin-top:-30px;
-    }
-
-    .forgot-box button {
-      width: 100%;
-      padding: 12px;
-      background: #071d3c;
-      color: #fff;
-      border: none;
-      font-size: 14px;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .forgot-box button:hover {
-      background: #062c61;
-    }
-
-      .return {
-      display: block;
-      text-align: center;
-      margin-top:6%;
-      padding-left:10px;
-      font-size: 13px;
-      color: #071d3c;
-      text-decoration: none;
-    }
-
+}    
+    
+    
+    
+    
     footer{
   background-color: #f4f2f0;
   padding: 0px 65px;
@@ -236,8 +49,7 @@ footer h4{
   margin-bottom:40px;
   margin-top:20px;
   font-size:30px;
-  color: #071d3c;
-  font-weight:600;
+  font-weight: bold;
 }
 
 footer a{
@@ -245,8 +57,6 @@ footer a{
   color:black;
   text-decoration: none;
 }
-
-
 .newsletter-form {
   max-width: 400px;
   margin: 0 auto;
@@ -255,21 +65,12 @@ footer a{
   font-family: Arial, sans-serif;
   margin-right:-50px;
 }
-
-.heading {
-  font-weight: bold;
-  font-size: 20px;
-}
-
 .newsletter-form h2 {
   margin-top: 0;
-  color: #071d3c;
+  color: #333;
   font-size: 24px;
 }
 
-.newsletter-form p{
-    color: #071d3c;
-}
 
 .newsletter-form input[type="email"] {
   width: 100%;
@@ -291,7 +92,7 @@ footer a{
 }
 
 .newsletter-form input[type="submit"]:hover {
-  background-color: #071d3c;
+  background-color: #ff8533;
 }
 
 
@@ -303,7 +104,7 @@ footer a{
   font-family: "Poppins", sans-serif;
   justify-content: center;
   padding-left:83%;
-  margin-top: -80px;
+  margin-top:-76px;
 }
 
 .wrapper .icon {
