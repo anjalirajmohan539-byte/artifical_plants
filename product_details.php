@@ -103,7 +103,7 @@ $data = mysqli_fetch_assoc($select);
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></sk></div>
             <?php
-            $productSelect = "SELECT ap.`Id`, `ProductName`, `Price`, `ColorName`, mt.Name AS `MaterialId` FROM `add_product` ap
+            $productSelect = "SELECT ap.`Id`, `ProductName`, `Price`, `ColorName`, mt.Name AS `MaterialId`, `Description` FROM `add_product` ap
                               INNER JOIN material_type mt ON mt.Id = ap.MaterialId WHERE ap.Id = $product_id ";
             $product_statment = mysqli_query($conn,$productSelect);
             // var_dump($productSelect);
@@ -121,6 +121,7 @@ $data = mysqli_fetch_assoc($select);
                 <div class="info"><div class="label">Color</div><div class="value"><?php echo $product['ColorName'];?></div></div>
                 <div class="info"><div class="label">Tax Included</div><div class="value">Yes</div></div>
                 <div class="info"><div class="label">With Vase</div><div class="value">Yes</div></div>
+                <div class="info"><div class="label">Description</div><div class="value"><?php echo $product['Description'];?></div></div>
             </div>
             <?php }?>
         </div>

@@ -11,18 +11,11 @@
 <body>
 
         <!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>Dashboard</h2>
+<?php
 
-    <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
-    <a href="add_product.php"><img src="images/add-product.png" alt="">Add Products</a>
-    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
-    <a href="#"><img src="images/product_list.jpg" alt="">Product List</a>
-    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
-    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
-    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
-    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
-</div>
+include('sidebar.php');
+
+?>
 
      <!-- Main Content -->
     <main class="main-content">

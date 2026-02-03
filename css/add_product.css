@@ -47,51 +47,11 @@ a {
       font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
     }
 
-    /* Sidebar */
-    .sidebar{
-      background: #0c192b;
-      color: #fff;
-      min-height: 100vh;
-      padding: 1.5rem 0.5rem;
-      width: 240px;
-    }
-    .sidebar h2{
-      font-size: 1.05rem;
-      margin-bottom: 6.2rem;
-      text-align:center;
-      line-height:1.1;
-    }
-    .sidebar .nav-link{
-      color: #fff;
-      padding: .6rem .8rem;
-      border-radius: .35rem;
-      display:flex;
-      gap:.6rem;
-      align-items:center;
-    }
-    .sidebar .nav-link img{ width:22px; height:22px; object-fit:cover; }
-
-    .sidebar a {
-        display: flex;
-        padding: 20px 20px;
-        color: #e6e6e6;
-        text-decoration: none;
-        font-size: 16px;
-        transition: 0.3s;
-        gap: 20px;
-    }
-
-    .sidebar a:hover {
-        background: #071d3c;
-        color: #fff;
-        padding-left: 28px;
-    }
-
-    .sidebar img
-    {
-      width:15%;
-      border-radius:20px;
-    }
+    
+     .container
+     {
+      max-width: 1427px !important;
+     }
 
     s
   {
@@ -122,7 +82,7 @@ a {
       justify-content:center;
       border-radius:6px;
       overflow:hidden;
-      background:#fafafa;
+      /* background:#fafafa; */
       color:#9aa3ad;
       margin-bottom: .6rem;
     }
@@ -139,6 +99,11 @@ a {
     label
     {
         font-size: 12px;
+    }
+
+    button
+    {
+      background-color: none !important;
     }
 
     .small_error

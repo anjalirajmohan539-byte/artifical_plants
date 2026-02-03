@@ -40,46 +40,6 @@ a {
         display: flex;
     }
 
-    /* -------------------- SIDEBAR -------------------- */
-    .sidebar {
-        width: 240px;
-        background: #0c192b;
-        height: 100vh;
-        padding-top: 30px;
-        position: fixed;
-        box-shadow: 3px 0 10px rgba(0,0,0,0.2);
-    }
-
-    .sidebar h2 {
-        text-align: center;
-        color: #fff;
-        margin-bottom: 80px;
-        font-size: 22px;
-    }
-
-    .sidebar a 
-    {
-        display: flex;
-        padding: 20px 20px;
-        color: #e6e6e6;
-        text-decoration: none;
-        font-size: 16px;
-        transition: 0.3s;
-        gap: 20px;
-    }
-
-    .sidebar a:hover {
-        background: #071d3c;
-        color: #fff;
-        padding-left: 28px;
-    }
-
-    .sidebar img
-    {
-      width:15%;
-      border-radius:20px;
-    }
-
     s
     {
       color: red;
