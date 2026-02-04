@@ -306,7 +306,7 @@ a {
 .product-card h3 {
   margin: 10px 0 5px;
   color: #333;
-  width:30%;
+  font-size: 150%;
   font-weight: bold;
 }
 

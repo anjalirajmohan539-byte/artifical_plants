@@ -26,6 +26,7 @@
         <div class="col-3">
             <a href="login.php"><img src="images/contact.png"></a>
             <a href="#"><img src="images/shopping-cart.png"></a>
+            <a href="#"><img src="images/wishlist.png"></a>
         </div>
     </div>
     <div class="menu">

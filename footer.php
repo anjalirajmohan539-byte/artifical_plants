@@ -1,6 +1,6 @@
 <link href="css/footer.css" rel="stylesheet">  
   
-  <div class="container-fluid">
+  <div>
   <footer>
         <div class="col-2">
       <h4>About Us</h4>
