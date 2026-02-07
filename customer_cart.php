@@ -1,3 +1,9 @@
+<?php
+
+include('database.php');
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +24,7 @@
     <!-- LEFT SIDE CART ITEMS -->
     <section class="cart-items">
         <div class="delivery">
-            Deliver to: <strong>Anjali Rajmohan, 680652</strong>
+            Deliver to: <strong>Hana, 680652</strong>
             <button class="change-btn">Change</button>
         </div>
 

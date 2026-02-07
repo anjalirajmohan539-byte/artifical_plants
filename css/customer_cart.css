@@ -47,7 +47,7 @@ body {
 /* Top Header */
 .topbar {
     background: #071d3c;
-    padding: 30px 40px;
+    padding: 30px 55px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -61,16 +61,22 @@ body {
     border: none;
 }
 
+.topbar b
+{
+    font-size: 10px;
+}
+
 .logo {
     font-size: 20px;
     font-weight: bold;
+    text-align: center;
 }
 
 /* Layout */
 .container {
     display: flex;
     gap: 20px;
-    padding: 20px 40px;
+    padding: 70px 40px;
 }
 
 /* Cart Items */
@@ -124,7 +130,7 @@ body {
 
 .actions button {
     margin-right: 10px;
-    padding: 5px 8px;
+    padding:12px 8px;
     border: none;
     background: none;
     color: #2874f0;

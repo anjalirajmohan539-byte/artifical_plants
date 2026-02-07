@@ -112,6 +112,11 @@ include('sidebar.php');
                 <div class="small_error" id="typeErr"></div>
               </div>
 
+              <!---------------------------------------------------- Product Type ---------------------------------------------------->
+
+              
+
+              <!---------------------------------------------------- Color ---------------------------------------------------->
                       <div style="display:flex; gap:50px;">
             <div style="display:flex; flex-direction:column;">
               <label>Color Name <s>*</s></label>
@@ -438,7 +443,7 @@ function ValidationForm() {
     }
 
       /* description */
-    if (name === "") {
+    if (description.trim() === "") {
         document.getElementById("descErr").innerText = "Product Description required";
         document.getElementById("description").style.border = "1px solid red";
         valid = false;
@@ -486,8 +491,6 @@ document.getElementById("categoryContainer").style.display = "none";
 </script>
 
 
-
-
 <script>
 
   /* ================= AJAX ================= */
@@ -520,7 +523,5 @@ $(document).ready(function () {
 });
 </script>
 
-
-</script>
 </body>
 </html>

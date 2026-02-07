@@ -56,7 +56,7 @@ include('header.php');
     ?>
 
       <div class="col-3 product-card">
-        <img src="images/product/<?php echo $vase['ProductImage']; ?>" alt="<?php echo $vase['ProductName']; ?>">
+        <a href="product_details.php?productId=<?php echo $vase['Id'];?>"><img src="images/product/<?php echo $vase['ProductImage']; ?>" alt="<?php echo $vase['ProductName']; ?>">
 
         <input type="hidden" class="pid" value="<?php echo $vase['Id']; ?>">
 
@@ -69,6 +69,7 @@ include('header.php');
         <p>
           Delivery by <?php echo $date->format("d M, D"); ?>
         </p>
+        </a>
       </div>
 
     <?php
