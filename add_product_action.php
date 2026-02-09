@@ -13,20 +13,20 @@ if(isset($_POST['btn']))
 	$material=$_POST['productMaterial'];
 	$materialType = $_POST['materialCategory'];
     $type=$_POST['productType'];
+    $typeCategory=$_POST['typeCategory'];
 	$colorname=$_POST['colorName'];
 	$colorcode=$_POST['colorCode'];
     $description=$_POST['productDesc'];
 
 //    var_dump($image);
 
-if(!empty($_FILES['image']) && $_FILES['image']['name'] != "")
-{
-$image=$_FILES['image']['name'];
+if(!empty($_FILES['image']['name'])){
+    $image = time().'_'.$_FILES['image']['name'];
+    move_uploaded_file($_FILES['image']['tmp_name'], "images/product/".$image);
+} else {
+    $image = $_POST['himage'];
 }
-else
-{
-$image = $_POST['himage'];
-}
+
 
     if ($id != 0) {
 
@@ -119,7 +119,7 @@ $image = $_POST['himage'];
     } 
     else 
     {
-        header("Location: location:add_product.php");
+        header("location:add_product.php");
         exit();
     }
 }

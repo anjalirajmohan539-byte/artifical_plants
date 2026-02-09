@@ -58,7 +58,7 @@ include('sidebar.php');
           <div class="panel-card">
             <h5 class="mb-3">Add Product</h5>
 
-            <form action="add_product_action.php" method="post"  id="productForm" autocomplete="off" novalidate enctype="multipart/form-data">
+            <form action="add_product_action.php" method="post"  id="productForm" autocomplete="off" novalidate enctype="multipart/form-data" onsubmit="return ValidationForm()">
               <!---------------------------------------------------- Image Preview ---------------------------------------------------->
               <label class="form-label">Product image <s>*</s></label>
               <div class="mb-2">
@@ -112,8 +112,15 @@ include('sidebar.php');
                 <div class="small_error" id="typeErr"></div>
               </div>
 
-              <!---------------------------------------------------- Product Type ---------------------------------------------------->
-
+              <!---------------------------------------------------- Product Type Category ---------------------------------------------------->
+              <div class="mb-3" id="typeContainer">
+                <label class="form-label">Type Category <s>*</s></label>
+                <select class="form-select" name="typeCategory" id="typeCategory" required>
+                  <option value="0">Choose type Category</option>
+                </select>
+                <div class="invalid-feedback">Please choose type.</div>
+                <div class="small_error" id="typeCategoryErr"></div>
+              </div>
               
 
               <!---------------------------------------------------- Color ---------------------------------------------------->
@@ -178,7 +185,7 @@ include('sidebar.php');
               <!---------------------------------------------------- Product Category ---------------------------------------------------->
               <div class="mb-3" id="categoryContainer" style="display: none;">
                 <label class="form-label">Product Category <s>*</s></label>
-                <select class="form-select" name="materialCategory" id="productCategory" required>
+                <select class="form-select" name="materialCategory" id="productCategory">
                 </select>
                 <div class="invalid-feedback">Please choose a category.</div>
                 <div class="small_error" id="categoryErr"></div>
@@ -389,6 +396,7 @@ function ValidationForm() {
     let image = document.getElementById("productImage").files[0];
     let name = document.getElementById("productName").value.trim();
     let type = document.getElementById("productType").value;
+    let typeCategory = document.getElementById("typeCategory").value;
     let price = document.getElementById("productPrice").value;
     let count = document.getElementById("productcount").value;
     let material = document.getElementById("productMaterials").value;
@@ -459,7 +467,7 @@ function ValidationForm() {
   /* ================= RESETBTN ================= */
 
 
-document.getElementById("resetBtn").addEventListener("click", function () {
+document.getElementById("resetBtn").addEventListener("click", function() {
 
   // Reset form fields
   document.getElementById("productForm").reset();
@@ -467,6 +475,7 @@ document.getElementById("resetBtn").addEventListener("click", function () {
   document.getElementById("productName").style.border = "";
   document.getElementById("productImage").style.border = "";
   document.getElementById("productType").style.border = "";
+  document.getElementById("typeCategory").style.border = "";
   document.getElementById("productCategory").style.border = "";
   document.getElementById("description").style.border = "";
   document.getElementById("productPrice").style.border = "";
@@ -487,13 +496,21 @@ category.innerHTML = "<option value='0'>Choose category</option>";
 
 // Hide category field
 document.getElementById("categoryContainer").style.display = "none";
+
+
+// Reset type category dropdown //
+const typeCategory = document.getElementById("typeCategory");
+typeCategory.innerHTML = "<option value='0'>Choose type category</option>";
+
+// Hide type category field //
+document.getElementById("typeContainer").style.display = "none";
 });
 </script>
 
 
 <script>
 
-  /* ================= AJAX ================= */
+  /* ================= PRODUCT MATERIAL AJAX ================= */
 
 
 $(document).ready(function () {
@@ -521,6 +538,37 @@ $(document).ready(function () {
     });
 
 });
+</script>
+
+<script>
+  /* ================= PRODUCT MATERIAL AJAX ================= */
+
+  $(document).ready(function () {
+    $('#typeContainer').hide();
+
+    $('#productType').on('change', function () {
+        let materialId = $(this).val();
+
+        if (materialId !== "0" && materialId !== "") {
+            $('#typeContainer').slideDown(); 
+
+            $.ajax({
+                url: 'fetch_type_category.php',
+                type: 'POST',
+                data: { productType: materialId },
+                success: function (data) {
+                    $('#typeCategory').html(data);
+                }
+            });
+
+        } else {
+            $('#typeContainer').slideUp();
+            $('#typeCategory').html('<option value="0">Choose category</option>');
+        }
+    });
+
+});
+
 </script>
 
 </body>

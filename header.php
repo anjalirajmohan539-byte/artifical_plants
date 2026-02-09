@@ -35,6 +35,14 @@
         <a href="#" class="text-light">DECOR</a>
         <a href="#" class="text-light">ARTIFICAL FLOWERS</a>
         <a href="vase.php" class="text-light">VASE</a>
+        <div class="menu_dropdown">
+            <a href="#">Bud Vase</a>
+            <a href="#">Bowl vase</a>
+            <a href="#">Cylinder vase</a>
+            <a href="#">Ceramic Vase</a>
+            <a href="#">Cube Vase</a>
+            <a href="#">Pitcher Vase</a>
+        </div>
         <a href="#" class="text-light">PEBBLES & MOSS</a>
         <a href="#" class="text-light">BLOG</a>
     </div>

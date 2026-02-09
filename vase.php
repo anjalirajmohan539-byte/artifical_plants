@@ -19,16 +19,25 @@ include('header.php');
   <!-- Sidebar -->
   <div class="sidebar">
     <h2>Vase Types</h2>
+    <?php
+    $select = "SELECT `Id`,`Image`, `Name` FROM `category_type` WHERE `IsDeleted`= 0";
+    $statemnt = mysqli_query($conn,$select);
+
+    if(mysqli_num_rows($statemnt)>0)
+      {
+        while($row = mysqli_fetch_assoc($statemnt))
+          {
+            $id = $row['Id'];
+            $name = $row['Name'];
+            $img=$row['Image'];     
+    ?>
     <ul>
-      <li><img src="images/bowl_vase.jpg"><a href="#">Bowl Vase</a></li>
-      <li><img src="images/bud_vase.jpg"><a href="#">Bud Vase</a></li>
-      <li><img src="images/cylinder_vase.jpg"><a href="#">Cylinder Vase</a></li>
-      <li><img src="images/Ceramic_vase.jpg"><a href="#">Ceramic Vase</a></li>
-      <li><img src="images/cube_vase.jpg"><a href="#">Cube Vase</a></li>
-      <li><img src="images/pitcher_vase.jpg"><a href="#">Pitcher Vase</a></li>
-      <li><img src="images/setting_icon.jpg"><a href="#">Settings</a></li>
-      <li><img src="images/exit.jpg"><a href="#">Logout</a></li>
+      <li><img src="images/<?php echo $img;?>"><a href="vase.php?typeId=<?php echo $id;?>&typeName=<?php echo $name;?>"><?php echo $name;?></a></li>
     </ul>
+    <?php
+        }
+      }
+    ?>
   </div>
 
   <!-- Products -->

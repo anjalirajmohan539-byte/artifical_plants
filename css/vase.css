@@ -136,87 +136,6 @@ a {
 }
 
 
-.image_slider
-{
-  width: 100%;
-  height: 800px;
-  overflow: hidden;
-}
-
-.my_slider img
-{
-  width: 100%;
-  height: 800px;
-
-}
-
-.image_slider figure
-{
-  position: relative;
-  left: 0;
-  width: 500%;
-  /* width: 400%; */
-  animation: 20s my_slider infinite;
-}
-
-.my_slider
-{
-  /* width: 25%; */
-  width: 20%;
-  position: relative;
-  float: left;
-}
-
-.my_slider h1,.onep,.twop,.threep,.fourp,.fivep,.one,.two,.twoo,.four,.five,.three
-{
-  text-align: center;
-  margin-top: 50px;
-  position:absolute;
-  font-size:42px;
-}
-
-.my_slider h1{
-  margin-top:250px;
-  font-size:90px;
-  margin-left:60%;
-  color:orangered;
-  font-family: Castellar;
-  font-weight:bold;
-  text-shadow: 1px 1px black;
-}
-
-
-
-@keyframes my_slider
-{
-  0% {left: 0%;}
-
-  9% {left: 0%;}
-
-  18% {left: -100%;}
-
-  27% {left: -200%;}
-
-  36% {left: -300%;}
-
-  45% {left: -400%;}
- 
-  54% {left: -400%;}
-
-  63% {left: -300%;}
-
-  72% {left: -200%;}
-
- 81% {left: -100%;}
-
-  90% {left: 0%;}
-
-  100% {left: 0%;}
-}
-
-
-
-
 .main_content {
   display: flex;
   padding: 30px;
@@ -286,6 +205,18 @@ a {
   text-align: center;
   margin-top:50px;
 }
+
+.product-head h1
+{
+  font-size: 40px;
+  font-weight:bold;
+}
+
+.product-head p
+{
+  font-size: 14px;
+}
+
 .product-card
 {
   margin-top:10px;
