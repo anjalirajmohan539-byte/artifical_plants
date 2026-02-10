@@ -8,40 +8,16 @@ include('header.php');
 
   <!--   banner   -->
 <link href="css/vase.css" rel="stylesheet">
-  <div class="product-head">
-      <h1>VASES</h1>
+  <div class="product-head" id="mainName">
+      <h1 id="headname">VASES</h1>
       <p>When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>
     </div>
 
   <!-- Main Section -->
   <div class="main_content">
 
-  <!-- Sidebar -->
-  <div class="sidebar">
-    <h2>Vase Types</h2>
-    <?php
-    $select = "SELECT `Id`,`Image`, `Name` FROM `category_type` WHERE `IsDeleted`= 0";
-    $statemnt = mysqli_query($conn,$select);
-
-    if(mysqli_num_rows($statemnt)>0)
-      {
-        while($row = mysqli_fetch_assoc($statemnt))
-          {
-            $id = $row['Id'];
-            $name = $row['Name'];
-            $img=$row['Image'];     
-    ?>
-    <ul>
-      <li><img src="images/<?php echo $img;?>"><a href="vase.php?typeId=<?php echo $id;?>&typeName=<?php echo $name;?>"><?php echo $name;?></a></li>
-    </ul>
-    <?php
-        }
-      }
-    ?>
-  </div>
-
   <!-- Products -->
-  <div class="products row">
+  <div class="products row" id="productContainer">
 
     <?php
     $select = "SELECT Id, ProductImage, ProductName, Price FROM add_product WHERE IsDeleted = 0 AND CategoryId = 2";
@@ -128,4 +104,25 @@ include('footer.php');
 
 ?>
 </body>
+<script src="js/jquery.min.js"></script>
+<script>
+$(document).on("click", ".vaseFilter", function(e){
+    e.preventDefault();
+
+    var vaseType = $(this).data("type");
+    var vaseName = $(this).data("name");
+
+    $.ajax({
+        url: "filter_vase.php",
+        type: "POST",
+        data: { type: vaseType },
+        success: function(response){
+            $("#productContainer").html(response);
+            $("#mainName").text(vaseName).toUpperCase();
+        }
+    });
+});
+</script>
+
+
 </html>

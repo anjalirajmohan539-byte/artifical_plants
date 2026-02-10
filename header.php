@@ -1,9 +1,15 @@
+<?php
+
+include('database.php');
+
+?>
+
 <html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artifical_plant_index</title>
-<!-- <link href="css/header.css" rel="stylesheet"> -->
+<link href="css/header.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
 </head>
@@ -34,14 +40,31 @@
         <a href="#" class="text-light">NEW ARRIVALS</a>
         <a href="#" class="text-light">DECOR</a>
         <a href="#" class="text-light">ARTIFICAL FLOWERS</a>
-        <a href="vase.php" class="text-light">VASE</a>
+        <div id="vase" class="vase">
+        <a href="vase.php" class="dropbtn text-light">VASE ▾</a>
+      
         <div class="menu_dropdown">
-            <a href="#">Bud Vase</a>
-            <a href="#">Bowl vase</a>
-            <a href="#">Cylinder vase</a>
-            <a href="#">Ceramic Vase</a>
-            <a href="#">Cube Vase</a>
-            <a href="#">Pitcher Vase</a>
+              <?php
+        $select = "SELECT `Id`, `Image`, `Name`, `CategoryId` FROM `category_type` WHERE  `IsDeleted` = 0";
+        $statemnt = mysqli_query($conn,$select);
+
+        if(mysqli_num_rows($statemnt)>0)
+      {
+        while($row = mysqli_fetch_assoc($statemnt))
+          {
+            $id = $row['Id'];
+            $name = $row['Name'];
+            $img=$row['Image'];    
+        
+        ?>
+            <a href="#" class="vaseFilter" data-type="<?php echo $id;?>"><img src="images/<?php echo $img;?>" alt="" data-name="<?php echo $name;?>"><?php echo $name;?></a>
+
+                 <?php
+        }
+      }
+    ?>
+        </div>
+     
         </div>
         <a href="#" class="text-light">PEBBLES & MOSS</a>
         <a href="#" class="text-light">BLOG</a>
