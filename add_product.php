@@ -550,7 +550,7 @@ $(document).ready(function () {
 </script>
 
 <script>
-  /* ================= PRODUCT MATERIAL AJAX ================= */
+  /* ================= PRODUCT TYPE AJAX ================= */
 
   $(document).ready(function () {
     $('#typeContainer').hide();

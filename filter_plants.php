@@ -9,7 +9,7 @@ if(isset($_POST['type'])) {
                FROM add_product ap
                INNER JOIN category_type ct ON ct.Id = ap.CategoryTypeId
                WHERE ap.IsDeleted = 0 
-               AND ap.CategoryId = 2 
+               AND ap.CategoryId = 1 
                AND CategoryTypeId = '$type'";
                
 

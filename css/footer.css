@@ -64,7 +64,14 @@ footer a{
   background-color: #f7f7f7;
   font-family: Arial, sans-serif;
   margin-right:-50px;
+  border-radius: 20px;
 }
+
+.heading {
+  font-weight: bold;
+  font-size: 20px;
+}
+
 .newsletter-form h2 {
   margin-top: 0;
   color: #333;
@@ -92,7 +99,7 @@ footer a{
 }
 
 .newsletter-form input[type="submit"]:hover {
-  background-color: #ff8533;
+  background-color: #11438a;
 }
 
 
@@ -104,7 +111,7 @@ footer a{
   font-family: "Poppins", sans-serif;
   justify-content: center;
   padding-left:83%;
-  margin-top:-76px;
+  margin-top:-67px;
 }
 
 .wrapper .icon {

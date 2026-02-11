@@ -38,14 +38,14 @@ include('database.php');
     <div class="menu">
         <a href="#" class="text-light">HOME</a>
         <a href="#" class="text-light">NEW ARRIVALS</a>
-        <a href="#" class="text-light">DECOR</a>
-        <a href="#" class="text-light">ARTIFICAL FLOWERS</a>
+
+
+
         <div id="vase" class="vase">
-        <a href="vase.php" class="dropbtn text-light">VASE ▾</a>
-      
+        <a href="decor.php" class="dropbtn text-light">DECOR ▾</a>
         <div class="menu_dropdown">
               <?php
-        $select = "SELECT `Id`, `Image`, `Name`, `CategoryId` FROM `category_type` WHERE  `IsDeleted` = 0";
+        $select = "SELECT `Id`, `Image`, `Name` FROM `category_type` WHERE `CategoryId` = 4 AND `IsDeleted` = 0";
         $statemnt = mysqli_query($conn,$select);
 
         if(mysqli_num_rows($statemnt)>0)
@@ -57,9 +57,64 @@ include('database.php');
             $img=$row['Image'];    
         
         ?>
-            <a href="#" class="vaseFilter" data-type="<?php echo $id;?>"><img src="images/<?php echo $img;?>" alt="" data-name="<?php echo $name;?>"><?php echo $name;?></a>
+           <a href="#" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>"><?php echo $row['Name']; ?></a>
+           <?php
+        }
+      }
+    ?>
+        </div>
+        </div>
 
-                 <?php
+
+
+
+        <div id="vase" class="vase">
+        <a href="plants_and_planters.php" class="text-light">ARTIFICAL FLOWERS ▾</a>
+
+         <div class="menu_dropdown">
+              <?php
+        $select = "SELECT `Id`, `Image`, `Name`, `Description`, `CategoryId` FROM `category_type` WHERE  `CategoryId` = 1 AND `IsDeleted` = 0";
+        $statemnt = mysqli_query($conn,$select);
+
+        if(mysqli_num_rows($statemnt)>0)
+      {
+        while($row = mysqli_fetch_assoc($statemnt))
+          {
+            $id = $row['Id'];
+            $name = $row['Name'];
+            $img=$row['Image'];    
+        
+        ?>
+           <a href="#" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>" data-dec="<?php echo $row['Description'];?>"><?php echo $row['Name']; ?></a>
+           <?php
+        }
+      }
+    ?>
+        </div>
+        </div>
+
+
+
+
+        <div id="vase" class="vase">
+        <a href="vase.php" class="dropbtn text-light">VASE ▾</a>
+      
+        <div class="menu_dropdown">
+              <?php
+        $select = "SELECT `Id`, `Image`, `Name`, `Description`, `CategoryId` FROM `category_type` WHERE  `CategoryId` = 2 AND `IsDeleted` = 0";
+        $statemnt = mysqli_query($conn,$select);
+
+        if(mysqli_num_rows($statemnt)>0)
+      {
+        while($row = mysqli_fetch_assoc($statemnt))
+          {
+            $id = $row['Id'];
+            $name = $row['Name'];
+            $img=$row['Image'];    
+        
+        ?>
+           <a href="#" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>" data-dec="<?php echo $row['Description'];?>"><img src="images/<?php echo $img;?>"><?php echo $row['Name']; ?></a>
+           <?php
         }
       }
     ?>

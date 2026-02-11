@@ -1,15 +1,14 @@
 <?php
+
 include('database.php');
 include('header.php');
+
 ?>
-
-
-
-
-  <!--   banner   -->
-<link href="css/vase.css" rel="stylesheet">
-  <div class="product-head">
-      <h1 id="mainName">VASES</h1>
+   
+   
+   <link href="css/plants_and_planters.css" rel="stylesheet">
+  <div class="product-head" id="">
+      <h1 id="mainName">PLANTS & PLANTER</h1>
       <p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>
     </div>
 
@@ -20,7 +19,7 @@ include('header.php');
   <div class="products row" id="productContainer">
 
     <?php
-    $select = "SELECT Id, ProductImage, ProductName, Price FROM add_product WHERE IsDeleted = 0 AND CategoryId = 2";
+    $select = "SELECT Id, ProductImage, ProductName, Price FROM add_product WHERE IsDeleted = 0 AND CategoryId = 1";
 
     $check = mysqli_query($conn, $select);
 
@@ -112,7 +111,7 @@ $(document).on("click", ".vaseFilter", function(e){
     var vaseDec = $(this).data("dec");
 
     $.ajax({
-        url: "filter_vase.php",
+        url: "filter_plants.php",
         type: "POST",
         data: { type: vaseType },
         success: function(response){
