@@ -11,16 +11,8 @@ if(isset($_POST['btn']))
     $discountType = $_POST['discountType'];
     $discountValue = $_POST['discountvalue'];
 
-    $select = "SELECT `Id`  FROM `product_offers` WHERE `ProductId` = $productId";
-    // var_dump($select);
-    if(!$check1 = mysqli_query($conn,$select))
-    {
-        echo "error1";
-    }
-    else
-    {
-        $insert = "INSERT INTO `product_offers`( `ProductId`, `OfferName`, `OfferType`, `OfferCode`, `DiscountType`, `DiscountValue`, `Status`) 
-                   VALUES ($productId,'$name',$type,$code,$discountType,$discountValue,$status)";
+        $insert = "INSERT INTO `product_offers`(`OfferName`, `OfferType`, `OfferCode`, `DiscountType`, `DiscountValue`, `Status`) 
+                   VALUES ('$name',$type,'$code',$discountType,$discountValue,$status)";
                    var_dump($insert);
         $check = mysqli_query($conn,$insert);
 
@@ -33,5 +25,5 @@ if(isset($_POST['btn']))
             header("location:product_Offers.php?productId=$productId");
         }
     }
-}
+
 ?>

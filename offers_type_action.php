@@ -1,32 +1,28 @@
 <?php
-
-include('database.php');
+include('database.php'); 
 
 if(isset($_POST['btn']))
 {
-    $name = $_POST['OffersTypes'];
+    $offerType = $_POST['OffersTypes'];
 
-    $select = "SELECT `Id`  FROM `offer_type` WHERE `Name` = '$name'";
-    var_dump($select);
-    if(!$check = mysqli_query($conn,$select))
+    if(!empty($offerType))
     {
-        echo "error1";
+        $stmt = $conn->prepare("INSERT INTO offer_type (Name) VALUES (?)");
+
+
+            $stmt->bind_param("s", $offerType);
+            if($stmt->execute())
+            {
+                header("location:offers_type.php");
+            }
+            else
+            {
+                echo "Error";
+            }
     }
     else
     {
-        $insert = "INSERT INTO `offer_type`( `Name`) VALUES ('$name')";
-        $statemnt = mysqli_query($conn,$insert);
-
-        if(!$statemnt)
-        {
-            echo "error2";
-        }
-        else
-        {
-            header("location:offers_type.php");
-        }
+        echo "<script>alert('Offer Type is required');</script>";
     }
-
 }
-
 ?>

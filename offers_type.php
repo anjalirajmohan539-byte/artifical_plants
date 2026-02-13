@@ -2,6 +2,14 @@
 
 include('database.php');
 
+
+$button = "Save";
+$name = "";
+if(isset($_POST['edit']))
+    {
+        $button = "Update";
+    }
+
 ?>
 
 <html>
@@ -11,23 +19,14 @@ include('database.php');
 <title>Artifical_plant_registration</title>
 <link href="css/offers_type.css" rel="stylesheet">
 <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body>
         <!-- SIDEBAR -->
-<div class="sidebar">
-    <h2>Dashboard</h2>
+<?php
+include('sidebar.php');
 
-    <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
-    <a href="add_product.php"><img src="images/add-product.png" alt="">Add Products</a>
-    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
-    <a href="#"><img src="images/product_list.jpg" alt="">Product List</a>
-    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
-    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
-    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
-    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
-</div>
+?>
 
 <!-- MAIN CONTENT -->
 <div class="wrapper">
@@ -42,7 +41,7 @@ include('database.php');
             <label>Offers Types <s>*</s></label>
             <input type="text" id="OffersTypes" name="OffersTypes" value="" placeholder="Enter offer name" oninput="clearError('colorErr')">
             <div class="error" id="colorErr"></div>
-             <button class="btn btn-save" id="add" name="btn" onclick="return validateForm()">Save</button>
+             <button class="btn btn-save" id="add" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
             </form>
         </div>
@@ -75,9 +74,11 @@ include('database.php');
                     <td><?php echo $sl++;?></td>
                     <td><?php echo $offer['Name'];?></td>
                     <td>
+                        <form action="#" method="post">
                         <button type="submit" name="edit" style="border:none;" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16" style="color: blue;">
   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
 </svg></button>
+</form>
                     </td>
                     <td>
                             <button type="submit" name="delete" style="border:none;" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="color: red;">
