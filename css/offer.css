@@ -1,0 +1,324 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; 
+	transition: 0.3s all;
+	font-family: 'Open Sans', sans-serif;
+}
+	   .col-1 {width: 8.333333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-2 {width: 16.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-3 {width: 25%; height: auto; float: left; padding: 15px;}
+	   .col-4 {width: 33.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-5 {width: 41.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-6 {width: 50%; height: auto; float: left; padding: 15px;}
+	   .col-7 {width: 58.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-8 {width: 66.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-9 {width: 75%; height: auto; float: left; padding: 15px;}
+	   .col-10 {width: 83.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-11 {width: 91.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-12 {width: 100%; height: auto; float: left; padding: 15px;}
+	   
+	   .container-fluid{ width: 100%; }
+	   
+	   .container{max-width:1100px;margin: auto;}
+	   
+	   .img-fluid{width: 100%; height:auto;}
+ 
+		.cl{clear:both;}
+a {
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  text-decoration: none;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
+    body{background:#eef2f7;padding:25px;}
+
+    .header
+    {
+        text-align:center;
+        padding:18px;
+        background:#0c192b;
+        color:#fff;
+        font-size:24px;
+        font-weight:600;
+        border-radius:12px;
+        letter-spacing:1px;
+        margin-bottom:25px;
+    }
+
+    .header a
+    {
+      text-decoration: none;
+      color: white;
+    }
+
+    .container
+    {
+        display:grid;
+        grid-template-columns:40% 61%;
+        gap:25px;
+        max-width: 1250px !important;
+    }
+
+    /* LEFT PRODUCT IMAGE CARD */
+
+    .left img:hover
+    {
+      transform:scale(1.01);
+    }
+
+    .left p
+    {
+        text-align: center;
+    }
+
+    .main-img
+    {
+        transition:.3s;
+        width:100%;
+        object-fit:cover;
+        box-shadow: 0 1px 4px rgba(0, 0, 0, 1.1);
+    }
+
+    .product-title
+    {
+      font-size:22px;font-weight:600;margin:15px 0;color:#1d3557;
+    }
+
+    .thumbs
+    {
+        display:flex;
+        gap:12px;
+        margin-top:15px;
+    }
+    .thumbs img
+    {
+        width:70px;height:70px;
+        border-radius:10px;
+        border:2px solid #ddd;
+        cursor:pointer;
+        transition:.3s;
+    }
+    .thumbs img:hover
+    {
+      border-color:#1d3557;transform:scale(1.07);
+    }    
+
+    /* RIGHT SIDE */
+    .right
+    {
+        display:flex;
+        flex-direction:column;
+        gap:25px;
+    }
+
+    .card
+    {
+        background:#fff;
+        padding:22px;
+        border-radius:15px;
+        box-shadow:0 4px 15px rgba(0,0,0,0.08);
+    }
+    .card-title
+    {
+        font-size:20px;
+        font-weight:600;
+        color:#1d3557;
+        margin-bottom:15px;
+        border-left:5px solid #1d3557;
+        padding-left:10px;
+    }
+
+    .ondelivery 
+    {
+        display: flex;
+        align-items: center;
+        gap: 35px;
+    }
+    
+    .ondelivery input[type="radio"]
+    {
+        margin-top: 3px;
+    }
+
+    .grid
+    {
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:15px;
+    }
+
+    .payment
+    {
+        white-space: nowrap;
+    }
+
+    .deliveryt
+    {
+        font-size:78%;
+        white-space: nowrap;
+        margin-bottom: 0px;
+        margin-left: -33px;
+    }
+
+    .info
+    {
+        background:#f8faff;
+        padding:15px;
+        border-radius:10px;
+        border:1px solid #e0e6ef;
+    }
+    .label
+    {
+      font-size:13px;color:#6b7280;
+    }
+    .value
+    {
+      font-size:16px;font-weight:600;color:#1d3557;margin-top:5px;
+    }
+
+    .shipping li
+    {
+      margin-bottom:8px;color:#333;font-size:15px;
+    }
+
+    s
+    {
+      margin-left: 1%;
+      text-decoration: none;
+      color: red;
+    }
+    .delivery a
+    {
+      color:#333;
+      font-size:15px;
+      text-decoration: none;
+    }
+    .delivery
+    {
+      padding: 3px;
+    }
+
+    .pair
+    {
+        display:flex;align-items:center;gap:15px;
+    }
+    .pair img
+    {
+      width:85px;height:85px;border-radius:12px;
+    }
+
+    /* Validation Example */
+    .error
+    {
+      color:red;font-size:14px;margin-top:6px;height:16px;
+    }
+
+/* FIELDSET */
+fieldset {
+    border:none;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+legend {
+    padding: 5px 10px;
+    font-weight: bold;
+    color: #0c192b;
+    font-size: 17px;
+}
+
+/* LABELS */
+label {
+    display: block;
+    margin-top: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+/* INPUTS & SELECTS */
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #bbb;
+    border-radius: 5px;
+    font-size: 15px;
+    outline: none;
+}
+
+input:focus,
+select:focus {
+    border-color: #0c192b50;
+}
+
+/* BUTTON */
+.btn1 {
+    margin-top: 18px;
+    padding: 12px;
+    background-color: #0c192b;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn1:hover {
+    background-color: #0c192b;
+}
+
+.table-card {
+        padding: 20px;
+        border-radius: 12px;
+        border-left: 6px solid #0c192b;
+        overflow-x: auto;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 15px;
+    }
+
+    th {
+        background: #f0f4ff;
+        padding: 12px;
+        text-align: left;
+        font-weight: 600;
+    }
+
+    td {
+        padding: 12px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .btn-sm {
+        padding: 6px 12px;
+        font-size: 13px;
+        border-radius: 4px;
+        border: none;
+        cursor: pointer;
+        background: red;
+        color: #fff;
+        width:60px;
+    }
+
+    .btn-delete {
+        background: #d64040;
+        width:60px;
+    }
+
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+    .main form {
+        width: 100%;
+    }
+}

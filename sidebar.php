@@ -14,6 +14,8 @@
     <a href="add_product.php"><img src="images/product_list.jpg" alt="">Products List</a>
     <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
     <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
+    <a href="offers_type.php"><img src="images/product_icon.jpg" alt="">Offer Type</a>
+    <a href="product_Offers.php"><img src="images/product_icon.jpg" alt="">Offers</a>
     <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
     <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
     <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>

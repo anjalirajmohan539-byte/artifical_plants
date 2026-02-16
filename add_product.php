@@ -51,7 +51,7 @@ include('sidebar.php');
 
   <!-- Main area -->
   <main class="flex-grow-1">
-    <div class="container container-main">
+    <div class="container container-main" style="margin-top:50px;">
       <div class="row gx-4">
  
         <div class="col-lg-4">
@@ -309,7 +309,7 @@ include('sidebar.php');
 
 
                                         <td>
-                      <a href="product_Offers.php?productId=<?php echo $product['Id'];?>" title="Product Offers">
+                      <a href="offers.php" title="Product Offers">
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="17" width="17" version="1.1" id="Capa_1" viewBox="0 0 195.803 195.803" xml:space="preserve">
 <g>
 	<g>

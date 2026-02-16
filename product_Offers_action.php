@@ -11,7 +11,7 @@ if(isset($_POST['btn']))
     $discountType = $_POST['discountType'];
     $discountValue = $_POST['discountvalue'];
 
-        $insert = "INSERT INTO `product_offers`(`OfferName`, `OfferType`, `OfferCode`, `DiscountType`, `DiscountValue`, `Status`) 
+        $insert = "INSERT INTO `offers`(`OfferName`, `OfferType`, `OfferCode`, `DiscountType`, `DiscountValue`, `Status`) 
                    VALUES ('$name',$type,'$code',$discountType,$discountValue,$status)";
                    var_dump($insert);
         $check = mysqli_query($conn,$insert);
