@@ -61,6 +61,7 @@ a {
         grid-template-columns:40% 61%;
         gap:25px;
         max-width: 1250px !important;
+        margin-top: 110px;
     }
 
     /* LEFT PRODUCT IMAGE CARD */
@@ -314,6 +315,60 @@ select:focus {
         background: #d64040;
         width:60px;
     }
+
+
+
+    .card-details
+    {
+        padding:22px;
+        margin-top:30px;
+        border-radius: 12px;
+        border-left: 6px solid #0c192b;
+        margin-bottom: 10px;
+    }
+
+    .card-title
+    {
+        font-size:20px;
+        font-weight:600;
+        color:#1d3557;
+        margin-bottom:15px;
+        border-left:5px solid #1d3557;
+        padding-left:10px;
+    }
+
+    .grid
+    {
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:15px;
+    }
+
+    .info
+    {
+        background:#f8faff;
+        padding:15px;
+        border-radius:10px;
+        border:1px solid #e0e6ef;
+    }
+    .label
+    {
+      font-size:10px;
+      color:#6b7280;
+      margin-top: -8px;
+    }
+    .value
+    {
+      font-size:12px;
+      font-weight:600;
+      color:#1d3557;
+      margin-top:5px;
+    }
+
+    #details {
+    display: none;
+}
+
 
 
 /* RESPONSIVE */

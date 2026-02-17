@@ -309,7 +309,7 @@ include('sidebar.php');
 
 
                                         <td>
-                      <a href="offers.php" title="Product Offers">
+                      <a href="offers.php?productId=<?php echo $product['Id'];?>" title="Product Offers">
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="17" width="17" version="1.1" id="Capa_1" viewBox="0 0 195.803 195.803" xml:space="preserve">
 <g>
 	<g>
