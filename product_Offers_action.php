@@ -3,13 +3,12 @@ include('database.php');
 
 if(isset($_POST['btn']))
 {
-    $productId = $_POST['proId'];
-    $name = $_POST['offerName'];
+    $name = $_POST['OffersName'];
     $type = $_POST['offerType'];
-    $code = $_POST['offerCode'];
+    $code = $_POST['OffersCode'];
     $status = $_POST['Status'];
     $discountType = $_POST['discountType'];
-    $discountValue = $_POST['discountvalue'];
+    $discountValue = $_POST['DiscountValue'];
 
         $insert = "INSERT INTO `offers`(`OfferName`, `OfferType`, `OfferCode`, `DiscountType`, `DiscountValue`, `Status`) 
                    VALUES ('$name',$type,'$code',$discountType,$discountValue,$status)";
@@ -22,7 +21,7 @@ if(isset($_POST['btn']))
         }
         else
         {
-            header("location:product_Offers.php?productId=$productId");
+            header("location:product_Offers.php");
         }
     }
 

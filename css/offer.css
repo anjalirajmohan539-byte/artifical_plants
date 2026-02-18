@@ -237,12 +237,11 @@ label {
     display: block;
     margin-top: 12px;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 }
 
 /* INPUTS & SELECTS */
 input[type="text"],
-input[type="date"],
 select {
     width: 100%;
     padding: 10px;
@@ -252,6 +251,7 @@ select {
     font-size: 15px;
     outline: none;
 }
+
 
 input:focus,
 select:focus {
@@ -286,6 +286,7 @@ select:focus {
         width: 100%;
         border-collapse: collapse;
         font-size: 15px;
+        text-align: center;
     }
 
     th {
@@ -293,11 +294,37 @@ select:focus {
         padding: 12px;
         text-align: left;
         font-weight: 600;
+        text-align: center;
     }
 
     td {
         padding: 12px;
         border-bottom: 1px solid #eee;
+    }
+    .pair
+    {
+        gap: 10px;
+    }
+
+    .update
+    {
+        text-align: end;
+    }
+
+    .update label
+    {
+        display: block;
+        margin-top:5px;
+        font-weight: 600;
+        margin-bottom: 0px;
+        font-size: 10px;
+        margin-right: 50px;
+    }
+
+    .update select
+    {
+         width: 60% !important;
+         padding: 5px !important;
     }
 
     .btn-sm {
@@ -368,6 +395,8 @@ select:focus {
     #details {
     display: none;
 }
+
+
 
 
 

@@ -118,8 +118,8 @@ include('sidebar.php');
                   $sl=1;
                   if(mysqli_num_rows($checksql)>0)
                     {
-                      $sql=mysqli_fetch_assoc($checksql);
-                    
+                      while($sql=mysqli_fetch_assoc($checksql))
+                        {
                   
                   ?>
             <tr>
@@ -139,7 +139,7 @@ include('sidebar.php');
 </svg></button>
                     </td>
                     </tr>
-                    <?php }?>
+                    <?php }}?>
             </table>
         </div>
 

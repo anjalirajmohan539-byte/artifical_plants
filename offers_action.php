@@ -1,11 +1,30 @@
 <?php
-include('database.php');
+include('database.php'); 
 
 if(isset($_POST['btn']))
-    {
-        $offer = $_POST['type'];
-        $product_id = $_POST['proId'];
+{
+    $offerId  = $_POST['type'];
+    $productId = $_POST['proId'];
 
-        $select = "";
+    if($offerId != 0)
+    {
+        $insert = "INSERT INTO product_offers 
+                   (ProductId, OfferId, Status) 
+                   VALUES 
+                   ('$productId', '$offerId', 1)";
+
+        if(mysqli_query($conn, $insert))
+        {
+            header("location:offers.php?productId=$productId");
+        }
+        else
+        {
+            echo "Error: " . mysqli_error($conn);
+        }
     }
+    else
+    {
+        echo "Please Select Offer";
+    }
+}
 ?>
