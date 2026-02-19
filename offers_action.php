@@ -5,6 +5,7 @@ if(isset($_POST['btn']))
 {
     $offerId  = $_POST['type'];
     $productId = $_POST['proId'];
+    $status = $_POST['update'];
 
     if($offerId != 0)
     {
