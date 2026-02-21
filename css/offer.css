@@ -34,19 +34,16 @@ a {
 }
 
 *{margin:0;padding:0;box-sizing:border-box;font-family:Poppins, sans-serif;}
-    body{background:#eef2f7;padding:25px;}
+    body{background:#eef2f7;}
 
     .header
     {
-        text-align:center;
-        padding:18px;
-        background:#0c192b;
-        color:#fff;
-        font-size:24px;
-        font-weight:600;
-        border-radius:12px;
-        letter-spacing:1px;
-        margin-bottom:25px;
+        font-size: 50px;
+        font-weight: 600;
+        color: #071d3c;
+        text-align: center;
+        margin-bottom: 60px;
+        padding-top: 50px;
     }
 
     .header a
