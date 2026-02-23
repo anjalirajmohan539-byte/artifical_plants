@@ -105,7 +105,8 @@ if(mysqli_num_rows($check)>0)
 
 
 <!------- button ------->
-        <button class="btn1" name="btn"><?php echo $button;?></button>
+        <button class="btn1" name="btn" onsubmit="validation()"><?php echo $button;?></button>
+        <button class="btn2" name="btn" id="resetbtn">Reset</button>
 
       </form>
         </div>
@@ -127,19 +128,32 @@ if(mysqli_num_rows($check)>0)
                     <th>Products</th>
                     <th>Offers</th>
                     <th>Status</th>
+                    <th>Create Date</th>
                     <th>Details</th>
                     <th>Edit</th>
                     <th>Delete</th>
                 </tr>
                    <?php
-                $selectDet = "SELECT po.OfferId ,po.Id, ap.ProductName ,`ProductId`,of.OfferName ,
-                              CASE WHEN of.Status = 0 THEN 'Active'
-                              WHEN of.Status = 1 THEN 'End'
-                              END AS status
-                              FROM `product_offers` po
-                              INNER JOIN add_product ap ON ap.Id = po.ProductId
-                              INNER JOIN offers of ON of.Id = po.OfferId
-                              WHERE po.ProductId = $proid AND po.IsDeleted = 0 AND of.`status` = 0";
+                $selectDet = "SELECT 
+                                po.OfferId,
+                                po.Id,
+                                ap.ProductName,
+                                po.ProductId,
+                                of.OfferName,
+                                po.CreateDate,
+                                CASE 
+                                    WHEN po.Status = 0 THEN 'Active'
+                                    WHEN po.Status = 1 THEN 'End'
+                                END AS status,
+                                CASE WHEN  po.CreateDate < DATE_SUB(NOW(), INTERVAL 1 DAY) THEN 1
+                                ELSE 0 END AS days
+                            FROM product_offers po
+                            INNER JOIN add_product ap ON ap.Id = po.ProductId
+                            INNER JOIN offers of ON of.Id = po.OfferId
+                            WHERE 
+                            po.ProductId = $proid
+                            AND po.IsDeleted = 0
+                            ORDER BY status ASC ";
 // var_dump($selectDet);
                 $checkDet = mysqli_query($conn,$selectDet);
  
@@ -154,6 +168,7 @@ if(mysqli_num_rows($check)>0)
                     <td><?php echo $data['ProductName'];?></td>
                     <td><?php echo $data['OfferName'];?></td>
                     <td><?php echo $data['status'];?></td>
+                    <td><?php echo $data['CreateDate'];?></td>
                     <td>
     <button type="button"
             class="showPopup"
@@ -172,7 +187,7 @@ if(mysqli_num_rows($check)>0)
                         <form action="#" method="post">
                         <input type="hidden" name="offId" value="<?php echo $data['OfferId'];?>">
                         <input type="hidden" id="stId" class="stId" value="<?php echo $data['status'];?>">
-                        <button type="submit" name="edit" style="border:none;background:transparent;" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16" style="color: blue;">
+                        <button type="submit" name="edit" style="border:none;background:transparent;<?php echo $data['days'] == 0 ? "display:block":"display:none"; ?>" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16" style="color: blue;">
   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
 </svg></button>
 </form>
@@ -181,7 +196,7 @@ if(mysqli_num_rows($check)>0)
                         <form action="offers_action.php" method="post">
                             <input type="hidden" name="offId" value="<?php echo $data['OfferId'];?>">
                             <input type="hidden" name="productId" value="<?php echo $data['ProductId'];?>">
-                            <button type="submit" name="delete" style="border:none;background:transparent;" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="color: red;">
+                            <button type="submit" name="delete" style="border:none;background:transparent;<?php echo $data['days'] == 0 ? "display:block":"display:none"; ?>" title="Delete"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="color: red;">
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
   <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 </svg></button>
@@ -208,9 +223,16 @@ if(mysqli_num_rows($check)>0)
     <div id="popupData"></div>
 
 </div>
-
-
 </body>
+
+<script>
+    function validation()
+    {
+        let offer = document.getElementById('')
+    }
+</script>
+
+
 
 <script>
 

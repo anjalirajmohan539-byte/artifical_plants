@@ -56,7 +56,7 @@ include('sidebar.php');
             <div class="error" id="colorErr"></div>
             <?php }?>
 
-            <label>Offers Code <s>*</s></label>
+            <label>Offers Code</label>
             <input type="text" id="OffersCode" name="OffersCode" value="" placeholder="Enter offer name" oninput="clearError('colorErr')">
             <div class="error" id="colorErr"></div>
 
@@ -86,7 +86,18 @@ include('sidebar.php');
             <input type="text" id="DiscountValue" name="DiscountValue" value="" placeholder="Enter offer name" oninput="clearError('colorErr')">
             <div class="error" id="colorErr"></div>
 
-            <label>Status <s>*</s></label>
+            <div class="dates">
+                <div class="col-3">
+                    <label for="">Starting Date <s>*</s></label>
+                    <input type="date" id="starting_date" name="starting_date" oninput="clearError('colorErr')">
+                </div>
+                <div class="col-3">
+                    <label for="">Ending Date <s>*</s></label>
+                    <input type="date" id="ending_date" name="ending_date" oninput="clearError('colorErr')">
+                </div>
+            </div>
+<br>
+            <label>Status</label>
             <select class="form-select" name="Status" id="Status" required>
                   <option value="0" <?php if($status == 0) echo "selected"; ?>>Active</option>
                   <option value="1" <?php if($status == 1) echo "selected"; ?>>InActive</option>

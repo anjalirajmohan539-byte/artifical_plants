@@ -8,13 +8,6 @@ if(isset($_POST['btn']))
     $status = $_POST['update'];
     $btn = $_POST['btn'];
 
-// if($btn == "Add")
-// {
-//     $insert = "INSERT INTO product_offers (ProductId, OfferId)
-//                VALUES ('$proid', '$offerId')";
-//     mysqli_query($conn,$insert);
-// }
-
  if($btn == "Update")
 {
     $update = "UPDATE offers 

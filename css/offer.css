@@ -272,6 +272,22 @@ select:focus {
     background-color: #0c192b;
 }
 
+.btn2 {
+    margin-top: 18px;
+    padding: 12px;
+    background-color:#626d76 !important;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.btn2:hover {
+    background-color: #0c192b;
+}
+
 .table-card {
         padding: 20px;
         border-radius: 12px;
