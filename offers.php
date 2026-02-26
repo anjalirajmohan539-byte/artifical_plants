@@ -53,7 +53,7 @@ include('sidebar.php');
 
    <div class="card">
       <!------- form ------->  
-           <form action="offers_action.php" method="post">
+           <form action="offers_action.php" method="post" id="productOffer" autocomplete="off" novalidate enctype="multipart/form-data" onsubmit="return ValidationForm()">
 
         <fieldset>
 
