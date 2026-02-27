@@ -90,13 +90,13 @@ a {
 .product-card h3 {
   margin: 10px 0 5px;
   color: #333;
-  font-size: 150%;
+  font-size: 200%;
   font-weight: bold;
 }
 
 .product-card p {
   color: #555;
-  font-size: 0.95em;
+  font-size:17px;
   font-family: Arial, Helvetica, sans-serif;
 }
 

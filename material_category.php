@@ -51,7 +51,7 @@ include('sidebar.php');
             <input type="hidden" name="categoryid" value="<?php echo $editId;?>">
             <div class="error" id="materialErr"></div>
 
-             <button class="btn btn-save" name="btn" onclick="return validateForm()"><?php echo $button; ?></button>
+             <button class="btn btn-save" id="add" name="btn" onclick="return validateForm()"><?php echo $button; ?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
             </form>
         </div>
@@ -147,6 +147,7 @@ function resetForm() {
 function clearError() {
     let material = document.getElementById("material");
     document.getElementById("materialErr").innerText = "";
+    document.getElementById("add").innerText = "Add";
     material.style.border = "";
 }
 </script>

@@ -37,19 +37,43 @@ include('header.php');
 
         $date = new DateTime();
         $date->modify("+$days days");
-    ?>
 
+
+        $offer = "SELECT ap.ProductName, ap.Price, of.DiscountType, of.DiscountValue
+                  FROM add_product ap
+                  INNER JOIN offers of ON of.Id = 1  
+                  WHERE ap.Id = {$vase['Id']}";
+
+              $result = mysqli_query($conn, $offer);
+              $rows = mysqli_fetch_assoc($result);
+
+              // var_dump($offer);
+
+              $price = $rows['Price'];
+              $discountType = $rows['DiscountType'];
+              $discountValue = $rows['DiscountValue'];
+        
+              if ($discountType == "Percentage") {
+                  $discountAmount = ($price * $discountValue) / 100;
+                  } else { 
+                    $discountAmount = $discountValue;
+                    }
+                    $finalPrice = $price - $discountAmount;
+                    if ($finalPrice < 0) {
+                      $finalPrice = 0;
+                      }
+
+?>
       <div class="col-3 product-card">
         <a href="product_details.php?productId=<?php echo $vase['Id'];?>"><img src="images/product/<?php echo $vase['ProductImage']; ?>" alt="<?php echo $vase['ProductName']; ?>">
 
         <input type="hidden" class="pid" value="<?php echo $vase['Id']; ?>">
 
-        <h3><?php echo $vase['ProductName']; ?></h3>
+        <h3><?php echo $vase['ProductName'];?></h3>
 
         <p>
-          <span>₹<?php echo number_format($vase['Price']); ?></span>
+          <span>₹<?php echo $finalPrice;?></span> <span1 style="font-size:12px;text-decoration: line-through;color:red">₹<?php echo $vase['Price'];?></span1>
         </p>
-
         <p>
           Delivery by <?php echo $date->format("d M, D"); ?>
         </p>

@@ -4,11 +4,12 @@ include('database.php');
 
 $status = 0;
 
-
+$button = "Add";
 $editData = null;
 
 if(isset($_POST['edit']))
 {
+    $button = "Updated";
     $edit_id = $_POST['edit_id'];
 
     $editQuery = "SELECT * FROM offers WHERE Id='$edit_id'";
@@ -47,7 +48,7 @@ include('sidebar.php');
         <!-- Left Card (Form) -->
         <div class="card">
             <h3 style="margin-bottom: 15px;">Add Offers</h3>
-            <form action="#" method="post" id="productForm" autocomplete="off">
+            <form action="product_Offers.php" method="post" id="productForm" autocomplete="off">
 
             <!---------------------------------------------------- OFFER NAME ---------------------------------------------------->
 
@@ -161,7 +162,7 @@ include('sidebar.php');
 
             <!---------------------------------------------------- BUTTON ---------------------------------------------------->
 
-             <button class="btn btn-save" id="add" name="btn" onclick="return validateForm()">Save</button>
+             <button class="btn btn-save" id="add" name="btn" onclick="return validateForm()"><?php echo $button;?></button>
             <button class="btn btn-reset" type="button" style="background-color: #626d76 !important;" onclick="resetForm()">Reset</button>
             </form>
         </div>
@@ -237,6 +238,9 @@ include('sidebar.php');
 </div>
 </body>
 <script>
+
+      /* ================= VALIDATION FORM ================= */
+
 function validateForm() {
 
     let isValid = true;
@@ -298,8 +302,21 @@ function validateForm() {
     return isValid;
 }
 
+
+  /* ================= RESETBTN ================= */
+
 function resetForm() {
     document.getElementById("productForm").reset();
+    document.getElementById("add").innerText = "Add";
+    document.getElementById("OffersName").value = "";
+    document.getElementById("offerType").value = "";
+    document.getElementById("OffersCode").value = "";
+    document.getElementById("discountType").value = "";
+    document.getElementById("DiscountValue").value = "";
+    document.getElementById("starting_date").value = "";
+    document.getElementById("ending_date").value = "";
+
+
     document.querySelectorAll(".error").forEach(el => el.innerHTML = "");
 }
 </script>
