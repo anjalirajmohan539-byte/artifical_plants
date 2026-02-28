@@ -19,7 +19,11 @@ include('header.php');
   <div class="products row" id="productContainer">
 
     <?php
-    $select = "SELECT Id, ProductImage, ProductName, Price FROM add_product WHERE IsDeleted = 0 AND CategoryId = 4";
+    $select = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, of.DiscountType, of.DiscountValue FROM add_product ap
+INNER JOIN shipping_details sd ON sd.ProductId = ap.Id
+LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+LEFT JOIN offers of ON of.Id = pf.OfferId
+WHERE ap.IsDeleted = 0 AND CategoryId = 4 ";
 
     $check = mysqli_query($conn, $select);
 
@@ -28,30 +32,14 @@ include('header.php');
       while ($vase = mysqli_fetch_assoc($check)) 
         {
 
-      
-        $sql = "SELECT DeliveryDays FROM shipping_details WHERE ProductId = {$vase['Id']}";
-        $res = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($res);
-
-        $days = $row['DeliveryDays'] ?? 4;
+        $days = ($vase && isset($vase['DeliveryDays'])) ? $vase['DeliveryDays'] : 4;
 
         $date = new DateTime();
         $date->modify("+$days days");
 
-
-        $offer = "SELECT ap.ProductName, ap.Price, of.DiscountType, of.DiscountValue
-                  FROM add_product ap
-                  INNER JOIN offers of ON of.Id = 1  
-                  WHERE ap.Id = {$vase['Id']}";
-
-              $result = mysqli_query($conn, $offer);
-              $rows = mysqli_fetch_assoc($result);
-
-              // var_dump($offer);
-
-              $price = $rows['Price'];
-              $discountType = $rows['DiscountType'];
-              $discountValue = $rows['DiscountValue'];
+             $price = $vase['Price']; // default price
+             $discountType = $vase['DiscountType'] ?? null;
+             $discountValue = $vase['DiscountValue'] ?? 0;
         
               if ($discountType == "Percentage") {
                   $discountAmount = ($price * $discountValue) / 100;

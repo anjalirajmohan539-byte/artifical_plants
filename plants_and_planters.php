@@ -37,6 +37,29 @@ include('header.php');
 
         $date = new DateTime();
         $date->modify("+$days days");
+
+         $offer = "SELECT ap.Price, of.DiscountType, of.DiscountValue
+                  FROM add_product ap
+                  LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+                  LEFT JOIN offers of ON of.Id = pf.OfferId
+                  WHERE ap.Id = {$vase['Id']}";
+
+              $result = mysqli_query($conn, $offer);
+             $rows = mysqli_fetch_assoc($result);
+
+             $price = $vase['Price']; // default price
+             $discountType = $rows['DiscountType'] ?? null;
+             $discountValue = $rows['DiscountValue'] ?? 0;
+        
+              if ($discountType == "Percentage") {
+                  $discountAmount = ($price * $discountValue) / 100;
+                  } else { 
+                    $discountAmount = $discountValue;
+                    }
+                    $finalPrice = $price - $discountAmount;
+                    if ($finalPrice < 0) {
+                      $finalPrice = 0;
+                      }
     ?>
 
       <div class="col-3 product-card">
@@ -47,7 +70,7 @@ include('header.php');
         <h3><?php echo $vase['ProductName']; ?></h3>
 
         <p>
-          <span>₹<?php echo number_format($vase['Price']); ?></span>
+          <span>₹<?php echo $finalPrice;?></span><span1 style="font-size:12px;text-decoration: line-through;color:red">₹<?php echo $vase['Price'];?></span1>
         </p>
 
         <p>
