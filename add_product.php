@@ -30,7 +30,7 @@ if (isset($_POST['edit']) || isset($_GET['productid'])) {
 }
 
 ?>
-<!doctype html>
+<!-- <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -40,7 +40,7 @@ if (isset($_POST['edit']) || isset($_GET['productid'])) {
   <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <script src="js/jquery.min.js"></script>
 </head>
-<body>
+<body> -->
 
 <div class="d-flex">
           <!-- SIDEBAR -->
@@ -309,7 +309,8 @@ include('sidebar.php');
 
 
                                         <td>
-                      <a href="offers.php?productId=<?php echo $product['Id'];?>" title="Product Offers">
+                      <a href="offers.php?productId=<?php echo $product['Id'];?>">
+                        <button type="submit" style="border: none;background:transparent;color:rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1))" title="Product Offers">
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" height="17" width="17" version="1.1" id="Capa_1" viewBox="0 0 195.803 195.803" xml:space="preserve">
 <g>
 	<g>
@@ -327,7 +328,8 @@ include('sidebar.php');
 		</g>
 	</g>
 </g>
-</svg> 
+</svg>
+</button> 
 </a>
                     </td>
 

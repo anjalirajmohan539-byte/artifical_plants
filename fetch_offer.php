@@ -3,16 +3,16 @@ include('database.php');
 
 $id = $_POST['id'];
 
-$query = "SELECT of.`Id`, `OfferName`,ot.Name AS `OfferType`, `OfferCode`, dt.Name AS `DiscountType`, `DiscountValue`, `StartingDate`, `EndingDate`,
+$query = "SELECT off.`Id`, `OfferName`,ot.Name AS `OfferType`, `OfferCode`, dt.Name AS `DiscountType`, `DiscountValue`, `StartingDate`, `EndingDate`,
  CASE WHEN Status = 0 THEN 'Active'
  WHEN Status = 1 THEN 'InActive'
  WHEN Status = 2 THEN 'Expired'
  WHEN Status = 3 THEN 'Schedule'
  END AS status
- FROM `offers` of
- INNER JOIN offer_type ot ON ot.Id = of.OfferType
- INNER JOIN discount_type dt ON dt.Id = of.DiscountType
- WHERE of.Id = $id";
+ FROM `offers` off
+ INNER JOIN offer_type ot ON ot.Id = off.OfferType
+ INNER JOIN discount_type dt ON dt.Id = off.DiscountType
+ WHERE off.Id = $id";
 $result = mysqli_query($conn, $query);
 $data = mysqli_fetch_assoc($result);
 ?>

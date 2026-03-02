@@ -19,11 +19,13 @@ include('header.php');
   <div class="products row" id="productContainer">
 
     <?php
-    $select = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, of.DiscountType, of.DiscountValue FROM add_product ap
+    $select = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, off.DiscountType, off.DiscountValue FROM add_product ap
 INNER JOIN shipping_details sd ON sd.ProductId = ap.Id
 LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
-LEFT JOIN offers of ON of.Id = pf.OfferId
+LEFT JOIN offers off ON off.Id = pf.Id
 WHERE ap.IsDeleted = 0 AND CategoryId = 4 ";
+
+// var_dump($select);
 
     $check = mysqli_query($conn, $select);
 

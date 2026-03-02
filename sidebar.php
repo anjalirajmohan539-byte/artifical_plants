@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet">
     <link href="css/sidebar.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/add_product.css">
+    <!-- <link href="css/admin_page.css" rel="stylesheet"> -->
+
 </head>
 <body>
     <div class="sidebar">

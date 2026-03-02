@@ -2,6 +2,7 @@
 include('database.php');
 
 $proid = $_GET['productId'];
+
 $button = "Add";
 $offer_id = "";
 $status = 0;
@@ -14,6 +15,7 @@ if(isset($_POST['edit']))
                    FROM product_offers po
                    INNER JOIN offers of ON of.Id = po.OfferId
                    WHERE po.OfferId = '$offer_id'";
+                   var_dump($selectEdit);
 
     $resultEdit = mysqli_query($conn,$selectEdit);
 
@@ -61,8 +63,9 @@ include('sidebar.php');
 
 <?php
 
-$select = "SELECT `Id`, `OfferName`, `Status` FROM `offers` 
-           WHERE `IsDelete` = 0 AND `Status` = 0";
+$select = "SELECT off.`Id`, `OfferName`, off.`Status`, pf.Status AS product_status FROM `offers` off
+            INNER JOIN product_offers pf ON pf.OfferId = off.Id
+            WHERE off.`IsDelete` = 0 AND off.`Status` = 0 AND pf.ProductId = $proid";
 $check = mysqli_query($conn,$select);
 
 if(mysqli_num_rows($check)>0)
@@ -79,17 +82,17 @@ if(mysqli_num_rows($check)>0)
         <?php if($offer['Id'] == $offer_id) echo "selected"; ?>>
         <?php echo $offer['OfferName'];?>
     </option>
-    <?php } ?>
+    
 </select>
-            <?php }?>
 
             <div class="pop-up" id="popup">
             <button  type="button" id="detailsIcon"
             class="showPopup"
-            data-id="<?php echo $offer['Id']; ?>"
+            data-id="<?php echo $offer['Id'];?>"
             style="border:none;background:transparent;cursor:pointer;"
-            title="Details"><svg xmlns="http://www.w3.org/2000/svg" fill="#0D6EFD" width="20" height="20" viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1" style="margin-left: 400px;margin-top: 10px;"><rect height="1" width="9" x="11" y="2"/><rect height="1" width="12" x="8" y="29"/><rect height="1" transform="translate(-13 22) rotate(-90)" width="17" x="-4" y="17"/><polygon points="24 6 24 17 23 18 23 6 24 6"/><polygon points="23 23 24 22 24 26 23 26 23 23"/><rect height="1" width="7" x="4" y="8"/><rect height="1" width="8" x="13" y="5"/><rect height="1" width="8" x="13" y="8"/><rect height="1" width="14" x="7" y="11"/><rect height="1" width="14" x="7" y="14"/><rect height="1" width="14" x="7" y="17"/><polygon points="7 20 21 20 20 21 7 21 7 20"/><polygon points="7 23 18 23 17 24 7 24 7 23"/><rect height="1" transform="translate(-1.68 6.66) rotate(-45)" width="8.49" x="2.96" y="4.85"/><rect height="1" transform="translate(5 16) rotate(-90)" width="7" x="7" y="5"/><path d="M20,2V3h2a1,1,0,0,1,1,1V6h1V4a2,2,0,0,0-2-2Z"/><path d="M20,30V29h2a1,1,0,0,0,1-1V26h1v2a2,2,0,0,1-2,2Z"/><path d="M8,30V29H6a1,1,0,0,1-1-1V26H4v2a2,2,0,0,0,2,2Z"/><rect height="10" transform="translate(21.46 -9.51) rotate(45)" width="2" x="21.2" y="16.15"/><path d="M27.15,15.2h0a1,1,0,0,1,1,1v1a0,0,0,0,1,0,0h-2a0,0,0,0,1,0,0v-1A1,1,0,0,1,27.15,15.2Z" transform="translate(19.41 -14.46) rotate(45)"/><polygon points="15.84 27.51 15.84 27.51 17.25 24.68 18.67 26.1 15.84 27.51"/></svg></button>
+            title="Details"><svg xmlns="http://www.w3.org/2000/svg" fill="#0D6EFD" width="20" height="20" viewBox="0 0 32 32" data-name="Layer 1" id="Layer_1" style="margin-left: 490px;margin-top: 10px;"><rect height="1" width="9" x="11" y="2"/><rect height="1" width="12" x="8" y="29"/><rect height="1" transform="translate(-13 22) rotate(-90)" width="17" x="-4" y="17"/><polygon points="24 6 24 17 23 18 23 6 24 6"/><polygon points="23 23 24 22 24 26 23 26 23 23"/><rect height="1" width="7" x="4" y="8"/><rect height="1" width="8" x="13" y="5"/><rect height="1" width="8" x="13" y="8"/><rect height="1" width="14" x="7" y="11"/><rect height="1" width="14" x="7" y="14"/><rect height="1" width="14" x="7" y="17"/><polygon points="7 20 21 20 20 21 7 21 7 20"/><polygon points="7 23 18 23 17 24 7 24 7 23"/><rect height="1" transform="translate(-1.68 6.66) rotate(-45)" width="8.49" x="2.96" y="4.85"/><rect height="1" transform="translate(5 16) rotate(-90)" width="7" x="7" y="5"/><path d="M20,2V3h2a1,1,0,0,1,1,1V6h1V4a2,2,0,0,0-2-2Z"/><path d="M20,30V29h2a1,1,0,0,0,1-1V26h1v2a2,2,0,0,1-2,2Z"/><path d="M8,30V29H6a1,1,0,0,1-1-1V26H4v2a2,2,0,0,0,2,2Z"/><rect height="10" transform="translate(21.46 -9.51) rotate(45)" width="2" x="21.2" y="16.15"/><path d="M27.15,15.2h0a1,1,0,0,1,1,1v1a0,0,0,0,1,0,0h-2a0,0,0,0,1,0,0v-1A1,1,0,0,1,27.15,15.2Z" transform="translate(19.41 -14.46) rotate(45)"/><polygon points="15.84 27.51 15.84 27.51 17.25 24.68 18.67 26.1 15.84 27.51"/></svg></button>
             </div>
+            <?php } }?>
 
 <!------- status update ------->
 
@@ -100,9 +103,6 @@ if(mysqli_num_rows($check)>0)
         </select>
         </fieldset>
         
-
-
-
 
 <!------- button ------->
         <button class="btn1" name="btn" onsubmit="validation()"><?php echo $button;?></button>
@@ -139,7 +139,7 @@ if(mysqli_num_rows($check)>0)
                                 po.Id,
                                 ap.ProductName,
                                 po.ProductId,
-                                of.OfferName,
+                                off.OfferName,
                                 po.CreateDate,
                                 CASE 
                                     WHEN po.Status = 0 THEN 'Active'
@@ -149,11 +149,11 @@ if(mysqli_num_rows($check)>0)
                                 ELSE 0 END AS days
                             FROM product_offers po
                             INNER JOIN add_product ap ON ap.Id = po.ProductId
-                            INNER JOIN offers of ON of.Id = po.OfferId
+                            INNER JOIN offers off ON off.Id = po.OfferId
                             WHERE 
                             po.ProductId = $proid
                             AND po.IsDeleted = 0
-                            ORDER BY status ASC ";
+                            ORDER BY status ASC";
 // var_dump($selectDet);
                 $checkDet = mysqli_query($conn,$selectDet);
  

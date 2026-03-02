@@ -12,7 +12,7 @@ if(isset($_POST['btn']))
 {
     $update = "UPDATE offers 
                SET Status = $status
-               WHERE Id = $offerId";
+               WHERE Id = $offerId AND EndDate = CURRENT_TIMESTAMP > 0";
     mysqli_query($conn,$update);
 }
 else
