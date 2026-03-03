@@ -39,10 +39,10 @@ include('header.php');
         $date = new DateTime();
         $date->modify("+$days days");
 
-        $offer = "SELECT ap.Price, of.DiscountType, of.DiscountValue
+        $offer = "SELECT ap.Price, off.DiscountType, off.DiscountValue
                   FROM add_product ap
                   LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
-                  LEFT JOIN offers of ON of.Id = pf.OfferId
+                  LEFT JOIN offers off ON off.Id = pf.OfferId
                   WHERE ap.Id = {$vase['Id']}";
 
               $result = mysqli_query($conn, $offer);

@@ -20,10 +20,10 @@ include('header.php');
 
     <?php
     $select = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, off.DiscountType, off.DiscountValue FROM add_product ap
-INNER JOIN shipping_details sd ON sd.ProductId = ap.Id
-LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
-LEFT JOIN offers off ON off.Id = pf.Id
-WHERE ap.IsDeleted = 0 AND CategoryId = 4 ";
+              INNER JOIN shipping_details sd ON sd.ProductId = ap.Id
+              LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+              LEFT JOIN offers off ON off.Id = pf.Id
+              WHERE ap.IsDeleted = 0 AND CategoryId = 4 ";
 
 // var_dump($select);
 
