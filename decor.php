@@ -62,7 +62,7 @@ include('header.php');
         <h3><?php echo $vase['ProductName'];?></h3>
 
         <p>
-          <span>₹<?php echo $finalPrice;?></span> <span1 style="font-size:12px;text-decoration: line-through;color:red">₹<?php echo $vase['Price'];?></span1>
+          <span>Rs <?php echo $finalPrice;?></span> <span1 style="font-size:12px;text-decoration: line-through;color:red">₹<?php echo $vase['Price'];?></span1>
         </p>
         <p>
           Delivery by <?php echo $date->format("d M, D"); ?>

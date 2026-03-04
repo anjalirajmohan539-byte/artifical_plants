@@ -6,13 +6,13 @@ $productid = $_GET['productId'];
 
 $imgs = "";
 $imgId = "";
-$button = "Add";
+$button = "Add Image";
 
 if(isset($_POST['edit']))
 {
-    $imgId = $_POST['id'];
+    echo $imgId = $_POST['id'];
     $imgs =$_POST['img'];
-    $button = "Update";
+    $button = "Update Image";
 }
 
     
@@ -25,7 +25,7 @@ if(isset($_POST['edit']))
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artifical_plant_registration</title>
 <link href="css/image.css" rel="stylesheet">
-<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
@@ -52,7 +52,7 @@ include('sidebar.php');
             <div class="card-right">
 
             <div class="avatar-preview" id="avatarBox">
-        <div style="text-align:center;padding:10px;color:var(--muted);<?php echo $imgs != "" ? 'display:none' : ''?>">
+        <div style="text-align:center;padding:10px;color:black;<?php echo $imgs != "" ? 'display:none' : ''?>">
           <div style="font-size:18px;font-weight:700">Welcome!</div>
           <div class="small">Upload a photo to preview here.</div>
         </div>
@@ -180,13 +180,13 @@ include('sidebar.php');
         let add = document.getElementById("add");
         document.getElementById("productForm").reset();
         avatarBox.innerHTML = `
-            <div style="text-align:center;padding:10px;color:var(--muted);">
+            <div style="text-align:center;padding:10px;color:black;">
                 <div style="font-size:18px;font-weight:700">Welcome!</div>
                 <div class="small">Upload a photo to preview here.</div>
             </div>
         `;
 
-        document.getElementById("add").innerText ="Add";
+        document.getElementById("add").innerText ="Add Image";
     }
 
 </script>

@@ -12,7 +12,7 @@ $product_id = $_GET['productId'];
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artifical_plant_registration</title>
 <link href="css/product_details.css" rel="stylesheet">
-<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet">
 </head>
 
 <body>
@@ -67,31 +67,59 @@ if(mysqli_num_rows($statemnt) > 0)
 <br>
 
 <?php
-$select = mysqli_query($conn, "SELECT * FROM product_dimensions WHERE ProductId = $product_id");
-$data = mysqli_fetch_assoc($select);
+
+$product_id = isset($product_id) ? intval($product_id) : 0;
+
+$query = "SELECT ProductId, Width, Height, Weight, Depth, TopDiameter, BottomDiameter, OtherDimensions 
+          FROM product_dimensions 
+          WHERE ProductId = ?";
+
+$stmt = mysqli_prepare($conn, $query);
+mysqli_stmt_bind_param($stmt, "i", $product_id);
+mysqli_stmt_execute($stmt);
+
+$result = mysqli_stmt_get_result($stmt);
+$datas = mysqli_fetch_assoc($result);
 ?>
 
-<div class="card-title" style="display: flex;justify-content: space-between">Dimensions Details<sv><a href="delivery_details.php?productId=<?php echo $product_id;?>&sectionId=Width" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-</svg></a></sv></div>
-
-  <div class="dimension-row" id="dimension">
-    <li><span>Width : </span><span><?php echo $data['Width']; ?></span></li>
-  </div>
-
-  <div class="dimension-row">
-    <li><span>Height : </span><span><?php echo $data['Height']; ?></span></li>
-    
-  </div>
-
-  <div class="dimension-row">
-    <li><span>Weight : </span><span><?php echo $data['Weight']; ?></span></li>
-    
-  </div>
+<div class="card-title" style="display:flex; justify-content:space-between;">
+    Dimensions Details
+    <a href="delivery_details.php?productId=<?php echo $product_id; ?>&sectionId=Width" title="Edit">
+    </a>
 </div>
 
+<?php if ($datas) { ?>
 
+<div class="dimension-row">
+    <li>
+        <span>Width :</span>
+        <span><?php echo htmlspecialchars($datas['Width']); ?></span>
+    </li>
+</div>
 
+<div class="dimension-row">
+    <li>
+        <span>Height :</span>
+        <span><?php echo htmlspecialchars($datas['Height']); ?></span>
+    </li>
+</div>
+
+<div class="dimension-row">
+    <li>
+        <span>Weight :</span>
+        <span><?php echo htmlspecialchars($datas['Weight']); ?></span>
+    </li>
+</div>
+
+<?php } else { ?>
+
+<div class="dimension-row">
+    <li>No dimensions available</li>
+</div>
+
+<?php } ?>
+
+</div>
 
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
     <div class="right">
@@ -121,7 +149,7 @@ $data = mysqli_fetch_assoc($select);
                 <div class="info"><div class="label">Color</div><div class="value"><?php echo $product['ColorName'];?></div></div>
                 <div class="info"><div class="label">Tax Included</div><div class="value">Yes</div></div>
                 <div class="info"><div class="label">With Vase</div><div class="value">Yes</div></div>
-                <div class="info"><div class="label">Description</div><div class="value"><?php echo $product['Description'];?></div></div>
+                <div class="info" style="width: 310%;"><div class="label">Description</div><div class="value"><?php echo $product['Description'];?></div></div>
             </div>
             <?php }?>
         </div>

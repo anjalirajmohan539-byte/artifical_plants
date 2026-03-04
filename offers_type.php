@@ -125,7 +125,7 @@ function resetForm()
     document.getElementById("productForm").reset();
     document.getElementById("OffersTypes").value = "";
     clearError('typeErr');
-    document.getElementById("add").innerText = "Add";
+    document.getElementById("add").innerText = "Save";
 }
 </script>
 </html>

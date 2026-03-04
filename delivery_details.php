@@ -14,7 +14,7 @@ $deliveryType = 1;
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artifical_plant_registration</title>
 <link href="css/delivery_details.css" rel="stylesheet">
-<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet">
 
 </head>
 
@@ -22,7 +22,7 @@ $deliveryType = 1;
 
 <div class="header">
     <p>ADDITIONAL DETAILS</p>
-    <p style="margin-right: 90%;margin-top: -64px;font-size: 30px;"><a href="add_product.php">⟵</a></p>
+    <p style="margin-right: 90%;margin-top: -73px;font-size: 30px;"><a href="add_product.php">⟵</a></p>
 
 </div>
 <div class="container">
@@ -58,7 +58,6 @@ if(mysqli_num_rows($statemnt) > 0)
 <?php } ?>
 
 </div>
-
 
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
     <div class="right">

@@ -30,17 +30,6 @@ if (isset($_POST['edit']) || isset($_GET['productid'])) {
 }
 
 ?>
-<!-- <!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Add Product - Milon Artificial Plant </title>
-  <link rel="stylesheet" href="css/add_product.css">
-  <link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-  <script src="js/jquery.min.js"></script>
-</head>
-<body> -->
 
 <div class="d-flex">
           <!-- SIDEBAR -->
@@ -201,7 +190,7 @@ include('sidebar.php');
                <!---------------------------------------------------- Btn ---------------------------------------------------->
 
               <div class="d-flex gap-2">
-                <button type="submit" class="btn btn-brown" id="btn" name="btn" onsubmit="ValidationForm()"><?php echo $button; ?></button>
+                <button type="submit" class="btn btn-brown" id="add" name="btn" onsubmit="ValidationForm()"><?php echo $button;?></button>
                 <button type="button" id="resetBtn" class="btn secondary">Reset</button>
               </div>
             </form>
@@ -369,7 +358,7 @@ include('sidebar.php');
 </div>
 
  <!---------------------------------------------------- JAVASCRIPT ---------------------------------------------------->
-
+ <script src="js/jquery.min.js"></script>
 
 <script>
 
@@ -513,9 +502,30 @@ document.getElementById("categoryContainer").style.display = "none";
 const typeCategory = document.getElementById("typeCategory");
 typeCategory.innerHTML = "<option value='0'>Choose type category</option>";
 
+const productMaterials = document.getElementById("productMaterials");
+productMaterials.innerHTML = "<option value='0'>Choose type category</option>";
+
+const productType = document.getElementById("productType");
+productType.innerHTML = "<option value='0'>Choose type category</option>";
+
 // Hide type category field //
 document.getElementById("typeContainer").style.display = "none";
+
+// Reset button //
+document.getElementById("add").innerText = "Add Product";
+
+document.getElementById("productName").value = "";
+// document.getElementById("productMaterials").value = "";
+// document.getElementById("productType").value = "";
+document.getElementById("description").value = "";
+document.getElementById("productPrice").value = "";
+document.getElementById("productcount").value = "";
+document.getElementById("color").value = "";
+document.getElementById("code").value = "";
+
 });
+
+
 </script>
 
 
