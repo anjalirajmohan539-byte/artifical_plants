@@ -1,6 +1,17 @@
 <?php
 include('database.php');
 include('header.php');
+
+if(isset($_GET['categoryId']))
+  {
+  $categoryId = $_GET['categoryId'];
+  }
+
+  if(isset($_GET['categoryTypeId']))
+    {
+      $categoryTypeId = $_GET['categoryTypeId'];
+    }
+
 ?>
 
 
@@ -9,7 +20,47 @@ include('header.php');
   <!--   banner   -->
 <link href="css/vase.css" rel="stylesheet">
   <div class="product-head">
-      <h1 id="mainName">VASES</h1>
+    <?php
+
+    if(isset($_GET['categoryTypeId']))
+      {
+        $select = "SELECT `Name`, `Description` FROM `category_type` WHERE Id = $categoryTypeId";
+        $check = mysqli_query($conn,$select);
+
+        if(mysqli_num_rows($check)>0)
+          {
+            $typeId = mysqli_fetch_assoc($check);
+            echo '<h1 id="mainName">'.$typeId['Name'].'</h1>';
+            echo '<p id="mainDec">'.$typeId["Description"].'</p>';
+          }
+      }
+      else
+        {
+
+        
+    switch($categoryId)
+    {
+      case 1 : 
+        echo '<h1 id="mainName">Plants & Planters</h1>';
+        break;
+      case 2 :
+        echo '<h1 id="mainName">VASES</h1>';
+        break;
+      case 3 :
+        echo '<h1 id="mainName">Decors</h1>';
+        break;
+      case 4 :
+        echo '<h1 id="mainName">Artifical Flowers</h1>';
+        break;
+      case 6 :
+        echo '<h1 id="mainName">Pebbles & Moss</h1>';
+        break;
+      default : echo "Product";
+      break;
+    }
+    }
+    ?>
+      
       <p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>
     </div>
 
@@ -20,7 +71,11 @@ include('header.php');
   <div class="products row" id="productContainer">
 
     <?php
-    $select = "SELECT Id, ProductImage, ProductName, Price FROM add_product WHERE IsDeleted = 0 AND CategoryId = 2";
+    $select = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, off.DiscountType, off.DiscountValue FROM add_product ap
+              left JOIN shipping_details sd ON sd.ProductId = ap.Id
+              LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+              LEFT JOIN offers off ON off.Id = pf.Id
+              WHERE ap.IsDeleted = 0 AND CategoryId = $categoryId";
 
     $check = mysqli_query($conn, $select);
 
@@ -29,28 +84,14 @@ include('header.php');
       while ($vase = mysqli_fetch_assoc($check)) 
         {
 
-      
-        $sql = "SELECT DeliveryDays FROM shipping_details WHERE ProductId = {$vase['Id']}";
-        $res = mysqli_query($conn, $sql);
-        $row = mysqli_fetch_assoc($res);
-
-        $days = $row['DeliveryDays'] ?? 4;
+        $days = $vase['DeliveryDays'] ?? 4;
 
         $date = new DateTime();
         $date->modify("+$days days");
 
-        $offer = "SELECT ap.Price, off.DiscountType, off.DiscountValue
-                  FROM add_product ap
-                  LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
-                  LEFT JOIN offers off ON off.Id = pf.OfferId
-                  WHERE ap.Id = {$vase['Id']}";
-
-              $result = mysqli_query($conn, $offer);
-             $rows = mysqli_fetch_assoc($result);
-
              $price = $vase['Price']; // default price
-             $discountType = $rows['DiscountType'] ?? null;
-             $discountValue = $rows['DiscountValue'] ?? 0;
+             $discountType = $vase['DiscountType'] ?? null;
+             $discountValue = $vase['DiscountValue'] ?? 0;
         
               if ($discountType == "Percentage") {
                   $discountAmount = ($price * $discountValue) / 100;
@@ -130,28 +171,28 @@ include('footer.php');
 </body>
 <script src="js/jquery.min.js"></script>
 <script>
-$(document).on("click", ".vaseFilter", function(e){
-    e.preventDefault();
+// $(document).on("click", ".vaseFilter", function(e){
+//     e.preventDefault();
 
-    var vaseType = $(this).data("type");
-    var vaseName = $(this).data("name");
-    var vaseDec = $(this).data("dec");
+//     var vaseType = $(this).data("type");
+//     var vaseName = $(this).data("name");
+//     var vaseDec = $(this).data("dec");
 
-    $.ajax({
-        url: "filter_vase.php",
-        type: "POST",
-        data: { type: vaseType },
-        success: function(response){
-            $("#productContainer").html(response);
+//     $.ajax({
+//         url: "filter_vase.php",
+//         type: "POST",
+//         data: { type: vaseType },
+//         success: function(response){
+//             $("#productContainer").html(response);
 
-            if(vaseName){
-                $("#mainName").text(vaseName);
-            }
-            if(vaseDec){
-              $("#mainDec").text(vaseDec);
-            }
-        }
-    });
-});
+//             if(vaseName){
+//                 $("#mainName").text(vaseName);
+//             }
+//             if(vaseDec){
+//               $("#mainDec").text(vaseDec);
+//             }
+//         }
+//     });
+// });
 </script>
 </html>

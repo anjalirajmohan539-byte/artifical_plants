@@ -10,7 +10,7 @@ $imgs = "";
 $category = false;
 $categoryType = 0;
 
-if (isset($_POST['edit']) || isset($_GET['productid'])) {
+if(isset($_POST['edit']) || isset($_GET['productid'])) {
   // echo "<script>alert('hi')</script>";
   $editId = $_POST['productid'] ?? $_GET['productid'];
   // $imgs = $_POST['img'];

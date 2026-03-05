@@ -65,9 +65,11 @@ include('sidebar.php');
 
 <?php
 
-$select = "SELECT off.`Id`, `OfferName`, off.`Status` FROM `offers` off
-            JOIN product_offers po ON po.OfferId = off.Id
-            WHERE off.`IsDelete` = 0 AND off.`Status` = 0";
+$select = "SELECT ofr.Id, ofr.OfferName
+            FROM offers AS ofr
+            WHERE ofr.IsDelete = 0 AND ofr.Status = 0 AND ofr.Id NOT IN(
+            SELECT pf.OfferId FROM product_offers pf WHERE Pf.ProductId = $proid)";
+
 $check = mysqli_query($conn,$select);
 
 $isDisabled = false;

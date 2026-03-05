@@ -3,7 +3,7 @@ include('database.php');
 
 if (isset($_POST['btn'])) {
 
-    echo $imageId = $_POST['imageId'];
+    echo $imageId = $_POST['imageId'] ?? 0;
     $product_id = $_POST['proId'];
     $image_name = $_FILES['image']['name'];
     $tmp_name   = $_FILES['image']['tmp_name'];
@@ -20,23 +20,23 @@ if (isset($_POST['btn'])) {
         exit;
     }
 
-    //     if($imageId != 0)
-    // {
+        if($imageId != 0 && $imageId != "")
+    {
     
-    // $update = "UPDATE `product_images` SET `Images`='$image_name',`ProductId`=$product_id,`LastUpdate`= CURRENT_TIMESTAMP WHERE `Id`=$imageId";
-    // // var_dump($update);
-    // $upstatemnt = mysqli_query($conn,$update);
+    $update = "UPDATE `product_images` SET `Images`='$image_name',`ProductId`=$product_id,`LastUpdate`= CURRENT_TIMESTAMP WHERE `Id`=$imageId";
+    var_dump($update);
+    $upstatemnt = mysqli_query($conn,$update);
 
-    // if(!$upstatemnt)
-    //     {
-    //         echo "error2";
-    //     } 
-    //     else {
-    //             header("image.php?productId=$product_id");
-    //         }
-    // }
-    // else
-    // {
+    if(!$upstatemnt)
+        {
+            echo "error2";
+        } 
+        else {
+                header("image.php?productId=$product_id");
+            }
+    }
+    else
+    {
 
     $check = "SELECT Id FROM product_images WHERE ProductId = $product_id  AND Images = '$image_name' AND IsDelete = 0";
 
@@ -59,7 +59,7 @@ if (isset($_POST['btn'])) {
     header("Location: image.php?productId=$product_id");
     exit;
 }
-// }
+}
 elseif(isset($_POST['delete']))
 {
     $imgId = $_POST['id'];

@@ -97,7 +97,7 @@ include('database.php');
 
 
         <div id="vase" class="vase">
-        <a href="vase.php" class="dropbtn text-light">VASE ▾</a>
+        <a href="vase.php?categoryId=2" class="dropbtn text-light">VASE ▾</a>
       
         <div class="menu_dropdown">
               <?php
@@ -113,7 +113,7 @@ include('database.php');
             $img=$row['Image'];    
         
         ?>
-           <a href="#" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>" data-dec="<?php echo $row['Description'];?>"><img src="images/<?php echo $img;?>"><?php echo $row['Name']; ?></a>
+           <a href="vase.php?categoryId=2&categoryTypeId=<?php echo $row['Id'];?>" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>" data-dec="<?php echo $row['Description'];?>"><img src="images/<?php echo $img;?>"><?php echo $row['Name']; ?></a>
            <?php
         }
       }
