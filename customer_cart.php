@@ -34,6 +34,8 @@ include('database.php');
             <div class="item-details">
                 <h3>Ceramic Coffee Mug Set (Pack of 6)</h3>
                 <p class="stock out">Out of Stock</p>
+                <p>299/-</p>
+                <p>Qty</p>
                 <div class="actions">
                     <button>Save for Later</button>
                     <button>Remove</button>

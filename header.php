@@ -42,7 +42,7 @@ include('database.php');
 
 
         <div id="vase" class="vase">
-        <a href="decor.php" class="dropbtn text-light">DECOR ▾</a>
+        <a href="vase.php?categoryId=4" class="dropbtn text-light">DECOR ▾</a>
         <div class="menu_dropdown">
               <?php
         $select = "SELECT `Id`, `Image`, `Name` FROM `category_type` WHERE `CategoryId` = 4 AND `IsDeleted` = 0";
@@ -57,7 +57,7 @@ include('database.php');
             $img=$row['Image'];    
         
         ?>
-           <a href="#" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>"><?php echo $row['Name']; ?></a>
+           <a href="vase.php?categoryId=4&categoryTypeId=<?php echo $row['Id'];?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>"><?php echo $row['Name']; ?></a>
            <?php
         }
       }
@@ -69,7 +69,7 @@ include('database.php');
 
 
         <div id="vase" class="vase">
-        <a href="plants_and_planters.php" class="text-light">ARTIFICAL FLOWERS ▾</a>
+        <a href="vase.php?categoryId=1" class="text-light">ARTIFICAL FLOWERS ▾</a>
 
          <div class="menu_dropdown">
               <?php
@@ -85,7 +85,7 @@ include('database.php');
             $img=$row['Image'];    
         
         ?>
-           <a href="#" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>" data-dec="<?php echo $row['Description'];?>"><?php echo $row['Name']; ?></a>
+           <a href="vase.php?categoryId=1&categoryTypeId=<?php echo $row['Id'];?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>" data-dec="<?php echo $row['Description'];?>"><?php echo $row['Name']; ?></a>
            <?php
         }
       }

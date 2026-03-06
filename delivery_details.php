@@ -6,6 +6,8 @@ $product_id = $_GET['productId'];
 
 $deliveryType = 1;
 
+
+
 ?>
 
 <html>
