@@ -6,6 +6,10 @@ $product_id = $_GET['productId'];
 
 $deliveryType = 1;
 
+if(isset($_GET['details']))
+  {
+    $id1 = $_GET['details'];
+  }
 
 
 ?>
@@ -24,7 +28,21 @@ $deliveryType = 1;
 
 <div class="header">
     <p>ADDITIONAL DETAILS</p>
-    <p style="margin-right: 90%;margin-top: -73px;font-size: 30px;"><a href="add_product.php">⟵</a></p>
+    <p style="margin-right: 90%;margin-top: -73px;font-size: 30px;">
+      <?php
+      switch($id1)
+    {
+      case 1 : 
+        echo '<a href="add_product.php">⟵</a></p>';
+        break;
+      case 2 :
+        echo '<a href="product_details.php?productId='. $product_id .'">⟵</a></p>';
+        break;
+      default : echo "Details";
+      break;
+    }
+      ?>
+    </p>
 
 </div>
 <div class="container">

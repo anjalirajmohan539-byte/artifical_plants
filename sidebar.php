@@ -16,6 +16,7 @@
 
     <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
     <a href="add_product.php"><img src="images/product_list.jpg" alt="">Products List</a>
+    <a href="product_category.php"><img src="images/product_list.jpg" alt="">Products Category</a>
     <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
     <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
     <a href="offers_type.php"><img src="images/product_icon.jpg" alt="">Offer Type</a>
