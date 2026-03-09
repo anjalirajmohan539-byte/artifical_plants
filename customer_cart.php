@@ -14,10 +14,21 @@ include('database.php');
 </head>
 <body>
 
-<header class="topbar">
-    <div class="logo">MILON<br><b>Artifical Flowers and Home Decors</b></div>
-    <input type="text" placeholder="Search for products and more">
-    <div class="user">user ▾</div>
+    <header>
+<div class="nav">
+    <div>
+<h2 class="logo">MILON</h2>
+<p class="text-body-secondary" style="color:white;">Artifical Flowers and Home Decors</p>
+</div>
+<input type="text" placeholder="Search for products and more">
+<ul class="menu">
+<li>Home</li>
+<li>Products</li>
+<li>Orders</li>
+<li>Blog</li>
+<li>User</li>
+</ul>
+</div>
 </header>
 
 <main class="container">
@@ -30,12 +41,12 @@ include('database.php');
 
         <!-- Item -->
         <div class="cart-item">
-            <img src="https://via.placeholder.com/100" alt="Product">
+            <img src="images/bud_vase.jpg" alt="Product">
             <div class="item-details">
                 <h3>Ceramic Coffee Mug Set (Pack of 6)</h3>
                 <p class="stock out">Out of Stock</p>
-                <p>299/-</p>
-                <p>Qty</p>
+                <p class="price">299/-</p>
+                <p class="qty">Qty</p>
                 <div class="actions">
                     <button>Save for Later</button>
                     <button>Remove</button>
@@ -44,18 +55,18 @@ include('database.php');
         </div>
 
         <div class="cart-item">
-            <img src="https://via.placeholder.com/100" alt="Product">
+            <img src="images/Ceramic_Floral_Vase.jpg" alt="Product">
             <div class="item-details">
                 <h3>Sports Stainless Steel Water Bottle</h3>
                 <p class="stock">In Stock</p>
+                <p class="price">299/-</p>
+                <p class="qty">Qty</p>
                 <div class="actions">
                     <button>Save for Later</button>
                     <button>Remove</button>
                 </div>
             </div>
         </div>
-
-        <button class="place-order">PLACE ORDER</button>
     </section>
 
     <!-- RIGHT SIDE PRICE DETAILS -->
@@ -91,7 +102,9 @@ include('database.php');
         <br>100% Authentic products.</p>
         </div>
         </div>
+        <button class="place-order">PLACE ORDER</button>
     </div>
+    
 </main>
 
 </body>

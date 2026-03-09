@@ -132,6 +132,7 @@ include('sidebar.php');
 </div>
 
 <script>
+    // validation
 function validateForm() {
     let valid = true;
 

@@ -169,30 +169,4 @@ include('footer.php');
 
 ?>
 </body>
-<script src="js/jquery.min.js"></script>
-<script>
-// $(document).on("click", ".vaseFilter", function(e){
-//     e.preventDefault();
-
-//     var vaseType = $(this).data("type");
-//     var vaseName = $(this).data("name");
-//     var vaseDec = $(this).data("dec");
-
-//     $.ajax({
-//         url: "filter_vase.php",
-//         type: "POST",
-//         data: { type: vaseType },
-//         success: function(response){
-//             $("#productContainer").html(response);
-
-//             if(vaseName){
-//                 $("#mainName").text(vaseName);
-//             }
-//             if(vaseDec){
-//               $("#mainDec").text(vaseDec);
-//             }
-//         }
-//     });
-// });
-</script>
 </html>

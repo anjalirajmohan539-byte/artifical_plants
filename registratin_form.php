@@ -316,9 +316,4 @@ function validation()
 }
 </script>
 
-
-
-
-
-
 </html>
