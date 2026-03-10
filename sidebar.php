@@ -22,6 +22,7 @@
     <a href="offers_type.php"><img src="images/product_icon.jpg" alt="">Offer Type</a>
     <a href="product_Offers.php"><img src="images/product_icon.jpg" alt="">Offers</a>
     <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
+    <a href="shipping_customer_details.php"><img src="images/users_icon.jpg" alt="">Shipping Details</a>
     <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
     <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
 </div>
