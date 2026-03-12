@@ -36,7 +36,7 @@ include('database.php');
     <section class="cart-items">
         <div class="delivery">
             Deliver to: <strong>Hana, 680652</strong>
-            <button class="change-btn">Change</button>
+           <a href="shipping_customer_details.php"><button class="change-btn">Change</button></a> 
         </div>
 
         <!-- Item -->

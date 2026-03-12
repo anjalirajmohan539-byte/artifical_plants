@@ -1,7 +1,7 @@
 <?php
-
 include("database.php");
 include("header.php");
+echo $id;
 
 $status = 0;
 

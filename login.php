@@ -12,11 +12,6 @@ if(isset($_SESSION['error']))
 
 ?>
 
-<?php
-
-include('header.php');
-
-?>
 
 <link href="css/login.css" rel="stylesheet">
     
@@ -38,11 +33,6 @@ include('header.php');
     </div>
   </div>
 
-  <?php
-
-include('footer.php');
-
-?>
 </body>
 
 <script>

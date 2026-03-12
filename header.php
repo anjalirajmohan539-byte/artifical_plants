@@ -1,7 +1,15 @@
 <?php
-
+session_start();
 include('database.php');
 
+if(isset($_SESSION['Id']) != "")
+  {
+    $id = $_SESSION['Id'];
+  }
+  else
+    {
+      header("location:login.php");
+    }
 ?>
 
 <html>
@@ -10,7 +18,7 @@ include('database.php');
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artifical_plant_index</title>
 <link href="css/header.css" rel="stylesheet">
-<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet">
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" rel="stylesheet">
 </head>
 
@@ -31,6 +39,7 @@ include('database.php');
         </div>
         <div class="col-3">
             <a href="login.php"><img src="images/contact.png"></a>
+            <a href="logout.php"><img src="images/contact.png"></a>
             <a href="customer_cart.php"><img src="images/shopping-cart.png"></a>
             <a href="#"><img src="images/wishlist.png"></a>
         </div>
