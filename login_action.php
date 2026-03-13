@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include("database.php");
 
 if(isset($_POST["button"]))
@@ -9,7 +9,7 @@ if(isset($_POST["button"]))
 
 
 $select="SELECT `Id`, `UserEmail`, `UserType` FROM `login` WHERE UserEmail='$email' AND Lpassword='$password'";
-// var_dump($select);
+var_dump($select);
 if(!$s_statement=mysqli_query($conn,$select))
 {
   echo "error";
@@ -27,7 +27,7 @@ else
 			$usertype=$l_array['UserType'];
 			$login_id=$l_array['Id'];
 			
-			$_SESSION['Id']=$login_id;
+			echo $_SESSION['Id']=$login_id;
 			
 			if($usertype==1)
 			{
@@ -35,7 +35,7 @@ else
 			}
 			else if($usertype==2)
 			{
-			header('location:index.php');
+			header('location:customer_front_page.php');
 			}
 			
 		}

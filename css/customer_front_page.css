@@ -38,17 +38,30 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 padding:20px 60px;
-background-color:black !important;
 }
 
 .menu{
 display:flex;
 list-style:none;
 gap:30px;
-color: white;
+color: black;
 }
 
 .logo
 {
-    color: white;
+    color: black;
+	font-size:25px;
+	margin-left:30px;
+}
+
+.main img
+{
+	width:30%;
+	margin-top: 100px;
+	margin-left: 60%;
+}
+
+.main h1
+{
+	font-size:20px;
 }

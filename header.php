@@ -1,7 +1,6 @@
 <?php
 session_start();
 include('database.php');
-
 if(isset($_SESSION['Id']) != "")
   {
     $id = $_SESSION['Id'];
@@ -38,7 +37,6 @@ if(isset($_SESSION['Id']) != "")
             <p class="text-body-secondary">Artifical Flowers and Home Decors</p>
         </div>
         <div class="col-3">
-            <a href="login.php"><img src="images/contact.png"></a>
             <a href="logout.php"><img src="images/contact.png"></a>
             <a href="customer_cart.php"><img src="images/shopping-cart.png"></a>
             <a href="#"><img src="images/wishlist.png"></a>
