@@ -14,6 +14,7 @@ if(isset($_SESSION['error']))
 
 
 <link href="css/login.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
 <div class="container">
   <div class="left-panel">
@@ -23,26 +24,26 @@ if(isset($_SESSION['error']))
     <div class="login-box">
       <h2>Login</h2>
   
-      <p class="register">Don't have an account yet? <a href="registratin_form.php">Create account</a></p>
+      <p class="register">Don't have an account yet? <a href="registratin_form.php" style="text-decoration: underline;">Create account</a></p>
    
 
       <form action="login_action.php" method="post" onSubmit="return validation();">
 
         <div class="input-box">
-        <i class="bi bi-envelope"></i>
+        <i class="fa-solid fa-envelope"></i>
         <input type="email" id="email" class="email" name="email" placeholder="Email" onChange="removeValidation('email','emailErr');">
         <div class="error" id="emailErr"></div>
         </div>
 
         <div class="input-box">
-        <i class="bi bi-lock"></i>
+        <i class="fa-solid fa-lock"></i>
         <input type="password" id="password" class="password" name="password" placeholder="Password" onChange="removeValidation('password','passwordErr');">
         <div class="error" id="passwordErr"></div>
         </div>
 
         <button type="submit" name="button" class="login-btn">Sign In</button>
         <div class="options">
-          <a href="forgot_password.php" class="forgot">Back To Home Page</a>
+          <a href="index.php" style="text-decoration: underline;color:#1f4c8c;" class="forgot">Back To Home Page</a>
           </div>
 
 </form>

@@ -3,17 +3,17 @@ include("database.php");
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $material = intval($_POST['productMaterial']);
+    $material = intval($_POST['productMaterial']); //productmaterial
 
     $select = "SELECT Id, Name 
                FROM material_category 
-               WHERE Type = $material AND IsDelete = 0";
+               WHERE Type = $material AND IsDelete = 0"; //productcategory_database
 
     $statement = mysqli_query($conn, $select);
 
     if ($statement && mysqli_num_rows($statement) > 0) {
 
-        echo "<option value='0'>Choose Category</option>";
+        echo "<option value='0'>Choose Category</option>";//productmaterial
 
         while ($row = mysqli_fetch_assoc($statement)) {
             echo "<option value='{$row['Id']}'>{$row['Name']}</option>";

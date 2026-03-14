@@ -63,15 +63,15 @@ include("database.php");
     </div>
 
     
-    <div class="col-4">
+  <div class="col-4">
   <label for="date_birth">Date of Birth</label>
-  <input type="date" id="dob" name="dob" class="dob" placeholder="Enter your date of birth" onChange="remove_validation('dob','dobErr');">
+  <input type="date" id="dob" name="dob" class="dob" placeholder="Enter your date of birth" onChange="calculate_Age()">
   <div class="error" id="dobErr"></div>
   </div>
 
   <div class="col-4">
   <label for="age">Age</label>
-  <input type="text" id="age" name="age" class="age" onChange="remove_validation('age','ageErr');">
+  <input type="text" id="age" name="age" class="age" onChange="remove_validation('age','ageErr');" readonly>
   <div class="error" id="ageErr"></div>
   </div>
 
@@ -98,31 +98,7 @@ include("database.php");
   <div class="error" id="cityErr"></div>
 
 
-  <?php
-  $select="SELECT `Id`, `Name` FROM `state` ";
-  $statemnt=mysqli_query($conn,$select);
-
-  if(mysqli_num_rows($statemnt)>0)
-  {  
-  
-  ?>
-
-  <label for="state" class="status">State</label>
-  <select id="state" name="state">
-    <option value="0">Select State</option>
-    <?php   
-    while($details=mysqli_fetch_assoc($statemnt))
-    {
-    ?>
-    <option value="<?php echo $details["Id"];?>"><?php echo $details["Name"];?></option>
-
-  <?php  }
-  ?>
-  </select>
-  <?php  } ?>
-  
-
-  <?php
+<?php
   
   $select_country="SELECT `Id`, `Name` FROM `country`";
   $country_statnmt=mysqli_query($conn,$select_country);
@@ -145,6 +121,14 @@ include("database.php");
 
 <?php  }?>
 
+
+<div id="statesContainer" class="statesContainer">
+  <label for="state" class="status">State</label>
+  <select id="state" name="state">
+  </select>
+  </div>
+  
+
  <div class="form-check">
   <input class="form-check-input" type="checkbox" value="" id="checkDefault">
   <label class="form-check-label" for="checkDefault">
@@ -157,7 +141,7 @@ include("database.php");
   </div>
 </body>
 
-
+<script src="js/jquery.min.js"></script>
 
 <!--   registration validation   -->
 
@@ -215,7 +199,6 @@ function validation()
   let male = document.getElementById("male").checked;
   let female = document.getElementById("female").checked;
   if (!male && !female) {
-    alert("Please select your Gender.");
     valid = false;
   }
 
@@ -224,6 +207,7 @@ function validation()
   let dobErr = document.getElementById("dobErr");
   if (dob === "") {
     dobErr.innerHTML = "Please select your date of birth.";
+    document.getElementById("dob").style.border = "1px solid red";
     valid = false;
   }
 
@@ -231,8 +215,6 @@ function validation()
   let age = document.getElementById("age").value.trim();
   let ageErr = document.getElementById("ageErr");
   if (age === "" || isNaN(age) || age <= 0) {
-    ageErr.innerHTML = "Enter a valid age.";
-    document.getElementById("age").style.border = "1px solid red";
     valid = false;
   }
 
@@ -286,21 +268,18 @@ function validation()
   // Country dropdown
   let country = document.getElementById("country").value;
   if (country === "0") {
-    alert("Please select your country.");
     valid = false;
   }
 
    // state dropdown
   let state = document.getElementById("state").value;
   if (state === "0") {
-    alert("Please select your state.");
     valid = false;
   }
 
   // Terms and Conditions checkbox
   let checkbox = document.getElementById("checkDefault");
   if (!checkbox.checked) {
-    alert("You must agree to the Terms & Conditions before registering.");
     valid = false;
   }
 
@@ -308,5 +287,58 @@ function validation()
   
 }
 </script>
+
+
+
+<script>
+
+  /* ================= AJAX ================= */
+
+$(document).ready(function () {
+    $('#statesContainer').hide();
+
+    $('#country').on('change', function () {
+        let materialId = $(this).val();
+
+        if (materialId !== "0" && materialId !== "") {
+            $('#statesContainer').slideDown(); 
+
+            $.ajax({
+                url: 'fetch_country.php',
+                type: 'POST',
+                data: { country: materialId },
+                success: function (data) {
+                    $('#state').html(data);
+                }
+            });
+
+        } else {
+            $('#statesContainer').slideUp();
+            $('#state').html('<option value="0">Choose states</option>');
+        }
+    });
+
+});
+</script>
+
+
+<script>
+
+    /* ================= AGE CALCULATION ================= */
+
+  	function calculate_Age(){
+       
+		var date=document.getElementById("dob");
+		var age=document.getElementById("age");
+
+		let dob=new Date(date.value);
+		let currentYear=new Date();
+		let dobYear= dob.getFullYear();
+		let thisYear= currentYear.getFullYear();
+    let agee=thisYear-dobYear;
+		age.value=agee;
+	}
+</script>
+
 
 </html>

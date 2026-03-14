@@ -535,26 +535,26 @@ document.getElementById("code").value = "";
 
 
 $(document).ready(function () {
-    $('#categoryContainer').hide();
+    $('#categoryContainer').hide();  //productcategory_div
 
-    $('#productMaterials').on('change', function () {
+    $('#productMaterials').on('change', function () { //productmaterial
         let materialId = $(this).val();
 
         if (materialId !== "0" && materialId !== "") {
-            $('#categoryContainer').slideDown(); 
+            $('#categoryContainer').slideDown(); //productcategory_div
 
             $.ajax({
                 url: 'fetch_category.php',
                 type: 'POST',
                 data: { productMaterial: materialId },
                 success: function (data) {
-                    $('#productCategory').html(data);
+                    $('#productCategory').html(data); //productcategory_select
                 }
             });
 
         } else {
-            $('#categoryContainer').slideUp();
-            $('#productCategory').html('<option value="0">Choose category</option>');
+            $('#categoryContainer').slideUp(); //productcategory_div
+            $('#productCategory').html('<option value="0">Choose category</option>'); //productcategory_select
         }
     });
 

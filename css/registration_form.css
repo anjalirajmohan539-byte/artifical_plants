@@ -211,7 +211,7 @@ form h2 {
 
 form label {
   display: block;
-  margin: 12px 0 6px;
+  margin: 20px 0 6px;
   font-weight: 500;
 }
 
@@ -253,6 +253,7 @@ form select:focus {
   display: flex;
   align-items: center;
   gap: 8px;
+  font-weight:normal;
 }
 
 .gender input[type="radio"] {
@@ -285,14 +286,20 @@ button[type="submit"]:hover {
 {
   font-size:18px;
   margin-bottom: -5px;
+  font-weight: normal;
 }
 
 .form-check-label {
   font-size: 14px;
   margin-left: 14px;
   padding-top: 5px;
+  display: contents;
 }
 
+.form-check-input
+{
+  width:25px
+}
 
 
 /* Responsive Design */
