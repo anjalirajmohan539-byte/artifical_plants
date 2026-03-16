@@ -17,19 +17,25 @@ include("database.php");
   <input type="email" id="email" name="email" class="email" placeholder="Enter your email" onChange="remove_validation('email','emailErr');">
   <div class="error" id="emailErr"></div>
 
+  <div class="col-12 pass" style="display: flex; padding:0; gap:2%">
+    <div class="col-6" style="display: flex; flex-direction:column; padding:0;">
    <label for="password">Password</label>
   <input type="password" id="password" name="password" class="password" placeholder="Enter your password" onChange="remove_validation('password','passwordErr');">
   <div class="error" id="passwordErr"></div>
+</div>
 
+  <div class="col-6" style="display: flex; flex-direction:column; padding:0;">
   <label for="confirm_password">Confirm Password</label>
   <input type="password" id="confirmpassword" name="confirm_password" placeholder="Confirm your password" onChange="remove_validation('confirmpassword','confirmpasswordErr');">
   <div class="error" id="confirmpasswordErr"></div>
+  </div>
+  </div>
   <br>
   <br>
   <br>
 
 
-  <h2>Personal Details</h2>
+  <h2 style="margin-top: 35px;">Personal Details</h2>
 
 <aside class="card-right">
 <div class="avatar-preview" id="avatarBox">
@@ -49,9 +55,31 @@ include("database.php");
   <input type="text" id="fullname" name="fullname" class="fullname" placeholder="Enter your full name" onChange="remove_validation('fullname','fullnameErr');">
   <div class="error" id="fullnameErr"></div>
 
-  <div class="col-12 personal">
+ 
+<!-- numbers -->
 
-    <div class="col-4 gender">
+  <div class="col-12" style="display: flex; gap:2%; padding:0;"> 
+    <div class="col-6" style="display: flex; flex-direction:column; padding:0;">
+  <label for="phone">Phone Number</label>
+  <input type="tel" id="phone" name="phone" class="phone" placeholder="Enter your phone number" style="margin-bottom: 20px;" onChange="remove_validation('phoneno','phonenoErr');">
+  <div class="error" id="phonenoErr"></div>
+</div>
+
+  <div class="col-6" style="display: flex; flex-direction:column; padding:0;">
+    <label for="phone">WhatsApp Number</label>
+  <input type="tel" id="whatsappphone" name="whatsapp_phone" class="whatsapp_phone" placeholder="Enter your whatsapp number" onChange="remove_validation('whatsapp','whatsappErr');">
+  <div class="error" id="whatsappErr"></div>
+</div>
+                
+  </div>
+
+  
+  <div class="col-12 personal" style="display: flex; padding:0;">
+
+  <!-- Gender -->
+
+  <div class="gen">
+    <div class="col-4 gender" style="padding:0;">
     <label for="gender" id="gender">Gender</label>
 	<input type="radio" id="male" value="0" name="male" >
 	<h3 class="male">Male</h3>
@@ -61,42 +89,45 @@ include("database.php");
 	<h3 class="male">Female</h3>
   <div class="error" id="femaleErr"></div>
     </div>
+    </div>                        
 
-    
-  <div class="col-4">
+  <!-- DOB & Age -->
+
+<div class="dobAge" style="display: flex;gap: 110px; margin-top: -20px;">
+  <div class="col-4" style="display: flex; flex-direction:column; padding:0;">
   <label for="date_birth">Date of Birth</label>
-  <input type="date" id="dob" name="dob" class="dob" placeholder="Enter your date of birth" onChange="calculate_Age()">
-  <div class="error" id="dobErr"></div>
+  <input type="date" id="dob" name="dob" class="dob" style="width:125%;" placeholder="Enter your date of birth" onChange="calculate_Age()">
+  <div class="error" id="dobErr"></div>  
   </div>
 
-  <div class="col-4">
+  <div class="col-4" style="display: flex; flex-direction:column; padding:0;">
   <label for="age">Age</label>
-  <input type="text" id="age" name="age" class="age" onChange="remove_validation('age','ageErr');" readonly>
-  <div class="error" id="ageErr"></div>
+  <input type="text" id="age" name="age" class="age" style="width:125%;" readonly>
+  <div class="error" id="ageErr"></div>                           
+  </div>
   </div>
 
   </div>
 
-  <label for="phone">Phone Number</label>
-  <input type="tel" id="phone" name="phone" class="phone" placeholder="Enter your phone number" onChange="remove_validation('phoneno','phonenoErr');">
-  <div class="error" id="phonenoErr"></div>
-
-    <label for="phone">WhatsApp Number</label>
-  <input type="tel" id="whatsappphone" name="whatsapp_phone" class="whatsapp_phone" placeholder="Enter your whatsapp number" onChange="remove_validation('whatsapp','whatsappErr');">
-  <div class="error" id="whatsappErr"></div>
+  <!-- Address -->
 
   <label for="address">Street Address</label>
   <textarea id="address" name="address" class="address" placeholder="Enter your address" onkeyup="remove_validation('address','addressErr')"></textarea>
   <div class="error" id="addressErr"></div>
 
+  <!-- P O -->
+
   <label for="zip">Postal Code</label>
   <input type="text" id="zip" name="zip" class="pincode" placeholder="Enter your pincode" onChange="remove_validation('pincode','pincodeErr');">
   <div class="error" id="pincodeErr"></div>
+
+  <!-- City -->
 
   <label for="city">City</label>
   <input type="text" id="city" name="city" class="city" placeholder="Enter your city" onChange="remove_validation('cityname','cityErr');">
   <div class="error" id="cityErr"></div>
 
+  <!-- Country -->
 
 <?php
   
@@ -121,6 +152,7 @@ include("database.php");
 
 <?php  }?>
 
+<!-- State -->
 
 <div id="statesContainer" class="statesContainer">
   <label for="state" class="status">State</label>
@@ -321,24 +353,27 @@ $(document).ready(function () {
 });
 </script>
 
-
 <script>
 
-    /* ================= AGE CALCULATION ================= */
+   /* ================= AGE CALCULATION ================= */
 
-  	function calculate_Age(){
-       
-		var date=document.getElementById("dob");
-		var age=document.getElementById("age");
+  function calculate_Age() {
 
-		let dob=new Date(date.value);
-		let currentYear=new Date();
-		let dobYear= dob.getFullYear();
-		let thisYear= currentYear.getFullYear();
-    let agee=thisYear-dobYear;
-		age.value=agee;
-	}
+    var age = document.getElementById("age");
+    var dob = document.getElementById("dob").value;
+    var birthDate = new Date(dob);
+    var today = new Date();
+
+    var years = today.getFullYear() - birthDate.getFullYear();
+    var months = today.getMonth() - birthDate.getMonth();
+
+    if (months < 0) 
+      {
+        years--;
+        months = 12 + months;
+    }
+
+    age.value = years ;
+}
 </script>
-
-
 </html>

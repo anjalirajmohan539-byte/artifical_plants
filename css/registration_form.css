@@ -249,6 +249,12 @@ form select:focus {
   justify-content: space-between;
 }
 
+.number
+{
+  display: flex;
+  margin-top: -48px;  
+}
+
 .gender {
   display: flex;
   align-items: center;
