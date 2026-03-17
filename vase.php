@@ -2,6 +2,8 @@
 include('database.php');
 include('header.php');
 
+$categoryTypeId = 0;
+
 if(isset($_GET['categoryId']))
   {
   $categoryId = $_GET['categoryId'];
@@ -14,11 +16,17 @@ if(isset($_GET['categoryId']))
 
 ?>
 
+<link href="css/vase.css" rel="stylesheet">
 
-
+<nav class="navbar navbar-light">
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    <a href="#"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
+  </form>
+</nav>
 
   <!--   banner   -->
-<link href="css/vase.css" rel="stylesheet">
+
   <div class="product-head">
     <?php
 
@@ -64,6 +72,7 @@ if(isset($_GET['categoryId']))
       <p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>
     </div>
 
+    
   <!-- Main Section -->
   <div class="main_content">
 
@@ -76,8 +85,14 @@ if(isset($_GET['categoryId']))
               LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
               LEFT JOIN offers off ON off.Id = pf.Id
               WHERE ap.IsDeleted = 0 AND CategoryId = $categoryId";
+              if($categoryTypeId !=0)
+                {
+                  $select = $select." AND CategoryTypeId =".$categoryTypeId;
+                }
+                // var_dump($select);
 
     $check = mysqli_query($conn, $select);
+    
 
     if ($check && mysqli_num_rows($check) > 0) 
       {

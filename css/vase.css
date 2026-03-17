@@ -53,7 +53,7 @@ a {
 .product-head 
 {
   text-align: center;
-  margin-top:50px;
+  margin-top:5px;
 }
 
 .product-head h1
@@ -104,6 +104,37 @@ a {
   color: #0c192b;
   font-weight: bold;
   margin-right: 5px;
+}
+
+.form-control
+{
+  display:inline;
+    width: 73%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--bs-body-color);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    border: var(--bs-border-width) solid #071d3c;
+    border-radius: var(--bs-border-radius);
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}
+
+.navbar
+{
+  justify-content: flex-end;
+  padding-right: 20px;
+  padding-top: 20px;
+}
+
+.form-inline
+{
+  width: 30%;
 }
 
 .product-card s {
