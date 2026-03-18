@@ -20,8 +20,7 @@ if(isset($_GET['categoryId']))
 
 <nav class="navbar navbar-light">
   <form class="form-inline">
-    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-    <a href="#"><button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button></a>
+    <input class="form-control mr-sm-2" type="search" id="search" name="search" placeholder="Search" aria-label="Search" oninput="loaddata()">
   </form>
 </nav>
 
@@ -50,26 +49,29 @@ if(isset($_GET['categoryId']))
     {
       case 1 : 
         echo '<h1 id="mainName">Plants & Planters</h1>';
+        echo '<p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>';
         break;
       case 2 :
         echo '<h1 id="mainName">VASES</h1>';
+        echo '<p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>';
         break;
       case 3 :
         echo '<h1 id="mainName">Decors</h1>';
+        echo '<p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>';
         break;
       case 4 :
         echo '<h1 id="mainName">Artifical Flowers</h1>';
+        echo '<p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>';
         break;
       case 6 :
         echo '<h1 id="mainName">Pebbles & Moss</h1>';
+        echo '<p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>';
         break;
       default : echo "Product";
       break;
     }
     }
     ?>
-      
-      <p id="mainDec">When it comes to displaying your Milon vases at home, some vases are better suited for one type of flower over another.</p>
     </div>
 
     
@@ -78,71 +80,6 @@ if(isset($_GET['categoryId']))
 
   <!-- Products -->
   <div class="products row" id="productContainer">
-
-    <?php
-    $select = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, off.DiscountType, off.DiscountValue FROM add_product ap
-              left JOIN shipping_details sd ON sd.ProductId = ap.Id
-              LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
-              LEFT JOIN offers off ON off.Id = pf.Id
-              WHERE ap.IsDeleted = 0 AND CategoryId = $categoryId";
-              if($categoryTypeId !=0)
-                {
-                  $select = $select." AND CategoryTypeId =".$categoryTypeId;
-                }
-                // var_dump($select);
-
-    $check = mysqli_query($conn, $select);
-    
-
-    if ($check && mysqli_num_rows($check) > 0) 
-      {
-      while ($vase = mysqli_fetch_assoc($check)) 
-        {
-
-        $days = $vase['DeliveryDays'] ?? 4;
-
-        $date = new DateTime();
-        $date->modify("+$days days");
-
-             $price = $vase['Price']; // default price
-             $discountType = $vase['DiscountType'] ?? null;
-             $discountValue = $vase['DiscountValue'] ?? 0;
-        
-              if ($discountType == "Percentage") {
-                  $discountAmount = ($price * $discountValue) / 100;
-                  } else { 
-                    $discountAmount = $discountValue;
-                    }
-                    $finalPrice = $price - $discountAmount;
-                    if ($finalPrice < 0) {
-                      $finalPrice = 0;
-                      }
-
-
-
-    ?>
-
-      <div class="col-3 product-card">
-        <a href="product_details.php?productId=<?php echo $vase['Id'];?>"><img src="images/product/<?php echo $vase['ProductImage']; ?>" alt="<?php echo $vase['ProductName']; ?>">
-
-        <input type="hidden" class="pid" value="<?php echo $vase['Id']; ?>">
-
-        <h3><?php echo $vase['ProductName']; ?></h3>
-
-        <p>
-          <span>₹<?php echo $finalPrice;?></span> <span1 style="font-size:12px;text-decoration: line-through;color:red"><?php echo $discountValue != 0 ? $vase['Price'] : "" ;?></span1>
-        </p>
-
-        <p>
-          Delivery by <?php echo $date->format("d M, D"); ?>
-        </p>
-        </a>
-      </div>
-
-    <?php
-      }
-    }
-    ?>
 
   </div>
 </div>
@@ -184,4 +121,34 @@ include('footer.php');
 
 ?>
 </body>
+<script src="js/jquery.min.js"></script>
+
+<script>
+        $(document).ready(function() {
+            loaddata();
+});
+            function loaddata() {
+              var search = document.getElementById('search').value;
+              var categoryId = <?php echo $categoryId;?>;
+              var categoryType = <?php echo $categoryTypeId;?>;
+
+              alert(categoryType);
+                $.ajax({
+                    url: "filter_searchBar.php",
+                    type: "GET",
+                    data: {
+                        search : search,
+                        category : categoryId,
+                        categoryTypeId : categoryType
+                    },
+                    success: function(data) {
+                      console.log(data);
+                        let response = JSON.parse(data);
+                        $('#productContainer').html(response.books_html);
+                    }
+                });
+            }
+        
+</script>
+
 </html>

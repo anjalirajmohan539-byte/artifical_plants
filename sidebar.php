@@ -14,14 +14,14 @@
     <div class="sidebar">
     <h2>Dashboard</h2>
 
-    <a href="admin_page.php"><img src="images/dashboard_icon.jpg" alt="">Home</a>
-    <a href="add_product.php"><img src="images/product_list.jpg" alt="">Products List</a>
-    <a href="product_category.php"><img src="images/product_list.jpg" alt="">Products Category</a>
-    <a href="product_material.php"><img src="images/product_list.jpg" alt="">Product Materials</a>
-    <a href="#"><img src="images/product_icon.jpg" alt="">Orders</a>
-    <a href="offers_type.php"><img src="images/product_icon.jpg" alt="">Offer Type</a>
-    <a href="product_Offers.php"><img src="images/product_icon.jpg" alt="">Offers</a>
-    <a href="users_list.php"><img src="images/users_icon.jpg" alt="">Customers</a>
-    <a href="#"><img src="images/report_icon.jpg" alt="">Report</a>
-    <a href="index.php"><img src="images/logout_icon.jpg" alt="">Logout</a>
+    <a href="admin_page.php">Home</a>
+    <a href="add_product.php">Products List</a>
+    <a href="product_category.php">Products Category</a>
+    <a href="product_material.php">Product Materials</a>
+    <a href="#">Orders</a>
+    <a href="offers_type.php">Offer Type</a>
+    <a href="product_Offers.php">Offers</a>
+    <a href="users_list.php">Customers</a>
+    <a href="#">Report</a>
+    <a href="index.php">Logout</a>
 </div>

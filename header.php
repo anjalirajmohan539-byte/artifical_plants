@@ -49,10 +49,10 @@ if(isset($_SESSION['Id']) != "")
 
 
         <div id="vase" class="vase">
-        <a href="vase.php?categoryId=4" class="dropbtn text-light">DECOR ▾</a>
+        <a href="vase.php?categoryId=3" class="dropbtn text-light">DECOR ▾</a>
         <div class="menu_dropdown">
               <?php
-        $select = "SELECT `Id`, `Image`, `Name` FROM `category_type` WHERE `CategoryId` = 4 AND `IsDeleted` = 0";
+        $select = "SELECT `Id`, `Image`, `Name` FROM `category_type` WHERE `CategoryId` = 3 AND `IsDeleted` = 0";
         $statemnt = mysqli_query($conn,$select);
 
         if(mysqli_num_rows($statemnt)>0)
@@ -64,7 +64,7 @@ if(isset($_SESSION['Id']) != "")
             $img=$row['Image'];    
         
         ?>
-           <a href="vase.php?categoryId=4&categoryTypeId=<?php echo $row['Id'];?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>"><?php echo $row['Name']; ?></a>
+           <a href="vase.php?categoryId=3&categoryTypeId=<?php echo $row['Id'];?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>"><?php echo $row['Name']; ?></a>
            <?php
         }
       }
