@@ -132,7 +132,7 @@ include('footer.php');
               var categoryId = <?php echo $categoryId;?>;
               var categoryType = <?php echo $categoryTypeId;?>;
 
-              alert(categoryType);
+              // alert(categoryType);
                 $.ajax({
                     url: "filter_searchBar.php",
                     type: "GET",

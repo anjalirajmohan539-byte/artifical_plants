@@ -24,21 +24,22 @@ if(!empty($_FILES['image']['name'])){
     $image = time().'_'.$_FILES['image']['name'];
     move_uploaded_file($_FILES['image']['tmp_name'], "images/product/".$image);
 } else {
-    $image = $_POST['himage'];
+    echo $image = $_POST['himage'];
 }
-
 
     if ($id != 0) {
 
         $update = "UPDATE `add_product` SET `ProductImage`='$image',`ProductName`='$name',`Description`='$description',`Price`=$price, `CategoryTypeId`=$typeCategory
 		          `ColorName`='$colorname',`ColorCode`='$colorcode',`CategoryId`=$type,`MaterialId`=$material,`MaterialTypeId`=$materialType,`ProductCount`=$count,
 		          `LastUpdated`=CURRENT_TIMESTAMP WHERE Id = $id AND `IsDeleted` = 0";
+
 				  var_dump($update);
+
         $ustatemnt=mysqli_query($conn,$update);
          if (!$ustatemnt) {
                 echo "error2";
             } else {
-                header("location:add_product.php");
+                // header("location:add_product.php");
             }
     } 
     else
@@ -62,7 +63,7 @@ if(!empty($_FILES['image']['name'])){
 			
 			$insert_product="INSERT INTO `add_product`( `ProductImage`, `ProductName`, `Description`, `Price`, `CategoryId`, `CategoryTypeId`, `MaterialId`,`MaterialTypeId`,`ProductCount`, `ColorName`, `ColorCode`)  
             VALUES ('$image','$name','$description',$price,$type,$typeCategory,$material,$materialType,$count,'$colorname', '$colorcode')";
-			var_dump($insert_product);
+			// var_dump($insert_product);
 
             $statement=mysqli_query($conn,$insert_product);
 	

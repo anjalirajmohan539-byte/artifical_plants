@@ -43,7 +43,7 @@ if(isset($_SESSION['Id']) != "")
         </div>
     </div>
     <div class="menu">
-        <a href="#" class="text-light">HOME</a>
+        <a href="customer_front_page.php" class="text-light">HOME</a>
         <a href="#" class="text-light">NEW ARRIVALS</a>
 
 
@@ -128,7 +128,31 @@ if(isset($_SESSION['Id']) != "")
         </div>
      
         </div>
-        <a href="#" class="text-light">PEBBLES & MOSS</a>
+
+        <div id="vase" class="vase">
+        <a href="vase.php?categoryId=6" class="text-light">PEBBLES & MOSS ▾</a>
+
+          <div class="menu_dropdown">
+              <?php
+        $select = "SELECT `Id`, `Image`, `Name`, `Description`, `CategoryId` FROM `category_type` WHERE  `CategoryId` = 6 AND `IsDeleted` = 0";
+        $statemnt = mysqli_query($conn,$select);
+
+        if(mysqli_num_rows($statemnt)>0)
+      {
+        while($row = mysqli_fetch_assoc($statemnt))
+          {
+            $id = $row['Id'];
+            $name = $row['Name'];
+            $img=$row['Image'];    
+        
+        ?>
+           <a href="vase.php?categoryId=6&categoryTypeId=<?php echo $row['Id'];?>" class="vaseFilter" data-type="<?php echo $row['Id']; ?>"data-name="<?php echo htmlspecialchars($row['Name']); ?>" data-dec="<?php echo $row['Description'];?>"><img src="images/<?php echo $img;?>"><?php echo $row['Name']; ?></a>
+           <?php
+        }
+      }
+    ?>
+        </div>
+        </div>
         <a href="#" class="text-light">BLOG</a>
     </div>
     </div>

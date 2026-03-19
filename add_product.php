@@ -62,8 +62,9 @@ include('sidebar.php');
                 </div>
            
 
-                <input type="hidden" name="himage" value="<?php echo empty($prows['ProductImage']) ? "" : $prows['ProductImage'];?>">
+                <input type="hidden" name="himage" id="oldimage" value="<?php echo empty($prows['ProductImage']) ? "" : $prows['ProductImage'];?>">
                 <input class="form-control form-control-sm" name="image" type="file" id="productImage" accept="image/*" >
+                <input name="productid" type="hidden" id="productImage" value="<?php echo $editId?>">
                 <div class="small_error" id="imgErr"></div>
                 <div class="form-text" style="font-size: 11px !important;">Recommended: square image. Max 2MB.</div>
               </div>
@@ -203,7 +204,7 @@ include('sidebar.php');
             <h5>Products</h5>
             <div class="table-responsive">
               <table class="table table-sm align-middle">
-                <thead>
+                <thead class="thead-dark">
                   <tr>
                     <th>Sl no</th>
                     <th>Product name</th>
@@ -313,7 +314,7 @@ include('sidebar.php');
 			<path fill="currentColor" d="M91.558,82.791c0-13.238-6.406-20.722-16.123-20.722c-9.183,0-16.763,7.802-16.763,21.681     c0.107,13.983,7.58,20.922,16.23,20.922C83.87,104.676,91.558,97.415,91.558,82.791z M66.144,83.432     c0-8.761,3.103-15.7,8.969-15.7c6.514,0,8.969,7.047,8.969,15.489c0,9.176-2.777,15.797-8.969,15.797     C69.247,99.014,65.93,92.29,66.144,83.432z"/>
 		</g>
 		<g>
-			<polygon fill="currentColor" points="115.049,62.07 74.258,133.829 80.234,133.829 121.03,62.07    "/>
+			<polygon fill="currentColor" points="115.049,62.07 74.258,133.829 80.234,133.829 121.03,62.07 "/>
 		</g>
 	</g>
 </g>
@@ -394,6 +395,7 @@ function ValidationForm() {
 
     // Get values
     let image = document.getElementById("productImage").files[0];
+    let oldimage = document.getElementById("oldimage").files[0];
     let name = document.getElementById("productName").value.trim();
     let type = document.getElementById("productType").value;
     let typeCategory = document.getElementById("typeCategory").value;
@@ -412,6 +414,13 @@ function ValidationForm() {
     if (!image) {
         document.getElementById("imgErr").innerText = "Please upload product image";
         document.getElementById("productImage").style.border = "1px solid red";
+        valid = false;
+    }
+
+     /* Image */
+    if (!oldimage) {
+        document.getElementById("imgErr").innerText = "Please product image";
+        document.getElementById("oldimage").style.border = "1px solid red";
         valid = false;
     }
 

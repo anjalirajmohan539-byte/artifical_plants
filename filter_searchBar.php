@@ -5,15 +5,40 @@ $search = $_GET['search'];
 $categoryId = $_GET['category'];
 $categoryTypeId = $_GET['categoryTypeId'];
 
+
+// $query = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, off.DiscountType, off.DiscountValue FROM add_product ap
+//               left JOIN shipping_details sd ON sd.ProductId = ap.Id
+//               LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+//               LEFT JOIN offers off ON off.Id = pf.Id
+//               WHERE ap.IsDeleted = 0 AND CategoryId = $categoryId";
+//               if($categoryTypeId !=0)
+//                 {
+//                   $query .= " AND CategoryTypeId =".$categoryTypeId;
+//                 }
+
+
 $query = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, off.DiscountType, off.DiscountValue FROM add_product ap
               left JOIN shipping_details sd ON sd.ProductId = ap.Id
               LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
               LEFT JOIN offers off ON off.Id = pf.Id
-              WHERE ap.IsDeleted = 0 AND CategoryId = $categoryId";
-              if($categoryTypeId !=0)
+              WHERE ap.IsDeleted = 0";
+              if($categoryId !=0)
+                {
+                  $query .= " AND CategoryId =".$categoryId;
+                }
+
+                              if($categoryTypeId !=0)
                 {
                   $query .= " AND CategoryTypeId =".$categoryTypeId;
                 }
+
+                
+                              if($search !="")
+                {
+                  $query .= " AND ap.ProductName LIKE '%$search%' ";
+                }
+
+                
 
 $result = mysqli_query($conn, $query);
 
@@ -47,8 +72,8 @@ $days = $row['DeliveryDays'] ?? 4;
     $books_html .= '<p>
           <span>₹'.$finalPrice.'</span> ';
 
-       $books_html .='   <span style="font-size:12px;text-decoration: line-through;color:red"> '.$discountValue != 0 ? $row['Price'] : "" .'</span>
-        </p>';
+       $books_html .='<span style="font-size:12px;text-decoration: line-through;color:red">'. (($discountValue != 0) ? $row['Price'] : "") .'</span>';
+         $books_html .='</p>';
     $books_html .= '<p>
           Delivery by  '.$date->format("d M, D").'
         </p>';
@@ -57,6 +82,6 @@ $days = $row['DeliveryDays'] ?? 4;
 }
 
 echo json_encode([
-    'books_html' => $query
+    'books_html' => $books_html
 ]);
 ?>
