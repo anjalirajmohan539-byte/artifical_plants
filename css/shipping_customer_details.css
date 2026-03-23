@@ -134,6 +134,64 @@ color: #dbdbdb !important;
   text-decoration: none;
 }
 
+.pin
+{
+  padding:0 !important;
+  display: flex;
+  gap: 10px;
+  width: 99% !important;
+  margin-bottom: 10px;
+}
+
+.name
+{
+  padding:0 !important;
+  display: flex;
+  gap: 10px;
+  width: 99% !important;
+  margin-bottom: 10px;
+}
+
+.col-6
+{
+  padding: 0 !important;
+}
+
+table, td, th {
+  border: 1px solid;
+  padding: 14px !important;
+  
+}
+
+table {
+  border-collapse: collapse;
+  padding:none;
+  border-radius:5px;
+}
+
+th
+{
+  font-size:15px;
+  text-align:center !important;
+}
+
+td
+{
+   font-size:15px;
+   font-weight: normal;
+   text-align:center;
+}
+
+
+table button
+{
+  padding:5px 7px;
+  border: none;
+  background-color:#071d3c ;
+  color: white;
+  border-radius:5px;
+}
+
 /* Registration Form Wrapper */
 
 .card-right
@@ -256,7 +314,8 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background: #082347;
+  background: #0d3568;
+  color: white;
 }
 
 /* Checkbox */

@@ -44,33 +44,6 @@ body {
     background: #f1f3f6;
 }
 
-.nav input {
-    width: 30%;
-    padding: 8px;
-    border-radius: 2px;
-    border: none;
-}
-
-.nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-padding:20px 60px;
-background-color:#071d3c !important;
-}
-
-.menu{
-display:flex;
-list-style:none;
-gap:30px;
-color: white;
-}
-
-.logo
-{
-    color: white;
-    text-align: center;
-}
 
 /* Layout */
 .container {

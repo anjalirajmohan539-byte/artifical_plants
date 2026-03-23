@@ -3,6 +3,7 @@ include('database.php');
 
 if(isset($_POST['btn']))
     {
+        $customerId = $_POST['customerId'];
         $name = $_POST['fullName'];
         $address = $_POST['address'];
         $phone = $_POST['phone'];
@@ -25,10 +26,10 @@ else
 	}
 	else
 	{
-        $stmt = $conn->prepare("INSERT INTO `delivery_customer_details`( `Name`, `Address`, `PhoneNo`, `Pincode`, `Place`, `Status`) 
-                   VALUES (?,?,?,?,?,?)");
+        $stmt = $conn->prepare("INSERT INTO `delivery_customer_details`(`Customer_Id`, `Name`, `Address`, `PhoneNo`, `Pincode`, `Place`, `Status`) 
+                   VALUES (?,?,?,?,?,?,?)");
 
-         $stmt->bind_param("ssssss",$name,$address,$phone,$pincode,$place,$status);
+         $stmt->bind_param("isssiss",$customerId,$name,$address,$phone,$pincode,$place,$status);
             if($stmt->execute())
             {
                 header("location:shipping_customer_details.php");

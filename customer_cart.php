@@ -1,44 +1,29 @@
 <?php
 
 include('database.php');
-
+include('header.php');
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
     <link rel="stylesheet" href="css/customer_cart.css">
-</head>
-<body>
-
-    <header>
-<div class="nav">
-    <div>
-<h2 class="logo">MILON</h2>
-<p class="text-body-secondary" style="color:white;">Artifical Flowers and Home Decors</p>
-</div>
-<input type="text" placeholder="Search for products and more">
-<ul class="menu">
-<li>Home</li>
-<li>Products</li>
-<li>Orders</li>
-<li>Blog</li>
-<li>User</li>
-</ul>
-</div>
-</header>
 
 <main class="container">
     <!-- LEFT SIDE CART ITEMS -->
     <section class="cart-items">
-        <div class="delivery">
-            Deliver to: <strong>Hana, 680652</strong>
-           <a href="shipping_customer_details.php"><button class="change-btn">Change</button></a> 
-        </div>
+        <?php
 
+        $select = "SELECT `Customer_Id`, `Name`, `Pincode` FROM `delivery_customer_details` WHERE IsDelected = 0 ";
+        $check = mysqli_query($conn,$select);
+
+        if(mysqli_num_rows($check)>0)
+            {
+                $cus = mysqli_fetch_assoc($check);
+            
+        ?>
+        <div class="delivery">
+            Deliver to: <strong><?php echo $cus['Name'];?>, <?php echo $cus['Pincode'];?></strong>
+           <a href="shipping_customer_details.php?customerId=<?php echo $id;?>"><button class="change-btn">Change</button></a> 
+        </div>
+<?php }?>
         <!-- Item -->
         <div class="cart-item">
             <img src="images/bud_vase.jpg" alt="Product">
