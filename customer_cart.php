@@ -82,7 +82,7 @@ include('header.php');
     width: -1% !important;">
     <img style="width:40px" src="images/Safe_and_secure.png" alt="">
     </div>
-    <div class="col-6 safe">
+    <div class="safe">
     <p>Safe and Secure Payments.Easy returns.
         <br>100% Authentic products.</p>
         </div>

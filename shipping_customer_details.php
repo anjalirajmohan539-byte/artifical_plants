@@ -72,8 +72,8 @@ $status = 0;
 
    <label for="status">Status</label>
   <select name="status" id="status">
-    <option value="0" <?php if($status == 0) echo "selected"; ?>>Active</option>
-    <option value="1" <?php if($status == 1) echo "selected"; ?>>InActive</option>
+    <option value="0" <?php echo ($data != "" ? ($data['Status'] == 0 ? "selected" : "") : ""); ?>>Active</option>
+    <option value="1" <?php echo ($data != "" ? ($data['Status'] == 1 ? "selected" : "") : ""); ?>>InActive</option>
   </select>
   <div class="error" id="cityErr"></div>
 
@@ -99,7 +99,7 @@ $status = 0;
                         CASE WHEN Status =0 THEN 'Active'
                              WHEN Status =1 THEN 'Inactive'
                         END AS Status 
-                        FROM `delivery_customer_details` WHERE `Customer_Id` = $id";
+                        FROM `delivery_customer_details` WHERE `Customer_Id` = $id ORDER BY LastUpdate DESC";
                         // var_dump($setectDetails);
 
       $check = mysqli_query($conn,$setectDetails);

@@ -3,7 +3,7 @@ include('database.php');
 
 if(isset($_POST['btn']))
     {
-        $Id = $_POST['editId'];
+        echo $Id = $_POST['editId'];
         $customerId = $_POST['customerId'];
         $name = $_POST['fullName'];
         $address = $_POST['address'];
@@ -14,15 +14,22 @@ if(isset($_POST['btn']))
 
         if($customerId !=0)
             {
-                
-            }
+                 $select = "SELECT Id FROM `delivery_customer_details` WHERE `Customer_Id` = $customerId";
+                 var_dump($select);
+        $check1 = mysqli_query($conn,$select);
 
-        if($Id <> 0 )
+        if(mysqli_num_rows($check1)>0)
             {
-                $update1 = "UPDATE `delivery_customer_details` SET  
+$update1 = "UPDATE `delivery_customer_details` SET  
                 `Status`= 1 WHERE `Customer_Id`=$customerId";
                 $updatecheck1 = mysqli_query($conn,$update1);
 
+            }
+            }
+
+        if($Id <> "" )
+            {
+                
                 $update2 = "UPDATE `delivery_customer_details` SET 
                 `Name`='$name',
                 `Address`='$address',
@@ -30,6 +37,7 @@ if(isset($_POST['btn']))
                 `Pincode`=$pincode,
                 `Place`='$place',
                 `Status`= $status WHERE `Id`=$Id";
+                var_dump($update2);
                 $updatecheck2 = mysqli_query($conn,$update2);
 
                 if(!$updatecheck2)
@@ -43,16 +51,16 @@ if(isset($_POST['btn']))
             }
             else
                 {
-        $select = "SELECT Id FROM `customer_details` WHERE `Address` = '$address'";
-        $check = mysqli_query($conn,$select);
+        $insert = "SELECT Id FROM `customer_details` WHERE `Address` = '$address'";
+        $check2 = mysqli_query($conn,$insert);
         
-        if(!$check)
+        if(!$check2)
 {
 	echo 'error';
 }
 else
 {
-	if(mysqli_num_rows($check)>0)
+	if(mysqli_num_rows($check2)>0)
 	{
 		echo "already in";
 	}

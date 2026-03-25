@@ -157,7 +157,7 @@ include('sidebar.php');
 
               ?>
                 <label class="form-label">Product Materials <s>*</s></label>
-                <select class="form-select" name="productMaterial" id="productMaterials" required>
+                <select class="form-select" name="productMaterial" id="productMaterials" required onchange="category();">
                   <option value="0">Choose Materials</option>
                   <?php
                 while ($material = mysqli_fetch_assoc($statemnt)) {
@@ -221,7 +221,7 @@ include('sidebar.php');
                 </thead>
                 <tbody id="productsTable">
                   <?php
-                  $select = "SELECT ap.`Id`, `Price`, `ProductName`, pc.Categorys AS `CategoryId`, ap.`CreateDate` FROM `add_product` ap
+                  $select = "SELECT ap.`Id`, `Price`, `ProductName`, pc.Categorys AS `Category`, ap.`CreateDate`, ap.`MaterialTypeId` FROM `add_product` ap
                                  INNER JOIN product_category pc ON pc.Id = ap.CategoryId WHERE ap.IsDeleted = 0";
                   $staemnt = mysqli_query($conn,$select);
 
@@ -237,7 +237,7 @@ include('sidebar.php');
                   <tr>
                     <td><?php echo $sl++;?></td>
                     <td><?php echo $product['ProductName'];?></td>
-                    <td><?php echo $product['CategoryId'];?></td>
+                    <td><?php echo $product['Category'];?></td>
                     <td><?php echo $product['Price'];?></td>
 
 <!------- view button ------->
@@ -328,6 +328,7 @@ include('sidebar.php');
                     <td>
                       <form action="#" method="post">
                         <input type="hidden" name="productid" value="<?php echo $product['Id']; ?>">
+                        <input type="hidden" name="categoryId" value="<?php echo $product['MaterialTypeId']; ?>">
                         
                       <button type="submit" name="edit" style="border: none;background:transparent;" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16" style="color: blue;">
   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
@@ -537,18 +538,25 @@ document.getElementById("code").value = "";
 
 </script>
 
-
+ 
 <script>
 
+  // category();
   /* ================= PRODUCT MATERIAL AJAX ================= */
 
 
-$(document).ready(function () {
-    $('#categoryContainer').hide();  //productcategory_div
 
-    $('#productMaterials').on('change', function () { //productmaterial
-        let materialId = $(this).val();
-
+    // $('#productMaterials').on('change', function () { //productmaterial
+    //     let materialId = $(this).val();
+     <?php
+   if($editId >0 )
+      {
+        echo "category();";
+      }
+      ?>
+    function category(){
+    let materialId = document.getElementById('productMaterials').value;
+// alert(2);
         if (materialId !== "0" && materialId !== "") {
             $('#categoryContainer').slideDown(); //productcategory_div
 
@@ -558,6 +566,7 @@ $(document).ready(function () {
                 data: { productMaterial: materialId },
                 success: function (data) {
                     $('#productCategory').html(data); //productcategory_select
+                      materialId.value('#categoryId');
                 }
             });
 
@@ -565,9 +574,9 @@ $(document).ready(function () {
             $('#categoryContainer').slideUp(); //productcategory_div
             $('#productCategory').html('<option value="0">Choose category</option>'); //productcategory_select
         }
-    });
+    }
 
-});
+
 </script>
 
 <script>
