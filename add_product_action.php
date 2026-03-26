@@ -40,13 +40,13 @@ if(isset($_POST['btn']))
             `ProductCount`='$count',
             `LastUpdated`=CURRENT_TIMESTAMP 
             WHERE Id = '$id' AND `IsDeleted` = 0";
-
+// var_dump($update);
         $ustatemnt = mysqli_query($conn, $update);
 
         if (!$ustatemnt) {
             echo mysqli_error($conn); // better error
         } else {
-            // header("location:add_product.php");
+            header("location:add_product.php");
         }
     }
     else

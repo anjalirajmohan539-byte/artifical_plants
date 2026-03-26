@@ -18,7 +18,7 @@ if(isset($_POST['edit']) || isset($_GET['productid'])) {
   $category = true;
 
 
-  $editselect = "SELECT `ProductImage`, `Price`,`Description`, `ProductName`,`ColorName`, `ColorCode`, `CategoryId`,  `MaterialId`, `MaterialTypeId`,`ProductCount` FROM `add_product` ap
+  $editselect = "SELECT `ProductImage`, `Price`,`Description`, `ProductName`,`ColorName`, `ColorCode`, `CategoryId`, CategoryTypeId , `MaterialId`, `MaterialTypeId`,`ProductCount` FROM `add_product` ap
                    WHERE ap.Id = $editId AND ap.IsDeleted = 0";
   $statmnt = mysqli_query($conn, $editselect);
 
@@ -89,7 +89,7 @@ include('sidebar.php');
 
               ?>
                 <label class="form-label">Product type <s>*</s></label>
-                <select class="form-select" name="productType" id="productType" required>
+                <select class="form-select" name="productType" id="productType" required onchange="productType();">
                   <option value="0">Choose type</option>
                   <?php
                   while ($type = mysqli_fetch_assoc($statment)) {
@@ -111,7 +111,7 @@ include('sidebar.php');
                 <div class="invalid-feedback">Please choose type.</div>
                 <div class="small_error" id="typeCategoryErr"></div>
               </div>
-              
+              <input type="hidden" name="productcategory" id="productcategory" value="<?php echo $prows == "" ? "" : $prows['CategoryTypeId'];?>" >
 
               <!---------------------------------------------------- Color ---------------------------------------------------->
                       <div style="display:flex; gap:50px;">
@@ -148,7 +148,7 @@ include('sidebar.php');
           </div>
 
             <!---------------------------------------------------- Product Material ---------------------------------------------------->
-              <div class="mb-3">
+              <div class="mb-3" id="materialContainer">
                   <?php
             $select_met = "SELECT `Id`, `Name` FROM `material_type` WHERE IsDeleted = 0";
             $statemnt = mysqli_query($conn, $select_met);
@@ -180,7 +180,7 @@ include('sidebar.php');
                 <div class="invalid-feedback">Please choose a category.</div>
                 <div class="small_error" id="categoryErr"></div>
               </div>
-
+<input type="hidden" name="categoryId" id="categoryId" value="<?php echo $prows == "" ? "" : $prows['MaterialTypeId']; ?>">
               <!---------------------------------------------------- Description ---------------------------------------------------->
               <div class="mb-3">
                 <label class="form-label">Description <s>*</s></label>
@@ -328,7 +328,7 @@ include('sidebar.php');
                     <td>
                       <form action="#" method="post">
                         <input type="hidden" name="productid" value="<?php echo $product['Id']; ?>">
-                        <input type="hidden" name="categoryId" value="<?php echo $product['MaterialTypeId']; ?>">
+                        
                         
                       <button type="submit" name="edit" style="border: none;background:transparent;" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen" viewBox="0 0 16 16" style="color: blue;">
   <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z"/>
@@ -548,15 +548,18 @@ document.getElementById("code").value = "";
 
     // $('#productMaterials').on('change', function () { //productmaterial
     //     let materialId = $(this).val();
+
      <?php
    if($editId >0 )
       {
         echo "category();";
       }
       ?>
+
     function category(){
     let materialId = document.getElementById('productMaterials').value;
-// alert(2);
+    let categoryId = document.getElementById('categoryId').value;
+// alert(categoryId);
         if (materialId !== "0" && materialId !== "") {
             $('#categoryContainer').slideDown(); //productcategory_div
 
@@ -566,7 +569,7 @@ document.getElementById("code").value = "";
                 data: { productMaterial: materialId },
                 success: function (data) {
                     $('#productCategory').html(data); //productcategory_select
-                      materialId.value('#categoryId');
+                    $('#productCategory').val(categoryId);
                 }
             });
 
@@ -582,21 +585,27 @@ document.getElementById("code").value = "";
 <script>
   /* ================= PRODUCT TYPE AJAX ================= */
 
-  $(document).ready(function () {
-    $('#typeContainer').hide();
+<?php
+if($editId >0)
+  {
+    echo "productType();";
+  }
+?>
 
-    $('#productType').on('change', function () {
-        let materialId = $(this).val();
+    function productType(){
+      let productType = document.getElementById('productType').value;
+      let productcategory = document.getElementById('productcategory').value;
 
-        if (materialId !== "0" && materialId !== "") {
+        if (productType !== "0" && productType !== "") {
             $('#typeContainer').slideDown(); 
 
             $.ajax({
                 url: 'fetch_type_category.php',
                 type: 'POST',
-                data: { productType: materialId },
+                data: { productType: productType },
                 success: function (data) {
                     $('#typeCategory').html(data);
+                    $('#typeCategory').val(productcategory);
                 }
             });
 
@@ -604,9 +613,8 @@ document.getElementById("code").value = "";
             $('#typeContainer').slideUp();
             $('#typeCategory').html('<option value="0">Choose category</option>');
         }
-    });
+    };
 
-});
 
 </script>
 
