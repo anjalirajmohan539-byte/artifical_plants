@@ -11,7 +11,7 @@ include('header.php');
     <section class="cart-items">
         <?php
 
-        $select = "SELECT `Customer_Id`, `Name`, `Pincode` FROM `delivery_customer_details` WHERE IsDelected = 0 ";
+        $select = "SELECT `Customer_Id`, `Name`, `Pincode` FROM `delivery_customer_details` WHERE `status` = 0 AND IsDelected = 0 ";
         $check = mysqli_query($conn,$select);
 
         if(mysqli_num_rows($check)>0)
@@ -87,10 +87,11 @@ include('header.php');
         <br>100% Authentic products.</p>
         </div>
         </div>
-        <button class="place-order">PLACE ORDER</button>
+        <a href="customerPayment.php"><button class="place-order">PLACE ORDER</button></a>
     </div>
     
 </main>
 
 </body>
+
 </html>

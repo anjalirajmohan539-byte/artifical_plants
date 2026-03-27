@@ -25,3 +25,7 @@
     <a href="#">Report</a>
     <a href="index.php">Logout</a>
 </div>
+
+<script>
+    
+</script>
