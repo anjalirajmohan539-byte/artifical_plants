@@ -72,15 +72,13 @@ if(isset($_GET['categoryId']))
     }
     }
     ?>
-    </div>
-
-    
   <!-- Main Section -->
   <div class="main_content">
 
   <!-- Products -->
   <div class="products row" id="productContainer">
 
+    </div>
   </div>
 </div>
   <div class="cl"></div>
