@@ -2,7 +2,10 @@
 
 include('database.php');
 include('header.php');
+
 ?>
+
+
 
     <link rel="stylesheet" href="css/customer_cart.css">
 
@@ -25,6 +28,14 @@ include('header.php');
         </div>
 <?php }?>
         <!-- Item -->
+
+        <?php
+        $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`, `Price`, `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount` FROM `add_product` ap
+                    INNER JOIN cart ca ON ca.ProductId = ap.Id
+                    WHERE ap.`IsDeleted` = 0 AND ca.Id = $id";
+
+        $check2 = mysqli_query($conn,$details);
+        ?>
         <div class="cart-item">
             <img src="images/bud_vase.jpg" alt="Product">
             <div class="item-details">

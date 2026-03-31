@@ -14,8 +14,8 @@ include('header.php');
             <p class="active" onclick="showMethod('card')">💳 Credit / Debit / ATM Card</p>
             <p onclick="showMethod('upi')">UPI</p>
             <p onclick="showMethod('cod')">💵 Cash on Delivery</p>
-            <p class="disabled" disabled>EMI</p>
             <p onclick="showMethod('gift')">🎁 Have a Gift Card</p>
+            <p class="disabled" disabled>EMI</p>
         </div>
     </div>
 

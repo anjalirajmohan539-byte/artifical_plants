@@ -77,7 +77,6 @@ if(isset($_GET['categoryId']))
 
   <!-- Products -->
   <div class="products row" id="productContainer">
-
     </div>
   </div>
 </div>
