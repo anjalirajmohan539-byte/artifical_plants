@@ -16,6 +16,7 @@ if(isset($_POST['btn']))
     $colorname = $_POST['colorName'];
     $colorcode = $_POST['colorCode'];
     $description = $_POST['productDesc'];
+    $availability = $_POST['ProductAvailability'];
 
     if(!empty($_FILES['image']['name'])){
         $image = time().'_'.basename($_FILES['image']['name']);
@@ -38,9 +39,9 @@ if(isset($_POST['btn']))
             `MaterialId`='$material',
             `MaterialTypeId`='$materialType',
             `ProductCount`='$count',
-            `LastUpdated`=CURRENT_TIMESTAMP 
+            `Availability`='$availability'
             WHERE Id = '$id' AND `IsDeleted` = 0";
-// var_dump($update);
+var_dump($update);
         $ustatemnt = mysqli_query($conn, $update);
 
         if (!$ustatemnt) {

@@ -64,23 +64,35 @@ else
 			}
 			else
 			{
-				$image_path="images/img";
+				$image_path="images/img/";
 				$c_pic=$image_path.basename($image);
 				echo $c_pic;
 				
-				if(move_uploaded_file($_FILES['image']['tmp_name'],$image_path))
-				{
-					header('location:index.php');
-				}
-				else
+				if(!move_uploaded_file($_FILES['image']['tmp_name'],$image_path))
 				{
 					echo "already exists";
 				}
 				
 			}
+
+			$insert = "INSERT INTO `delivery_customer_details`(`Customer_Id`, `Name`, `Address`, `PhoneNo`, `Pincode`, `Place`)
+			 VALUES ($id,'$name','$address','$phone',$pincode,'$city')";
+
+$check_insert = mysqli_query($conn,$insert);
+
+if(!$check_insert)
+	{
+		echo "error3";
+	}
+	else
+		{
+			header('location:index.php');
+		}
 		}
 	}
 }
+
+
  }
 
 ?>

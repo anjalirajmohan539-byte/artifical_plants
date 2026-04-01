@@ -180,13 +180,42 @@ include('sidebar.php');
                 <div class="invalid-feedback">Please choose a category.</div>
                 <div class="small_error" id="categoryErr"></div>
               </div>
-<input type="hidden" name="categoryId" id="categoryId" value="<?php echo $prows == "" ? "" : $prows['MaterialTypeId']; ?>">
+              <input type="hidden" name="categoryId" id="categoryId" value="<?php echo $prows == "" ? "" : $prows['MaterialTypeId']; ?>">
+
               <!---------------------------------------------------- Description ---------------------------------------------------->
               <div class="mb-3">
                 <label class="form-label">Description <s>*</s></label>
                 <textarea id="description" name="productDesc" class="form-control" rows="4" placeholder="Short description (optional)"><?php echo $prows == "" ? "" : $prows['Description'] ?></textarea>
                 <div class="small_error" id="descErr"></div>
               </div>
+
+              <!---------------------------------------------------- Product Availability ---------------------------------------------------->
+              <?php
+              if($editId != "")
+                {  
+              ?>
+              <div class="mb-3">
+                <?php
+                $select_avl = "SELECT * FROM `product_availability` WHERE IsDeleted = 0";
+                $avl_check = mysqli_query($conn,$select_avl);
+
+                if(mysqli_num_rows($avl_check)>0)
+                  {     
+                  
+                ?>
+                <label class="form-label">Product Availability <s>*</s></label>
+                <select class="form-select" name="ProductAvailability" id="ProductAvailability">
+                  <?php
+                  while($availability = mysqli_fetch_assoc($avl_check))
+                      {
+                  ?>
+                  <option value="<?php echo $availability['Id'];?>"><?php echo $availability['Name'];?></option>
+                  <?php }?>
+                </select>
+                <div class="small_error" id="categoryErr"></div>
+                <?php } ?>
+              </div>
+              <?php }?>
 
                <!---------------------------------------------------- Btn ---------------------------------------------------->
 

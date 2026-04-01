@@ -3,7 +3,7 @@ session_start();
 include('database.php');
 if(isset($_SESSION['Id']) != "")
   {
-    $id = $_SESSION['Id'];
+    $Id = $_SESSION['Id'];
   }
   else
     {

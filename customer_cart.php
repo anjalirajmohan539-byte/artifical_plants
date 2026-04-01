@@ -14,7 +14,8 @@ include('header.php');
     <section class="cart-items">
         <?php
 
-        $select = "SELECT `Customer_Id`, `Name`, `Pincode` FROM `delivery_customer_details` WHERE `status` = 0 AND IsDelected = 0 ";
+        $select = "SELECT  `Name`, `Pincode` FROM `delivery_customer_details` WHERE `Customer_Id` = $Id AND `status` = 0 AND IsDelected = 0 ";
+        // var_dump($select);
         $check = mysqli_query($conn,$select);
 
         if(mysqli_num_rows($check)>0)
@@ -24,7 +25,7 @@ include('header.php');
         ?>
         <div class="delivery">
             Deliver to: <strong><?php echo $cus['Name'];?>, <?php echo $cus['Pincode'];?></strong>
-           <a href="shipping_customer_details.php?customerId=<?php echo $id;?>"><button class="change-btn">Change</button></a> 
+           <a href="shipping_customer_details.php?customerId=<?php echo $Id;?>"><button class="change-btn">Change</button></a> 
         </div>
 <?php }?>
         <!-- Item -->
@@ -32,16 +33,22 @@ include('header.php');
         <?php
         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`, `Price`, `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount` FROM `add_product` ap
                     INNER JOIN cart ca ON ca.ProductId = ap.Id
-                    WHERE ap.`IsDeleted` = 0 AND ca.Id = $id";
+                    WHERE ap.`IsDeleted` = 0 AND ca.CustomerId = $Id";
+                    // var_dump($details);
 
         $check2 = mysqli_query($conn,$details);
+
+        if(mysqli_num_rows($check2)>0)
+            {
+                while($deta=mysqli_fetch_assoc($check2))
+                    {  
         ?>
         <div class="cart-item">
-            <img src="images/bud_vase.jpg" alt="Product">
+            <img src="images/product/<?php echo $deta['ProductImage'];?>" alt="Product">
             <div class="item-details">
-                <h3>Ceramic Coffee Mug Set (Pack of 6)</h3>
+                <h3><?php echo $deta['ProductName'];?></h3>
                 <p class="stock out">Out of Stock</p>
-                <p class="price">299/-</p>
+                <p class="price"><?php echo $deta['Price'];?>/-</p>
                 <p class="qty">Qty</p>
                 <div class="actions">
                     <button>Save for Later</button>
@@ -50,19 +57,8 @@ include('header.php');
             </div>
         </div>
 
-        <div class="cart-item">
-            <img src="images/Ceramic_Floral_Vase.jpg" alt="Product">
-            <div class="item-details">
-                <h3>Sports Stainless Steel Water Bottle</h3>
-                <p class="stock">In Stock</p>
-                <p class="price">299/-</p>
-                <p class="qty">Qty</p>
-                <div class="actions">
-                    <button>Save for Later</button>
-                    <button>Remove</button>
-                </div>
-            </div>
-        </div>
+        <?php       }
+            }?>
     </section>
 
     <!-- RIGHT SIDE PRICE DETAILS -->

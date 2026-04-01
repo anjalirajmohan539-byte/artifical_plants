@@ -39,7 +39,7 @@ $status = 0;
     <div class="col-6"> 
    <label for="fullname">Full Name</label>
   <input type="text" id="fullName" name="fullName" class="fullName" placeholder="Enter your full name" value="<?php echo $data == "" ? "" : $data['Name'] ;?>" onChange="remove_validation('fullname','fullnameErr');">
-  <input type="hidden" id="customerId" name="customerId" value="<?php echo $id;?>">
+  <input type="hidden" id="customerId" name="customerId" value="<?php echo $Id;?>">
   <input type="hidden" id="editId" name="editId" value="<?php echo $editid;?>">
   <div class="error" id="fullnameErr"></div>
 </div>
@@ -99,7 +99,7 @@ $status = 0;
                         CASE WHEN Status =0 THEN 'Active'
                              WHEN Status =1 THEN 'Inactive'
                         END AS Status 
-                        FROM `delivery_customer_details` WHERE `Customer_Id` = $id ORDER BY LastUpdate DESC";
+                        FROM `delivery_customer_details` WHERE `Customer_Id` = $Id ORDER BY LastUpdate DESC";
                         // var_dump($setectDetails);
 
       $check = mysqli_query($conn,$setectDetails);

@@ -6,6 +6,7 @@ if(isset($_SESSION['Id']))
         $customerId = $_SESSION['Id'];
     }
 $cartId = $_GET['cartId'];
+$category = $_GET['categoryId'];
 
 
 $insert = "INSERT INTO `cart`(`ProductId`, `CustomerId`) 
@@ -18,6 +19,6 @@ if(!$check)
     }
     else
         {
-            header('location:vase.php');
+            header('location:vase.php?categoryId='.$category);
         }
 ?>
