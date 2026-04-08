@@ -194,7 +194,7 @@ include('sidebar.php');
               if($editId != "")
                 {  
               ?>
-              <div class="mb-3">
+              <div class="mb-3" id="availibilityContainer">
                 <?php
                 $select_avl = "SELECT * FROM `product_availability` WHERE IsDeleted = 0";
                 $avl_check = mysqli_query($conn,$select_avl);
@@ -535,6 +535,7 @@ category.innerHTML = "<option value='0'>Choose category</option>";
 
 // Hide category field
 document.getElementById("categoryContainer").style.display = "none";
+document.getElementById("availibilityContainer").style.display = "none";
 
 
 // Reset type category dropdown //
