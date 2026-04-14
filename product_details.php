@@ -33,7 +33,7 @@ $select = "SELECT ap.Id, ap.ProductImage, pi.Images, ProductName, Price, ColorNa
            FROM add_product ap
            LEFT JOIN product_images pi ON pi.ProductId = ap.Id AND pi.IsDelete = 0
            WHERE ap.Id = $product_id AND ap.IsDeleted = 0";
-        //    var_dump($select);
+           var_dump($select);
 
 $statemnt = mysqli_query($conn,$select);
 
@@ -160,20 +160,26 @@ $datas = mysqli_fetch_assoc($result);
             <div class="card-title" style="display: flex;justify-content: space-between">Shipping Details <s><a href="delivery_details.php?details=2&productId=<?php echo $product_id;?>&sectionId=available" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
 </svg></a></s></div>
-            <ul class="shipping">
-                <li>Availability: In Stock</li>
 
-                <!------- Delivery Days ------->
 
                 <?php
-                $sql = "SELECT `DeliveryDays` FROM `shipping_details` WHERE productId = $product_id";
+                $sql = "SELECT pr.Name AS `AvailabilityId`, `DeliveryDays`, `DeliveryType`, `Deliverycharge` FROM `shipping_details` sd
+                        INNER JOIN product_availability pr ON pr.Id = sd.AvailabilityId 
+                        WHERE productId = $product_id";
                 $res = mysqli_query($conn, $sql);
                 $row = mysqli_fetch_assoc($res);
                 
                 $days = $row['DeliveryDays'] ?? 4;
                 $date = date_create();
                 date_add($date, date_interval_create_from_date_string($days . " days"));
+
+                $deliveryType   = $row['DeliveryType'] ?? 1;
+                $deliveryCharge = $row['DeliveryCharge'] ?? 0;
                 ?>
+            <ul class="shipping">
+                <li>Availability: <?php echo $row['AvailabilityId'];?></li>
+
+                <!------- Delivery Days ------->
 
                 <li>Delivery by <?php echo date_format($date,"d M, D");?></li>
 
@@ -183,15 +189,6 @@ $datas = mysqli_fetch_assoc($result);
                     
                 Order within <strong><?php echo $days;?> days</strong> for fastest delivery
             </p>
-
-                <?php
-                    $sql = "SELECT DeliveryType, DeliveryCharge FROM shipping_details WHERE productId = $product_id";
-                    $res = mysqli_query($conn, $sql);
-                    $row = mysqli_fetch_assoc($res);
-
-                    $deliveryType   = $row['DeliveryType'] ?? 1;
-                    $deliveryCharge = $row['DeliveryCharge'] ?? 0;
-                ?>
 
                 <li><?php if ($deliveryType == 1) {echo "Free Delivery";} else {echo "Delivery Fee: ₹" . number_format($deliveryCharge, 2);}?></li>
 

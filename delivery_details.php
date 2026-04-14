@@ -8,7 +8,7 @@ $deliveryType = 1;
 
 if(isset($_GET['details']))
   {
-    $id1 = $_GET['details'];
+    $id = $_GET['details'];
   }
 
 
@@ -30,7 +30,7 @@ if(isset($_GET['details']))
     <p>ADDITIONAL DETAILS</p>
     <p style="margin-right: 90%;margin-top: -73px;font-size: 30px;">
       <?php
-      switch($id1)
+      switch($id)
     {
       case 1 : 
         echo '<a href="add_product.php">⟵</a></p>';

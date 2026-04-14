@@ -15,7 +15,7 @@ include('header.php');
          $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`, `Price`, `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount` FROM `add_product` ap
                     INNER JOIN cart ca ON ca.ProductId = ap.Id
                     WHERE ap.`IsDeleted` = 0 AND ca.CustomerId = $Id";
-                    var_dump($details);
+                    // var_dump($details);
 
         $check2 = mysqli_query($conn,$details);
         $count = mysqli_num_rows($check2);

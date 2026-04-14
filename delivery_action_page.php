@@ -6,6 +6,7 @@ if(isset($_POST["btn"]))
 {
     $product = $_POST["proId"];
     $return = $_POST["return"];
+    
 
     $select = "SELECT `Id` FROM `return_details` WHERE ProductId = $product";
     $result = mysqli_query($conn,$select);
