@@ -24,10 +24,10 @@ else
 		else
 		{
 			$l_array=mysqli_fetch_array($s_statement);
-			$usertype=$l_array['UserType'];
+			$_SESSION=$l_array['UserType'];
 			$login_id=$l_array['Id'];
 			
-			echo $_SESSION['Id']=$login_id;
+			 $_SESSION['Id']=$login_id;
 			
 			if($usertype==1)
 			{

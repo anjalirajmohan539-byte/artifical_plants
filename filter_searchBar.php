@@ -61,11 +61,11 @@ $days = $row['DeliveryDays'] ?? 4;
              $discountValue = $row['DiscountValue'] ?? 0;
         
               if ($discountType == "Percentage") {
-                  $discountAmount = ($price * $discountValue) / 100;
+                 $discountAmount = ($price * $discountValue) / 100;
                   } else { 
                     $discountAmount = $discountValue;
                     }
-                    $finalPrice = $price - $discountAmount;
+                   $finalPrice = $price - $discountAmount;
                     if ($finalPrice < 0) {
                       $finalPrice = 0;
                       }

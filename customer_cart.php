@@ -3,6 +3,9 @@
 include('database.php');
 include('header.php');
 
+
+$totalPrice = 0;
+$totalDiscount = 0;
 ?>
 
 
@@ -12,8 +15,17 @@ include('header.php');
 <main class="container">
     <!-- LEFT SIDE CART ITEMS -->
      <?php
-         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`, `Price`, `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount` FROM `add_product` ap
+         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue,
+                    CASE DeliveryType
+                    WHEN 1 THEN 'Free Delivery'
+                    WHEN 2 THEN 'with Delivery fee'
+                    END AS deliveryType, 
+                    `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount`,pa.Name AS `Availability` FROM `add_product` ap
                     INNER JOIN cart ca ON ca.ProductId = ap.Id
+                    INNER JOIN product_availability pa ON pa.Id = ap.Availability
+                    INNER JOIN product_offers pf ON pf.ProductId = ap.Id
+                    INNER JOIN offers off ON off.Id = pf.OfferId
+                    INNER JOIN shipping_details sd ON sd.ProductId = ap.Id
                     WHERE ap.`IsDeleted` = 0 AND ca.CustomerId = $Id";
                     // var_dump($details);
 
@@ -46,26 +58,33 @@ include('header.php');
     
                 while($deta=mysqli_fetch_assoc($check2))
                     {  
-                         $price = $deta['Price']; // default price
-             $discountType = $deta['DiscountType'] ?? null;
-             $discountValue = $deta['DiscountValue'] ?? 0;
-        
-              if ($discountType == "Percentage") {
-                  $discountAmount = ($price * $discountValue) / 100;
-                  } else { 
-                    $discountAmount = $discountValue;
+                         $price = $deta['Price'];
+                        $discountType = $deta['DiscountType'] ?? null;
+                        $discountValue = $deta['DiscountValue'] ?? 0;
+
+                if ($discountType == "Percentage") {
+                    $discountAmount = ($price * $discountValue) / 100;
+                    } else {
+                        $discountAmount = $discountValue;
                     }
-                    $finalPrice = $price - $discountAmount;
-                    if ($finalPrice < 0) {
-                      $finalPrice = 0;
-                      }
+
+                        $finalPrice = $price - $discountAmount;
+                if ($finalPrice < 0) {
+                        $finalPrice = 0;
+                    }
+
+// 👉 ADD THIS
+$totalPrice += $price;
+$totalDiscount += $discountAmount;
+                      
         ?>
         <div class="cart-item">
             <img src="images/product/<?php echo $deta['ProductImage'];?>" alt="Product">
             <div class="item-details">
                 <h3><?php echo $deta['ProductName'];?></h3>
-                <p class="stock out">Out of Stock</p>
-                <p class="price"><?php echo $deta['Price'];?>/-</p>
+                <p class="stock"><?php echo $deta['Availability'];?></p>
+                 <?php $grandTotal = $totalPrice - $totalDiscount; ?>
+                <p class="price"><?php echo $grandTotal;?>/-  <span style="font-size:12px;text-decoration: line-through;color:red;padding-left:10px"><?php echo $price;?></span></p>
                 <p class="qty">Qty</p>
                 <div class="actions">
                     <button>Save for Later</button>
@@ -83,22 +102,23 @@ include('header.php');
         <h3>PRICE DETAILS</h3>
         <div class="price-row">
             <span>Price (<?php echo $count;?> items)</span>
-            <span>₹<?php echo $deta['Price'];?></span>
+            <?php $grandTotal = $totalPrice - $totalDiscount; ?>
+             <span>₹<?php echo $grandTotal; ?></span>
         </div>
         <div class="price-row">
             <span>Discount</span>
-            <span class="green">− ₹<?php echo $discountValue != 0 ? $discountAmount : "";?></span>
+            <span>₹<?php echo $totalDiscount; ?></span>
         </div>
         <div class="price-row">
             <span>Delivery Charges</span>
-            <span>FREE</span>
+            <span><?php echo $deta['deliveryType'];?></span>
         </div>
         <hr>
         <div class="price-row total">
             <span>Total Amount</span>
-            <span>₹1,490</span>
+            <span>₹<?php echo $totalPrice; ?></span>
         </div>
-        <p class="save-msg">You will save ₹812 on this order</p>
+        <p class="save-msg">You will save ₹<?php echo $totalDiscount; ?> on this order</p>
     </aside>
     <div class="secure">
         <div class="col-6 img" style="

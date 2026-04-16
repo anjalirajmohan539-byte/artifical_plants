@@ -93,7 +93,7 @@ body {
 }
 
 .item-details h3 {
-    font-size: 16px;
+    font-size: 25px;
     margin-bottom: 5px;
 }
 
@@ -109,8 +109,9 @@ body {
 }
 
 .price{
-    font-size: 14px;
+    font-size: 18px;
     margin-bottom: 5px;
+    font-weight: bold;
 }
 
 .qty{
