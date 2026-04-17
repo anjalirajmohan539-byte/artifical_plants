@@ -4,46 +4,50 @@ include("database.php");
 
 if(isset($_POST["button"]))
 {
-    $email=$_POST['email'];
-    $password=$_POST['password'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
 
+    $select = "SELECT `Id`, `UserEmail`, `UserType`, `Lpassword` 
+               FROM `login` 
+               WHERE UserEmail='$email'";
 
-$select="SELECT `Id`, `UserEmail`, `UserType` FROM `login` WHERE UserEmail='$email' AND Lpassword='$password'";
-var_dump($select);
-if(!$s_statement=mysqli_query($conn,$select))
-{
-  echo "error";
+    $result = mysqli_query($conn, $select);
+
+    if(!$result)
+    {
+        echo "Query Error";
+    }
+    else
+    {
+        if(mysqli_num_rows($result) < 1)
+        {
+            $_SESSION['error'] = "Incorrect email or password";
+            header('location:login_action.php');
+        }
+        else
+        {
+            $row = mysqli_fetch_assoc($result);
+
+            if($row['Lpassword'] != $password)
+            {
+                $_SESSION['error'] = "Incorrect email or password";
+                header('location:login_action.php');
+            }
+
+            $_SESSION['Id'] = $row['Id'];
+            $_SESSION['UserType'] = $row['UserType'];
+
+            $usertype = $row['UserType'];
+
+            if($usertype == 1)
+            {
+                header('location:admin_page.php');
+            }
+            else if($usertype == 2)
+            {
+                header('location:customer_front_page.php');
+            }
+        }
+    }
 }
-else
-{
-		if(mysqli_num_rows($s_statement)<1)
-		{
-			$_SESSION['error']="incorrect email or password";
-			header('location:login_action.php');
-		}
-		else
-		{
-			$l_array=mysqli_fetch_array($s_statement);
-			$_SESSION=$l_array['UserType'];
-			$login_id=$l_array['Id'];
-			
-			 $_SESSION['Id']=$login_id;
-			
-			if($usertype==1)
-			{
-				header('location:admin_page.php');
-			}
-			else if($usertype==2)
-			{
-			header('location:customer_front_page.php');
-			}
-			
-		}
-	}
-  }
-
-
-
-
-
 ?>

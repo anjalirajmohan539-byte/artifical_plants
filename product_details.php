@@ -38,7 +38,7 @@ $select = "SELECT ap.Id, ap.ProductImage, pi.Images, ProductName, Price, ColorNa
            FROM add_product ap
            LEFT JOIN product_images pi ON pi.ProductId = ap.Id AND pi.IsDelete = 0
            WHERE ap.Id = $product_id AND ap.IsDeleted = 0";
-           var_dump($select);
+        //    var_dump($select);
 
 $statemnt = mysqli_query($conn,$select);
 
@@ -132,9 +132,16 @@ $datas = mysqli_fetch_assoc($result);
         <!---------------------------------------------------- Product Information ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Product Information<sk><a href="add_product.php?productid=<?php echo $product_id;?>" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between">Product Information
+             <?php
+                if($usertype == 1)
+                    {
+                ?>    
+            <sk><a href="add_product.php?productid=<?php echo $product_id;?>" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-</svg></a></sk></div>
+</svg></a></sk>
+<?php }?>
+</div>
             <?php
             $productSelect = "SELECT ap.`Id`, `ProductName`, `Price`, `ColorName`, mt.Name AS `MaterialId`, `Description` FROM `add_product` ap
                               INNER JOIN material_type mt ON mt.Id = ap.MaterialId WHERE ap.Id = $product_id ";
@@ -162,9 +169,16 @@ $datas = mysqli_fetch_assoc($result);
         <!---------------------------------------------------- Shipping Info ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Shipping Details <s><a href="delivery_details.php?details=2&productId=<?php echo $product_id;?>&sectionId=available" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between">Shipping Details 
+             <?php
+                if($usertype == 1)
+                    {
+                ?>    
+            <s><a href="delivery_details.php?details=2&productId=<?php echo $product_id;?>&sectionId=available" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-</svg></a></s></div>
+</svg></a></s>
+<?php }?>
+</div>
 
 
                 <?php
@@ -210,9 +224,16 @@ $datas = mysqli_fetch_assoc($result);
 
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Payment Method<s><a href="delivery_details.php?details=2&productId=<?php echo $product_id;?>&sectionId=ondelivery" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between">Payment Method
+             <?php
+                if($usertype == 1)
+                    {
+                ?>    
+            <s><a href="delivery_details.php?details=2&productId=<?php echo $product_id;?>&sectionId=ondelivery" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-</svg></a></s></div>
+</svg></a></s>
+<?php }?>
+</div>
 
 <!------- Return Days ------->
 
@@ -287,9 +308,16 @@ date_add($returnDate, date_interval_create_from_date_string(($deliveryDays + $re
         <!---------------------------------------------------- Pair Well With ---------------------------------------------------->
 
         <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between;">Pair Well With <s><a href="product_pair.php?productId=<?php echo $product_id;?>" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
+            <div class="card-title" style="display: flex;justify-content: space-between;">Pair Well With 
+             <?php
+                if($usertype == 1)
+                    {
+                ?>    
+            <s><a href="product_pair.php?productId=<?php echo $product_id;?>" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
   <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-</svg></a></s></div>
+</svg></a></s>
+<?php }?>
+</div>
             <div class="pair">
                            <?php
             

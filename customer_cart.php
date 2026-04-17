@@ -85,7 +85,14 @@ $totalDiscount += $discountAmount;
                 <p class="stock"><?php echo $deta['Availability'];?></p>
                  <?php $grandTotal = $totalPrice - $totalDiscount; ?>
                 <p class="price"><?php echo $grandTotal;?>/-  <span style="font-size:12px;text-decoration: line-through;color:red;padding-left:10px"><?php echo $price;?></span></p>
-                <p class="qty">Qty</p>
+                <p class="qty">
+                    <select name="qty" id="qty">
+                        <option value="1">Qty : 1</option>
+                        <option value="2">Qty : 2</option>
+                        <option value="3">Qty : 3</option>
+                        <option value="more">more</option>
+                    </select>
+                </p>
                 <div class="actions">
                     <button>Save for Later</button>
                     <button>Remove</button>
