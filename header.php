@@ -38,8 +38,8 @@ if(isset($_SESSION['Id']) != "")
         </div>
         <div class="col-3">
             <a href="personal_information.php"><img src="images/contact.png"></a>
-            <a href="customer_cart.php"><img src="images/shopping-cart.png"></a>
-            <a href="wishlist.php"><img src="images/wishlist.png"></a>
+            <a href="customer_cart.php"><img src="images/cart.png"></a>
+            <a href="wishlist.php"><img src="images/whishlist.png"></a>
             <a href="logout.php"><img src="images/logout.png"></a>
         </div>
     </div>

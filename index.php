@@ -24,7 +24,7 @@
             <p class="text-body-secondary">Artifical Flowers and Home Decors</p>
         </div>
         <div class="col-3">
-            <a href="login.php"><img src="images/contact.png"></a>
+            <a href="login.php"><img src="images/register.png"></a>
         </div>
     </div>
     <div class="menu">

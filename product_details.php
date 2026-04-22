@@ -3,6 +3,7 @@ session_start();
 include('database.php');
 
 $product_id = $_GET['productId'];
+$deliveryCharge = 0;
 
 if(isset($_SESSION['UserType']))
     {
@@ -186,6 +187,10 @@ $datas = mysqli_fetch_assoc($result);
                         INNER JOIN product_availability pr ON pr.Id = sd.AvailabilityId 
                         WHERE productId = $product_id";
                 $res = mysqli_query($conn, $sql);
+                if(mysqli_num_rows($res)>0)
+                    {
+
+                    
                 $row = mysqli_fetch_assoc($res);
                 
                 $days = $row['DeliveryDays'] ?? 4;
@@ -193,7 +198,7 @@ $datas = mysqli_fetch_assoc($result);
                 date_add($date, date_interval_create_from_date_string($days . " days"));
 
                 $deliveryType   = $row['DeliveryType'] ?? 1;
-                $deliveryCharge = $row['DeliveryCharge'] ?? 0;
+                $deliveryCharge = $row['Deliverycharge'] ?? 0;
                 ?>
             <ul class="shipping">
                 <li>Availability: <?php echo $row['AvailabilityId'];?></li>
@@ -212,6 +217,7 @@ $datas = mysqli_fetch_assoc($result);
                 <li><?php if ($deliveryType == 1) {echo "Free Delivery";} else {echo "Delivery Fee: ₹" . number_format($deliveryCharge, 2);}?></li>
 
             </ul>
+            <?php } ?>
         </div>
 
 
@@ -238,7 +244,7 @@ $datas = mysqli_fetch_assoc($result);
 <!------- Return Days ------->
 
 <?php
-$pay = "SELECT pm.name AS`PaymentMethodId` FROM `payment_product_method`ppm 
+$pay = "SELECT pm.name AS `PaymentMethodId` FROM `payment_product_method`ppm 
         INNER JOIN `payment_method`pm ON pm.Id = ppm.PaymentMethodId
         WHERE ProductId = $product_id";
 

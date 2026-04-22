@@ -12,7 +12,7 @@ if (isset($_POST['btn'])) {
 
     $check = "SELECT Id FROM shipping_details WHERE ProductId = $product";
     $result = mysqli_query($conn, $check);
-    // var_dump($check);
+    var_dump($check);
 
     if (mysqli_num_rows($result) > 0) 
         {

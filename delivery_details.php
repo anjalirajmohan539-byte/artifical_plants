@@ -54,8 +54,8 @@ if(isset($_GET['details']))
 <?php
 $select = "SELECT ap.Id, ap.ProductImage, pi.Images, ProductName, Price, ColorName 
            FROM add_product ap
-           INNER JOIN product_images pi ON pi.ProductId = ap.Id 
-           WHERE ap.Id = $product_id AND pi.IsDelete = 0";
+          LEFT JOIN product_images pi ON pi.ProductId = ap.Id AND pi.IsDelete = 0
+           WHERE ap.Id = $product_id ";
 // var_dump($select);
 $statemnt = mysqli_query($conn,$select);
 
@@ -81,7 +81,15 @@ if(mysqli_num_rows($statemnt) > 0)
 
     <!---------------------------------------------------- RIGHT: SIDE ---------------------------------------------------->
     <div class="right">
+<?php
+$select = "SELECT `Id`, `AvailabilityId`, `DeliveryDays`, `DeliveryType`, `Deliverycharge` FROM `shipping_details` WHERE  `ProductId` = $product_id";
+$check = mysqli_query($conn,$select);
 
+if(mysqli_num_rows($check)>0)
+  {
+    $details = mysqli_fetch_assoc($check);
+  
+?>
     <!---------------------------------------------------- Shipping Details ---------------------------------------------------->
 
         <div class="card">
@@ -142,7 +150,9 @@ if(mysqli_num_rows($statemnt) > 0)
 
       </form>
         </div>
-
+<?php
+}
+?>
 
             <!---------------------------------------------------- Payment Details ---------------------------------------------------->
 
