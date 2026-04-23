@@ -3,8 +3,7 @@
 include('database.php');
 
 $product_id = $_GET['productId'];
-
-$deliveryType = 1;
+$details = "";
 
 if(isset($_GET['details']))
   {
@@ -84,11 +83,11 @@ if(mysqli_num_rows($statemnt) > 0)
 <?php
 $select = "SELECT `Id`, `AvailabilityId`, `DeliveryDays`, `DeliveryType`, `Deliverycharge` FROM `shipping_details` WHERE  `ProductId` = $product_id";
 $check = mysqli_query($conn,$select);
-
+$details = "";
 if(mysqli_num_rows($check)>0)
   {
     $details = mysqli_fetch_assoc($check);
-  
+  }
 ?>
     <!---------------------------------------------------- Shipping Details ---------------------------------------------------->
 
@@ -116,7 +115,7 @@ if(mysqli_num_rows($check)>0)
               {
 
               ?>
-                <option value="<?php echo $row['Id'];?>"><?php echo $row['Name'];?></option>
+                <option value="<?php echo $row['Id'];?>"<?php echo ($details != "" && $row['Id'] == $details['AvailabilityId']) ? 'selected' : '';?>><?php echo $row['Name'];?></option>
                 <?php }?>
             </select>
             <?php }?>
@@ -132,16 +131,16 @@ if(mysqli_num_rows($check)>0)
             ?>
 
             <label for="">Delivery Days</label>
-            <input type="text" class="form-control" name="dday">
+            <input type="text" class="form-control" name="dday" value="<?php echo $details['DeliveryDays'];?>">
 
 <!------- Delivery Type ------->
 
             <label for="">Delivery Type</label>
             <select name="type" id="charge" onchange="showDeliveryCharge()">
-              <option value="1"<?php echo ($deliveryType == 1) ? "selected" : ""; ?>>Free Delivery</option>
-              <option value="2"<?php echo ($deliveryType == 2) ? "selected" : ""; ?>>With Delivery fee</option>
+              <option value="1"<?php echo ($details['DeliveryType'] == 1) ? "selected" : ""; ?>>Free Delivery</option>
+              <option value="2"<?php echo ($details['DeliveryType'] == 2) ? "selected" : ""; ?>>With Delivery fee</option>
             </select>
-            <input type="text" id="deliveryCharge" name="deliveryCharge" min="0" placeholder="Enter Delivery Charge">
+            <input type="text" id="deliveryCharge" name="deliveryCharge" min="0" value="<?php echo $details != "" ? $details['Deliverycharge'] : "";?>">
 
             <input type="hidden" name="proId" id="proId" value="<?php echo $product_id;?>">
 
@@ -150,9 +149,6 @@ if(mysqli_num_rows($check)>0)
 
       </form>
         </div>
-<?php
-}
-?>
 
             <!---------------------------------------------------- Payment Details ---------------------------------------------------->
 
@@ -166,7 +162,7 @@ if(mysqli_num_rows($check)>0)
 
              <?php
             $selectMethod = "SELECT pm.`Id`,ppm.Id AS productMethodId, `Name` FROM `payment_method` pm
-                             LEFT JOIN payment_product_method ppm ON ppm.PaymentMethodId = pm.Id AND ppm.ProductId = $product_id
+                             LEFT JOIN payment_product_method ppm ON ppm.PaymentMethodId = pm.Id AND ppm.IsDelete = 0 AND ppm.ProductId = $product_id
                              WHERE pm.`IsDeleted` = 0";
                              $product_method=1;
             $check = mysqli_query($conn,$selectMethod);
@@ -188,7 +184,6 @@ if(mysqli_num_rows($check)>0)
             }?>
             
          </div> 
-            
         </fieldset>
         <input type="hidden" name="proId" id="product" value="<?php echo $product_id;?>">
         <button class="btn1" name="btn">Add</button>
@@ -204,11 +199,22 @@ if(mysqli_num_rows($check)>0)
 
         <fieldset>
 <!------- Return ------->
+<?php
+$select = "SELECT `ReturnDays` FROM `return_details` WHERE `IsDelete` = 0 AND `ProductId` = $product_id";
+
+$checkdel = mysqli_query($conn,$select);
+$return ="";
+if(mysqli_num_rows($checkdel)>0)
+  {
+    $return = mysqli_fetch_assoc($checkdel);
+  }
+?>
 
             <label for="">Return Days</label>
-            <input type="text" name="return" id="returnId"> 
-            
+            <input type="text" name="return" id="returnId" value="<?php echo $return != "" ? $return['ReturnDays'] : "";?>"> 
+
         </fieldset>
+       
         <input type="hidden" name="proId" id="product" value="<?php echo $product_id;?>">
         <button class="btn1" name="btn">Add</button>
         
@@ -223,16 +229,24 @@ if(mysqli_num_rows($check)>0)
            <form action="Dimensions_action_page.php" method="post">
 
         <fieldset>
-            
+            <?php
+$select = "SELECT `Width`, `Height`, `Weight`, `Depth`, `TopDiameter`, `BottomDiameter`, `OtherDimensions` FROM `product_dimensions` WHERE `ProductId` = $product_id AND `Isdelete` = 0";
+$checkdim = mysqli_query($conn,$select);
+$dim = "";
+if(mysqli_num_rows($checkdim)>0)
+  {
+    $dim = mysqli_fetch_assoc($checkdim);
+  }
+?>
             <label for="Width">Width</label>
-            <input type="text" name="Width" id="Width">
+            <input type="text" name="Width" id="Width" value="<?php echo $dim != "" ? $dim['Width'] : "";?>">
             <label for="Height">Height</label>
-            <input type="text" name="Height" id="Height">
+            <input type="text" name="Height" id="Height" value="<?php echo $dim != "" ? $dim['Height'] : "";?>">
             <label for="Weight">Weight</label>
-            <input type="text" name="Weight" id="Weight">
+            <input type="text" name="Weight" id="Weight" value="<?php echo $dim != "" ? $dim['Weight'] : "";?>">
             <input type="hidden" name="prodId" id="prodId" value="<?php echo $product_id;?>">
-
         </fieldset>
+        
         <button class="btn1" name="btn" id="btn3">Add</button>
         
       </form>

@@ -16,7 +16,7 @@ $totalCharge = 0;
 <main class="container">
     <!-- LEFT SIDE CART ITEMS -->
      <?php
-         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`, 
+         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`,ca.Count, 
                     `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount`,pa.Name AS `Availability` FROM `add_product` ap
                     INNER JOIN cart ca ON ca.ProductId = ap.Id
                     INNER JOIN product_availability pa ON pa.Id = ap.Availability
@@ -24,7 +24,7 @@ $totalCharge = 0;
                     INNER JOIN offers off ON off.Id = pf.OfferId
                     INNER JOIN shipping_details sd ON sd.ProductId = ap.Id
                     WHERE ap.`IsDeleted` = 0 AND ca.CustomerId = $Id";
-                    var_dump($details);
+                    // var_dump($details);
 
         $check2 = mysqli_query($conn,$details);
         $count = mysqli_num_rows($check2);
@@ -86,18 +86,17 @@ $delivery = $grandTotal + $totalCharge;
                 <h3><?php echo $deta['ProductName'];?></h3>
                 <p class="stock"><?php echo $deta['Availability'];?></p>
                  <?php //$grandTotal = $totalPrice - $totalDiscount; ?>
-                <p class="price"><?php echo $grandTotal;?>/-  <span style="font-size:12px;text-decoration: line-through;color:red;padding-left:10px"><?php echo $price;?></span></p>
+                <p class="price">₹<?php echo $grandTotal;?>  <span style="font-size:12px;text-decoration: line-through; color:#fb7474 ;padding-left:10px">₹<?php echo $price;?></span></p>
                 <p class="qty">
                     <select name="qty" id="qty">
-                        <option value="1">Qty : 1</option>
-                        <option value="2">Qty : 2</option>
-                        <option value="3">Qty : 3</option>
-                        <option value="more">more</option>
+                        <option value="1">Qty : <?php echo $deta['Count'];?></option>
                     </select>
                 </p>
                 <div class="actions">
-                    <button>Save for Later</button>
-                    <button>Remove</button>
+                    <form action="customer_cart_action.php" method="post">
+                    <a href="wishlist.php"><button>Save for Later</button></a>
+                    <input type="button" value="Remove" name="btn" class="btn">
+                    </form>
                 </div>
             </div>
         </div>

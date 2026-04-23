@@ -119,6 +119,14 @@ body {
     margin-bottom: 5px;
 }
 
+.btn
+{
+    border: none;
+    color: red !important;
+
+}
+
+
 #qty
 {
     border-radius: 4px;
@@ -131,12 +139,17 @@ body {
   text-align: center;
 }
 
+.actions
+{
+    margin-top: 20px;
+}
+
 .actions button {
     margin-right: 10px;
-    padding:12px 8px;
-    border: none;
+    padding:5px 8px;
+    border:none;
     background: none;
-    color: #2874f0;
+    color: green;
     cursor: pointer;
 }
 
@@ -206,3 +219,4 @@ body {
     margin-left: 55px;
     padding-top: 10px;
 }
+
