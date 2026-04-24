@@ -33,55 +33,194 @@ a {
   text-decoration: none;
 }
 
-.main_content {
-  display: flex;
-  padding: 30px;
-  gap: 30px;
+body {
+    font-family: Arial, sans-serif;
+    background: #f8f8f8;
 }
 
-
-
-/* Product Grid */
-.products {
-  flex: 3;
-  padding: 0 217px;
+.container {
+    width: 80%;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
 }
 
-
-.product-head 
-{
-  text-align: center;
-  margin-top:5px;
-}
-
-.product-head h1
-{
-  font-size: 60px;
+.wishlist h2 {
+    text-align: center;
+	font-size: 60px;
   font-weight:bold;
   font-family: Footlight MT Light;
   color: #032658;
 }
 
-.product-head p
+.wishlist p
 {
-  font-size: 14px;
+	color: #032658;
+	text-align: center;
+	margin-top:-10px;
+	margin-bottom: 20px;
 }
 
-.product-wishlist
-{
-	margin-top:10px;
+.wishlist-table {
+    width: 100%;
+    border-collapse: collapse;
 }
 
-.product-wishlist :hover
-{
-	transform: translateY(-5px);
+.wishlist-table th {
+    background: linear-gradient(90deg, #124da1, #071d3c);
+    color: white;
+    padding: 12px;
 }
 
-.product-wishlist img
-{
-	width: 90%;
-  height: 362px;
-  object-fit: cover;
-  border-radius: 8px;
-  box-shadow: 1px 1px 8px black;
+.wishlist-table td {
+    padding: 15px;
+    text-align: center;
 }
+
+.product {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-align: left;
+}
+
+.product img {
+    border-radius: 5px;
+}
+
+.product h4 {
+    margin: 0;
+    font-size: 14px;
+}
+
+.product p {
+    margin: 0;
+    font-size: 12px;
+    color: gray;
+}
+
+.stock {
+    color: green;
+    font-weight: bold;
+}
+
+/* .btn {
+    background: #7c3aed;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #5b21b6;
+} */
+
+
+/* Button Container */
+.wooden-cart-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 13px 22px;
+  border: none;
+  background: linear-gradient(90deg, #124da1, #071d3c); /* Lighter wood color */
+  border-radius: 35px;
+  box-shadow:
+    inset 0 5px 10px rgba(255, 255, 255, 0.5),
+    inset 0 -5px 10px rgba(0, 0, 0, 0.2),
+    0 5px 15px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: perspective(500px) rotateX(5deg);
+  transform-style: preserve-3d;
+}
+
+/* Wood grain texture */
+.wooden-cart-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    rgba(139, 90, 43, 0.1) 25%,
+    transparent 25%,
+    transparent 75%,
+    rgba(139, 90, 43, 0.1) 75%
+  );
+  background-size: 10px 10px;
+  opacity: 0.5;
+  border-radius: 25px;
+  transition: all 0.4s ease;
+  transform: translateZ(-1px);
+}
+
+/* SVG Icon */
+.wooden-cart-button svg {
+  width: 24px;
+  height: 24px;
+  margin-right: 7px;
+  fill: white; /* Dark brown color for icon */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateZ(10px);
+}
+
+/* Text */
+.button-text {
+  position: relative;
+  z-index: 1;
+  color: white; /* Dark brown color for text */
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 16px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateZ(10px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Hover State */
+.wooden-cart-button:hover {
+  transform: perspective(500px) rotateX(0deg) translateY(-3px);
+  box-shadow:
+    inset 0 6px 12px rgba(255, 255, 255, 0.6),
+    inset 0 -6px 12px rgba(0, 0, 0, 0.25),
+    0 8px 20px rgba(0, 0, 0, 0.35);
+ background: linear-gradient(90deg, #124da1, #071d3c);
+}
+
+.wooden-cart-button:hover svg {
+  transform: translateZ(15px) scale(1.2) rotate(5deg);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.wooden-cart-button:hover .button-text {
+  transform: translateZ(15px) translateX(5px);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Active/Clicked State */
+.wooden-cart-button:active {
+  transform: perspective(500px) rotateX(2deg) translateY(2px);
+  box-shadow:
+    inset 0 3px 6px rgba(255, 255, 255, 0.3),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom,#0f55b8,
+    #124da1);
+}
+
+.wooden-cart-button:active svg {
+  transform: translateZ(5px) scale(0.9) rotate(-5deg);
+  filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.2));
+}
+
+.wooden-cart-button:active .button-text {
+  transform: translateZ(5px) translateY(1px);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
