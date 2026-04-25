@@ -101,8 +101,5 @@ $delivery = $grandTotal + $totalCharge;
         ?>
     </table>
 </div>
-<?php
-include('footer.php');
-?>
 </body>
 </html>

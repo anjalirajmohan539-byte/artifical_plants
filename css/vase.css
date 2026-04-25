@@ -305,6 +305,11 @@ a {
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.heart
+{
+  color: red;
+  font-size: 30px;
+}
 
 /* Hover State */
 .wooden-cart-button:hover {

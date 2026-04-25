@@ -22,11 +22,12 @@ if(isset($_SESSION['Id']) != "")
 //                 }
 
 
-$query = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, ca.ProductId, off.DiscountType, off.DiscountValue FROM add_product ap
+$query = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, ca.ProductId, wl.ProductId AS wishlistproduct, wl.Favorite AS Heart, wl.Id AS RowId ,off.DiscountType, off.DiscountValue FROM add_product ap
               left JOIN shipping_details sd ON sd.ProductId = ap.Id
               LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
               LEFT JOIN offers off ON off.Id = pf.Id
               LEFT JOIN cart ca ON ca.ProductId = ap.Id And ca.customerId = $Id 
+              LEFT JOIN wishlist wl ON wl.ProductId = ap.Id AND wl.CustomerId = $Id
               WHERE ap.IsDeleted = 0";
               if($categoryId !=0)
                 {
@@ -95,6 +96,15 @@ $days = $row['DeliveryDays'] ?? 4;
   $books_html .=($row['ProductId'] != "") ?  "customer_cart.php" : "vase_action.php?cartId=".($row['Id'])."&categoryId=".$categoryId;
   $books_html .=' style="user-select: none;"><span class="button-text">';
   $books_html .= ($row['ProductId'] != "") ? "Go To Cart" : "Add To Cart";
+  $books_html .= '</span>';
+  $books_html .= '</a>';
+  $books_html .='   </button>';
+
+  $books_html .='    <button onclick="wishlist('.$row['Id'].",".$row['RowId'].');" style="border:none;">';
+    $books_html .='    <a href=';
+  $books_html .=($row['Id'] != "") ?  "wishlist.php" : "wishlist_action.php?wishlistId=".($row['Id']);
+  $books_html .=' style="user-select: none;"><span class="heart">';
+  $books_html .= ($row['Heart'] == 1 ) ? "<i class='fa-solid fa-heart' style='color:rgb(255,30,0)'></i>" : "<i class='fa-regular fa-heart' style='color:rgb(255,30,0)'></i>";
   $books_html .= '</span>';
   $books_html .= '</a>';
   $books_html .='   </button>';

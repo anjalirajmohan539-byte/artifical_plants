@@ -17,7 +17,7 @@ if(isset($_GET['categoryId']))
 ?>
 
 <link href="css/vase.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 <nav class="navbar navbar-light">
   <form class="form-inline">
     <input class="form-control mr-sm-2" type="search" id="search" name="search" placeholder="Search" aria-label="Search" oninput="loaddata()">
@@ -78,6 +78,7 @@ if(isset($_GET['categoryId']))
   <!-- Products -->
   <div class="products row" id="productContainer">
     </div>
+    <input type="hidden" name="customer" id="customer" value="<?php echo $Id;?>">
   </div>
 </div>
   <div class="cl"></div>
@@ -121,6 +122,7 @@ include('footer.php');
 <script src="js/jquery.min.js"></script>
 
 <script>
+  loaddata();
         $(document).ready(function() {
             loaddata();
 });
@@ -139,6 +141,7 @@ include('footer.php');
                         categoryTypeId : categoryType
                     },
                     success: function(data) {
+                      alert(data);
                       console.log(data);
                         let response = JSON.parse(data);
                         $('#productContainer').html(response.books_html);
@@ -148,4 +151,30 @@ include('footer.php');
         
 </script>
 
+<script>
+  function wishlist(productId,rowId)
+  {
+    var customer = document.getElementById('customer').value;
+
+    $.ajax({
+      type:"GET",
+      url:"wishlist_action.php",
+      data:{
+        pId : productId,
+        customer : customer,
+        rId : rowId
+      },
+      success:function(data)
+      {
+        loaddata();
+      },
+      error:function(xhr,status,error)
+      {
+        alert("error");
+      }
+    })
+  }
+
+
+</script>
 </html>
