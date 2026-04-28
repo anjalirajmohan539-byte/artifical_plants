@@ -94,7 +94,7 @@ $delivery = $grandTotal + $totalCharge;
                 </p>
                 <div class="actions">
                     <form action="customer_cart_action.php" method="post">
-                    <a href="wishlist.php"><button>Save for Later</button></a>
+                    <a href="#"><button>Save for Later</button></a>
                     <input type="button" value="Remove" name="btn" class="btn">
                     </form>
                 </div>
@@ -124,7 +124,7 @@ $delivery = $grandTotal + $totalCharge;
         <div class="price-row total">
             <span>Total Amount</span>
             <?php //$grandTotal = $totalPrice - $totalDiscount; ?>
-             <span>₹<?php echo $delivery; ?></span>
+             <span>₹<?php echo $delivery;?></span>
             
         </div>
         <p class="save-msg">You will save ₹<?php echo $totalDiscount; ?> on this order</p>

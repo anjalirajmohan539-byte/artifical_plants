@@ -100,9 +100,9 @@ $days = $row['DeliveryDays'] ?? 4;
   $books_html .= '</a>';
   $books_html .='   </button>';
 
-  $books_html .='    <button onclick="wishlist('.$row['Id'].",".$row['RowId'].');" style="border:none;">';
+  $books_html .='    <button onclick="wishlist('.$row['Id'].",".$row['RowId'].');" style="border:none;background: transparent;">';
     $books_html .='    <a href=';
-  $books_html .=($row['Id'] != "") ?  "wishlist.php" : "wishlist_action.php?wishlistId=".($row['Id']);
+  $books_html .=($row['RowId'] != "") ?  "wishlist.php" : "wishlist_action.php?wishlistId=".($row['Id']);
   $books_html .=' style="user-select: none;"><span class="heart">';
   $books_html .= ($row['Heart'] == 1 ) ? "<i class='fa-solid fa-heart' style='color:rgb(255,30,0)'></i>" : "<i class='fa-regular fa-heart' style='color:rgb(255,30,0)'></i>";
   $books_html .= '</span>';

@@ -141,7 +141,6 @@ include('footer.php');
                         categoryTypeId : categoryType
                     },
                     success: function(data) {
-                      alert(data);
                       console.log(data);
                         let response = JSON.parse(data);
                         $('#productContainer').html(response.books_html);
