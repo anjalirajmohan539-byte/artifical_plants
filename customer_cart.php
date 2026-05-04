@@ -16,13 +16,13 @@ $totalCharge = 0;
 <main class="container">
     <!-- LEFT SIDE CART ITEMS -->
      <?php
-         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`,ca.Count, 
+         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`, off.`DiscountType`,ca.Count, 
                     `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount`,pa.Name AS `Availability` FROM `add_product` ap
-                    INNER JOIN cart ca ON ca.ProductId = ap.Id
-                    INNER JOIN product_availability pa ON pa.Id = ap.Availability
-                    INNER JOIN product_offers pf ON pf.ProductId = ap.Id
-                    INNER JOIN offers off ON off.Id = pf.OfferId
-                    INNER JOIN shipping_details sd ON sd.ProductId = ap.Id
+                    LEFT JOIN cart ca ON ca.ProductId = ap.Id
+                    LEFT JOIN product_availability pa ON pa.Id = ap.Availability
+                    LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+                    LEFT JOIN offers off ON off.Id = pf.OfferId
+                    LEFT JOIN shipping_details sd ON sd.ProductId = ap.Id
                     WHERE ap.`IsDeleted` = 0 AND ca.CustomerId = $Id";
                     // var_dump($details);
 
@@ -55,38 +55,45 @@ $totalCharge = 0;
     
                 while($deta=mysqli_fetch_assoc($check2))
                     {  
-                         $price = $deta['Price'];
-                        $discountType = $deta['DiscountType'] ?? null;
-                        $discountValue = $deta['DiscountValue'] ?? 0;
-                        $deliverCharge = $deta['Deliverycharge'] ?? 0;
+                        $price = $deta['Price'];
+$countQty = $deta['Count'];
 
-                if ($discountType == "Percentage") {
-                    $discountAmount = ($price * $discountValue) / 100;
-                    } else {
-                        $discountAmount = $discountValue;
-                    }
+$discountType = $deta['DiscountType'] ?? null;
+$discountValue = $deta['DiscountValue'] ?? 0;
+$deliverCharge = $deta['Deliverycharge'] ?? 0;
 
-                        $finalPrice = $price - $discountAmount;
-                if ($finalPrice < 0) {
-                        $finalPrice = 0;
-                    }
-                
+// Calculate discount
+if ($discountType == "Percentage") {
+    $discountAmount = ($price * $discountValue) / 100;
+} else {
+    $discountAmount = $discountValue;
+}
 
-// 👉 ADD THIS
-$totalPrice += $price;
-$totalDiscount += $discountAmount;
-$totalCharge += $deliverCharge;
-                      
-$grandTotal = $totalPrice - $totalDiscount;
-$delivery = $grandTotal + $totalCharge;
+// Final price per item
+$finalPrice = $price - $discountAmount;
+if ($finalPrice < 0) {
+    $finalPrice = 0;
+}
+
+// 👉 Multiply by quantity
+$itemTotalPrice = $price * $countQty;
+$itemDiscount = $discountAmount * $countQty;
+$itemDelivery = $deliverCharge * $countQty;
+
+// 👉 Add to totals
+$totalPrice += $itemTotalPrice;
+$totalDiscount += $itemDiscount;
+$totalCharge += $itemDelivery;
+$grandprice = $totalPrice - $totalDiscount + $totalCharge;
+
         ?>
         <div class="cart-item">
             <img src="images/product/<?php echo $deta['ProductImage'];?>" alt="Product">
             <div class="item-details">
                 <h3><?php echo $deta['ProductName'];?></h3>
                 <p class="stock"><?php echo $deta['Availability'];?></p>
-                 <?php //$grandTotal = $totalPrice - $totalDiscount; ?>
-                <p class="price">₹<?php echo $grandTotal;?>  <span style="font-size:12px;text-decoration: line-through; color:#fb7474 ;padding-left:10px">₹<?php echo $price;?></span></p>
+
+                <p class="price">₹<?php echo $finalPrice * $countQty;?>  <span style="font-size:12px;text-decoration: line-through; color:#fb7474 ;padding-left:10px">₹<?php echo $price * $countQty;?></span></p>
                 <p class="qty">
                     <select name="qty" id="qty">
                         <option value="1">Qty : <?php echo $deta['Count'];?></option>
@@ -94,16 +101,17 @@ $delivery = $grandTotal + $totalCharge;
                 </p>
                 <div class="actions">
                     <form action="customer_cart_action.php" method="post">
+                        <input type="hidden" name="cart" value="<?php echo $deta['Id'];?>">
                     <a href="#"><button>Save for Later</button></a>
                     <input type="button" value="Remove" name="btn" class="btn">
                     </form>
                 </div>
             </div>
         </div>
-
+<?php }?>
         
     </section>
-
+   
     <!-- RIGHT SIDE PRICE DETAILS -->
      <div>
     <aside class="price-box">
@@ -118,13 +126,12 @@ $delivery = $grandTotal + $totalCharge;
         </div>
         <div class="price-row">
             <span>Delivery Charges</span>
-            <span>₹<?php echo $deta['Deliverycharge'];?></span>
+            <span>₹<?php echo $totalCharge;?></span>
         </div>
         <hr>
         <div class="price-row total">
             <span>Total Amount</span>
-            <?php //$grandTotal = $totalPrice - $totalDiscount; ?>
-             <span>₹<?php echo $delivery;?></span>
+             <span>₹<?php echo $grandprice;?></span>
             
         </div>
         <p class="save-msg">You will save ₹<?php echo $totalDiscount; ?> on this order</p>
@@ -141,7 +148,7 @@ $delivery = $grandTotal + $totalCharge;
         </div>
         <a href="customerPayment.php"><button class="place-order">PLACE ORDER</button></a>
     </div>
-    <?php       }
+ <?php       
             }
             else
             {

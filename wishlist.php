@@ -18,8 +18,8 @@ $totalCharge = 0;
                     INNER JOIN product_category pc ON pc.Id = ap.CategoryId
                     INNER JOIN wishlist wl ON wl.ProductId = ap.Id
                     INNER JOIN product_availability pa ON pa.Id = ap.Availability
-                    INNER JOIN product_offers pf ON pf.ProductId = ap.Id
-                    INNER JOIN offers off ON off.Id = pf.OfferId
+                    LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+                    LEFT JOIN offers off ON off.Id = pf.OfferId
                     WHERE ap.`IsDeleted` = 0 AND wl.CustomerId = $Id AND wl.Favorite = 1";
 
 $check = mysqli_query($conn,$select);
@@ -37,8 +37,8 @@ if(mysqli_num_rows($check)>0)
                 <th>Price</th>
                 <th>Date Added</th>
                 <th>Stock Status</th>
-                <th></th>
-                <th></th>
+                <th>Add to Cart</th>
+                <th>Delete</th>
             </tr>
         </thead>
 
@@ -48,29 +48,33 @@ if(mysqli_num_rows($check)>0)
 
         $date = new DateTime();
            $price = $details['Price'];
-                        $discountType = $details['DiscountType'] ?? null;
-                        $discountValue = $details['DiscountValue'] ?? 0;
-                        $deliverCharge = $details['Deliverycharge'] ?? 0;
 
-                if ($discountType == "Percentage") {
-                    $discountAmount = ($price * $discountValue) / 100;
-                    } else {
-                        $discountAmount = $discountValue;
-                    }
+$discountType = $details['DiscountType'] ?? null;
+$discountValue = $details['DiscountValue'] ?? 0;
+$deliverCharge = $details['Deliverycharge'] ?? 0;
 
-                        $finalPrice = $price - $discountAmount;
-                if ($finalPrice < 0) {
-                        $finalPrice = 0;
-                    }
-                
+// Calculate discount
+if ($discountType == "Percentage") {
+    $discountAmount = ($price * $discountValue) / 100;
+} else {
+    $discountAmount = $discountValue;
+}
 
-// 👉 ADD THIS
-$totalPrice += $price;
-$totalDiscount += $discountAmount;
-$totalCharge += $deliverCharge;
-                      
-$grandTotal = $totalPrice - $totalDiscount;
-$delivery = $grandTotal + $totalCharge;
+// Final price per item
+$finalPrice = $price - $discountAmount;
+if ($finalPrice < 0) {
+    $finalPrice = 0;
+}
+
+// 👉 Multiply by quantity
+$itemTotalPrice = $price;
+$itemDiscount = $discountAmount;
+$itemDelivery = $deliverCharge;
+
+// 👉 Add to totals
+$totalPrice += $itemTotalPrice;
+$totalDiscount += $itemDiscount;
+$totalCharge += $itemDelivery;
 ?>
         <tbody>
             <tr>
@@ -81,7 +85,7 @@ $delivery = $grandTotal + $totalCharge;
                         <p><?php echo $details['CategoryId']?></p>
                     </div>
                 </td>
-                <td>₹<?php echo $delivery;?></td>
+                <td>₹<?php echo $finalPrice;?></td>
                 <td><?php echo $date->format("d M,D");?></td>
                 <td class="stock"><?php echo $details['Availability'];?></td>
                 <td><button class="wooden-cart-button" title="Add To Cart">
@@ -100,7 +104,13 @@ $delivery = $grandTotal + $totalCharge;
         </tbody>
         <?php
         }}
-        ?>
+       else
+            {
+                ?>
+                <section class="cart-items">
+                    <p>No Items</p>
+                </section>
+                <?php }?>
     </table>
 </div>
 </body>

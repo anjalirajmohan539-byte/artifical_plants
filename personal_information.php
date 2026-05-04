@@ -7,7 +7,7 @@ $Id;
 
 <link href="css/personal_information.css" rel="stylesheet">
     <div class="cl"></div>
-     <div class="reg-wrapper">
+     <div class="container reg-wrapper">
     <div class="reg-box">
       <form id="regForm" action="personal_information_action.php" method="post" enctype="multipart/form-data" onSubmit="return validation();">
 <?php
