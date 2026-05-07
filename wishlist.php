@@ -21,6 +21,7 @@ $totalCharge = 0;
                     LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
                     LEFT JOIN offers off ON off.Id = pf.OfferId
                     WHERE ap.`IsDeleted` = 0 AND wl.CustomerId = $Id AND wl.Favorite = 1";
+                    // var_dump($select);
 
 $check = mysqli_query($conn,$select);
 $count = mysqli_num_rows($check);

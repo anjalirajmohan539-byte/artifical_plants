@@ -154,7 +154,8 @@ include('footer.php');
   function wishlist(productId,rowId)
   {
     var customer = document.getElementById('customer').value;
-
+alert(productId);
+alert(customer);
     $.ajax({
       type:"GET",
       url:"wishlist_action.php",

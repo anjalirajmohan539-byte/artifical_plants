@@ -119,13 +119,6 @@ body {
     margin-bottom: 5px;
 }
 
-.btn
-{
-    border: none;
-    color: red !important;
-
-}
-
 
 #qty
 {
@@ -144,12 +137,37 @@ body {
     margin-top: 20px;
 }
 
-.actions button {
+.btn1 {
     margin-right: 10px;
     padding:5px 8px;
     border:none;
     background: none;
     color: green;
+    cursor: pointer;
+}
+
+.btn1:disabled
+{
+    color:#7a7a7a;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn2 {
+    margin-right: 10px;
+    padding:5px 8px;
+    border:none;
+    background: none;
+    color: red;
+    cursor: pointer;
+}
+
+.btn3 {
+    margin-right: 10px;
+    padding:5px 8px;
+    border:none;
+    background: none;
+    color: #1a6aeb;
     cursor: pointer;
 }
 

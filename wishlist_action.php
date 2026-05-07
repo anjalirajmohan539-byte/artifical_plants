@@ -1,13 +1,13 @@
 <?php
 include('database.php');
 
-$productId = isset($_GET['pId']) ? $_GET['pId'] : '';
-$customerId = isset($_GET['customer']) ? $_GET['customer'] : '';
+echo $productId = isset($_GET['pId']) ? $_GET['pId'] : 0;
+echo $customerId = isset($_GET['customer']) ? $_GET['customer'] : 0;
 $rowId = isset($_GET['rId']) ? $_GET['rId'] : '';
 
 
 $selectQuere = "SELECT `Id` FROM `wishlist` WHERE `ProductId` = $productId  AND `CustomerId` = $customerId  AND `IsDelete` = 0";
-// var_dump($selectQuere);
+var_dump($selectQuere);
 $check = mysqli_query($conn,$selectQuere);
 
 if(mysqli_num_rows($check)>0)
@@ -20,23 +20,30 @@ if(mysqli_num_rows($check)>0)
 
     if (mysqli_num_rows($check2) > 0) {
 
-        $update1 = "UPDATE `wishlist` SET `Favorite`=0 WHERE Id=$rowId";
+        $update1 = "UPDATE `wishlist` SET `Favorite`= 0 WHERE Id=$rowId";
         if (mysqli_query($conn, $update1)) {
             echo "Favourate deleted";
         }
     } else {
 
-        $update = "UPDATE `wishlist` SET `Favorite`=1 WHERE Id=$rowId";
+        $update = "UPDATE `wishlist` SET `Favorite`= 1 WHERE Id=$rowId";
         if (mysqli_query($conn, $update)) {
             echo "Favourate readded";
         }
     }
 } else {
+    if($productId > 0 && $customerId > 0)
+        {
     $query = "INSERT INTO `wishlist` (`CustomerId`, `ProductId`) VALUES ($customerId,$productId)";
     if (!mysqli_query($conn, $query)) {
 
         echo "error";
     }
+    }
 }
 
 ?>
+
+<script>
+    // window.history.back();
+</script>

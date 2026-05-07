@@ -16,9 +16,10 @@ $totalCharge = 0;
 <main class="container">
     <!-- LEFT SIDE CART ITEMS -->
      <?php
-         $details = "SELECT ap.`Id`, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`, off.`DiscountType`,ca.Count, 
+         $details = "SELECT ap.`Id` AS ProductId, wl.Id AS wishlistId, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`, off.`DiscountType`,ca.Count, 
                     `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount`,pa.Name AS `Availability` FROM `add_product` ap
                     LEFT JOIN cart ca ON ca.ProductId = ap.Id
+                    LEFT JOIN wishlist wl ON wl.ProductId = ap.Id
                     LEFT JOIN product_availability pa ON pa.Id = ap.Availability
                     LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
                     LEFT JOIN offers off ON off.Id = pf.OfferId
@@ -57,7 +58,8 @@ $totalCharge = 0;
                     {  
                         $price = $deta['Price'];
 $countQty = $deta['Count'];
-
+$wishlsitId = $deta['wishlistId'];
+$ProductId = $deta['ProductId'];
 $discountType = $deta['DiscountType'] ?? null;
 $discountValue = $deta['DiscountValue'] ?? 0;
 $deliverCharge = $deta['Deliverycharge'] ?? 0;
@@ -79,6 +81,7 @@ if ($finalPrice < 0) {
 $itemTotalPrice = $price * $countQty;
 $itemDiscount = $discountAmount * $countQty;
 $itemDelivery = $deliverCharge * $countQty;
+$finalTotalPrice = $finalPrice * $countQty;
 
 // 👉 Add to totals
 $totalPrice += $itemTotalPrice;
@@ -93,18 +96,37 @@ $grandprice = $totalPrice - $totalDiscount + $totalCharge;
                 <h3><?php echo $deta['ProductName'];?></h3>
                 <p class="stock"><?php echo $deta['Availability'];?></p>
 
-                <p class="price">₹<?php echo $finalPrice * $countQty;?>  <span style="font-size:12px;text-decoration: line-through; color:#fb7474 ;padding-left:10px">₹<?php echo $price * $countQty;?></span></p>
+                <p class="price">
+    ₹<?php echo $finalTotalPrice; ?>
+
+    <?php if(($finalTotalPrice) != $itemTotalPrice){ ?>
+        <span style="font-size:12px;text-decoration: line-through; color:#fb7474; padding-left:10px">
+            ₹<?php echo $itemTotalPrice; ?>
+        </span>
+    <?php } ?>
+</p>
                 <p class="qty">
                     <select name="qty" id="qty">
                         <option value="1">Qty : <?php echo $deta['Count'];?></option>
                     </select>
                 </p>
                 <div class="actions">
-                    <form action="customer_cart_action.php" method="post">
+                    <!-- <form action="customer_cart_action.php" method="post">
                         <input type="hidden" name="cart" value="<?php echo $deta['Id'];?>">
-                    <a href="#"><button>Save for Later</button></a>
-                    <input type="button" value="Remove" name="btn" class="btn">
-                    </form>
+                        <input type="button" name="btn1" value="Save for Later" class="btn1">
+                        <input type="button" value="Remove" name="btn2" class="btn2">
+                        <input type="button" value="Buy This Now" name="btn3" class="btn3">
+                    </form> -->
+                <?php
+                // $wishlist = "SELECT ProductId FROM `wishlist` WHERE IsDelete = 0 AND CustomerId = $Id AND ProductId = $ProductId";
+                // // var_dump($wishlist);
+                // $check3 = mysqli_query($conn,$wishlist);
+
+                // $wishlistid = mysqli_num_rows($check3)>0;
+                ?>
+                    <a href="wishlist_action.php?pId=<?php echo $deta['ProductId']?>&customer=<?php echo $Id?>&rId=<?php echo $deta['wishlistId']?>"><button class="btn1" <?php if($deta['wishlistId'] != 0){echo "disabled";}?>><?php echo $deta['wishlistId'] ? "Item in Wishlist" : "Save for Later";?></button></a>
+                    <button class="btn2">Remove</button>
+                    <button class="btn3">Buy This Now</button>
                 </div>
             </div>
         </div>

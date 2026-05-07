@@ -123,10 +123,10 @@ a {
 {
 	padding-top:5px;
 	text-align: center;
-	background:#071d3c;
 	margin:0;
 	align-items:center;
 	justify-content: center;
+  background: linear-gradient(180deg, #124da1, #071d3c);
 }
 .menu a
 {
