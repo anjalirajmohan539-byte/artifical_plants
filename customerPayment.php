@@ -22,6 +22,7 @@ include('header.php');
     <!-- Middle Card Form -->
     <div class="card-form">
         <h4>Enter Details</h4>
+        <div class="button">
 <div id="card" class="payment-form">
   <h4>Enter Card Details</h4>
     <input type="text" placeholder="Card Number">
@@ -48,8 +49,8 @@ include('header.php');
     </div>
     <input type="text" placeholder="Enter UPI ID">
 </div>
-
-        <button onclick="payNow()">Pay ₹232</button>
+<button onclick="payNow()">Pay ₹232</button>
+</div>   
 
         <!-- GIFT CARD -->
 <div id="gift" class="payment-form hidden">

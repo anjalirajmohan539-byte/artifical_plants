@@ -111,19 +111,6 @@ $grandprice = $totalPrice - $totalDiscount + $totalCharge;
                     </select>
                 </p>
                 <div class="actions">
-                    <!-- <form action="customer_cart_action.php" method="post">
-                        <input type="hidden" name="cart" value="<?php echo $deta['Id'];?>">
-                        <input type="button" name="btn1" value="Save for Later" class="btn1">
-                        <input type="button" value="Remove" name="btn2" class="btn2">
-                        <input type="button" value="Buy This Now" name="btn3" class="btn3">
-                    </form> -->
-                <?php
-                // $wishlist = "SELECT ProductId FROM `wishlist` WHERE IsDelete = 0 AND CustomerId = $Id AND ProductId = $ProductId";
-                // // var_dump($wishlist);
-                // $check3 = mysqli_query($conn,$wishlist);
-
-                // $wishlistid = mysqli_num_rows($check3)>0;
-                ?>
                     <a href="wishlist_action.php?pId=<?php echo $deta['ProductId']?>&customer=<?php echo $Id?>&rId=<?php echo $deta['wishlistId']?>"><button class="btn1" <?php if($deta['wishlistId'] != 0){echo "disabled";}?>><?php echo $deta['wishlistId'] ? "Item in Wishlist" : "Save for Later";?></button></a>
                     <button class="btn2">Remove</button>
                     <button class="btn3">Buy This Now</button>

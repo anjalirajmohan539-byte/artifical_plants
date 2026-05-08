@@ -139,7 +139,7 @@ body {
     width: 100%;
     margin-top: 15px;
     padding: 12px;
-    background: #071d3c;
+    background:  linear-gradient(90deg, #124da1, #071d3c);
     border: none;
     color: white;
     font-size: 16px;
