@@ -3,10 +3,30 @@
 include('database.php');
 include('header.php');
 
-
 $totalPrice = 0;
 $totalDiscount = 0;
 $totalCharge = 0;
+
+
+
+if(isset($_POST['remove']) && $_SERVER["REQUEST_METHOD"] == "POST")
+    {
+        $customerId = $_POST['customerId'];
+        $rowId = $_POST['rowId'];
+
+        $removeUpdate = "UPDATE `cart` SET `Status`= 1 WHERE `CustomerId`= $customerId AND Id = $rowId";
+        // var_dump($removeUpdate);
+        $checkupdate = mysqli_query($conn,$removeUpdate);
+        if($checkupdate)
+            {
+                echo "<script>window.location.href='customer_cart.php'</script>";
+            }
+            else
+                {
+                    echo "error";
+                }
+    }
+
 ?>
 
 
@@ -16,7 +36,7 @@ $totalCharge = 0;
 <main class="container">
     <!-- LEFT SIDE CART ITEMS -->
      <?php
-         $details = "SELECT ap.`Id` AS ProductId, wl.Id AS wishlistId, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`, off.`DiscountType`,ca.Count, 
+         $details = "SELECT ap.`Id` AS ProductId, wl.Id AS wishlistId, ca.Id AS cartId, `ProductImage`, `ProductName`, `Description`,ap.`Price`, off.DiscountValue, sd.`Deliverycharge`, off.`DiscountType`,ca.Count, 
                     `ColorName`, `ColorCode`, `CategoryId`, `CategoryTypeId`, `MaterialId`, `MaterialTypeId`, `ProductCount`,pa.Name AS `Availability` FROM `add_product` ap
                     LEFT JOIN cart ca ON ca.ProductId = ap.Id
                     LEFT JOIN wishlist wl ON wl.ProductId = ap.Id
@@ -24,7 +44,7 @@ $totalCharge = 0;
                     LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
                     LEFT JOIN offers off ON off.Id = pf.OfferId
                     LEFT JOIN shipping_details sd ON sd.ProductId = ap.Id
-                    WHERE ap.`IsDeleted` = 0 AND ca.CustomerId = $Id";
+                    WHERE ca.`Status` = 0 AND ca.CustomerId = $Id";
                     // var_dump($details);
 
         $check2 = mysqli_query($conn,$details);
@@ -111,9 +131,12 @@ $grandprice = $totalPrice - $totalDiscount + $totalCharge;
                     </select>
                 </p>
                 <div class="actions">
+                    <form action="customer_cart.php" method="post">
                     <a href="wishlist_action.php?pId=<?php echo $deta['ProductId']?>&customer=<?php echo $Id?>&rId=<?php echo $deta['wishlistId']?>"><button class="btn1" <?php if($deta['wishlistId'] != 0){echo "disabled";}?>><?php echo $deta['wishlistId'] ? "Item in Wishlist" : "Save for Later";?></button></a>
-                    <button class="btn2">Remove</button>
-                    <button class="btn3">Buy This Now</button>
+                    <input type="hidden" name="customerId" id="customerId" value="<?php echo $Id;?>">
+                    <input type="hidden" name="rowId" id="rowId" value="<?php echo $deta['cartId'];?>">
+                    <button class="btn2" type="submit" name="remove" id="remove" onclick="return confirm('Are you sure to remove this product ?')">Remove</button>
+                    </form>
                 </div>
             </div>
         </div>

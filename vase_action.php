@@ -15,7 +15,7 @@ $check = mysqli_query($conn,$insert);
 
 if(!$check)
     {
-        echo $error;
+        echo 'error';
     }
     else
         {

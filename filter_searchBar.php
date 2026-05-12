@@ -22,7 +22,7 @@ if(isset($_SESSION['Id']) != "")
 //                 }
 
 
-$query = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, ca.ProductId, wl.ProductId AS wishlistproduct, wl.Favorite AS Heart, wl.Id AS RowId ,off.DiscountType, off.DiscountValue FROM add_product ap
+$query = "SELECT ap.Id, ap.ProductImage,ap.ProductName ,DeliveryDays, ap.Price, ca.ProductId, wl.ProductId AS wishlistproduct, wl.Favorite AS Heart, wl.Id AS RowId ,off.DiscountType, off.DiscountValue, ca.Status AS cartStatus FROM add_product ap
               left JOIN shipping_details sd ON sd.ProductId = ap.Id
               LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
               LEFT JOIN offers off ON off.Id = pf.Id
@@ -93,9 +93,9 @@ $days = $row['DeliveryDays'] ?? 4;
     $books_html .='   </path>';
   $books_html .='    </svg>';
   $books_html .='    <a href=';
-  $books_html .=($row['ProductId'] != "") ?  "customer_cart.php" : "vase_action.php?cartId=".($row['Id'])."&categoryId=".$categoryId;
+  $books_html .=($row['cartStatus'] == 0 && $row['ProductId'] != "") ?  "customer_cart.php" : "vase_action.php?cartId=".($row['Id'])."&categoryId=".$categoryId;
   $books_html .=' style="user-select: none;"><span class="button-text">';
-  $books_html .= ($row['ProductId'] != "") ? "Go To Cart" : "Add To Cart";
+  $books_html .= ($row['cartStatus'] == 0 && $row['ProductId'] != "") ? "Go To Cart" : "Add To Cart";
   $books_html .= '</span>';
   $books_html .= '</a>';
   $books_html .='   </button>';
