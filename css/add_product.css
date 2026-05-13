@@ -71,6 +71,7 @@ a {
       box-shadow: 0 4px 12px rgba(29,29,29,0.06);
       padding: 1rem;
       margin-bottom:1rem;
+      border-left: 6px solid #071d3c !important;
     }
 
     .avatar-preview{

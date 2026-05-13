@@ -1,122 +1,173 @@
-<?php
+<?php 
+include('database.php');
 include('header.php');
 ?>
+<link href="css/customerPayment.css" rel="stylesheet">
+    <div class="container main">
+        
+        <!-- LEFT COLUMN: Form Details -->
+        <main class="checkout-form">
 
-<link rel="stylesheet" href="css/customerPayment.css">
+            <!-- Shipping Address -->
+            <section class="card">
+                <h2 class="section-title"><span class="step-number">2</span> Shipping Address</h2>
+                    <div class="form-group">
+                        <label>First Name</label>
+                        <input type="text" placeholder="John">
+                    </div>
+                <div class="form-group">
+                    <label>Address</label>
+                    <input type="text" placeholder="123 Main St">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>City</label>
+                        <input type="text" placeholder="New York">
+                    </div>
+                    <div class="form-group">
+                        <label>State</label>
+                        <select>
+                            <option>New York</option>
+                            <option>California</option>
+                            <option>Texas</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>PIN Code</label>
+                        <input type="text" >
+                    </div>
+                    <div class="form-group">
+                        <label>Phone</label>
+                        <input type="tel">
+                    </div>
+                </div>
+            </section>
 
-<div class="container">
-    
-    <!-- Left Side -->
-    <div class="left-panel">
-        <h4>Complete Payment</h4>
 
-        <div class="payment-options">
-            <p class="active" onclick="showMethod('card')">💳 Credit / Debit / ATM Card</p>
-            <p onclick="showMethod('upi')">UPI</p>
-            <p onclick="showMethod('cod')">💵 Cash on Delivery</p>
-            <p onclick="showMethod('gift')">🎁 Have a Gift Card</p>
-            <p class="disabled" disabled>EMI</p>
-        </div>
+               <!-- RIGHT COLUMN: Order Summary -->
+        <aside class="order-summary">
+            <div class="card">
+                <h3 style="margin-bottom: 1.5rem;">Your Cart</h3>
+                
+                <div class="product-row">
+                    <img src="https://via.placeholder.com/80x80/3b82f6/ffffff?text=Item" alt="Product" class="product-img">
+                    <div class="product-info">
+                        <h4>Minimalist Wireless Headphones</h4>
+                        <p>Black / Matte Finish</p>
+                        <p style="margin-top: 0.25rem; font-weight: 500;">₹110.00</p>
+                    </div>
+                </div>
+
+                <div class="product-row" style="border-bottom: none; margin-bottom: 0.5rem;">
+                    <img src="https://via.placeholder.com/80x80/10b981/ffffff?text=Case" alt="Product" class="product-img">
+                    <div class="product-info">
+                        <h4>Hard Shell Travel Case</h4>
+                        <p>Fits all models</p>
+                        <p style="margin-top: 0.25rem; font-weight: 500;">₹18.00</p>
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="summary-item">
+                    <span class="text-gray">Subtotal</span>
+                    <span>₹128.00</span>
+                </div>
+                <div class="summary-item">
+                    <span class="text-gray">Shipping</span>
+                    <span>Free</span>
+                </div>
+                <div class="summary-item">
+                    <span class="text-gray">Taxes (Estimated)</span>
+                    <span>₹0.00</span>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="total-row">
+                    <span>Total</span>
+                    <span>USD ₹128.00</span>
+                </div>
+            </div>
+        </aside>
+        
+        </main>
+
+     
+            <!-- Payment -->
+            <section class="card">
+                <h2 class="section-title"><span class="step-number">3</span> Payment</h2>
+                
+                <div class="payment-tabs">
+                    <div class="tab active" onclick="switchTab('card')">Credit Card</div>
+                    <div class="tab" onclick="switchTab('paypal')">PayPal</div>
+                </div>
+
+                <!-- Credit Card Form -->
+                <div id="card-form">
+                    <div class="card-icons">
+                        <!-- Simple SVG placeholders for card icons -->
+                        <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="20" rx="2" fill="#E5E7EB"/><rect x="4" y="8" width="24" height="4" rx="1" fill="#9CA3AF"/></svg>
+                        <svg width="32" height="20" viewBox="0 0 32 20" fill="none" xmlns="http://www.w3.org/2000/svg"><rect width="32" height="20" rx="2" fill="#E5E7EB"/><circle cx="12" cy="10" r="5" fill="#9CA3AF"/><circle cx="20" cy="10" r="5" fill="#6B7280" fill-opacity="0.5"/></svg>
+                    </div>
+                    <div class="form-group">
+                        <label>Card Number</label>
+                        <input type="text" placeholder="0000 0000 0000 0000">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Expiration (MM/YY)</label>
+                            <input type="text" placeholder="MM/YY">
+                        </div>
+                        <div class="form-group">
+                            <label>Security Code (CVC)</label>
+                            <input type="text" placeholder="123">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Name on Card</label>
+                        <input type="text" placeholder="John Doe">
+                    </div>
+                </div>
+
+                <!-- PayPal Placeholder -->
+                <div id="paypal-form" style="display: none; text-align: center; padding: 2rem;">
+                    <p>You will be redirected to PayPal to complete your purchase securely.</p>
+                </div>
+
+                <button class="btn" style="margin-top: 1.5rem;">Pay Now • ₹128.00</button>
+                
+                <div class="secure-checkout">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+                    Transactions are secure and encrypted.
+                </div>
+            </section>
+
     </div>
+<?php
+include('footer.php');
+?>
+    <script>
+        // Simple script to toggle payment tabs
+        function switchTab(method) {
+            const cardForm = document.getElementById('card-form');
+            const paypalForm = document.getElementById('paypal-form');
+            const tabs = document.querySelectorAll('.tab');
 
-    <!-- Middle Card Form -->
-    <div class="card-form">
-        <h4>Enter Details</h4>
-        <div class="button">
-<div id="card" class="payment-form">
-  <h4>Enter Card Details</h4>
-    <input type="text" placeholder="Card Number">
-    <input type="text" placeholder="MM/YY">
-    <input type="text" placeholder="CVV">
-    </div>
-
-    <!-- COD -->
-<div id="cod" class="payment-form hidden">
-    <h4>Cash on Delivery</h4>
-    <p>No details required. Pay online now for safe and contactless delivery.</p>
-</div>
-
-<!-- UPI -->
-<div id="upi" class="payment-form hidden">
-    <h4>UPI</h4>
-    <div class="upi">
-    <input type="radio" class="upi" name="upi">
-    <h2>Google&nbsp;Pay</h2>
-    <input type="radio" class="upi" name="upi">
-    <h2>PhonePe</h2>
-    <input type="radio" class="upi" name="upi">
-    <h2>Paytm</h2>
-    </div>
-    <input type="text" placeholder="Enter UPI ID">
-</div>
-<button onclick="payNow()">Pay ₹232</button>
-</div>   
-
-        <!-- GIFT CARD -->
-<div id="gift" class="payment-form hidden">
-    <h4>Add New Gift Card</h4>
-    <input type="text" placeholder="Enter voucher number">
-    <input type="text" placeholder="Enter voucher PIN">
-    <button>Add Gift Card</button>
-</div>
-    </div>
-
-    <!-- Right Summary -->
-    <div class="summary">
-        <h4>Price Details</h4>
-
-        <p>MRP: ₹699</p>
-        <p>Platform Fee: ₹7</p>
-        <p class="discount">Discount: -₹474</p>
-
-        <hr>
-
-        <h3>Total: ₹232</h3>
-
-        <!-- <div class="cashback">5% Cashback Available</div> -->
-    </div>
-
-</div>
-<?php include('footer.php');?>
-
-<script>
-  function payNow() {
-    let card = document.getElementById("cardNumber").value;
-    let expiry = document.getElementById("expiry").value;
-    let cvv = document.getElementById("cvv").value;
-    let error = document.getElementById("cardError");
-
-    error.innerText = "";
-
-    if (card.length < 16) {
-        error.innerText = "Card number must be 16 digits";
-        return;
-    }
-
-    if (expiry === "") {
-        alert("Enter expiry date");
-        return;
-    }
-
-    if (cvv.length !== 3) {
-        alert("Invalid CVV");
-        return;
-    }
-
-    alert("Payment Successful!");
-}
-</script>
-
-<script>
-  function showMethod(method) {
-
-    // hide all forms
-    let forms = document.querySelectorAll('.payment-form');
-    forms.forEach(form => form.classList.add('hidden'));
-
-    // show selected form
-    document.getElementById(method).classList.remove('hidden');
-}
-</script>
+            if (method === 'card') {
+                cardForm.style.display = 'block';
+                paypalForm.style.display = 'none';
+                tabs[0].classList.add('active');
+                tabs[1].classList.remove('active');
+            } else {
+                cardForm.style.display = 'none';
+                paypalForm.style.display = 'block';
+                tabs[0].classList.remove('active');
+                tabs[1].classList.add('active');
+            }
+        }
+    </script>
 </body>
 </html>

@@ -93,7 +93,7 @@ $days = $row['DeliveryDays'] ?? 4;
     $books_html .='   </path>';
   $books_html .='    </svg>';
   $books_html .='    <a href=';
-  $books_html .=($row['cartStatus'] == 0 && $row['ProductId'] != "") ?  "customer_cart.php" : "vase_action.php?cartId=".($row['Id'])."&categoryId=".$categoryId;
+  $books_html .=($row['cartStatus'] == 0 && $row['ProductId'] != "") ?  "customer_cart.php" : "vase_action.php?cartId=".($row['Id'])."&categoryId=".$categoryId."&productId=".($row['Id']);
   $books_html .=' style="user-select: none;"><span class="button-text">';
   $books_html .= ($row['cartStatus'] == 0 && $row['ProductId'] != "") ? "Go To Cart" : "Add To Cart";
   $books_html .= '</span>';
