@@ -168,8 +168,8 @@ a {
         }
 
         .tab.active {
-            color: var(--primary-color);
-            border-bottom-color: var(--primary-color);
+            color:#124da1;
+            border-bottom-color: #124da1
         }
 
         .card-icons {
@@ -221,7 +221,7 @@ a {
 
         .divider {
             border-top: 1px dashed var(--border-color);
-            margin: 1.5rem 0;
+            margin: 0.5rem 0;
         }
 
         .total-row {
@@ -237,7 +237,7 @@ a {
             display: block;
             width: 100%;
             padding: 1rem;
-            background-color: var(--primary-color);
+            background: linear-gradient(90deg, #124da1, #071d3c);
             color: white;
             border: none;
             border-radius: var(--radius);
@@ -249,7 +249,8 @@ a {
         }
 
         .btn:hover {
-            background-color: #071d3c;
+            background: linear-gradient(90deg, #071d3c , #124da1);
+            color: white;
         }
 
         .secure-checkout {
