@@ -126,7 +126,7 @@ if(mysqli_num_rows($check)>0)
              if (isset($_POST['btn']))
             {
              $days = $_POST['DeliveryDays'];
-             mysqli_query($conn, "UPDATE `shipping_details` SET `DeliveryDays`=$days WHERE Id = $product");
+             mysqli_query($conn, "UPDATE `shipping_details` SET `DeliveryDays`=$days WHERE Id = $product_id");
             }
             ?>
 
@@ -150,46 +150,6 @@ if(mysqli_num_rows($check)>0)
       </form>
         </div>
 
-            <!---------------------------------------------------- Payment Details ---------------------------------------------------->
-
-        <div class="card">
-          <div class="card-title">Payment Method Details</div>
-           <form action="paymentDetails_action.php" method="post">
-
-        <fieldset>
-            <label for="" class="Payment">Payment Method</label><br>
-          <div class="col-12"> 
-
-             <?php
-            $selectMethod = "SELECT pm.`Id`,ppm.Id AS productMethodId, `Name` FROM `payment_method` pm
-                             LEFT JOIN payment_product_method ppm ON ppm.PaymentMethodId = pm.Id AND ppm.IsDelete = 0 AND ppm.ProductId = $product_id
-                             WHERE pm.`IsDeleted` = 0";
-                             $product_method=1;
-            $check = mysqli_query($conn,$selectMethod);
-
-            if(mysqli_num_rows($check)>0)
-            {
-              while($method = mysqli_fetch_assoc($check))
-              {
- 
-            ?>
-           
-              <div class="col-10" style="width: 5.666667%;">
-                <input type="checkbox" name="ondelivery[]" id="ondelivery" value="<?php echo $method['Id'];?>" <?php echo $method['productMethodId'] != "" ? "Checked" : ""?>>    
-              </div>
-              <div class="col-2" style="width: 10.666667%;">
-              <h3 class="deliveryt" name="ondeliveryName"><?php echo $method['Name'];?></h3>
-              </div>
-          <?php   }
-            }?>
-            
-         </div> 
-        </fieldset>
-        <input type="hidden" name="proId" id="product" value="<?php echo $product_id;?>">
-        <button class="btn1" name="btn">Add</button>
-        
-      </form>
-        </div>
 
         <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
 

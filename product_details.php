@@ -228,54 +228,6 @@ $datas = mysqli_fetch_assoc($result);
 
 
 
-
-        
-
-
-        <!---------------------------------------------------- Payment Method ---------------------------------------------------->
-
-
-        <div class="card">
-            <div class="card-title" style="display: flex;justify-content: space-between">Payment Method
-             <?php
-                if($usertype == 1)
-                    {
-                ?>    
-            <s><a href="delivery_details.php?details=2&productId=<?php echo $product_id;?>&sectionId=ondelivery" title="Edit"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="black" class="bi bi-arrow-right" viewBox="0 0 16 16">
-  <path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8"/>
-</svg></a></s>
-<?php }?>
-</div>
-
-<!------- Return Days ------->
-
-<?php
-$pay = "SELECT pm.name AS `PaymentMethodId` FROM `payment_product_method`ppm 
-        INNER JOIN `payment_method`pm ON pm.Id = ppm.PaymentMethodId
-        WHERE ProductId = $product_id";
-
-$res = mysqli_query($conn, $pay);
-
-if(mysqli_num_rows($res)>0)
-{
-    while($pays = mysqli_fetch_assoc($res))
-    {
-
- 
-
-?>
-            <div class="delivery col-4">
-            <li><a href=""><?php echo $pays['PaymentMethodId']; ?></a></li>
-            </div>
-            <?php    }
-}?>
-        </div>
-
-
-
-
-
-
                 <!---------------------------------------------------- Delivery Details ---------------------------------------------------->
 
         <div class="card">

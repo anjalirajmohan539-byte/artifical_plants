@@ -11,7 +11,7 @@ $totalCharge = 0;
         
         <!-- LEFT COLUMN: Form Details -->
         <main class="checkout-form">
-
+<form action="customerPaymentAction.php" method="post">
             <!-- Shipping Address -->
             <section class="card">
                 <?php
@@ -25,33 +25,33 @@ $totalCharge = 0;
                         $details = mysqli_fetch_assoc($check);
                     
                 ?>
-                <h2 class="section-title"><span class="step-number">2</span> Shipping Address</h2>
+                <h2 class="section-title"><span class="step-number">1</span> Shipping Address</h2>
                     <div class="form-group">
                         <label>Full Name</label>
-                        <input type="text" value="<?php echo $details['FullName'];?>" disabled style="color: gray;">
+                        <input type="text" value="<?php echo $details['FullName'];?>" readonly style="color: gray;">
                     </div>
                 <div class="form-group">
                     <label>Address</label>
-                    <input type="text" value="<?php echo $details['Address'];?>" disabled style="color: gray;">
+                    <input type="text" value="<?php echo $details['Address'];?>" readonly style="color: gray;">
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>City</label>
-                        <input type="text" value="<?php echo $details['City'];?>" disabled style="color: gray;">
+                        <input type="text" value="<?php echo $details['City'];?>" readonly style="color: gray;">
                     </div>
                     <div class="form-group">
                         <label>State</label>
-                        <input type="text" value="<?php echo $details['State'];?>" disabled style="color: gray;">
+                        <input type="text" value="<?php echo $details['State'];?>" readonly style="color: gray;">
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label>PIN Code</label>
-                        <input type="text" value="<?php echo $details['PinCode'];?>" disabled style="color: gray;">
+                        <input type="text" value="<?php echo $details['PinCode'];?>" readonly style="color: gray;">
                     </div>
                     <div class="form-group">
                         <label>Phone</label>
-                        <input type="tel" value="<?php echo $details['PhoneNo'];?>" disabled style="color: gray;">
+                        <input type="tel" value="<?php echo $details['PhoneNo'];?>" readonly style="color: gray;">
                     </div>
                 </div>
                 <?php }?>
@@ -60,14 +60,14 @@ $totalCharge = 0;
 
                <!-- RIGHT COLUMN: Order Summary -->
         
-            <div class="card">
+            <div class="card" style="margin-top: 50px;">
                 <?php
 
                     $totalPrice = 0;
                     $totalDiscount = 0;
                     $totalCharge = 0;
                     
-                    $selectcart = "SELECT ap.`Id` AS ProductId, ca.Id AS cartId, ap.`Price`, off.DiscountValue, sd.`Deliverycharge`, off.`DiscountType`, ca.Count
+                    $selectcart = "SELECT ap.`Id` AS ProductId, ca.Id AS cartId, ap.`Price`, off.DiscountValue, sd.Id AS shippingDetailsId, sd.`Deliverycharge`, off.`DiscountType`, ca.Count
                                    FROM `add_product` ap
             LEFT JOIN cart ca ON ca.ProductId = ap.Id
             LEFT JOIN product_availability pa ON pa.Id = ap.Availability
@@ -86,6 +86,7 @@ if($count > 0)
     while($deta = mysqli_fetch_assoc($check2))
     {
 
+    $shippingDetailsId = $deta['shippingDetailsId'];
         $price = $deta['Price'];
         $countQty = $deta['Count'];
 
@@ -123,7 +124,8 @@ if($count > 0)
 ?>
 
     <h3 style="margin-bottom: 1.5rem;">Amount</h3>
-
+<input type="hidden" name="totalprice" value="<?php echo $grandprice;?>">
+<input type="hidden" name="shippingDetailsId" value="<?php echo $shippingDetailsId;?>">
     <div class="divider"></div>
 
     <div class="summary-item">
@@ -156,14 +158,14 @@ if($count > 0)
         </main>
             <!-- Payment -->
              <aside class="order-summary">
-                <form action="customerPaymentAction.php" method="post">
             <section class="card">
-                <h2 class="section-title"><span class="step-number">3</span> Payment</h2>
+                <h2 class="section-title"><span class="step-number">2</span> Payment</h2>
                 
                 <div class="payment-tabs">
-                    <div class="tab active" onclick="switchTab('card')">Credit Card</div>
-                    <div class="tab" onclick="switchTab('delivery')">Cash On Delivery</div>
-                    <div class="tab" onclick="switchTab('upi')">UPI</div>
+                    <div class="tab active" onclick="switchTab('card',1)">Credit Card</div>
+                    <div class="tab" onclick="switchTab('delivery',2)">Cash On Delivery</div>
+                    <div class="tab" onclick="switchTab('upi',3)">UPI</div>
+                    <input type="hidden" name="PaymentMethodId" id="PaymentMethodId">
                 </div>
 
                 <!-- Credit Card Form -->
@@ -178,8 +180,8 @@ if($count > 0)
                             <input type="text" name="exp" placeholder="MM/YY">
                         </div>
                         <div class="form-group">
-                            <label>Security Code (CVC)</label>
-                            <input type="text" name="cvc" placeholder="123">
+                            <label>Security Code (CVV)</label>
+                            <input type="text" name="cvv" placeholder="123">
                         </div>
                     </div>
                     <div class="form-group">
@@ -201,11 +203,6 @@ if($count > 0)
                 <input type="text" name="upiId" placeholder="example@upi">
                 </div>
 
-                <div class="form-group">
-                    <label>Account Holder Name</label>
-                <input type="text" placeholder="John Doe">
-                </div>
-
 </div>
 
                 <button class="btn" name="btn" style="margin-top: 1.5rem;">Pay Now   ₹<?php echo $grandprice;?>.00</button>
@@ -215,19 +212,22 @@ if($count > 0)
                     Transactions are secure and encrypted.
                 </div>
             </section>
-            </form>
+            
 </aside>
+</form>
     </div>
 <?php
 include('footer.php');
 ?>
     <script>
     // Payment tab switch script
-    function switchTab(method) {
+    switchTab('card', 1);
+    function switchTab(method, PaymentMethodId) {
 
         const cardForm = document.getElementById('card-form');
         const deliveryForm = document.getElementById('delivery-form');
         const upiForm = document.getElementById('upi-form');
+        document.getElementById('PaymentMethodId').value = PaymentMethodId;
 
         const tabs = document.querySelectorAll('.tab');
 
