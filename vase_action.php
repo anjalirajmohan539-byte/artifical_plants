@@ -15,7 +15,7 @@ $cartId    = $_GET['cartId'];
 $productId = $_GET['productId'];
 $category  = $_GET['categoryId'];
 
-$select = "SELECT `Id`,`Status` FROM `cart` WHERE `IsDeleted` = 0 AND `ProductId` = $productId  AND `CustomerId` = $customerId";
+$select = "SELECT `Id`,`Status` FROM `cart` WHERE `ProductId` = $productId  AND `CustomerId` = $customerId";
 var_dump($select);
 $checkselect = mysqli_query($conn, $select);
 
@@ -41,7 +41,7 @@ if(mysqli_num_rows($checkselect) > 0)
 }
 else
 {
-    $insert = "INSERT INTO `cart`(`ProductId`, `CustomerId`, `Status`) VALUES ($productId, $customerId, 0)";
+    $insert = "INSERT INTO `cart`(`ProductId`, `CustomerId`, `Status`) VALUES ($productId, $customerId, 1)";
     $check = mysqli_query($conn, $insert);
 
     if(!$check)

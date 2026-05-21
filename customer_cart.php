@@ -14,7 +14,7 @@ if(isset($_POST['remove']) && $_SERVER["REQUEST_METHOD"] == "POST")
         $customerId = $_POST['customerId'];
         $rowId = $_POST['rowId'];
 
-        $removeUpdate = "UPDATE `cart` SET `Status`= 1 WHERE `CustomerId`= $customerId AND Id = $rowId";
+        $removeUpdate = "UPDATE `cart` SET `Status`= 0 WHERE `CustomerId`= $customerId AND Id = $rowId";
         // var_dump($removeUpdate);
         $checkupdate = mysqli_query($conn,$removeUpdate);
         if($checkupdate)
@@ -44,7 +44,7 @@ if(isset($_POST['remove']) && $_SERVER["REQUEST_METHOD"] == "POST")
                     LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
                     LEFT JOIN offers off ON off.Id = pf.OfferId
                     LEFT JOIN shipping_details sd ON sd.ProductId = ap.Id
-                    WHERE ca.`Status` = 0 AND ca.CustomerId = $Id";
+                    WHERE ca.`Status` = 1 AND ca.CustomerId = $Id AND ca.IsDeleted = 0";
                     // var_dump($details);
 
         $check2 = mysqli_query($conn,$details);

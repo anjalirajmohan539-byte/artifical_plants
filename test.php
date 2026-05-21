@@ -18,55 +18,120 @@ $totalPrice        = $_POST['totalprice'];
 $cardNumber = isset($_POST['cardno']) ? $_POST['cardno'] : NULL;
 $validDate  = isset($_POST['exp']) ? $_POST['exp'] : NULL;
 $cvv        = isset($_POST['cvv']) ? $_POST['cvv'] : NULL;
-$upiId      = isset($_POST['upiId']) ? $_POST['upiId'] : NULL;
+$upiId      = isset($_POST['upi']) ? $_POST['upi'] : NULL;
 
-$orderNo = "ORD".rand(1000,9999);
+$date = date("Y-m-d");
+$status = "Pending";
 
-$insertPayment = "INSERT INTO `payment_details`(`CustomerId`, `ShippingDetailsId`, `OrderNo`, `PaymentMethodId`, `CardNumber`, `ValidDate`, `CVV`, `UPIId`, `TotalPrice`, `IsDeleted`) 
-                  VALUES($customerId,$shippingDetailsId,$orderNo,$paymentMethodId,$cardNumber,'$validDate',$cvv,'$upiId',$totalPrice,0)";
 
-if(mysqli_query($conn, $insertPayment))
+
+/* ======================================================
+   1. INSERT QUERY IN payment_details TABLE
+====================================================== */
+
+$paymentQuery = "
+INSERT INTO payment_details
+(
+    customer_id,
+    payment_method_id,
+    card_number,
+    expiry_date,
+    cvv,
+    upi_id,
+    total_amount,
+    payment_date,
+    status
+)
+VALUES
+(
+    '$customerId',
+    '$paymentMethodId',
+    '$cardNumber',
+    '$validDate',
+    '$cvv',
+    '$upiId',
+    '$totalPrice',
+    '$date',
+    '$status'
+)";
+
+mysqli_query($conn, $paymentQuery);
+
+$paymentId = mysqli_insert_id($conn);
+
+
+
+/* ======================================================
+   2. SELECT QUERY IN cart TABLE
+====================================================== */
+
+$cartQuery = "
+SELECT * FROM cart
+WHERE customer_id = '$customerId'
+AND status = 'Cart'
+";
+
+$cartResult = mysqli_query($conn, $cartQuery);
+
+
+
+/* ======================================================
+   3. INSERT QUERY IN order_items TABLE
+====================================================== */
+
+while($cartData = mysqli_fetch_assoc($cartResult))
 {
-    
-    $paymentDetailsId = mysqli_insert_id($conn);
+    $productId = $cartData['product_id'];
+    $quantity  = $cartData['quantity'];
+    $price     = $cartData['price'];
+    $subtotal  = $quantity * $price;
 
-    $selectCart = "SELECT * FROM `cart` WHERE `CustomerId` = $customerId AND `IsDeleted` = 0";
-    $cartResult = mysqli_query($conn, $selectCart);
+    $orderQuery = "
+    INSERT INTO order_items
+    (
+        customer_id,
+        shipping_details_id,
+        payment_id,
+        product_id,
+        quantity,
+        price,
+        subtotal,
+        order_date,
+        order_status
+    )
+    VALUES
+    (
+        '$customerId',
+        '$shippingDetailsId',
+        '$paymentId',
+        '$productId',
+        '$quantity',
+        '$price',
+        '$subtotal',
+        '$date',
+        'Ordered'
+    )";
 
-    while($cart = mysqli_fetch_assoc($cartResult))
-    {
-        $productId    = $cart['ProductId'];
-        $productCount = $cart['Count'];
-
-        $selectProduct = "SELECT `Price` FROM `add_product` WHERE `Id` = $productId";
-        $productResult = mysqli_query($conn, $selectProduct);
-        $productData   = mysqli_fetch_assoc($productResult);
-
-        $price = $productData['Price'];
-
-        $itemTotal = $price * $productCount;
-
-        $insertOrderItems = "INSERT INTO `order_items` (`PaymentDetailsId`,`ProductId`,`ProductCount`,`TotalPrice`,`IsDeleted`)
-                             VALUES($paymentDetailsId,$productId,$productCount,$itemTotal,0)";
-         mysqli_query($conn, $insertOrderItems);
-    }
-
-    // Optional: clear cart
-    $updateCart = "UPDATE `cart`
-                   SET `IsDeleted` = 1
-                   WHERE `CustomerId` = $customerId";
-
-    mysqli_query($conn, $updateCart);
-
-    echo "<script>
-            alert('Order Placed Successfully');
-            window.location='index.php';
-          </script>";
+    mysqli_query($conn, $orderQuery);
 }
-else
-{
-    echo "Payment Insert Failed";
-}
+
+
+
+/* ======================================================
+   4. UPDATE QUERY IN cart TABLE
+====================================================== */
+
+$updateCart = "
+UPDATE cart
+SET status = 'Ordered'
+WHERE customer_id = '$customerId'
+AND status = 'Cart'
+";
+
+mysqli_query($conn, $updateCart);
+
+echo "Order Placed Successfully";
+
 ?>
 
 

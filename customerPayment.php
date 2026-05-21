@@ -67,15 +67,16 @@ $totalCharge = 0;
                     $totalDiscount = 0;
                     $totalCharge = 0;
                     
-                    $selectcart = "SELECT ap.`Id` AS ProductId, ca.Id AS cartId, ap.`Price`, off.DiscountValue, sd.Id AS shippingDetailsId, sd.`Deliverycharge`, off.`DiscountType`, ca.Count
+                    $selectcart = "SELECT ap.`Id` AS ProductId, ca.Id AS cartId, ap.`Price`, off.DiscountValue, dcd.Id AS shippingDetailsId, sd.`Deliverycharge`, off.`DiscountType`, ca.Count
                                    FROM `add_product` ap
-            LEFT JOIN cart ca ON ca.ProductId = ap.Id
-            LEFT JOIN product_availability pa ON pa.Id = ap.Availability
-            LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
-            LEFT JOIN offers off ON off.Id = pf.OfferId
-            LEFT JOIN shipping_details sd ON sd.ProductId = ap.Id
-            WHERE ca.`Status` = 0 
-            AND ca.CustomerId = $Id";
+                                   LEFT JOIN cart ca ON ca.ProductId = ap.Id
+                                   LEFT JOIN product_availability pa ON pa.Id = ap.Availability
+                                   LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+                                   LEFT JOIN offers off ON off.Id = pf.OfferId
+                                   LEFT JOIN shipping_details sd ON sd.ProductId = ap.Id
+                                   LEFT JOIN delivery_customer_details dcd ON dcd.Customer_Id = ca.CustomerId
+                                   WHERE ca.`Status` = 1 
+                                   AND ca.CustomerId = $Id AND dcd.Status = 0";
 
 $check2 = mysqli_query($conn,$selectcart);
 

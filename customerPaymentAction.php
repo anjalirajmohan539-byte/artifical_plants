@@ -22,15 +22,34 @@ $upiId      = isset($_POST['upiId']) ? $_POST['upiId'] : NULL;
 
 $orderNo = "ORD".rand(1000,9999);
 
-$insertPayment = "INSERT INTO `payment_details`(`CustomerId`, `ShippingDetailsId`, `OrderNo`, `PaymentMethodId`, `CardNumber`, `ValidDate`, `CVV`, `UPIId`, `TotalPrice`, `IsDeleted`) 
-                  VALUES($customerId,$shippingDetailsId,$orderNo,$paymentMethodId,$cardNumber,'$validDate',$cvv,'$upiId',$totalPrice,0)";
-var_dump($insertPayment);
+$insertPayment = "INSERT INTO `payment_details`(`CustomerId`, `ShippingDetailsId`, `OrderNo`,`PaymentMethodId`,`CardNumber`,`ValidDate`,`CVV`,`UPIId`,`TotalPrice`)
+VALUES
+(
+    $customerId,
+    $shippingDetailsId,
+    '$orderNo',
+    $paymentMethodId,
+    '$cardNumber',
+    '$validDate',
+    '$cvv',
+    '$upiId',
+    $totalPrice
+)";
+
+// echo $insertPayment;
+
 if(mysqli_query($conn, $insertPayment))
 {
-    
     $paymentDetailsId = mysqli_insert_id($conn);
 
-    $selectCart = "SELECT * FROM `cart` WHERE `CustomerId` = $customerId AND `IsDeleted` = 0";
+    $selectCart = "
+    SELECT *
+    FROM `cart`
+    WHERE `CustomerId` = $customerId
+    AND `IsDeleted` = 0";
+
+    // echo $selectCart;
+
     $cartResult = mysqli_query($conn, $selectCart);
 
     while($cart = mysqli_fetch_assoc($cartResult))
@@ -38,31 +57,50 @@ if(mysqli_query($conn, $insertPayment))
         $productId    = $cart['ProductId'];
         $productCount = $cart['Count'];
 
-        $selectProduct = "SELECT `Price` FROM `add_product` WHERE `Id` = $productId";
+        $selectProduct = "
+        SELECT `Price`
+        FROM `add_product`
+        WHERE `Id` = $productId";
+
         $productResult = mysqli_query($conn, $selectProduct);
         $productData   = mysqli_fetch_assoc($productResult);
 
         $price = $productData['Price'];
 
-        $insertOrderItems = "INSERT INTO `order_items` (`PaymentDetailsId`,`ProductId`,`ProductCount`,`TotalPrice`,`IsDeleted`)
-                             VALUES($paymentDetailsId,$productId,$productCount,$price,0)";
-         mysqli_query($conn, $insertOrderItems);
+        $itemTotal = $price * $productCount;
+
+
+        $insertOrderItems = "
+        INSERT INTO `order_items`
+        (
+            `PaymentDetailsId`,
+            `ProductId`,
+            `ProductCount`,
+            `TotalPrice`
+        )
+        VALUES
+        (
+            $paymentDetailsId,
+            $productId,
+            $productCount,
+            $itemTotal
+        )";
+
+        mysqli_query($conn, $insertOrderItems);
+
+        $updateCart = "
+        UPDATE `cart`
+        SET `IsDeleted` = 0,`Status` = 0
+        WHERE `CustomerId` = $customerId
+        AND `ProductId` = $productId";
+
+        mysqli_query($conn, $updateCart);
     }
 
-    // Optional: clear cart
-    $updateCart = "UPDATE `cart`
-                   SET `IsDeleted` = 1
-                   WHERE `CustomerId` = $customerId";
-
-    mysqli_query($conn, $updateCart);
-
-    echo "<script>
-            alert('Order Placed Successfully');
-            window.location='index.php';
-          </script>";
+    echo "Order Placed Successfully";
 }
 else
 {
-    echo "Payment Insert Failed";
+    echo "Payment Failed";
 }
 ?>
