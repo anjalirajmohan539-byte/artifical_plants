@@ -1,19 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Successful | Order #ORD-7782</title>
-    <!-- Importing Inter font for a clean, modern look -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- FontAwesome for Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <style>
-        /* CSS Variables for easy theming */
-        :root {
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box; 
+	transition: 0.3s all;
+	font-family: 'Open Sans', sans-serif;
+}
+	   .col-1 {width: 8.333333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-2 {width: 16.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-3 {width: 25%; height: auto; float: left; padding: 15px;}
+	   .col-4 {width: 33.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-5 {width: 41.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-6 {width: 50%; height: auto; float: left; padding: 15px;}
+	   .col-7 {width: 58.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-8 {width: 66.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-9 {width: 75%; height: auto; float: left; padding: 15px;}
+	   .col-10 {width: 83.33333333333333%; height: auto; float: left; padding: 15px;}
+	   .col-11 {width: 91.66666666666667%; height: auto; float: left; padding: 15px;}
+	   .col-12 {width: 100%; height: auto; float: left; padding: 15px;}
+	   
+	   .container-fluid{ width: 100%; }
+	   
+	   .container{max-width:1100px;margin: auto;}
+	   
+	   .img-fluid{width: 100%; height:auto;}
+ 
+		.cl{clear:both;}
+a {
+  transition: 0.5s all;
+  -webkit-transition: 0.5s all;
+  -moz-transition: 0.5s all;
+  -o-transition: 0.5s all;
+  text-decoration: none;
+}   
+   
+   
+   
+   :root {
             --primary-color: #10B981; /* Green for success */
             --primary-dark: #059669;
             --secondary-color: #3B82F6; /* Blue for actions */
@@ -127,46 +149,24 @@
             color: var(--text-main);
         }
 
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.875rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.2s;
-            cursor: pointer;
+      .btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(90deg, #124da1, #071d3c);
+            color: white;
             border: none;
-            font-size: 0.95rem;
+            border-radius: var(--radius);
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+            text-align: center;
         }
 
-        .btn-primary {
-            background-color: var(--text-main);
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background-color: #000;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .btn-secondary {
-            background-color: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-main);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--text-muted);
-            background-color: #F9FAFB;
+        .btn:hover {
+            background: linear-gradient(90deg, #071d3c , #124da1);
+            color: white;
         }
 
         /* Right Column: Order Summary */
@@ -302,102 +302,3 @@
                 padding: 1.5rem;
             }
         }
-    </style>
-</head>
-<body>
-
-    <main>
-        
-
-        <section class="success-section">
-            <div class="icon-circle">
-                <i class="fa-solid fa-check"></i>
-            </div>
-            
-            <h1>Payment Successful!</h1>
-            <p class="subtitle">Thank you for your purchase. We have received your order.</p>
-            
-            <div class="order-number">
-                Order #ORD-7782-XJ
-            </div>
-
-            <p class="subtitle" style="font-size: 0.9rem; margin-bottom: 1.5rem;">
-                A confirmation email has been sent to <strong>alex@example.com</strong>.
-            </p>
-
-            <div class="action-buttons">
-                <a href="#" class="btn btn-secondary">
-                    <i class="fa-solid fa-arrow-left" style="margin-right: 8px;"></i> Continue Shopping
-                </a>
-            </div>
-        </section>
-
-
-        <aside class="order-summary">
-            <div class="summary-header">
-                <h2>Order Summary</h2>
-                <span style="font-size: 0.85rem; color: var(--text-muted);">Oct 24, 2023</span>
-            </div>
-
-            <div class="summary-items">
-
-                <div class="item">
-                    <img src="https://picsum.photos/seed/headphones/100/100" alt="Product" class="item-image">
-                    <div class="item-details">
-                        <span class="item-name">Noise Cancelling Headphones</span>
-                        <span class="item-meta">Color: Matte Black</span>
-                    </div>
-                    <span class="item-price">₹299.00</span>
-                </div>
-
-
-                <div class="item">
-                    <img src="https://picsum.photos/seed/stand/100/100" alt="Product" class="item-image">
-                    <div class="item-details">
-                        <span class="item-name">Headphone Stand</span>
-                        <span class="item-meta">Aluminum Alloy</span>
-                    </div>
-                    <span class="item-price">₹35.00</span>
-                </div>
-            </div>
-
-            <div class="divider"></div>
-
-            <div class="summary-row">
-                <span>Subtotal</span>
-                <span>₹.00</span>
-            </div>
-            <div class="summary-row">
-                <span>Shipping</span>
-                <span>₹.00</span>
-            </div>
-            <div class="summary-row">
-                <span>Discount (15)</span>
-                <span>₹.00</span>
-            </div>
-
-            <div class="summary-row total">
-                <span>Total Paid</span>
-                <span>₹.00</span>
-            </div>
-
-        </aside>
-
-    </main>
-
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2023 Milon Inc. All rights reserved.</p>
-    </footer>
-
-</body>
-</html>
-
-
-
-
-
-
-
-
-

@@ -411,34 +411,44 @@ document.getElementById("productImage").addEventListener("change", function () {
 </script>
 
 <script>
-document.getElementById("productForm").addEventListener("submit", function (e) {
-    if (!ValidationForm()) {
-        e.preventDefault();
-    }
-});
+
 
 
 
 /* ================= VALIDATION ================= */
 function ValidationForm() {
+ 
     let valid = true;
 
     // Get values
     let image = document.getElementById("productImage").files[0];
-    let oldimage = document.getElementById("oldimage").files[0];
+    
+    let oldimage = document.getElementById("oldimage").value;
+     
     let name = document.getElementById("productName").value.trim();
+    
     let type = document.getElementById("productType").value;
+    
     let typeCategory = document.getElementById("typeCategory").value;
+    
     let price = document.getElementById("productPrice").value;
+    
     let count = document.getElementById("productcount").value;
+    
     let material = document.getElementById("productMaterials").value;
+    
     let category = document.getElementById("productCategory").value;
+    
     let description = document.getElementById("description").value;
+    
     let color = document.getElementById("color").value.trim();
+    
     let code = document.getElementById("code").value.trim();
+    
 
     // Clear old errors
     document.querySelectorAll(".error, #imgErr, #nameErr, #typeErr, #descErr").forEach(el => el.innerText = "");
+    
 
     /* Image */
     if (!image) {
@@ -446,6 +456,7 @@ function ValidationForm() {
         document.getElementById("productImage").style.border = "1px solid red";
         valid = false;
     }
+    
 
      /* Image */
     if (!oldimage) {
@@ -495,8 +506,9 @@ function ValidationForm() {
         document.getElementById("description").style.border = "1px solid red";
         valid = false;
     }
-
+alert(valid);
     return valid;
+    
 }
 
 </script>

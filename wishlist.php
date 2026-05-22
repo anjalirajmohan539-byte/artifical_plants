@@ -69,7 +69,7 @@ if(mysqli_num_rows($check)>0)
     while($details = mysqli_fetch_assoc($check))
       {
 
-        $date = new DateTime();
+        $date = new DateTime($details['CreateDate']);
            $price = $details['Price'];
 
 $discountType = $details['DiscountType'] ?? null;

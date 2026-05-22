@@ -88,16 +88,11 @@ if(mysqli_query($conn, $insertPayment))
 
         mysqli_query($conn, $insertOrderItems);
 
-        $updateCart = "
-        UPDATE `cart`
-        SET `IsDeleted` = 0,`Status` = 0
-        WHERE `CustomerId` = $customerId
-        AND `ProductId` = $productId";
-
+        $updateCart = "UPDATE `cart` SET `IsDeleted` = 0,`Status` = 0 WHERE `CustomerId` = $customerId AND `ProductId` = $productId";
         mysqli_query($conn, $updateCart);
     }
 
-    echo "Order Placed Successfully";
+    header('location:paymentSuccessfullPage.php');
 }
 else
 {
