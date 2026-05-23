@@ -92,7 +92,7 @@ if(mysqli_query($conn, $insertPayment))
         mysqli_query($conn, $updateCart);
     }
 
-    header('location:paymentSuccessfullPage.php');
+    header("location:paymentSuccessfullPage.php?paymentproduct=$paymentDetailsId");
 }
 else
 {

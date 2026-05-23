@@ -1,5 +1,8 @@
 <?php
 include('database.php');
+
+        $paymentId = intval($_GET['paymentproduct']);
+
 ?>
 
 <!DOCTYPE html>
@@ -22,22 +25,20 @@ include('database.php');
                 <i class="fa-solid fa-check"></i>
             </div>
              <?php
-        $select = "SELECT `ProductImage`, `ProductName`,ap. `Price`, `MaterialTypeId`, pd.OrderNo, pd.CreateDate, cd.Email, sd.Deliverycharge, off.DiscountValue, off.DiscountType  FROM `add_product` ap
-                    LEFT JOIN shipping_details sd ON sd.ProductId = ap.Id
-                    LEFT JOIN payment_details pd ON pd.ShippingDetailsId = sd.Id
-                    LEFT JOIN order_items ot ON ot.PaymentDetailsId = pd.Id
-                    LEFT JOIN product_offers po ON po.ProductId = ap.Id
-                    LEFT JOIN offers off ON off.Id = po.OfferId
-                    LEFT JOIN customer_details cd ON cd.CustomerId = pd.CustomerId
-                   WHERE ap.`IsDeleted` = 0 AND ot.ProductId = 2";
 
-        $check = mysqli_query($conn,$select);
+             $totalCharge = 0;
+             $totalDiscount = 0;
+             $totalPrice = 0;
+        
+                //    var_dump($select);
+$select1 = "SELECT  `OrderNo`, `Email`  FROM `payment_details` pd
+            INNER JOIN customer_details cd ON cd.CustomerId = pd.CustomerId
+            WHERE cd.Status = 1";
+        $check = mysqli_query($conn,$select1);
 
         if(mysqli_num_rows($check)>0)
             {
                 $data = mysqli_fetch_assoc($check);
-
-                 $date = new DateTime($data['CreateDate']);
         ?>
             <h1>Payment Successful!</h1>
             <p class="subtitle">Thank you for your purchase. We have received your order.</p>
@@ -51,26 +52,40 @@ include('database.php');
             </p>
 
             <button class="btn" name="btn" style="margin-top: 1.5rem;">←&emsp;Continue Shopping</button>
-
+<?php }?>
         </section>
 
 
         <aside class="order-summary">
             <div class="summary-header">
                 <h2>Order Summary</h2>
-                <span style="font-size: 0.85rem; color: var(--text-muted);"><?php echo $date->format('M d,Y');?></span>
+                <span style="font-size: 0.85rem; color: var(--text-muted);"></span>
             </div>
 
             <div class="summary-items">
                 <?php
-                while($details = mysqli_fetch_assoc($check))
+                $select = "SELECT `ProductImage`, `ProductName`,ap. `Price`,mt.Name AS `MaterialTypeId`, pd.OrderNo,  DATE_FORMAT(pd.CreateDate, '%M %d,%Y') AS createDate, ifnull(sd.Deliverycharge,0) AS DeliveryCharge, ifnull(off.DiscountValue,0) AS DiscountValue
+FROM `order_items` ot
+                    INNER JOIN add_product ap ON ap.Id = ot.ProductId
+                    INNER JOIN material_type mt ON mt.Id = ap.MaterialTypeId
+                    INNER JOIN payment_details pd ON pd.Id = ot.PaymentDetailsId
+                    LEFT JOIN shipping_details sd ON sd.ProductId = ap.Id
+                    LEFT JOIN product_offers pf ON pf.ProductId = ap.Id
+                    LEFT JOIN offers off ON off.Id = pf.OfferId
+                   WHERE ap.`IsDeleted` = 0 AND pd.Id = $paymentId"; 
+                   
+                   $check1 = mysqli_query($conn,$select);
+
+                   if(mysqli_num_rows($check1)>0)
+                    {
+                while($details = mysqli_fetch_assoc($check1))
                     {
                        
                            $price = $details['Price'];
 
                            $discountType = $details['DiscountType'] ?? null;
                         $discountValue = $details['DiscountValue'] ?? 0;
-                        $deliverCharge = $details['Deliverycharge'] ?? 0;
+                        $deliverCharge = $details['DeliveryCharge'] ?? 0;
 
                         if ($discountType == "Percentage") 
                             {
@@ -106,35 +121,36 @@ $grandprice = $totalPrice - $totalDiscount + $totalCharge;
                     </div>
                     <span class="item-price">₹<?php echo $details['Price'];?></span>
                 </div>
+                <?php }?>
             </div>
 
             <div class="divider"></div>
 
             <div class="summary-row">
                 <span>Subtotal</span>
-                <span>₹.00</span>
+                <span>₹<?php echo number_format($totalPrice, 2)?></span>
             </div>
             <div class="summary-row">
                 <span>Shipping</span>
-                <span>₹.00</span>
+                <span>₹<?php echo number_format($totalCharge, 2)?></span>
             </div>
             <div class="summary-row">
-                <span>Discount (15)</span>
-                <span>₹.00</span>
+                <span>Discount</span>
+                <span>₹<?php echo number_format($totalDiscount, 2)?></span>
             </div>
 
             <div class="summary-row total">
                 <span>Total Paid</span>
-                <span>₹.00</span>
+                <span>₹<?php echo number_format($grandprice, 2)?></span>
             </div>
-
+<?php }?>
         </aside>
-<?php }}?>
+
     </main>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 Milon Inc. All rights reserved.</p>
+        <p>&copy; 2026 Milon Inc. All rights reserved.</p>
     </footer>
 
 </body>
