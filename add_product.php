@@ -41,6 +41,15 @@ include('sidebar.php');
   <!-- Main area -->
   <main class="flex-grow-1">
     <div class="container container-main" style="margin-top:50px;">
+
+       <header class="topbar">
+        <h1><span>Admin</span> Product Add page</h1>
+        <div class="profile">
+          <img src="images/men_image.jpg" alt="Admin Profile" />
+          <p>Admin Profile</p>
+        </div>
+      </header>
+      
       <div class="row gx-4">
  
         <div class="col-lg-4">

@@ -18,7 +18,7 @@
     <a href="add_product.php">Products List</a>
     <a href="product_category.php">Products Category</a>
     <a href="product_material.php">Product Materials</a>
-    <a href="#">Orders</a>
+    <a href="admin_orderlist.php">Orders</a>
     <a href="offers_type.php">Offer Type</a>
     <a href="product_Offers.php">Offers</a>
     <a href="users_list.php">Customers</a>
@@ -26,6 +26,4 @@
     <a href="index.php">Logout</a>
 </div>
 
-<script>
-    
-</script>
+
