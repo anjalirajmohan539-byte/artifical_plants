@@ -1,68 +1,82 @@
 <?php
 include('database.php');
-
+$status = 1;
 ?>
 
+<script src="js/jquery.min.js"></script>
 <link href="css/admin_orderlist.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
 <div class="main">
-    <?php
-    include('sidebar.php');
-    ?>
-  <div class="container-fluid content">
-  <div class="container details">
-    <h1>Order List</h1>
+<?php include('sidebar.php'); ?>
 
-  <table class="table table-hover table-bordered">
-  <thead>
-    <tr>
-        <th>#</th>
-        <th>Order ID</th>
-        <th>Name</th>
-        <th>Customer Name</th>
-        <th>Address</th>
-        <th>Date</th>
-        <th>Price</th>
-        <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <?php
-    $select = "SELECT pd.`Id`, pd.`CustomerId`, pd.`CreateDate`, pd.OrderNo, ot.TotalPrice, ap.ProductImage, ap.ProductName, pd.OrderStatus, dcd.Address, dcd.Name FROM `payment_details` pd
-                INNER JOIN delivery_customer_details dcd ON dcd.Customer_Id = pd.CustomerId
-                INNER JOIN order_items ot ON ot.PaymentDetailsId = pd.Id
-                INNER JOIN add_product ap ON ap.Id = ot.ProductId
-               WHERE pd.`IsDeleted` = 0 AND dcd.Status = 0 ";
+<div class="container-fluid content">
+<div class="container details">
 
-    $check = mysqli_query($conn,$select);
+<h1>Order List</h1>
 
-    $count = 1;
-    if(mysqli_num_rows($check)>0)
+<nav class="navbar navbar-light">
+    <form class="form-inline" onsubmit="return false;">
+        <input class="form-control mr-sm-2"
+               type="search"
+               id="search"
+               name="search"
+               placeholder="Search"
+               onkeyup="loaddata()">
+    </form>
+</nav>
+
+<div class="container">
+
+    <div id="table-data">
+        <!-- AJAX DATA LOAD HERE -->
+    </div>
+</div>
+</div>
+</div>
+
+<script>
+$(document).ready(function(){
+    loaddata();
+});
+
+function loaddata()
+{
+    var search = $('#search').val();
+
+    $.ajax({
+        url: "filter_orderlist.php",
+        type: "POST",
+        data: {search:search},
+
+        success:function(data)
         {
-            while($details = mysqli_fetch_assoc($check))
-                {
-                    $date = new DateTime($details['CreateDate']);
-    ?>
-    <tr>
-        <td><?php echo $count++;?></td>
-        <td><?php echo $details['OrderNo'];?></td>
-        <td><img src="images/product/<?php echo $details['ProductImage'];?>" alt="">&emsp;<?php echo $details['ProductName'];?></td>
-        <td><?php echo $details['Name'];?></td>
-        <td><?php echo $details['Address'];?></td>
-        <td><?php echo $date->format("d M,D");?></td>
-        <td><?php echo $details['TotalPrice'];?></td>
-        <td>
-            <select name="status" id="status">
-                <option value="<?php ?>"></option>
-            </select>
-        </td> 
-    </tr>
-    <?php
-    }}
-    ?>
-  </tbody>
-</table>
-</div>
-</div>
+            $('#table-data').html(data);
+        }
+    });
+}
+</script>
+
+<script>
+    function status(orderId,status)
+    {
+        
+
+        $.ajax({
+            url:"filter_orderlist.php",
+            type:"POST",
+            data:{
+            orderId : orderId,
+            status : status
+        },
+
+        success:function(response)
+        {
+            alert(response);
+        }
+        });
+    }
+</script>
+
 </body>
 </html>
