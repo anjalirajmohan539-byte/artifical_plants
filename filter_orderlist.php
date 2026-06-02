@@ -75,6 +75,9 @@ if(mysqli_num_rows($result) > 0)
 
 <td>
 <select name="status" id="status" onchange="status(<?php echo $details['Id']?>,this.value)">
+<option value="0" <?php if($details['OrderStatus']==0){ echo "selected"; } ?>>
+    Order proccessing
+</option>
 
 <option value="1" <?php if($details['OrderStatus']==1){ echo "selected"; } ?>>
     Order Confirmed

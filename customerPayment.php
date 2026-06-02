@@ -11,7 +11,7 @@ $totalCharge = 0;
         
         <!-- LEFT COLUMN: Form Details -->
         <main class="checkout-form">
-<form action="customerPaymentAction.php" method="post">
+<form action="#" method="post" onsubmit="return Validation()">
             <!-- Shipping Address -->
             <section class="card">
                 <?php
@@ -173,21 +173,25 @@ if($count > 0)
                 <div id="card-form">
                     <div class="form-group">
                         <label>Card Number</label>
-                        <input type="text" name="cardno" placeholder="0000 0000 0000 0000">
+                        <input type="text" name="cardno" id="cardno" placeholder="0000 0000 0000 0000">
+                        <small id="cardno-error" class="error-text"></small>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
                             <label>Expiration (MM/YY)</label>
-                            <input type="text" name="exp" placeholder="MM/YY">
+                            <input type="text" name="exp" id="exp" placeholder="MM/YY">
+                            <small id="exp-error" class="error-text"></small>
                         </div>
                         <div class="form-group">
                             <label>Security Code (CVV)</label>
-                            <input type="text" name="cvv" placeholder="123">
+                            <input type="text" name="cvv" id="cvv" placeholder="123">
+                            <small id="cvv-error" class="error-text"></small>
                         </div>
                     </div>
                     <div class="form-group">
                         <label>Name on Card</label>
-                        <input type="text" placeholder="John Doe">
+                        <input type="text" placeholder="John Doe" id="customerName">
+                        <small id="customerName-error" class="error-text"></small>
                     </div>
                 </div>
 
@@ -201,7 +205,7 @@ if($count > 0)
 
                 <div class="form-group">
                     <label>UPI ID</label>
-                <input type="text" name="upiId" placeholder="example@upi">
+                <input type="text" name="upiId" id="upiId" placeholder="example@upi">
                 </div>
 
 </div>
@@ -256,5 +260,79 @@ include('footer.php');
     }
 </script>
 
+
+<script>
+function Validation()
+{
+    let valid = true;
+    
+    document.querySelectorAll("input").forEach(input => {
+        input.classList.remove("error");
+    });
+
+    document.querySelectorAll(".error-text").forEach(error => {
+        error.innerHTML = "";
+    });
+
+    let paymentMethod = document.getElementById("PaymentMethodId").value;
+
+    if(paymentMethod == 1)
+    {
+        let cardno = document.getElementById("cardno");
+        let exp = document.getElementById("exp");
+        let cvv = document.getElementById("cvv");
+        let customerName = document.getElementById("customerName");
+
+        if(cardno.value.trim() == "")
+        {
+            cardno.classList.add("error");
+            document.getElementById("cardno-error").innerHTML = "Card number is required";
+            valid = false;
+        }
+
+        if(exp.value.trim() == "")
+        {
+            exp.classList.add("error");
+            document.getElementById("exp-error").innerHTML = "Expiration Date is required";
+            valid = false;
+        }
+
+        if(cvv.value.trim() == "")
+        {
+            cvv.classList.add("error");
+            document.getElementById("cvv-error").innerHTML = "Security code is required";
+            valid = false;
+        }
+
+        if(customerName.value.trim() == "")
+        {
+            customerName.classList.add("error");
+            document.getElementById("customerName-error").innerHTML = "Customer name is required";
+            valid = false;
+        }
+    }
+
+    if(paymentMethod == 3)
+    {
+        let upiId = document.getElementById("upiId");
+
+        if(upiId.value.trim() == "")
+        {
+            upiId.classList.add("error");
+            valid = false;
+        }
+    }
+
+    return valid;
+
+
+    document.querySelectorAll("input").forEach(input => {
+    input.addEventListener("input", function() {
+        this.classList.remove("error");
+    });
+});
+
+}
+</script>
 </body>
 </html>

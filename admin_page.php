@@ -4,7 +4,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Artifical_plant_registration</title>
 <link href="css/admin_page.css" rel="stylesheet">
-<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet"  integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link href="bootstrap/bootstrap.min(css).css" rel="stylesheet">
 
 </head>
 
@@ -30,13 +30,9 @@ include('sidebar.php');
       <!-- Dashboard Cards -->
       <section class="cards">
         <div class="card"><h3>Sales</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
-        <div class="card"><h3>Earnings</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
         <div class="card"><h3>Order</h3><h2>2.382</h2><p class="down">-3.65% Since last week</p></div>
-        <div class="card"><h3>Delivered</h3><h2>21.300</h2><p class="up">+6.65% Since last week</p></div>
         <div class="card"><h3>Total Customer</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
         <div class="card"><h3>Active Users</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
-        <div class="card"><h3>InActive Users</h3><h2>14.212</h2><p class="up">+5.25% Since last week</p></div>
-        <div class="card"><h3>Banned Users</h3><h2>64</h2><p class="down">-2.25% Since last week</p></div>
       </section>
 
       <!-- Graph Section -->

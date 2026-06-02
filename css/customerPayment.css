@@ -253,6 +253,16 @@ a {
             color: white;
         }
 
+        .error {
+    border: 2px solid red !important;
+}
+
+.error-text {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
         .secure-checkout {
             text-align: center;
             margin-top: 1rem;

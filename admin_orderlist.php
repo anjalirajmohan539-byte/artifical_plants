@@ -51,7 +51,7 @@ function loaddata()
 
         success:function(data)
         {
-            $('#table-data').html(data);
+            alert(data);
         }
     });
 }

@@ -1,162 +1,183 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Premium Sidebar</title>
-
-<!-- Bootstrap -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Icons -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-
-<style>
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-}
-
-/* Sidebar */
-.sidebar {
-    position: fixed;
-    width: 250px;
-    height: 100%;
-    background: #1e1e2f;
-    color: #fff;
-    transition: 0.3s;
-    overflow-y: auto;
-}
-
-/* Collapsed */
-.sidebar.collapsed {
-    width: 70px;
-}
-
-/* Logo */
-.sidebar .logo {
-    text-align: center;
-    padding: 20px;
-    font-size: 22px;
-    font-weight: bold;
-    background: #151522;
-}
-
-/* Menu */
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-}
-
-.sidebar ul li {
-    padding: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
-.sidebar ul li:hover {
-    background: #343456;
-}
-
-.sidebar ul li i {
-    margin-right: 10px;
-}
-
-/* Hide text when collapsed */
-.sidebar.collapsed ul li span {
-    display: none;
-}
-
-/* Content */
-.content {
-    margin-left: 250px;
-    padding: 20px;
-    transition: 0.3s;
-}
-
-.content.full {
-    margin-left: 70px;
-}
-
-/* Topbar */
-.topbar {
-    background: #fff;
-    padding: 10px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-.toggle-btn {
-    font-size: 20px;
-    cursor: pointer;
-}
-
-/* Dropdown */
-.submenu {
-    display: none;
-    padding-left: 20px;
-    background: #2a2a40;
-}
-
-.submenu li {
-    padding: 10px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eShop - Product Index</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons (for cart/search icons) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    
+    <style>
+        /* Custom Styling for aesthetics */
+        body { background-color: #f8f9fa; }
+        .card { transition: transform 0.2s; border: none; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
+        .card-img-top { height: 200px; object-fit: cover; }
+        .price-tag { color: #d9534f; font-weight: 700; font-size: 1.2rem; }
+        .badge-cart { font-size: 0.8em; top: -5px; position: relative; }
+    </style>
 </head>
-
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar" id="sidebar">
-    <div class="logo">Admin</div>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">eShop</a>
+            
+            <!-- Search Form (Visible on larger screens) -->
+            <form class="d-none d-md-flex ms-4 flex-grow-1">
+                <input class="form-control me-2" type="search" placeholder="Search products..." aria-label="Search">
+                <button class="btn btn-outline-light" type="submit"><i class="bi bi-search"></i></button>
+            </form>
 
-    <ul>
-        <li><i class="fas fa-home"></i> <span>Dashboard</span></li>
+            <div class="d-flex align-items-center ms-auto">
+                <a href="#" class="btn btn-outline-light position-relative me-2">
+                    <i class="bi bi-cart3"></i>
+                    <span id="cart-count" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger badge-cart">
+                        0
+                    </span>
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+            </div>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Categories</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Deals</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Account</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <li onclick="toggleMenu(this)">
-            <i class="fas fa-box"></i> <span>Products</span>
-        </li>
-        <ul class="submenu">
-            <li>Add Product</li>
-            <li>View Product</li>
-        </ul>
+    <!-- MAIN CONTENT -->
+    <div class="container mt-4">
+        <div class="row">
+            
+            <!-- SIDEBAR (Filters) - Hidden on small screens, 3 cols on large -->
+            <div class="col-md-3 mb-4">
+                <div class="list-group shadow-sm">
+                    <div class="list-group-item bg-light fw-bold">Categories</div>
+                    <a href="#" class="list-group-item list-group-item-action">Electronics</a>
+                    <a href="#" class="list-group-item list-group-item-action">Fashion</a>
+                    <a href="#" class="list-group-item list-group-item-action">Home & Garden</a>
+                    <a href="#" class="list-group-item list-group-item-action">Sports</a>
+                </div>
 
-        <li><i class="fas fa-shopping-cart"></i> <span>Orders</span></li>
-        <li><i class="fas fa-users"></i> <span>Users</span></li>
-        <li><i class="fas fa-cog"></i> <span>Settings</span></li>
-        <li><i class="fas fa-sign-out-alt"></i> <span>Logout</span></li>
-    </ul>
-</div>
+                <div class="card mt-4 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="card-title fw-bold">Price Range</h6>
+                        <input type="range" class="form-range" min="0" max="1000">
+                        <div class="d-flex justify-content-between">
+                            <span>$0</span>
+                            <span>$1000</span>
+                        </div>
+                        <button class="btn btn-outline-dark btn-sm w-100 mt-2">Filter</button>
+                    </div>
+                </div>
+            </div>
 
-<!-- Content -->
-<div class="content" id="content">
+            <!-- PRODUCT GRID - 9 cols on large, 12 on small -->
+            <div class="col-md-9">
+                
+                <!-- Sorting Header -->
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h5 class="mb-0 text-muted">Showing <span id="product-count">0</span> Products</h5>
+                    <select class="form-select w-auto">
+                        <option>Sort by: Featured</option>
+                        <option>Price: Low to High</option>
+                        <option>Price: High to Low</option>
+                        <option>Newest</option>
+                    </select>
+                </div>
 
-    <div class="topbar">
-        <span class="toggle-btn" onclick="toggleSidebar()">☰</span>
+                <!-- Products Row -->
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-4" id="product-container">
+                    <!-- Products are injected here by JavaScript -->
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <h2>Dashboard</h2>
-    <p>Welcome to your premium admin panel 🚀</p>
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p class="mb-0">&copy; 2023 eShop Inc. All rights reserved.</p>
+    </footer>
 
-</div>
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom Logic -->
+    <script>
+        // 1. Sample Data
+        const products = [
+            { id: 1, name: "Wireless Headphones", price: 99.99, img: "https://via.placeholder.com/300", category: "Electronics" },
+            { id: 2, name: "Smart Watch Pro", price: 199.50, img: "https://via.placeholder.com/300", category: "Electronics" },
+            { id: 3, name: "Leather Jacket", price: 249.00, img: "https://via.placeholder.com/300", category: "Fashion" },
+            { id: 4, name: "Running Shoes", price: 85.00, img: "https://via.placeholder.com/300", category: "Sports" },
+            { id: 5, name: "Gaming Mouse", price: 45.99, img: "https://via.placeholder.com/300", category: "Electronics" },
+            { id: 6, name: "Coffee Maker", price: 120.00, img: "https://via.placeholder.com/300", category: "Home" },
+            { id: 7, name: "Desk Lamp", price: 35.00, img: "https://via.placeholder.com/300", category: "Home" },
+            { id: 8, name: "Yoga Mat", price: 25.00, img: "https://via.placeholder.com/300", category: "Sports" },
+            { id: 9, name: "Backpack", price: 65.00, img: "https://via.placeholder.com/300", category: "Fashion" }
+        ];
 
-<script>
-function toggleSidebar() {
-    document.getElementById("sidebar").classList.toggle("collapsed");
-    document.getElementById("content").classList.toggle("full");
-}
+        let cart = [];
 
-function toggleMenu(element) {
-    let submenu = element.nextElementSibling;
-    submenu.style.display = submenu.style.display === "block" ? "none" : "block";
-}
-</script>
+        // 2. Render Products
+        function renderProducts() {
+            const container = document.getElementById('product-container');
+            container.innerHTML = ''; // Clear loading state
+            
+            products.forEach(product => {
+                const cardHTML = `
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="${product.img}" class="card-img-top" alt="${product.name}">
+                            <div class="card-body">
+                                <h6 class="text-muted text-uppercase small">${product.category}</h6>
+                                <h5 class="card-title">${product.name}</h5>
+                                <p class="card-text price-tag">$${product.price.toFixed(2)}</p>
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-primary btn-sm" onclick="addToCart(${product.id})">
+                                        <i class="bi bi-cart-plus"></i> Add to Cart
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                container.innerHTML += cardHTML;
+            });
 
+            document.getElementById('product-count').innerText = products.length;
+        }
+
+        // 3. Add to Cart Logic
+        function addToCart(id) {
+            const product = products.find(p => p.id === id);
+            cart.push(product);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const countElement = document.getElementById('cart-count');
+            countElement.innerText = cart.length;
+            
+            // Simple animation for feedback
+            countElement.classList.remove('badge-cart'); // trigger reflow
+            void countElement.offsetWidth; 
+            countElement.classList.add('badge-cart');
+        }
+
+        // Initialize
+        renderProducts();
+    </script>
 </body>
 </html>
-
-
-
-
-
-
