@@ -1,6 +1,6 @@
 <?php
 include('database.php');
-$status = 1;
+$status = 0;
 ?>
 
 <script src="js/jquery.min.js"></script>
@@ -51,7 +51,8 @@ function loaddata()
 
         success:function(data)
         {
-            alert(data);
+            $('#table-data').html(data);
+            // alert(data);
         }
     });
 }

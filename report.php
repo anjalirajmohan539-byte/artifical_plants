@@ -24,7 +24,7 @@ while($row = mysqli_fetch_assoc($result))
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Report Dashboard</title>
-<link rel="stylesheet" href="css/test.css">
+<link rel="stylesheet" href="css/report.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -45,8 +45,6 @@ include('sidebar.php');
             <h1>Sales Reports</h1>
             <p>Overview of your store performance</p>
         </div>
-
-        <button class="date-btn">Last 30 Days</button>
         
             <div class="profile">
           <img src="images/men_image.jpg" alt="Admin Profile" />
@@ -59,14 +57,32 @@ include('sidebar.php');
     <section class="stats-grid">
 
         <div class="card">
+            <?php
+            $select1 = "SELECT ifnull(SUM(TotalPrice),0) AS TotalPrice FROM `payment_details` WHERE OrderStatus = 4 AND IsDeleted = 0";
+            $checked1 = mysqli_query($conn,$select1);
+
+            if(mysqli_num_rows($checked1)>0)
+                {
+                    $revenue = mysqli_fetch_assoc($checked1);
+                }
+            ?>
             <h4>Total Revenue</h4>
-            <h2>₹124,592</h2>
+            <h2>₹<?php echo $revenue['TotalPrice'];?></h2>
             <span class="positive">+12.5%</span>
         </div>
 
         <div class="card">
+            <?php
+            $select2 = "SELECT COUNT(1) AS Total FROM `payment_details` WHERE IsDeleted = 0";
+            $cheched2 = mysqli_query($conn,$select2);
+
+            if(mysqli_num_rows($cheched2)>0)
+                {
+                    $orders = mysqli_fetch_assoc($cheched2);
+                }
+            ?>
             <h4>Total Orders</h4>
-            <h2>1,482</h2>
+            <h2><?php echo $orders['Total'];?></h2>
             <span class="positive">+8.2%</span>
         </div>
 
@@ -109,12 +125,22 @@ include('sidebar.php');
         <div class="table-top">
             <h3>Recent Transactions</h3>
 
-            <input type="text" placeholder="Search Orders">
+            <nav class="navbar navbar-light">
+    <form class="form-inline" onsubmit="return false;">
+        <input class="form-control mr-sm-2"
+               type="search"
+               id="search"
+               name="search"
+               placeholder="Search"
+               onkeyup="loaddata()">
+    </form>
+</nav>
         </div>
 
         <table>
             <thead>
                 <tr>
+                    <th>#</th>
                     <th>Order ID</th>
                     <th>Customer</th>
                     <th>Date</th>
@@ -125,57 +151,47 @@ include('sidebar.php');
             </thead>
 
             <tbody>
-                <tr>
-                    <td>#ORD-001</td>
-                    <td>Alice Freeman</td>
-                    <td>24-10-2023</td>
-                    <td>₹120.50</td>
-                    <td><span class="completed">Completed</span></td>
-                    <td><a href="#" title="View"><svg xmlns="http://www.w3.org/2000/svg" 
-                      width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-</svg></a></td>
-                </tr>
+                <?php
+                $select = "SELECT pd.`Id`, pd.`CustomerId`, dcd.Name, `OrderNo`, `TotalPrice`,
+                            CASE
+                            WHEN 0 THEN 'Order Processing'
+                            WHEN 1 THEN 'Order Confirmed'
+                            WHEN 2 THEN 'Shipped'
+                            WHEN 3 THEN 'Out for Delivery'
+                            WHEN 4 THEN 'Delivered'
+                            END AS
+                            `OrderStatus`, DATE_FORMAT(pd.CreateDate, '%d/%m/%Y') AS createDate FROM `payment_details` pd
+                            INNER JOIN delivery_customer_details dcd ON dcd.Customer_Id = pd.CustomerId
+                            WHERE pd.`IsDeleted` = 0 AND dcd.Status = 0";
 
-                <tr>
-                    <td>#ORD-002</td>
-                    <td>Mark Wilson</td>
-                    <td>24-10-2023</td>
-                    <td>₹450.00</td>
-                    <td><span class="pending">Pending</span></td>
-                    <td><a href="#" title="View"><svg xmlns="http://www.w3.org/2000/svg" 
-                      width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-</svg></a></td>
-                </tr>
+                $check = mysqli_query($conn,$select);
 
+                $count = 1;
+                if(mysqli_num_rows($check)>0)
+                    {
+                        while($datas = mysqli_fetch_assoc($check))
+                            {
+                ?>
                 <tr>
-                    <td>#ORD-003</td>
-                    <td>Louisa Clark</td>
-                    <td>23-10-2023</td>
-                    <td>₹75.25</td>
-                    <td><span class="cancelled">Cancelled</span></td>
+                    <td><?php echo $count++;?></td>
+                    <td><?php echo $datas['OrderNo'];?></td>
+                    <td><?php echo $datas['Name'];?></td>
+                    <td><?php echo $datas['createDate'];?></td>
+                    <td>₹<?php echo $datas['TotalPrice'];?></td>
+                    <td><span class="completed"><?php echo $datas['OrderStatus'];?></span></td>
                     <td><a href="#" title="View"><svg xmlns="http://www.w3.org/2000/svg" 
                       width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
   <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
   <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-</svg></a></td>
+</svg></a>
+<a href="#" title="Delete" style="margin-left: 20px;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16" style="color: red;">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+</svg></a>
+</td>
                 </tr>
+                <?php }}?>
 
-                <tr>
-                    <td>#ORD-004</td>
-                    <td>James Smith</td>
-                    <td>23-10-2023</td>
-                    <td>₹210.00</td>
-                    <td><span class="completed">Completed</span></td>
-                    <td><a href="#" title="View"><svg xmlns="http://www.w3.org/2000/svg" 
-                      width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
-  <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
-  <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0"/>
-</svg></a></td>
-                </tr>
             </tbody>
         </table>
 
@@ -211,5 +227,9 @@ new Chart(graph, {
         }
     }
 });
+</script>
+
+<script>
+
 </script>
 </html>

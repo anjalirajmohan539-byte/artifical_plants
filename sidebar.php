@@ -13,7 +13,7 @@
 </head>
 <body>
     <div class="sidebar">
-    <h2>Dashboard</h2>
+    <h2>Milon</h2>
 
 <ul class="sidebar-menu">
     <a href="admin_page.php"><i class="fas fa-gauge-high"></i><span>Dashboard</span></a>
