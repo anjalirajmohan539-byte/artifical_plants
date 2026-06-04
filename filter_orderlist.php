@@ -75,24 +75,28 @@ if(mysqli_num_rows($result) > 0)
 
 <td>
 <select name="status" id="status" onchange="status(<?php echo $details['Id']?>,this.value)">
-<option value="0" <?php if($details['OrderStatus']==0){ echo "selected"; } ?>>
+<option value="0" <?php if($details['OrderStatus'] == 0){ echo "selected"; } ?>>
     Order proccessing
 </option>
 
-<option value="1" <?php if($details['OrderStatus']==1){ echo "selected"; } ?>>
+<option value="1" <?php if($details['OrderStatus'] == 1){ echo "selected"; } ?>>
     Order Confirmed
 </option>
 
-<option value="2" <?php if($details['OrderStatus']==2){ echo "selected"; } ?>>
+<option value="2" <?php if($details['OrderStatus'] == 2){ echo "selected"; } ?>>
     Shipped
 </option>
 
-<option value="3" <?php if($details['OrderStatus']==3){ echo "selected"; } ?>>
+<option value="3" <?php if($details['OrderStatus'] == 3){ echo "selected"; } ?>>
     Out for Delivery
 </option>
 
-<option value="4" <?php if($details['OrderStatus']==4){ echo "selected"; } ?>>
+<option value="4" <?php if($details['OrderStatus'] == 4){ echo "selected"; } ?>>
     Delivered
+</option>
+
+<option value="5" <?php if($details['OrderStatus'] == 5){ echo "selected"; } ?>>
+    Cancelled
 </option>
 
 </select>

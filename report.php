@@ -1,7 +1,7 @@
 
 <?php
 include('database.php');
-
+$status = 0;
 $months = [];
 $revenues = [];
 
@@ -16,6 +16,7 @@ while($row = mysqli_fetch_assoc($result))
     $months[] = $row['Month'];
     $revenues[] = $row['Revenue'];
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -26,6 +27,10 @@ while($row = mysqli_fetch_assoc($result))
 <title>Admin Report Dashboard</title>
 <link rel="stylesheet" href="css/report.css">
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.8/css/jquery.dataTables.min.css">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.8/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
 
@@ -124,20 +129,9 @@ include('sidebar.php');
 
         <div class="table-top">
             <h3>Recent Transactions</h3>
-
-            <nav class="navbar navbar-light">
-    <form class="form-inline" onsubmit="return false;">
-        <input class="form-control mr-sm-2"
-               type="search"
-               id="search"
-               name="search"
-               placeholder="Search"
-               onkeyup="loaddata()">
-    </form>
-</nav>
         </div>
 
-        <table>
+        <table id="transactionTable" class="display">
             <thead>
                 <tr>
                     <th>#</th>
@@ -152,13 +146,14 @@ include('sidebar.php');
 
             <tbody>
                 <?php
-                $select = "SELECT pd.`Id`, pd.`CustomerId`, dcd.Name, `OrderNo`, `TotalPrice`,
+                $select = "SELECT pd.`Id`, pd.`CustomerId`, dcd.Name, `OrderNo`, `TotalPrice`, pd.OrderStatus AS StatusCode,
                             CASE
-                            WHEN 0 THEN 'Order Processing'
-                            WHEN 1 THEN 'Order Confirmed'
-                            WHEN 2 THEN 'Shipped'
-                            WHEN 3 THEN 'Out for Delivery'
-                            WHEN 4 THEN 'Delivered'
+                            WHEN OrderStatus = 0 THEN 'Order Processing'
+                            WHEN OrderStatus = 1 THEN 'Order Confirmed'
+                            WHEN OrderStatus = 2 THEN 'Shipped'
+                            WHEN OrderStatus = 3 THEN 'Out for Delivery'
+                            WHEN OrderStatus = 4 THEN 'Delivered'
+                            WHEN OrderStatus = 5 THEN 'Cancelled'
                             END AS
                             `OrderStatus`, DATE_FORMAT(pd.CreateDate, '%d/%m/%Y') AS createDate FROM `payment_details` pd
                             INNER JOIN delivery_customer_details dcd ON dcd.Customer_Id = pd.CustomerId
@@ -178,7 +173,31 @@ include('sidebar.php');
                     <td><?php echo $datas['Name'];?></td>
                     <td><?php echo $datas['createDate'];?></td>
                     <td>₹<?php echo $datas['TotalPrice'];?></td>
-                    <td><span class="completed"><?php echo $datas['OrderStatus'];?></span></td>
+                    <?php
+if($datas['StatusCode'] == 0){
+    $color = '#ff9800';
+}
+elseif($datas['StatusCode'] == 1){
+    $color = '#2196f3';
+}
+elseif($datas['StatusCode'] == 2){
+    $color = '#9c27b0';
+}
+elseif($datas['StatusCode'] == 3){
+    $color = '#f44336';
+}
+elseif($datas['StatusCode'] == 4){
+    $color = '#4caf50';
+}
+elseif($datas['StatusCode'] == 5)
+{
+    $color = 'red';
+}
+?>
+
+<td style="color:<?= $color ?>; font-weight:bold;">
+    <?= $datas['OrderStatus'] ?>
+</td>
                     <td><a href="#" title="View"><svg xmlns="http://www.w3.org/2000/svg" 
                       width="16" height="16" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
   <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13 13 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5s3.879 1.168 5.168 2.457A13 13 0 0 1 14.828 8q-.086.13-.195.288c-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5s-3.879-1.168-5.168-2.457A13 13 0 0 1 1.172 8z"/>
@@ -227,9 +246,19 @@ new Chart(graph, {
         }
     }
 });
+
 </script>
 
 <script>
-
+$(document).ready(function () {
+    $('#transactionTable').DataTable({
+        "pageLength": 5,
+        "lengthMenu": [5, 10, 25, 50],
+        "ordering": true,
+        "searching": true,
+        "info": true,
+        "responsive": true
+    });
+});
 </script>
 </html>
