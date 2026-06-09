@@ -1,13 +1,15 @@
 <?php
 include('database.php');
+
+include('header.php');
 ?>
 
 <script src="js/jquery.min.js"></script>
 <link href="css/customer_tracking_page.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+<link rel="stylesheet" href="bootstrap/bootstrap.min(css).css">
 
 <div class="main">
-<?php include('sidebar.php'); ?>
 
 <div class="container-fluid content">
 <div class="container details">
@@ -23,27 +25,27 @@ include('database.php');
             <div class="steps d-flex flex-wrap flex-sm-nowrap justify-content-between padding-top-2x padding-bottom-1x">
               <div class="step completed">
                 <div class="step-icon-wrap">
-                  <div class="step-icon"><i class="pe-7s-cart"></i></div>
-                </div>
-                <h4 class="step-title">Confirmed Order</h4>
-              </div>
-              <div class="step completed">
-                <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-config"></i></div>
                 </div>
                 <h4 class="step-title">Processing Order</h4>
               </div>
               <div class="step completed">
                 <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-cart"></i></div>
+                </div>
+                <h4 class="step-title">Confirmed Order</h4>
+              </div>
+              <div class="step completed">
+                <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-medal"></i></div>
                 </div>
-                <h4 class="step-title">Quality Check</h4>
+                <h4 class="step-title">Shipping</h4>
               </div>
               <div class="step">
                 <div class="step-icon-wrap">
                   <div class="step-icon"><i class="pe-7s-car"></i></div>
                 </div>
-                <h4 class="step-title">Product Dispatched</h4>
+                <h4 class="step-title">Out for Delivery</h4>
               </div>
               <div class="step">
                 <div class="step-icon-wrap">
@@ -51,15 +53,14 @@ include('database.php');
                 </div>
                 <h4 class="step-title">Product Delivered</h4>
               </div>
+              <div class="step">
+                <div class="step-icon-wrap">
+                  <div class="step-icon"><i class="pe-7s-home"></i></div>
+                </div>
+                <h4 class="step-title">Cancelled</h4>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="d-flex flex-wrap flex-md-nowrap justify-content-center justify-content-sm-between align-items-center">
-          <div class="custom-control custom-checkbox mr-3">
-            <input class="custom-control-input" type="checkbox" id="notify_me" checked="">
-            <label class="custom-control-label" for="notify_me">Notify me when order is delivered</label>
-          </div>
-          <div class="text-left text-sm-right"><a class="btn btn-outline-primary btn-rounded btn-sm" href="admin_orderlist.php" data-toggle="modal" data-target="#orderDetails">View Order Details</a></div>
         </div>
       </div>
 </div>

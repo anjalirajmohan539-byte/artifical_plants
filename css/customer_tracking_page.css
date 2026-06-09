@@ -37,7 +37,16 @@ body{margin-top:20px;}
 
 .mb-3
 {
-    margin-top: 50px;
+    margin-top: 25px;
+    margin-bottom: 2rem !important
+}
+
+.details h1
+{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 40px;
+    font-weight: bold;
 }
 
 .steps .step {
