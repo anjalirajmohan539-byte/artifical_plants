@@ -90,23 +90,23 @@ if(isset($_GET['categoryId']))
   <div class="container decor">
           <div class="col-3 ">
             <img src="images/decor_1.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
             <img src="images/decor_2.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
             <img src="images/decor_3.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
             <img src="images/decor_4.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="cl"></div>
   </div>

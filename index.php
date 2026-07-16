@@ -84,46 +84,46 @@
     <div class="container new_arrival">
 
         <div class="col-3 ">
-            <img src="images/plant_5.png" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_1.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
-            <img src="images/plant_6.jpeg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_2.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
-            <img src="images/plant_3.png" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_3.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
-            <img src="images/plant_4.png" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_4.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
 
 
         <div class="col-3 ">
-            <img src="images/plant_5.png" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_1.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
-            <img src="images/plant_6.jpeg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_2.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
-            <img src="images/plant_3.png" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_3.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
-            <img src="images/plant_4.png" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <img src="images/decor_4.jpg" alt="">
+            <p class="ph1">Artifical plant</p><br>
+            <p class="ph2"><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
 
         <div class="cl"></div>
@@ -206,23 +206,23 @@
         <div class="container decor">
           <div class="col-3 ">
             <img src="images/decor_1.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p>Artifical plant</p><br>
+            <p><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
             <img src="images/decor_2.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p>Artifical plant</p><br>
+            <p><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
             <img src="images/decor_3.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p>Artifical plant</p><br>
+            <p><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
         <div class="col-3">
             <img src="images/decor_4.jpg" alt="">
-            <p1>Artifical plant</p1><br>
-            <p2><span>₹9,999</span><s>MRP₹13,000</s></p2>
+            <p>Artifical plant</p><br>
+            <p><span>₹9,999</span><s>MRP₹13,000</s></p>
         </div>
 
         <div class="cl"></div>
